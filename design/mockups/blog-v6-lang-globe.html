@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration — Viatu Travel Journal (v6)</title>
+    <meta name="description"
+        content="Discover African safari travel tips, destination guides, lodge reviews, and expert itineraries from our travel specialists.">
+    <meta property="og:title" content="Inspiration — Viatu Travel Journal">
+    <meta property="og:description"
+        content="Discover African safari travel tips, destination guides, lodge reviews, and expert itineraries from our travel specialists.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #F7F3EF;
+            --earth-sand: #E8E0D6;
+            --earth-stone: #B5A898;
+            --earth-clay: #8B7355;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0, 0, 0, .05);
+            --sh-md: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            font-family: var(--fs);
+            color: var(--black);
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        button {
+            font-family: var(--fs);
+            cursor: pointer;
+            border: none;
+            background: none
+        }
+
+        .ico {
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .nums { font-family: var(--fs) }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        /* ─── NAV ──────────────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            transition: background var(--dur3) var(--ease), box-shadow var(--dur3) var(--ease)
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, .06)
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-logo { display: flex; align-items: center }
+        .nav-logo img { height: 24px; width: auto; display: block }
+        .nav:not(.scrolled) .logo-dark { display: none }
+        .nav.scrolled .logo-white { display: none }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        /* Search icon */
+        .nav-search {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--rmd);
+            transition: all var(--dur) var(--ease)
+        }
+
+        .nav:not(.scrolled) .nav-search { color: rgba(255, 255, 255, .7) }
+        .nav:not(.scrolled) .nav-search:hover { color: var(--white); background: rgba(255, 255, 255, .08) }
+        .nav.scrolled .nav-search { color: var(--gm) }
+        .nav.scrolled .nav-search:hover { color: var(--sangria); background: rgba(84, 23, 54, .04) }
+
+        .nav-search svg {
+            width: 18px; height: 18px;
+            stroke-width: 2; stroke: currentColor; fill: none
+        }
+
+        /* Back button — always solid sangria */
+        .nav-back-btn {
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: var(--rmd);
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--dur) var(--ease);
+            letter-spacing: .01em;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--white);
+            background: var(--sangria);
+            border: none
+        }
+
+        .nav-back-btn:hover {
+            background: #6b1d45;
+            transform: translateY(-1px)
+        }
+
+        .nav-back-btn svg { flex-shrink: 0; transition: inherit }
+
+        /* ─── LANGUAGE DROPDOWN — V2 Globe Accent ──────────────── */
+        .lang { position: relative }
+
+        .lang-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 7px 10px;
+            border-radius: var(--rmd);
+            min-height: 36px;
+            border: 1px solid transparent;
+            background: none;
+            letter-spacing: .04em;
+            line-height: 1;
+            transition: all var(--dur) var(--ease)
+        }
+
+        .nav:not(.scrolled) .lang-trigger         { color: rgba(255, 255, 255, .7) }
+        .nav:not(.scrolled) .lang-trigger:hover   { color: var(--white); background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .2) }
+        .nav.scrolled .lang-trigger               { color: var(--gm) }
+        .nav.scrolled .lang-trigger:hover         { color: var(--sangria); background: rgba(84, 23, 54, .04); border-color: rgba(84, 23, 54, .15) }
+
+        .lang-globe {
+            width: 15px; height: 15px;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0
+        }
+
+        .lang-code-label { font-size: 13px; font-weight: 600; letter-spacing: .06em }
+
+        .lang-chevron {
+            display: block;
+            width: 11px; height: 11px;
+            stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+            transition: transform var(--dur) var(--ease)
+        }
+
+        .lang.open .lang-chevron { transform: rotate(180deg) }
+
+        .lang-panel {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 210px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .12), 0 0 0 1px rgba(0, 0, 0, .04);
+            padding: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-5px) scale(.98);
+            transform-origin: top right;
+            transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+            z-index: 20
+        }
+
+        .lang.open .lang-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1)
+        }
+
+        .lang-panel-header {
+            display: flex;
+            align-items: center;
+            padding: 11px 16px 9px;
+            border-bottom: 1px solid rgba(0, 0, 0, .06)
+        }
+
+        .lang-panel-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gm)
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            width: 100%;
+            padding: 11px 16px;
+            border: none;
+            border-left: 3px solid transparent;
+            background: none;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gd);
+            cursor: pointer;
+            text-align: left;
+            transition:
+                background var(--dur) var(--ease),
+                color var(--dur) var(--ease),
+                border-left-color var(--dur) var(--ease)
+        }
+
+        .lang-option:not(:last-child) { border-bottom: 1px solid rgba(0, 0, 0, .045) }
+        .lang-option:hover             { background: var(--gl); color: var(--sangria); border-left-color: rgba(84, 23, 54, .3) }
+        .lang-option.active            { color: var(--sangria); border-left-color: var(--sangria); background: rgba(84, 23, 54, .03) }
+        .lang-option.active .lang-name { font-weight: 600 }
+
+        .lang-flag { font-size: 18px; line-height: 1; flex-shrink: 0 }
+        .lang-name { flex: 1; font-size: 13px }
+
+        .lang-check {
+            width: 13px; height: 13px;
+            fill: none;
+            stroke: var(--sangria);
+            stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+            margin-left: auto;
+            flex-shrink: 0
+        }
+
+        /* ─── HERO ─────────────────────────────────────────────── */
+        .hero {
+            position: relative;
+            min-height: 100vh; min-height: 100svh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden
+        }
+
+        .hero-bg { position: absolute; inset: 0 }
+
+        .hero-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block
+        }
+
+        .hero-grad {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .08) 0%, rgba(0, 0, 0, .02) 40%, rgba(0, 0, 0, .55) 100%);
+            pointer-events: none
+        }
+
+        .hero-body {
+            position: relative; z-index: 2;
+            width: 100%; max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 72px
+        }
+
+        .hero-cat {
+            font-size: 13px; font-weight: 500;
+            letter-spacing: .08em; text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 16px
+        }
+
+        .hero-title {
+            font-family: var(--fp);
+            font-size: clamp(28px, 5vw, 54px);
+            font-weight: 400;
+            color: var(--white);
+            letter-spacing: -.06em;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 680px;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, .4)
+        }
+
+        .hero-excerpt {
+            font-size: 17px; font-weight: 300;
+            color: rgba(255, 255, 255, .65);
+            line-height: 1.6; max-width: 480px;
+            margin-bottom: 32px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, .4)
+        }
+
+        .hero-bottom {
+            display: flex; align-items: center;
+            gap: 20px; flex-wrap: wrap
+        }
+
+        .hero-av {
+            width: 36px; height: 36px;
+            border-radius: var(--rfull);
+            background: rgba(255, 255, 255, .15);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 600;
+            color: var(--white);
+            backdrop-filter: blur(4px)
+        }
+
+        .hero-author { display: flex; align-items: center; gap: 10px }
+        .hero-byline { font-size: 13px; color: rgba(255, 255, 255, .6) }
+        .hero-byline strong { color: rgba(255, 255, 255, .9); font-weight: 500 }
+        .hero-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255, 255, 255, .3) }
+        .hero-read { font-size: 13px; color: rgba(255, 255, 255, .45) }
+
+        /* ─── STICKY BROWSE BAR ────────────────────────────────── */
+        .browse-bar {
+            position: sticky; top: 64px; z-index: 90;
+            background: rgba(255, 255, 255, .97);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--g3)
+        }
+
+        .browse-bar-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none
+        }
+
+        .browse-bar-inner::-webkit-scrollbar { display: none }
+
+        .browse-bar .browse-row { padding: 14px 0; flex-wrap: nowrap; gap: 8px }
+
+        /* ─── SECTIONS ─────────────────────────────────────────── */
+        .section { padding: 88px 0 }
+        .section-head { margin-bottom: 48px }
+
+        .section-head .tag {
+            font-family: var(--fc);
+            font-size: 22px; font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2; margin-bottom: 4px
+        }
+
+        .section-head h2 {
+            font-family: var(--fp);
+            font-size: clamp(20px, 2.8vw, 32px);
+            font-weight: 400;
+            letter-spacing: -.05em; line-height: 1.2
+        }
+
+        .section-head p {
+            font-size: 16px; color: var(--gm);
+            margin-top: 8px; max-width: 440px; line-height: 1.6
+        }
+
+        .section-top {
+            display: flex; align-items: flex-end;
+            justify-content: space-between; gap: 24px; flex-wrap: wrap
+        }
+
+        .section-more {
+            font-size: 13px; font-weight: 500;
+            color: var(--sangria);
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: color var(--dur) var(--ease); flex-shrink: 0
+        }
+
+        .section-more svg {
+            width: 14px; height: 14px;
+            stroke: var(--sangria); fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+            transition: transform var(--dur) var(--ease)
+        }
+
+        .section-more:hover svg { transform: translateX(4px) }
+
+        .section-footer { margin-top: 40px; text-align: center }
+
+        /* ─── CARDS ────────────────────────────────────────────── */
+        .card {
+            display: flex; flex-direction: column;
+            cursor: pointer;
+            transition: transform var(--dur3) var(--ease)
+        }
+
+        .card:hover { transform: translateY(-3px) }
+
+        .card-img {
+            position: relative; overflow: hidden;
+            border-radius: var(--rlg);
+            aspect-ratio: 3/2; margin-bottom: 16px
+        }
+
+        .card-img img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform .7s var(--ease)
+        }
+
+        .card:hover .card-img img { transform: scale(1.04) }
+
+        .card-cat {
+            font-size: 12px; font-weight: 500;
+            letter-spacing: .06em; text-transform: uppercase;
+            color: var(--gm); margin-bottom: 8px
+        }
+
+        .card-title {
+            font-family: var(--fs);
+            font-size: 18px; font-weight: 600;
+            line-height: 1.35; color: var(--black);
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
+        }
+
+        .card-meta { font-size: 13px; color: var(--platinum) }
+        .card-meta strong { color: var(--gm); font-weight: 500 }
+        .card--wide .card-img { aspect-ratio: 16/9 }
+
+        /* ─── GRIDS ────────────────────────────────────────────── */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px }
+
+        /* ─── BUTTONS ──────────────────────────────────────────── */
+        .btn-outline {
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: var(--fs); font-size: 14px; font-weight: 600;
+            color: var(--sangria); background: transparent;
+            border: 1.5px solid var(--sangria); border-radius: var(--rmd);
+            padding: 10px 24px; min-height: 44px;
+            transition: all var(--dur) var(--ease); cursor: pointer
+        }
+
+        .btn-outline:hover { background: var(--sangria); color: var(--white) }
+
+        /* ─── BROWSE PILLS ─────────────────────────────────────── */
+        .browse-row { display: flex; flex-wrap: wrap; gap: 10px }
+
+        .browse-pill {
+            font-size: 13px; font-weight: 500; color: var(--gm);
+            padding: 7px 18px; border-radius: var(--rfull);
+            border: 1.5px solid var(--g3);
+            transition: all var(--dur) var(--ease);
+            min-height: 36px; display: inline-flex; align-items: center;
+            letter-spacing: .01em; white-space: nowrap
+        }
+
+        .browse-pill:hover { border-color: var(--sangria); color: var(--sangria); background: rgba(84, 23, 54, .04) }
+        .browse-pill.active { background: var(--sangria); border-color: var(--sangria); color: var(--white) }
+
+        /* ─── SPREAD ───────────────────────────────────────────── */
+        .spread { position: relative; width: 100%; overflow: hidden }
+        .spread-full { min-height: 70vh; min-height: 70svh }
+        .spread-mid { min-height: 50vh; min-height: 50svh }
+
+        .spread-bg { position: absolute; inset: 0 }
+
+        .spread-bg img { width: 100%; height: 100%; object-fit: cover; display: block }
+
+        .spread-grad {
+            position: absolute; inset: 0; pointer-events: none;
+            background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, .55) 100%)
+        }
+
+        .spread-content {
+            position: relative; z-index: 2;
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            min-height: inherit; padding-bottom: 56px
+        }
+
+        .spread-tag {
+            font-size: 12px; font-weight: 500;
+            letter-spacing: .08em; text-transform: uppercase;
+            color: rgba(255, 255, 255, .5); margin-bottom: 12px
+        }
+
+        .spread-title {
+            font-family: var(--fp);
+            font-size: clamp(22px, 3.5vw, 40px); font-weight: 400;
+            color: var(--white); letter-spacing: -.05em;
+            line-height: 1.2; max-width: 560px; margin-bottom: 16px
+        }
+
+        .spread-text {
+            font-size: 15px; font-weight: 300;
+            color: rgba(255, 255, 255, .6);
+            max-width: 420px; line-height: 1.6; margin-bottom: 24px
+        }
+
+        .spread-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 14px; font-weight: 500; color: var(--white);
+            padding: 10px 24px; border-radius: var(--rmd);
+            border: 1px solid rgba(255, 255, 255, .25);
+            transition: all var(--dur) var(--ease);
+            min-height: 44px; width: fit-content;
+            backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .spread-link:hover { background: rgba(255, 255, 255, .15); border-color: rgba(255, 255, 255, .4) }
+
+        .spread-link svg {
+            width: 16px; height: 16px;
+            stroke: var(--white); fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round
+        }
+
+        /* ─── FEATURE ──────────────────────────────────────────── */
+        .feature {
+            display: grid; grid-template-columns: 1.2fr 1fr;
+            gap: 48px; align-items: center;
+            cursor: pointer; transition: transform var(--dur3) var(--ease)
+        }
+
+        .feature:hover { transform: translateY(-2px) }
+
+        .feature-img { border-radius: var(--rlg); overflow: hidden; aspect-ratio: 4/3 }
+
+        .feature-img img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform .7s var(--ease)
+        }
+
+        .feature:hover .feature-img img { transform: scale(1.04) }
+
+        .feature-cat {
+            font-size: 12px; font-weight: 500;
+            letter-spacing: .06em; text-transform: uppercase;
+            color: var(--gm); margin-bottom: 12px
+        }
+
+        .feature-title {
+            font-family: var(--fp);
+            font-size: clamp(20px, 2.2vw, 28px); font-weight: 400;
+            letter-spacing: -.04em; line-height: 1.2; margin-bottom: 16px
+        }
+
+        .feature-excerpt { font-size: 15px; color: var(--gm); line-height: 1.6; margin-bottom: 20px }
+        .feature-meta { font-size: 13px; color: var(--platinum) }
+        .feature-meta strong { color: var(--gm); font-weight: 500 }
+
+        /* ─── DESTINATION CARDS ────────────────────────────────── */
+        .dest-card {
+            position: relative; border-radius: var(--rlg); overflow: hidden;
+            aspect-ratio: 4/3; cursor: pointer; display: block;
+            transition: transform var(--dur3) var(--ease)
+        }
+
+        .dest-card:hover { transform: translateY(-4px) }
+
+        .dest-card img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform .9s var(--ease)
+        }
+
+        .dest-card:hover img { transform: scale(1.06) }
+
+        .dest-card-grad {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .08) 0%, transparent 35%, rgba(0, 0, 0, .75) 100%);
+            pointer-events: none
+        }
+
+        .dest-card-body {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 28px
+        }
+
+        .dest-card-label {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: rgba(255, 255, 255, .5); margin-bottom: 6px
+        }
+
+        .dest-card-name {
+            font-family: var(--fp);
+            font-size: clamp(24px, 3vw, 36px); font-weight: 400;
+            color: var(--white); letter-spacing: -.05em;
+            line-height: 1.1; margin-bottom: 8px;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, .3)
+        }
+
+        .dest-card-desc {
+            font-size: 14px; font-weight: 300;
+            color: rgba(255, 255, 255, .65);
+            line-height: 1.5; margin-bottom: 20px
+        }
+
+        .dest-card-foot { display: flex; align-items: center; gap: 14px }
+
+        .dest-card-cta {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 13px; font-weight: 500; color: var(--white);
+            padding: 7px 16px;
+            border: 1px solid rgba(255, 255, 255, .3); border-radius: var(--rfull);
+            backdrop-filter: blur(4px); background: rgba(255, 255, 255, .07);
+            transition: all var(--dur) var(--ease)
+        }
+
+        .dest-card:hover .dest-card-cta { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .5) }
+
+        .dest-card-cta svg {
+            width: 13px; height: 13px; stroke: var(--white); fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+            transition: transform var(--dur) var(--ease)
+        }
+
+        .dest-card:hover .dest-card-cta svg { transform: translateX(3px) }
+        .dest-card-count { font-size: 12px; color: rgba(255, 255, 255, .4); letter-spacing: .02em }
+
+        /* ─── EXPERIENCE TILES ─────────────────────────────────── */
+        .exp-tile {
+            position: relative; border-radius: var(--rlg); overflow: hidden;
+            aspect-ratio: 3/4; cursor: pointer; display: block;
+            transition: transform var(--dur3) var(--ease)
+        }
+
+        .exp-tile:hover { transform: translateY(-4px) }
+
+        .exp-tile img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform .9s var(--ease)
+        }
+
+        .exp-tile:hover img { transform: scale(1.07) }
+
+        .exp-tile-grad {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .72) 100%);
+            pointer-events: none
+        }
+
+        .exp-tile-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px }
+
+        .exp-tile-label {
+            font-family: var(--fp);
+            font-size: clamp(14px, 1.4vw, 16px); font-weight: 400;
+            color: var(--white); letter-spacing: -.03em; line-height: 1.2
+        }
+
+        .exp-tile-sub { font-size: 12px; color: rgba(255, 255, 255, .5); margin-top: 3px }
+
+        /* ─── EXPERT ───────────────────────────────────────────── */
+        .expert-wrapper { background: var(--earth-warm); border-radius: var(--rlg); padding: 64px 48px }
+
+        .expert { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: center }
+
+        .expert-photo { aspect-ratio: 3/4; border-radius: var(--rlg); overflow: hidden }
+
+        .expert-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block }
+
+        .expert-tag { font-family: var(--fc); font-size: 20px; font-weight: 700; color: var(--sangria); margin-bottom: 4px }
+
+        .expert-name {
+            font-family: var(--fp);
+            font-size: clamp(20px, 2.5vw, 28px); font-weight: 400;
+            letter-spacing: -.04em; margin-bottom: 4px
+        }
+
+        .expert-role { font-size: 14px; color: var(--gm); margin-bottom: 24px }
+
+        .expert-quote {
+            font-family: var(--fc);
+            font-size: 22px; font-weight: 700; color: var(--pthalo);
+            line-height: 1.3; margin-bottom: 24px;
+            padding-left: 20px; border-left: 3px solid var(--earth-sand)
+        }
+
+        .expert-link {
+            font-size: 13px; font-weight: 500; color: var(--sangria);
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: color var(--dur) var(--ease)
+        }
+
+        .expert-link svg {
+            width: 14px; height: 14px;
+            stroke: var(--sangria); fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+            transition: transform var(--dur) var(--ease)
+        }
+
+        .expert-link:hover svg { transform: translateX(4px) }
+
+        /* ─── NEWSLETTER ───────────────────────────────────────── */
+        .nl { background: var(--earth-warm); padding: 80px 0 }
+
+        .nl-inner { max-width: 520px; margin: 0 auto; padding: 0 24px; text-align: center }
+
+        .nl-tag { font-family: var(--fc); font-size: 22px; font-weight: 700; color: var(--sangria); margin-bottom: 4px }
+
+        .nl-title {
+            font-family: var(--fp);
+            font-size: clamp(20px, 2.5vw, 28px); font-weight: 400;
+            letter-spacing: -.04em; line-height: 1.2; margin-bottom: 8px
+        }
+
+        .nl-text { font-size: 15px; color: var(--gm); margin-bottom: 28px; line-height: 1.6 }
+
+        .nl-form { display: flex; gap: 10px }
+
+        .nl-input {
+            flex: 1; font-family: var(--fs); font-size: 15px; color: var(--black);
+            padding: 12px 16px; border: 1px solid var(--earth-sand);
+            border-radius: var(--rmd); min-height: 48px; outline: none;
+            background: var(--white);
+            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease)
+        }
+
+        .nl-input::placeholder { color: var(--platinum); font-weight: 300 }
+        .nl-input:focus { border-color: var(--pthalo); box-shadow: 0 0 0 3px rgba(28, 68, 71, .08) }
+
+        .nl-btn {
+            font-size: 14px; font-weight: 500; color: var(--white);
+            background: var(--sangria); padding: 12px 28px;
+            border-radius: var(--rmd); min-height: 48px;
+            transition: all var(--dur) var(--ease); white-space: nowrap
+        }
+
+        .nl-btn:hover { opacity: .9 }
+        .nl-fine { font-size: 12px; color: var(--earth-stone); margin-top: 14px }
+
+        /* ─── FOOTER ───────────────────────────────────────────── */
+        .footer { background: var(--pthalo); padding: 64px 0 32px; color: rgba(255, 255, 255, .6) }
+
+        .footer-grid {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 48px; margin-bottom: 48px
+        }
+
+        .footer-logo { margin-bottom: 16px }
+        .footer-brand p { font-size: 14px; line-height: 1.6; margin-bottom: 20px }
+        .footer-certs { display: flex; gap: 12px }
+
+        .footer-cert {
+            width: 40px; height: 40px; border-radius: var(--rfull);
+            background: rgba(255, 255, 255, .06);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; color: rgba(255, 255, 255, .4); text-align: center; line-height: 1.1
+        }
+
+        .footer h4 {
+            font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: .06em;
+            color: rgba(255, 255, 255, .9); margin-bottom: 16px
+        }
+
+        .footer a {
+            display: block; font-size: 14px;
+            color: rgba(255, 255, 255, .5); padding: 3px 0;
+            transition: color var(--dur) var(--ease)
+        }
+
+        .footer a:hover { color: var(--white) }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            padding-top: 24px; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 16px
+        }
+
+        .footer-copy { font-size: 12px; color: rgba(255, 255, 255, .3) }
+        .footer-socials { display: flex; gap: 12px }
+
+        .footer-social {
+            width: 32px; height: 32px; border-radius: var(--rfull);
+            background: rgba(255, 255, 255, .06);
+            display: flex; align-items: center; justify-content: center;
+            transition: background var(--dur) var(--ease)
+        }
+
+        .footer-social:hover { background: rgba(255, 255, 255, .12) }
+
+        .footer-social svg {
+            width: 14px; height: 14px;
+            stroke: rgba(255, 255, 255, .5); fill: none;
+            stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round
+        }
+
+        /* ─── REVEAL ───────────────────────────────────────────── */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease) }
+        .reveal.vis { opacity: 1; transform: translateY(0) }
+
+        /* ─── DIVIDER ──────────────────────────────────────────── */
+        .section-divider { height: 1px; background: var(--g3); margin: 0 }
+
+        /* ─── RESPONSIVE ───────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .grid-3 { grid-template-columns: 1fr 1fr; gap: 24px }
+            .grid-4 { grid-template-columns: 1fr 1fr; gap: 16px }
+            .feature { grid-template-columns: 1fr; gap: 24px }
+            .feature-img { aspect-ratio: 16/9 }
+            .expert { grid-template-columns: 200px 1fr; gap: 32px }
+            .footer-grid { grid-template-columns: 1fr 1fr }
+        }
+
+        @media (max-width: 768px) {
+            .hero-body { padding-bottom: 48px }
+            .section { padding: 64px 0 }
+            .section-head { margin-bottom: 32px }
+            .grid-3, .grid-2 { grid-template-columns: 1fr }
+            .grid-3 { gap: 40px }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 12px }
+            .card-img { aspect-ratio: 16/10 }
+            .dest-card { aspect-ratio: 3/2 }
+            .exp-tile { aspect-ratio: 1/1 }
+            .spread-full { min-height: 60vh; min-height: 60svh }
+            .spread-mid { min-height: 45vh; min-height: 45svh }
+            .spread-content { padding-bottom: 40px }
+            .spread-grad { background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, .6) 100%) }
+            .expert-wrapper { padding: 48px 24px }
+            .expert { grid-template-columns: 1fr; text-align: center }
+            .expert-photo { max-width: 220px; margin: 0 auto; aspect-ratio: 1/1 }
+            .expert-quote { border-left: none; padding-left: 0; text-align: center }
+            .nl-form { flex-direction: column }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px }
+            .footer-bottom { justify-content: center; text-align: center }
+        }
+
+        @media (max-width: 480px) {
+            .nav-back-btn span { display: none }
+            .nav-back-btn { padding: 8px 10px; gap: 0 }
+            .hero { min-height: 90vh; min-height: 90svh }
+            .wrap { padding: 0 20px }
+            .nav-inner { padding: 0 20px }
+            .hero-body { padding: 0 20px 40px }
+            .spread-content { padding: 0 20px 36px }
+            .browse-bar-inner { padding: 0 20px }
+            .grid-4 { grid-template-columns: repeat(2, 1fr) }
+            .dest-card { aspect-ratio: 4/3 }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAV ──────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <img src="../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+                <img src="../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+            </a>
+            <div class="nav-right">
+                <button class="nav-search" aria-label="Search">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                </button>
+
+                <!-- V2 Globe Accent language toggle -->
+                <div class="lang" id="lang">
+                    <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox"
+                        aria-label="Select language">
+                        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10" stroke-width="1.75" />
+                            <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5" />
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5" />
+                        </svg>
+                        <span class="lang-code-label" id="langCurrent">EN</span>
+                        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+                    <div class="lang-panel" id="langPanel" role="listbox">
+                        <div class="lang-panel-header">
+                            <span class="lang-panel-label">Language</span>
+                        </div>
+                        <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                            <svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+                        </button>
+                        <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
+                            <span class="lang-flag">🇩🇪</span>
+                            <span class="lang-name">Deutsch</span>
+                        </button>
+                        <button class="lang-option" data-lang="FR" role="option" aria-selected="false">
+                            <span class="lang-flag">🇫🇷</span>
+                            <span class="lang-name">Français</span>
+                        </button>
+                        <button class="lang-option" data-lang="ES" role="option" aria-selected="false">
+                            <span class="lang-flag">🇪🇸</span>
+                            <span class="lang-name">Español</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="/" class="nav-back-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    <span>Back to homepage</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── HERO ─────────────────────────────────────────────────── -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="../../public/images/photos/hero-safari-camp.jpg" alt="Safari camp at sunset in Africa">
+        </div>
+        <div class="hero-grad"></div>
+        <div class="hero-body">
+            <p class="hero-cat">Guide</p>
+            <h1 class="hero-title">The ultimate first-timer's guide to an African safari</h1>
+            <p class="hero-excerpt">Everything you need to know — from choosing a destination and packing smart, to what
+                to expect on your first game drive.</p>
+            <div class="hero-bottom">
+                <div class="hero-author">
+                    <div class="hero-av">LS</div>
+                    <span class="hero-byline"><strong>Lena Schmidt</strong><br>Safari Specialist</span>
+                </div>
+                <span class="hero-dot"></span>
+                <span class="hero-read nums">12 min read</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── STICKY BROWSE BAR ─────────────────────────────────────── -->
+    <div class="browse-bar" id="browseBar">
+        <div class="browse-bar-inner">
+            <div class="browse-row">
+                <a href="#featured" class="browse-pill active" data-target="featured">All</a>
+                <a href="#destinations" class="browse-pill" data-target="destinations">Destinations</a>
+                <a href="#experiences" class="browse-pill" data-target="experiences">Experiences</a>
+                <a href="#guides" class="browse-pill" data-target="guides">Guides</a>
+                <a href="#reviews" class="browse-pill" data-target="reviews">Reviews</a>
+                <a href="#travel-styles" class="browse-pill" data-target="travel-styles">Travel Styles</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FEATURED STORIES ──────────────────────────────────────── -->
+    <section class="section" id="featured" data-section="featured">
+        <div class="wrap">
+            <div class="section-top section-head">
+                <div>
+                    <p class="tag">Editor's picks</p>
+                    <h2>Featured stories</h2>
+                </div>
+                <a href="#" class="section-more">All articles
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </a>
+            </div>
+            <div class="grid-3 reveal">
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-3.jpg"
+                            alt="Giraffes and zebras crossing the Serengeti plains">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Destination · Tanzania</p>
+                        <h3 class="card-title">A complete guide to the Serengeti — when to go, where to stay, and what you'll see</h3>
+                        <p class="card-meta"><strong>Lena S.</strong> · <span class="nums">10</span> min</p>
+                    </div>
+                </a>
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-8.jpg"
+                            alt="Luxury safari lodge pool with rocky bush landscape">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Review · South Africa</p>
+                        <h3 class="card-title">Londolozi Founders Camp — our complete first-hand review</h3>
+                        <p class="card-meta"><strong>Bárbara R.</strong> · <span class="nums">14</span> min</p>
+                    </div>
+                </a>
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-7.jpg"
+                            alt="Family watching elephants from an open safari vehicle">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Travel Style · Family</p>
+                        <h3 class="card-title">The <span class="nums">8</span> best family-friendly lodges in East Africa</h3>
+                        <p class="card-meta"><strong>Amara S.</strong> · <span class="nums">9</span> min</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SPREAD — visual break ─────────────────────────────────── -->
+    <section class="spread spread-mid reveal">
+        <div class="spread-bg">
+            <img src="../../public/images/photos/landscape-etosha-namibia.jpg"
+                alt="Namibia's Etosha salt pan stretching to the horizon at golden hour">
+        </div>
+        <div class="spread-grad"></div>
+        <div class="spread-content">
+            <p class="spread-tag">Trip showcase</p>
+            <h2 class="spread-title">A desert dream: <span class="nums">10</span> days self-driving through Namibia</h2>
+            <p class="spread-text">Red dunes at sunrise, desert-adapted elephants at dusk. Marco's road trip journal
+                through one of Africa's most extraordinary landscapes.</p>
+            <a href="#" class="spread-link">Read the journey
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── DESTINATIONS ───────────────────────────────────────────── -->
+    <section class="section" id="destinations" data-section="destinations">
+        <div class="wrap">
+            <div class="section-top section-head">
+                <div>
+                    <p class="tag">Explore Africa</p>
+                    <h2>Destinations</h2>
+                    <p>Two of the continent's most extraordinary safari destinations, up close.</p>
+                </div>
+                <a href="#" class="section-more">All destinations
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </a>
+            </div>
+            <div class="grid-2 reveal">
+                <a href="#" class="dest-card">
+                    <img src="../../public/images/photos/destination-cape-town-beach.jpg"
+                        alt="Cape Town beach with Table Mountain rising behind it, South Africa">
+                    <div class="dest-card-grad"></div>
+                    <div class="dest-card-body">
+                        <p class="dest-card-label">Destination</p>
+                        <h3 class="dest-card-name">South Africa</h3>
+                        <p class="dest-card-desc">Big Five game reserves, Cape Town's culture, and <span class="nums">2,500</span>&nbsp;km of wild coastline.</p>
+                        <div class="dest-card-foot">
+                            <span class="dest-card-cta">Explore South Africa
+                                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                            </span>
+                            <span class="dest-card-count"><span class="nums">3</span> articles</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="dest-card">
+                    <img src="../../public/images/photos/rect-3.jpg"
+                        alt="Wildebeest crossing the Mara River during the Great Migration, Serengeti, Tanzania">
+                    <div class="dest-card-grad"></div>
+                    <div class="dest-card-body">
+                        <p class="dest-card-label">Destination</p>
+                        <h3 class="dest-card-name">Tanzania</h3>
+                        <p class="dest-card-desc">The Serengeti migration, Kilimanjaro's summit, and Zanzibar's coral reefs.</p>
+                        <div class="dest-card-foot">
+                            <span class="dest-card-cta">Explore Tanzania
+                                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                            </span>
+                            <span class="dest-card-count"><span class="nums">4</span> articles</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── EXPERIENCES ────────────────────────────────────────────── -->
+    <section class="section" id="experiences" data-section="experiences" style="background: var(--gl)">
+        <div class="wrap">
+            <div class="section-top section-head">
+                <div>
+                    <p class="tag">How you travel</p>
+                    <h2>Experiences</h2>
+                    <p>From classic game drives to deep-forest gorilla treks — find the adventure that fits.</p>
+                </div>
+                <a href="#" class="section-more">All experiences
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </a>
+            </div>
+            <div class="grid-4 reveal">
+                <a href="#" class="exp-tile">
+                    <img src="../../public/images/photos/rect-4.jpg" alt="Male lion walking across the open savannah at dusk">
+                    <div class="exp-tile-grad"></div>
+                    <div class="exp-tile-body">
+                        <p class="exp-tile-label">Safari</p>
+                        <p class="exp-tile-sub"><span class="nums">7</span> articles</p>
+                    </div>
+                </a>
+                <a href="#" class="exp-tile">
+                    <img src="../../public/images/photos/rect-2.jpg" alt="Elephant herd crossing a waterhole in the African bush">
+                    <div class="exp-tile-grad"></div>
+                    <div class="exp-tile-body">
+                        <p class="exp-tile-label">Gorilla Trekking</p>
+                        <p class="exp-tile-sub"><span class="nums">3</span> articles</p>
+                    </div>
+                </a>
+                <a href="#" class="exp-tile">
+                    <img src="../../public/images/photos/rect-5.jpg" alt="Springbok running across a dramatic red-dune Namibian desert landscape">
+                    <div class="exp-tile-grad"></div>
+                    <div class="exp-tile-body">
+                        <p class="exp-tile-label">Self Drive</p>
+                        <p class="exp-tile-sub"><span class="nums">2</span> articles</p>
+                    </div>
+                </a>
+                <a href="#" class="exp-tile">
+                    <img src="../../public/images/photos/rect-6.jpg" alt="Zebras and giraffe gathered at a waterhole in Etosha National Park">
+                    <div class="exp-tile-grad"></div>
+                    <div class="exp-tile-body">
+                        <p class="exp-tile-label">Fly-In Safari</p>
+                        <p class="exp-tile-sub"><span class="nums">2</span> articles</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── GUIDES ─────────────────────────────────────────────────── -->
+    <section class="section" id="guides" data-section="guides">
+        <div class="wrap">
+            <div class="section-top section-head">
+                <div>
+                    <p class="tag">Learn before you go</p>
+                    <h2>Guides</h2>
+                </div>
+                <a href="#" class="section-more">All guides
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </a>
+            </div>
+            <a href="#" class="feature reveal" style="margin-bottom: 40px">
+                <div class="feature-img">
+                    <img src="../../public/images/photos/hero-safari-camp.jpg"
+                        alt="Tented safari camp at golden hour, lanterns lit across a bush clearing">
+                </div>
+                <div class="feature-body">
+                    <p class="feature-cat">Guide · First-timer</p>
+                    <h3 class="feature-title">The ultimate first-timer's guide to an African safari</h3>
+                    <p class="feature-excerpt">Everything you need to know — from choosing a destination and packing
+                        smart, to what to expect on your first game drive. Written by a specialist who has done it
+                        <span class="nums">47</span> times.</p>
+                    <p class="feature-meta"><strong>Lena Schmidt</strong> · <span class="nums">12</span> min read</p>
+                </div>
+            </a>
+            <div class="grid-2 reveal">
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-1.jpg" alt="View through the open roof hatch of a safari vehicle at dusk">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Planning</p>
+                        <h3 class="card-title">The definitive safari packing list for <span class="nums">2026</span></h3>
+                        <p class="card-meta"><strong>Lena S.</strong> · <span class="nums">6</span> min</p>
+                    </div>
+                </a>
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-2.jpg" alt="Elephant herd at a waterhole with red dust rising in Amboseli">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Sustainability</p>
+                        <h3 class="card-title">How Reteti Elephant Sanctuary is changing northern Kenya</h3>
+                        <p class="card-meta"><strong>Kamau M.</strong> · <span class="nums">7</span> min</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TRAVEL STYLES ──────────────────────────────────────────── -->
+    <section class="section" id="travel-styles" data-section="travel-styles" style="background: var(--earth-warm)">
+        <div class="wrap">
+            <div class="section-top section-head">
+                <div>
+                    <p class="tag">Find your style</p>
+                    <h2>Travel styles</h2>
+                    <p>Every trip is different. Find the one that fits how you like to travel.</p>
+                </div>
+                <a href="#" class="section-more">All travel styles
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </a>
+            </div>
+            <div class="grid-3 reveal">
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/accommodation-camp-suite.jpg"
+                            alt="Interor of a luxury safari camp suite with canvas walls and a view onto the bush">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Eco Luxury</p>
+                        <h3 class="card-title">Ongava Lodge: Etosha's best-kept secret for the luxury traveller</h3>
+                        <p class="card-meta"><strong>Marco R.</strong> · <span class="nums">9</span> min</p>
+                    </div>
+                </a>
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-7.jpg"
+                            alt="Family in an open game drive vehicle, children pointing at wildlife">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Family Travel</p>
+                        <h3 class="card-title">Cape Town to Kruger: our <span class="nums">14</span>-day family adventure across South Africa</h3>
+                        <p class="card-meta"><strong>Lena S.</strong> · <span class="nums">18</span> min</p>
+                    </div>
+                </a>
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/destination-cape-wine-route.jpg"
+                            alt="Couple watching a sunset over Cape winelands with mountains behind">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Honeymoon</p>
+                        <h3 class="card-title">Our Kenya honeymoon: <span class="nums">12</span> days of wildlife, romance, and the Indian Ocean</h3>
+                        <p class="card-meta"><strong>Bárbara R.</strong> · <span class="nums">12</span> min</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── COMPARISONS ────────────────────────────────────────────── -->
+    <section class="section" id="comparisons" data-section="comparisons">
+        <div class="wrap">
+            <div class="section-top section-head">
+                <div>
+                    <p class="tag">Make the right choice</p>
+                    <h2>Comparisons</h2>
+                    <p>Side-by-side breakdowns to help you decide where — and how — to go.</p>
+                </div>
+                <a href="#" class="section-more">All comparisons
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </a>
+            </div>
+            <div class="grid-2 reveal">
+                <a href="#" class="card card--wide">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/rect-5.jpg" alt="Springbok in stark Namibian desert — Botswana vs Namibia">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Comparison · Destinations</p>
+                        <h3 class="card-title">Botswana vs. Namibia — which safari is right for you?</h3>
+                        <p class="card-meta"><strong>Marco R.</strong> · <span class="nums">8</span> min</p>
+                    </div>
+                </a>
+                <a href="#" class="card card--wide">
+                    <div class="card-img">
+                        <img src="../../public/images/photos/landscape-etosha-namibia.jpg" alt="Vast East African savannah — Tanzania vs Kenya">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Comparison · East Africa</p>
+                        <h3 class="card-title">Tanzania vs. Kenya — Great Migration, two perspectives</h3>
+                        <p class="card-meta"><strong>Amara S.</strong> · <span class="nums">11</span> min</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── EXPERT ─────────────────────────────────────────────────── -->
+    <section class="section" style="background: var(--gl)">
+        <div class="wrap">
+            <div class="expert-wrapper reveal">
+                <div class="expert">
+                    <div class="expert-photo">
+                        <img src="../../public/images/photos/portrait-safari-specialist.png"
+                            alt="Lena Schmidt, Senior Safari Specialist at Viatu">
+                    </div>
+                    <div class="expert-body">
+                        <p class="expert-tag">Meet the specialist</p>
+                        <h3 class="expert-name">Lena Schmidt</h3>
+                        <p class="expert-role">Senior Safari Specialist · <span class="nums">47</span> trips across <span class="nums">9</span> countries</p>
+                        <blockquote class="expert-quote">"Every sunrise on the savannah reminds me why I do this. The
+                            best trips aren't planned in spreadsheets — they're built from conversations, curiosity, and
+                            a willingness to be surprised."</blockquote>
+                        <a href="#" class="expert-link">Read Lena's articles
+                            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SPREAD — CTA ──────────────────────────────────────────── -->
+    <section class="spread spread-full reveal">
+        <div class="spread-bg">
+            <img src="../../public/images/photos/wildlife-leopard-timbavati.jpg"
+                alt="Leopard resting in an acacia tree at dusk, Timbavati Private Reserve">
+        </div>
+        <div class="spread-grad"></div>
+        <div class="spread-content">
+            <p class="spread-tag">Start planning</p>
+            <h2 class="spread-title">Your African journey begins with a conversation</h2>
+            <p class="spread-text">Tell us what you're dreaming of. Our specialists will craft a tailor-made trip that's uniquely yours.</p>
+            <a href="#" class="spread-link">Plan your trip
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── NEWSLETTER ────────────────────────────────────────────── -->
+    <section class="nl">
+        <div class="nl-inner">
+            <p class="nl-tag">Stay inspired</p>
+            <h2 class="nl-title">Safari stories in your inbox</h2>
+            <p class="nl-text">Expert guides, lodge reviews, and trip inspiration. Delivered every two weeks.</p>
+            <div class="nl-form">
+                <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+                <button class="nl-btn">Subscribe</button>
+            </div>
+            <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="../brand/logos/viatu-logo-white.svg" alt="Viatu" width="110" height="24">
+                    </div>
+                    <p>Tailor-made, positive impact trips: curated by us, created by you.</p>
+                    <div class="footer-certs">
+                        <div class="footer-cert">B Corp</div>
+                        <div class="footer-cert">1%</div>
+                        <div class="footer-cert">UN GC</div>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="#">All Trips</a>
+                    <a href="#">All Stays</a>
+                    <a href="#">Destinations</a>
+                    <a href="#">Plan My Trip</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Destinations</h4>
+                    <a href="#">Namibia</a>
+                    <a href="#">Botswana</a>
+                    <a href="#">Kenya</a>
+                    <a href="#">Tanzania</a>
+                    <a href="#">South Africa</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Sustainability</a>
+                    <a href="#">Reviews</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copy">© <span class="nums">2026</span> Viatu Travel. All rights reserved.</span>
+                <div class="footer-socials">
+                    <a href="#" class="footer-social" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                        </svg>
+                    </a>
+                    <a href="#" class="footer-social" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Nav scroll ────────────────────────────────────────────
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+
+        // ── Language dropdown ─────────────────────────────────────
+        const langWrap    = document.getElementById('lang');
+        const langTrigger = document.getElementById('langTrigger');
+        const langCurrent = document.getElementById('langCurrent');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langWrap.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.lang-option').forEach(o => {
+                    o.classList.remove('active');
+                    o.setAttribute('aria-selected', 'false');
+                    const chk = o.querySelector('.lang-check');
+                    if (chk) chk.remove();
+                });
+                opt.classList.add('active');
+                opt.setAttribute('aria-selected', 'true');
+                opt.insertAdjacentHTML('beforeend',
+                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                langCurrent.textContent = opt.dataset.lang;
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', e => {
+            if (!langWrap.contains(e.target)) {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // ── Sticky browse bar — active pill on scroll ─────────────
+        const sections = Array.from(document.querySelectorAll('[data-section]'));
+        const pills    = document.querySelectorAll('.browse-pill[data-target]');
+        const NAV_H    = 64 + 65;
+
+        function updateActivePill() {
+            let current = '';
+            sections.forEach(sec => {
+                if (sec.getBoundingClientRect().top <= NAV_H + 32) current = sec.dataset.section;
+            });
+            pills.forEach(pill => {
+                const isActive = current
+                    ? pill.dataset.target === current
+                    : pill.dataset.target === 'featured';
+                pill.classList.toggle('active', isActive);
+            });
+        }
+
+        window.addEventListener('scroll', updateActivePill, { passive: true });
+        updateActivePill();
+
+        // ── Offset anchor scroll for sticky bars ─────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (!target) return;
+                e.preventDefault();
+                const offset = target.getBoundingClientRect().top + window.scrollY - NAV_H;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            });
+        });
+
+        // ── Reveal on scroll ──────────────────────────────────────
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('vis'), i * 60);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

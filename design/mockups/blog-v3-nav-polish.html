@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspiration — Viatu Travel Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sangria:#541736;--pthalo:#1C4447;--platinum:#C4C4C4;--black:#000;--white:#FFF;--cream:#F3FFB9;
+  --gl:#F8F9FA;--gm:#6C757D;--gd:#343A40;--g3:#DEE2E6;
+  --earth-warm:#F7F3EF;--earth-sand:#E8E0D6;--earth-stone:#B5A898;--earth-clay:#8B7355;
+  --fp:'Krona One',sans-serif;--fs:'Hanken Grotesk',sans-serif;--fc:'Caveat',cursive;
+  --rmd:.375rem;--rlg:.5rem;--rfull:9999px;
+  --sh-sm:0 1px 2px rgba(0,0,0,.05);--sh-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+  --dur:200ms;--dur3:300ms;--ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fs);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--fs);cursor:pointer;border:none;background:none}
+.ico{fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.nums{font-family:var(--fs)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* PLACEHOLDER SYSTEM */
+.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;min-height:inherit}
+.ph-icon{width:52px;height:52px;border-radius:var(--rfull);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ph-icon.lg{width:72px;height:72px}
+.ph-icon svg{width:24px;height:24px;stroke:var(--white);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ph-icon.lg svg{width:32px;height:32px}
+.ph-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.ph-dims{font-size:11px}
+.ph-warm{background:var(--earth-warm)}.ph-warm .ph-icon{background:var(--earth-stone)}.ph-warm .ph-label{color:var(--earth-clay)}.ph-warm .ph-dims{color:var(--earth-stone)}
+.ph-dark{background:var(--pthalo)}.ph-dark .ph-icon{background:rgba(255,255,255,.1)}.ph-dark .ph-label{color:rgba(255,255,255,.45)}.ph-dark .ph-dims{color:rgba(255,255,255,.25)}
+.ph-deep{background:linear-gradient(160deg,var(--pthalo) 0%,#0f2e30 100%)}.ph-deep .ph-icon{background:rgba(255,255,255,.08)}.ph-deep .ph-label{color:rgba(255,255,255,.4)}.ph-deep .ph-dims{color:rgba(255,255,255,.2)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background var(--dur3) var(--ease),box-shadow var(--dur3) var(--ease)}
+.nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--fp);font-size:18px;letter-spacing:-.04em;transition:color var(--dur3) var(--ease)}
+.nav:not(.scrolled) .nav-logo{color:var(--white)}.nav.scrolled .nav-logo{color:var(--sangria)}
+.nav-right{display:flex;align-items:center;gap:10px}
+
+/* BACK TO HOMEPAGE BUTTON */
+.nav-back-btn{font-family:var(--fs);font-size:13px;font-weight:600;padding:8px 16px;border-radius:var(--rmd);min-height:38px;display:inline-flex;align-items:center;gap:5px;transition:all var(--dur) var(--ease);letter-spacing:.01em;cursor:pointer;white-space:nowrap}
+.nav:not(.scrolled) .nav-back-btn{color:var(--white);border:1.5px solid rgba(255,255,255,.35);background:transparent}
+.nav:not(.scrolled) .nav-back-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.55)}
+.nav.scrolled .nav-back-btn{color:var(--sangria);border:1.5px solid var(--sangria);background:transparent}
+.nav.scrolled .nav-back-btn:hover{background:var(--sangria);color:var(--white);transform:translateY(-1px)}
+.nav-back-btn svg{flex-shrink:0;transition:inherit}
+
+/* LANGUAGE DROPDOWN */
+.lang{position:relative}
+.lang-trigger{display:inline-flex;align-items:center;gap:3px;font-family:var(--fs);font-size:13px;font-weight:500;cursor:pointer;padding:6px 8px;border-radius:var(--rmd);transition:color var(--dur) var(--ease),background var(--dur) var(--ease);letter-spacing:.05em;background:none;border:none;line-height:1}
+.nav:not(.scrolled) .lang-trigger{color:rgba(255,255,255,.7)}
+.nav:not(.scrolled) .lang-trigger:hover{color:var(--white);background:rgba(255,255,255,.08)}
+.nav.scrolled .lang-trigger{color:var(--gm)}
+.nav.scrolled .lang-trigger:hover{color:var(--sangria);background:rgba(84,23,54,.04)}
+.lang-chevron{display:block;width:11px;height:11px;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--dur) var(--ease)}
+.lang.open .lang-chevron{transform:rotate(180deg)}
+.lang-panel{position:absolute;top:calc(100% + 8px);right:0;min-width:130px;background:var(--white);border-radius:var(--rlg);box-shadow:var(--sh-md),0 0 0 1px rgba(0,0,0,.04);padding:5px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur);z-index:20}
+.lang.open .lang-panel{opacity:1;visibility:visible;transform:translateY(0)}
+.lang-option{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border-radius:var(--rmd);font-family:var(--fs);font-size:13px;font-weight:400;color:var(--gd);cursor:pointer;transition:background var(--dur) var(--ease),color var(--dur) var(--ease);background:none;border:none;text-align:left}
+.lang-option:hover{background:var(--gl);color:var(--sangria)}
+.lang-option.active{color:var(--sangria);font-weight:600}
+.lang-code{font-size:12px;font-weight:700;letter-spacing:.05em;min-width:20px}
+.lang-name{color:var(--gm);font-size:12px;flex:1}
+.lang-option.active .lang-name{color:rgba(84,23,54,.5)}
+.lang-check{width:14px;height:14px;fill:none;stroke:var(--sangria);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;margin-left:auto;flex-shrink:0}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0}.hero-bg .ph{padding:48px}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.02) 40%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.hero-body{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:0 24px 72px}
+.hero-cat{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px}
+.hero-title{font-family:var(--fp);font-size:clamp(28px,5vw,54px);font-weight:400;color:var(--white);letter-spacing:-.06em;line-height:1.15;margin-bottom:20px;max-width:680px}
+.hero-excerpt{font-size:17px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.6;max-width:480px;margin-bottom:32px}
+.hero-bottom{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.hero-av{width:36px;height:36px;border-radius:var(--rfull);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--white);backdrop-filter:blur(4px)}
+.hero-author{display:flex;align-items:center;gap:10px}
+.hero-byline{font-size:13px;color:rgba(255,255,255,.6)}.hero-byline strong{color:rgba(255,255,255,.9);font-weight:500}
+.hero-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+.hero-read{font-size:13px;color:rgba(255,255,255,.45)}
+
+/* SECTIONS */
+.section{padding:96px 0}.section-head{margin-bottom:56px}
+.section-head .tag{font-family:var(--fc);font-size:22px;font-weight:700;color:var(--sangria);line-height:1.2;margin-bottom:4px}
+.section-head h2{font-family:var(--fp);font-size:clamp(20px,2.8vw,32px);font-weight:400;letter-spacing:-.05em;line-height:1.2}
+.section-head p{font-size:16px;color:var(--gm);margin-top:8px;max-width:440px;line-height:1.6}
+.section-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.section-more{font-size:13px;font-weight:500;color:var(--sangria);display:inline-flex;align-items:center;gap:4px;transition:gap var(--dur) var(--ease);flex-shrink:0}
+.section-more:hover{gap:8px}
+.section-more svg{width:14px;height:14px;stroke:var(--sangria);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* CARDS */
+.card{display:flex;flex-direction:column;cursor:pointer;transition:transform var(--dur3) var(--ease)}
+.card:hover{transform:translateY(-3px)}
+.card-img{position:relative;overflow:hidden;border-radius:var(--rlg);aspect-ratio:3/2;margin-bottom:16px}
+.card-img .ph{min-height:auto;height:100%;border-radius:var(--rlg)}
+.card-cat{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gm);margin-bottom:8px}
+.card-title{font-family:var(--fs);font-size:18px;font-weight:600;line-height:1.35;color:var(--black);margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-meta{font-size:13px;color:var(--platinum)}.card-meta strong{color:var(--gm);font-weight:500}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+
+/* SPREAD — large immersive images */
+.spread{position:relative;width:100%;overflow:hidden}
+.spread-full{min-height:70vh;min-height:70svh}.spread-mid{min-height:50vh;min-height:50svh}
+.spread-bg{position:absolute;inset:0}.spread-bg .ph{min-height:inherit}
+.spread-grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55) 100%)}
+.spread-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;justify-content:flex-end;min-height:inherit;padding-bottom:56px}
+.spread-tag{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:12px}
+.spread-title{font-family:var(--fp);font-size:clamp(22px,3.5vw,40px);font-weight:400;color:var(--white);letter-spacing:-.05em;line-height:1.2;max-width:560px;margin-bottom:16px}
+.spread-text{font-size:15px;font-weight:300;color:rgba(255,255,255,.6);max-width:420px;line-height:1.6;margin-bottom:24px}
+.spread-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--white);padding:10px 24px;border-radius:var(--rmd);border:1px solid rgba(255,255,255,.25);transition:all var(--dur) var(--ease);min-height:44px;width:fit-content;backdrop-filter:blur(4px);background:rgba(255,255,255,.06)}
+.spread-link:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+.spread-link svg{width:16px;height:16px;stroke:var(--white);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* FEATURE — horizontal large card */
+.feature{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;cursor:pointer;transition:transform var(--dur3) var(--ease)}
+.feature:hover{transform:translateY(-2px)}
+.feature-img{border-radius:var(--rlg);overflow:hidden;aspect-ratio:4/3}.feature-img .ph{min-height:auto;height:100%;border-radius:var(--rlg)}
+.feature-cat{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gm);margin-bottom:12px}
+.feature-title{font-family:var(--fp);font-size:clamp(20px,2.2vw,28px);font-weight:400;letter-spacing:-.04em;line-height:1.2;margin-bottom:16px}
+.feature-excerpt{font-size:15px;color:var(--gm);line-height:1.6;margin-bottom:20px}
+.feature-meta{font-size:13px;color:var(--platinum)}.feature-meta strong{color:var(--gm);font-weight:500}
+
+/* BROWSE PILLS */
+.browse-row{display:flex;flex-wrap:wrap;gap:10px}
+.browse-pill{font-size:13px;font-weight:500;color:var(--gm);padding:7px 18px;border-radius:var(--rfull);border:1.5px solid var(--g3);transition:all var(--dur) var(--ease);min-height:38px;display:inline-flex;align-items:center;letter-spacing:.01em}
+.browse-pill:hover{border-color:var(--sangria);color:var(--sangria);background:rgba(84,23,54,.04)}
+.browse-pill.active{background:var(--sangria);border-color:var(--sangria);color:var(--white)}
+
+/* EXPERT */
+.expert{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center}
+.expert-photo{aspect-ratio:3/4;border-radius:var(--rlg);overflow:hidden}.expert-photo .ph{min-height:auto;height:100%;border-radius:var(--rlg)}
+.expert-tag{font-family:var(--fc);font-size:20px;font-weight:700;color:var(--sangria);margin-bottom:4px}
+.expert-name{font-family:var(--fp);font-size:clamp(20px,2.5vw,28px);font-weight:400;letter-spacing:-.04em;margin-bottom:4px}
+.expert-role{font-size:14px;color:var(--gm);margin-bottom:24px}
+.expert-quote{font-family:var(--fc);font-size:22px;font-weight:700;color:var(--pthalo);line-height:1.3;margin-bottom:24px;padding-left:20px;border-left:3px solid var(--earth-sand)}
+.expert-link{font-size:13px;font-weight:500;color:var(--sangria);display:inline-flex;align-items:center;gap:4px;transition:gap var(--dur) var(--ease)}
+.expert-link:hover{gap:8px}
+.expert-link svg{width:14px;height:14px;stroke:var(--sangria);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* NEWSLETTER */
+.nl{background:var(--earth-warm);padding:80px 0}
+.nl-inner{max-width:520px;margin:0 auto;padding:0 24px;text-align:center}
+.nl-tag{font-family:var(--fc);font-size:22px;font-weight:700;color:var(--sangria);margin-bottom:4px}
+.nl-title{font-family:var(--fp);font-size:clamp(20px,2.5vw,28px);font-weight:400;letter-spacing:-.04em;line-height:1.2;margin-bottom:8px}
+.nl-text{font-size:15px;color:var(--gm);margin-bottom:28px;line-height:1.6}
+.nl-form{display:flex;gap:10px}
+.nl-input{flex:1;font-family:var(--fs);font-size:15px;color:var(--black);padding:12px 16px;border:1px solid var(--earth-sand);border-radius:var(--rmd);min-height:48px;outline:none;background:var(--white);transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.nl-input::placeholder{color:var(--platinum);font-weight:300}
+.nl-input:focus{border-color:var(--pthalo);box-shadow:0 0 0 3px rgba(28,68,71,.08)}
+.nl-btn{font-size:14px;font-weight:500;color:var(--white);background:var(--sangria);padding:12px 28px;border-radius:var(--rmd);min-height:48px;transition:all var(--dur) var(--ease);white-space:nowrap}
+.nl-btn:hover{opacity:.9}
+.nl-fine{font-size:12px;color:var(--earth-stone);margin-top:14px}
+
+/* FOOTER */
+.footer{background:var(--pthalo);padding:64px 0 32px;color:rgba(255,255,255,.6)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:var(--fp);font-size:18px;color:var(--white);letter-spacing:-.04em;margin-bottom:16px}
+.footer-brand p{font-size:14px;line-height:1.6;margin-bottom:20px}
+.footer-certs{display:flex;gap:12px}
+.footer-cert{width:40px;height:40px;border-radius:var(--rfull);background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.4);text-align:center;line-height:1.1}
+.footer h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.9);margin-bottom:16px}
+.footer a{display:block;font-size:14px;color:rgba(255,255,255,.5);padding:3px 0;transition:color var(--dur) var(--ease)}
+.footer a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+.footer-socials{display:flex;gap:12px}
+.footer-social{width:32px;height:32px;border-radius:var(--rfull);background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:background var(--dur) var(--ease)}
+.footer-social:hover{background:rgba(255,255,255,.12)}
+.footer-social svg{width:14px;height:14px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .grid-3{grid-template-columns:1fr 1fr;gap:24px}
+  .feature{grid-template-columns:1fr;gap:24px}.feature-img{aspect-ratio:16/9}
+  .expert{grid-template-columns:200px 1fr;gap:32px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .nav-back-btn span{display:none}
+  .nav-back-btn{padding:8px 10px;gap:0}
+}
+@media(max-width:768px){
+  .hero-body{padding-bottom:48px}
+  .section{padding:64px 0}.section-head{margin-bottom:36px}
+  .grid-3,.grid-2{grid-template-columns:1fr}.grid-3{gap:40px}
+  .card-img{aspect-ratio:16/10}
+  .spread-full{min-height:60vh;min-height:60svh}.spread-mid{min-height:45vh;min-height:45svh}
+  .spread-content{padding-bottom:40px}
+  .spread-grad{background:linear-gradient(180deg,transparent 20%,rgba(0,0,0,.6) 100%)}
+  .expert{grid-template-columns:1fr;text-align:center}
+  .expert-photo{max-width:220px;margin:0 auto;aspect-ratio:1/1}
+  .expert-quote{border-left:none;padding-left:0;text-align:center}
+  .nl-form{flex-direction:column}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .footer-bottom{justify-content:center;text-align:center}
+}
+@media(max-width:480px){
+  .hero{min-height:90vh;min-height:90svh}
+  .wrap{padding:0 20px}.nav-inner{padding:0 20px}.hero-body{padding:0 20px 40px}.spread-content{padding:0 20px 36px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">viatu</a>
+    <div class="nav-right">
+
+      <!-- Language selector -->
+      <div class="lang" id="lang">
+        <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+          <span id="langCurrent">EN</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-panel" id="langPanel" role="listbox">
+          <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+            <span class="lang-code">EN</span><span class="lang-name">English</span>
+            <svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
+            <span class="lang-code">DE</span><span class="lang-name">Deutsch</span>
+          </button>
+          <button class="lang-option" data-lang="FR" role="option" aria-selected="false">
+            <span class="lang-code">FR</span><span class="lang-name">Français</span>
+          </button>
+          <button class="lang-option" data-lang="ES" role="option" aria-selected="false">
+            <span class="lang-code">ES</span><span class="lang-name">Español</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Back to homepage -->
+      <a href="/" class="nav-back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back to homepage</span>
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="ph ph-deep">
+      <div class="ph-icon lg"><svg viewBox="0 0 24 24" class="ico"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <span class="ph-label">Hero background</span>
+      <span class="ph-dims">2000 × 1340 · object-fit: cover · 3:2</span>
+    </div>
+  </div>
+  <div class="hero-grad"></div>
+  <div class="hero-body">
+    <p class="hero-cat">Guide</p>
+    <h1 class="hero-title">The ultimate first-timer's guide to an African safari</h1>
+    <p class="hero-excerpt">Everything you need to know — from choosing a destination and packing smart, to what to expect on your first game drive.</p>
+    <div class="hero-bottom">
+      <div class="hero-author"><div class="hero-av">LS</div><span class="hero-byline"><strong>Lena Schmidt</strong><br>Safari Specialist</span></div>
+      <span class="hero-dot"></span>
+      <span class="hero-read nums">12 min read</span>
+    </div>
+  </div>
+</section>
+
+<!-- BROWSE -->
+<section class="section" style="padding:48px 0">
+  <div class="wrap">
+    <div class="browse-row">
+      <a href="#" class="browse-pill active">All</a>
+      <a href="#" class="browse-pill">Guides</a>
+      <a href="#" class="browse-pill">Reviews</a>
+      <a href="#" class="browse-pill">Comparisons</a>
+      <a href="#" class="browse-pill">Trip stories</a>
+      <a href="#" class="browse-pill">Itineraries</a>
+      <a href="#" class="browse-pill">Sustainability</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED STORIES -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-top section-head">
+      <div><p class="tag">Editor's picks</p><h2>Featured stories</h2></div>
+      <a href="#" class="section-more">All articles <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+    <div class="grid-3 reveal">
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span class="ph-label">Serengeti landscape</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Destination · Tanzania</p><h3 class="card-title">A complete guide to the Serengeti — when to go, where to stay, and what you'll see</h3><p class="card-meta"><strong>Lena S.</strong> · <span class="nums">10</span> min</p></div>
+      </a>
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><span class="ph-label">Lodge exterior</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Review · South Africa</p><h3 class="card-title">Londolozi Founders Camp — our complete first-hand review</h3><p class="card-meta"><strong>Bárbara R.</strong> · <span class="nums">14</span> min</p></div>
+      </a>
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1.5a3 3 0 0 0-3-3h-.5"/><circle cx="18.5" cy="9.5" r="2.5"/></svg></div><span class="ph-label">Family on safari</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Travel style · Family</p><h3 class="card-title">The <span class="nums">8</span> best family-friendly lodges in East Africa</h3><p class="card-meta"><strong>Amara S.</strong> · <span class="nums">9</span> min</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SPREAD 1 — large inspirational image -->
+<section class="spread spread-full reveal">
+  <div class="spread-bg"><div class="ph ph-deep"><div class="ph-icon lg"><svg viewBox="0 0 24 24" class="ico"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span class="ph-label">Okavango Delta aerial</span><span class="ph-dims">2400 × 1600 · object-fit: cover</span></div></div>
+  <div class="spread-grad"></div>
+  <div class="spread-content">
+    <p class="spread-tag">Trip showcase</p>
+    <h2 class="spread-title">A desert dream: <span class="nums">10</span> days self-driving through Namibia</h2>
+    <p class="spread-text">Red dunes at sunrise, desert-adapted elephants at dusk. Marco's road trip journal through one of Africa's most extraordinary landscapes.</p>
+    <a href="#" class="spread-link">Read the journey <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+  </div>
+</section>
+
+<!-- MORE STORIES -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-top section-head">
+      <div><p class="tag">Real journeys</p><h2>Trip stories</h2></div>
+      <a href="#" class="section-more">All stories <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+
+    <!-- Feature horizontal -->
+    <div class="feature reveal" style="margin-bottom:48px">
+      <div class="feature-img"><div class="ph ph-warm"><div class="ph-icon lg"><svg viewBox="0 0 24 24" class="ico"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="ph-label">Kenya beach sunset</span><span class="ph-dims">1000 × 750 · 4:3</span></div></div>
+      <div class="feature-body">
+        <p class="feature-cat">Kenya · Honeymoon</p>
+        <h3 class="feature-title">Our Kenya honeymoon: <span class="nums">12</span> days of wildlife, romance, and the Indian Ocean</h3>
+        <p class="feature-excerpt">From the Maasai Mara to the white sands of Diani Beach — a two-week journey that proved Africa is the most romantic continent on earth.</p>
+        <p class="feature-meta"><strong>Bárbara R.</strong> · <span class="nums">12</span> min read</p>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal">
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1.5a3 3 0 0 0-3-3h-.5"/><circle cx="18.5" cy="9.5" r="2.5"/></svg></div><span class="ph-label">Family safari vehicle</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">South Africa · Family</p><h3 class="card-title">Cape Town to Kruger: our <span class="nums">14</span>-day family adventure across South Africa</h3><p class="card-meta"><strong>Lena S.</strong> · <span class="nums">18</span> min</p></div>
+      </a>
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="ph-label">Misty volcano forest</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Rwanda · Adventure</p><h3 class="card-title">Into the mist: <span class="nums">7</span> days of gorilla trekking and golden monkey encounters</h3><p class="card-meta"><strong>Amara S.</strong> · <span class="nums">11</span> min</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SPREAD 2 — mid-height inspirational -->
+<section class="spread spread-mid reveal">
+  <div class="spread-bg"><div class="ph ph-dark"><div class="ph-icon lg"><svg viewBox="0 0 24 24" class="ico"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><span class="ph-label">Sossusvlei dunes at dawn</span><span class="ph-dims">2400 × 1200 · object-fit: cover</span></div></div>
+  <div class="spread-grad"></div>
+  <div class="spread-content">
+    <p class="spread-tag">Comparison</p>
+    <h2 class="spread-title">Botswana vs. Namibia — which safari is right for you?</h2>
+    <a href="#" class="spread-link">Read comparison <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+  </div>
+</section>
+
+<!-- EXPERT -->
+<section class="section">
+  <div class="wrap">
+    <div class="expert reveal">
+      <div class="expert-photo"><div class="ph ph-warm"><div class="ph-icon lg"><svg viewBox="0 0 24 24" class="ico"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="ph-label">Author portrait</span><span class="ph-dims">560 × 750 · 3:4</span></div></div>
+      <div class="expert-body">
+        <p class="expert-tag">Meet the specialist</p>
+        <h3 class="expert-name">Lena Schmidt</h3>
+        <p class="expert-role">Senior Safari Specialist · <span class="nums">47</span> trips across <span class="nums">9</span> countries</p>
+        <blockquote class="expert-quote">"Every sunrise on the savannah reminds me why I do this. The best trips aren't planned in spreadsheets — they're built from conversations, curiosity, and a willingness to be surprised."</blockquote>
+        <a href="#" class="expert-link">Read Lena's articles <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST -->
+<section class="section" style="background:var(--gl)">
+  <div class="wrap">
+    <div class="section-top section-head">
+      <div><p class="tag">Fresh from the field</p><h2>Latest articles</h2></div>
+      <a href="#" class="section-more">Archive <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+    <div class="grid-3 reveal">
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span class="ph-label">Packing checklist</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Planning</p><h3 class="card-title">The definitive safari packing list for <span class="nums">2026</span></h3><p class="card-meta"><strong>Lena S.</strong> · <span class="nums">6</span> min</p></div>
+      </a>
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><span class="ph-label">Ongava Lodge exterior</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Review · Namibia</p><h3 class="card-title">Ongava Lodge: Etosha's best-kept secret?</h3><p class="card-meta"><strong>Marco R.</strong> · <span class="nums">9</span> min</p></div>
+      </a>
+      <a href="#" class="card">
+        <div class="card-img"><div class="ph ph-warm"><div class="ph-icon"><svg viewBox="0 0 24 24" class="ico"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="ph-label">Elephant sanctuary</span><span class="ph-dims">800 × 540 · 3:2</span></div></div>
+        <div class="card-body"><p class="card-cat">Sustainability</p><h3 class="card-title">How Reteti Elephant Sanctuary is changing northern Kenya</h3><p class="card-meta"><strong>Kamau M.</strong> · <span class="nums">7</span> min</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SPREAD 3 — large inspirational close -->
+<section class="spread spread-full reveal">
+  <div class="spread-bg"><div class="ph ph-deep"><div class="ph-icon lg"><svg viewBox="0 0 24 24" class="ico"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div><span class="ph-label">Sunset game drive</span><span class="ph-dims">2400 × 1600 · object-fit: cover</span></div></div>
+  <div class="spread-grad"></div>
+  <div class="spread-content">
+    <p class="spread-tag">Start planning</p>
+    <h2 class="spread-title">Your African journey begins with a conversation</h2>
+    <p class="spread-text">Tell us what you're dreaming of. Our specialists will craft a tailor-made trip that's uniquely yours.</p>
+    <a href="#" class="spread-link">Plan your trip <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl">
+  <div class="nl-inner">
+    <p class="nl-tag">Stay inspired</p>
+    <h2 class="nl-title">Safari stories in your inbox</h2>
+    <p class="nl-text">Expert guides, lodge reviews, and trip inspiration. Delivered every two weeks.</p>
+    <div class="nl-form">
+      <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+      <button class="nl-btn">Subscribe</button>
+    </div>
+    <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">viatu</div>
+        <p>Tailor-made, positive impact trips: curated by us, created by you.</p>
+        <div class="footer-certs"><div class="footer-cert">B Corp</div><div class="footer-cert">1%</div><div class="footer-cert">UN GC</div></div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><a href="#">All Trips</a><a href="#">All Stays</a><a href="#">Destinations</a><a href="#">Plan My Trip</a></div>
+      <div class="footer-col"><h4>Destinations</h4><a href="#">Namibia</a><a href="#">Botswana</a><a href="#">Kenya</a><a href="#">Tanzania</a><a href="#">South Africa</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Sustainability</a><a href="#">Reviews</a><a href="#">Contact</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span class="nums">2026</span> Viatu Travel. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg></a>
+        <a href="#" class="footer-social" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+// Language dropdown
+const langWrap    = document.getElementById('lang');
+const langTrigger = document.getElementById('langTrigger');
+const langCurrent = document.getElementById('langCurrent');
+
+langTrigger.addEventListener('click', () => {
+  const isOpen = langWrap.classList.toggle('open');
+  langTrigger.setAttribute('aria-expanded', isOpen);
+});
+
+document.querySelectorAll('.lang-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    // Clear previous active state
+    document.querySelectorAll('.lang-option').forEach(o => {
+      o.classList.remove('active');
+      o.setAttribute('aria-selected', 'false');
+      const chk = o.querySelector('.lang-check');
+      if (chk) chk.remove();
+    });
+    // Set new active state
+    opt.classList.add('active');
+    opt.setAttribute('aria-selected', 'true');
+    opt.insertAdjacentHTML('beforeend',
+      '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+    langCurrent.textContent = opt.dataset.lang;
+    // Close
+    langWrap.classList.remove('open');
+    langTrigger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Close dropdown on outside click
+document.addEventListener('click', e => {
+  if (!langWrap.contains(e.target)) {
+    langWrap.classList.remove('open');
+    langTrigger.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Gentle reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('vis'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
