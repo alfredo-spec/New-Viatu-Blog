@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery — Variants 7, 10 &amp; 11 — Viatu Blog</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Design System Tokens ── */
+        :root {
+            --sangria:  #541736;
+            --pthalo:   #1C4447;
+            --platinum: #C4C4C4;
+            --black:    #000;
+            --white:    #FFF;
+            --cream:    #F3FFB9;
+            --gl:       #F8F9FA;
+            --gm:       #6C757D;
+            --gd:       #343A40;
+            --g3:       #DEE2E6;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd:  .375rem;
+            --rlg:  .5rem;
+            --rxl:  .75rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --dur:  200ms;
+            --dur3: 300ms;
+            --dur5: 500ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; }
+        body {
+            overflow-x: hidden;
+            font-family: var(--fs);
+            color: var(--gd);
+            background: var(--gl);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        img { display: block; max-width: 100%; }
+        figure { margin: 0; }
+
+        /* ── Page Shell ── */
+        .page-header {
+            padding: 64px 24px 48px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: var(--fp);
+            font-size: 20px;
+            color: var(--pthalo);
+            letter-spacing: .02em;
+            margin-bottom: 8px;
+        }
+        .page-header p {
+            font-size: 14px;
+            color: var(--gm);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .page-header .variant-count {
+            display: inline-block;
+            margin-top: 16px;
+            font-family: var(--fc);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--sangria);
+        }
+
+        /* ── Variant Section ── */
+        .variant-section { margin-bottom: 48px; }
+
+        .variant-card {
+            background: var(--white);
+            border-radius: var(--rxl);
+            box-shadow: var(--sh-md);
+            overflow: hidden;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .variant-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 32px 0;
+        }
+
+        .variant-label .number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--rfull);
+            background: var(--sangria);
+            color: var(--white);
+            font-family: var(--fs);
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .variant-label h2 {
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gd);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .variant-meta {
+            padding: 8px 32px 0 76px;
+            font-size: 12px;
+            color: var(--gm);
+            line-height: 1.5;
+        }
+
+        .variant-meta code {
+            font-size: 11px;
+            background: var(--gl);
+            padding: 1px 5px;
+            border-radius: var(--rmd);
+            color: var(--pthalo);
+        }
+
+        /* ── Content Column ── */
+        .content-column {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Faux body text */
+        .faux-text {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--gm);
+            margin-bottom: 24px;
+        }
+        .faux-text:last-child { margin-top: 24px; margin-bottom: 0; }
+        .faux-text-line {
+            display: block;
+            height: 10px;
+            background: var(--g3);
+            border-radius: var(--rfull);
+            margin-bottom: 8px;
+            opacity: .4;
+        }
+        .faux-text-line:nth-child(2) { width: 92%; }
+        .faux-text-line:nth-child(3) { width: 78%; }
+        .faux-text-line:nth-child(4) { width: 85%; }
+        .faux-text-line:nth-child(5) { width: 60%; }
+
+
+        /* ══════════════════════════════════════════════════════════════
+           VARIANT 7 — Editorial Feature Split
+           ══════════════════════════════════════════════════════════════ */
+
+        .gallery-v7 .bento-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            grid-template-rows: 220px 220px;
+            gap: 10px;
+        }
+
+        .gallery-v7 .cell-hero {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            overflow: hidden;
+            border-radius: var(--rlg);
+            box-shadow: var(--sh-sm);
+            position: relative;
+        }
+
+        .gallery-v7 .cell-sm {
+            overflow: hidden;
+            border-radius: var(--rlg);
+            box-shadow: var(--sh-sm);
+            position: relative;
+        }
+
+        .gallery-v7 .cell-hero img,
+        .gallery-v7 .cell-sm img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--dur5) var(--ease);
+        }
+
+        .gallery-v7 .cell-hero:hover img,
+        .gallery-v7 .cell-sm:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-v7 .cell-hero::after,
+        .gallery-v7 .cell-sm::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,.5)  0%,
+                rgba(0,0,0,.15) 35%,
+                transparent     60%
+            );
+            border-radius: var(--rlg);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gallery-v7 .cell-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 12px 14px 14px;
+            z-index: 2;
+        }
+
+        .gallery-v7 .cell-label .loc {
+            font-family: var(--fs);
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--white);
+            letter-spacing: .01em;
+            line-height: 1.3;
+        }
+
+        .gallery-v7 .cell-hero .cell-label .loc {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .gallery-v7 .cell-label .sub {
+            font-size: 11px;
+            color: rgba(255,255,255,.65);
+            font-style: italic;
+            margin-top: 3px;
+        }
+
+        .gallery-v7 .cell-hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 4px; height: 60%;
+            background: var(--pthalo);
+            border-radius: 0 0 0 var(--rlg);
+            z-index: 3;
+        }
+
+        .gallery-v7 figcaption {
+            font-size: 13px;
+            color: var(--gm);
+            font-style: italic;
+            padding-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════════
+           VARIANT 10 — Bento Magazine Mosaic (4 images)
+           ══════════════════════════════════════════════════════════════ */
+
+        .gallery-v10 .mosaic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.7fr 1fr;
+            grid-template-rows: 228px 228px;  /* increased from 204px */
+            gap: 8px;
+        }
+
+        .gallery-v10 .cell-a { grid-column: 1; grid-row: 1 / 3; }
+        .gallery-v10 .cell-b { grid-column: 2; grid-row: 1 / 3; }
+        .gallery-v10 .cell-c { grid-column: 3; grid-row: 1; }
+        .gallery-v10 .cell-d { grid-column: 3; grid-row: 2; }
+
+        .gallery-v10 .mosaic-cell {
+            overflow: hidden;
+            border-radius: var(--rlg);
+            box-shadow: var(--sh-sm);
+            position: relative;
+        }
+
+        .gallery-v10 .mosaic-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .gallery-v10 .mosaic-cell:hover img { transform: scale(1.05); }
+
+        /* Deeper gradient for better text legibility */
+        .gallery-v10 .mosaic-cell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,.58)  0%,
+                rgba(0,0,0,.18)  45%,
+                transparent      70%
+            );
+            pointer-events: none;
+            z-index: 1;
+            border-radius: var(--rlg);
+        }
+
+        /* Label: hidden by default, slides up on hover */
+        .gallery-v10 .mosaic-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 10px 14px 14px;
+            z-index: 2;
+            transform: translateY(6px);
+            opacity: 0;
+            transition:
+                transform var(--dur3) var(--ease),
+                opacity   var(--dur3) var(--ease);
+        }
+
+        .gallery-v10 .mosaic-cell:hover .mosaic-label {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-v10 .mosaic-label .mloc {
+            font-family: var(--fs);
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--white);
+            letter-spacing: .01em;
+            line-height: 1.3;
+        }
+
+        .gallery-v10 .cell-b .mosaic-label {
+            padding: 14px 16px 16px;
+        }
+
+        .gallery-v10 .cell-b .mosaic-label .mloc {
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: .02em;
+        }
+
+        .gallery-v10 .cell-b .mosaic-label .msub {
+            font-size: 11px;
+            color: rgba(255,255,255,.65);
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Featured centre: always show label (static, not hover-gated) */
+        .gallery-v10 .cell-b .mosaic-label {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Sangria left-edge accent on featured */
+        .gallery-v10 .cell-b .mosaic-cell::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--sangria);
+            z-index: 3;
+        }
+
+        .gallery-v10 figcaption {
+            font-size: 13px;
+            color: var(--gm);
+            font-style: italic;
+            padding-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+
+        /* ══════════════════════════════════════════════════════════════
+           VARIANT 11 — Cinematic Immersive Gallery
+           ══════════════════════════════════════════════════════════════ */
+
+        /* ── Main image viewport ── */
+        .v11-viewport {
+            position: relative;
+            width: 100%;
+            height: clamp(340px, 62vh, 620px);
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        /* Slides sit absolutely, crossfade via opacity */
+        .v11-viewport .v11-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity var(--dur5) var(--ease);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .v11-viewport .v11-slide.is-active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .v11-viewport .v11-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Consistent tint overlay — normalises different exposures across images */
+        .v11-slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.14);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Bottom gradient for caption-area separation */
+        .v11-viewport::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 28%;
+            background: linear-gradient(to top, rgba(0,0,0,.3), transparent);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* ── Navigation arrows — high contrast ── */
+        .v11-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 48px; height: 48px;
+            border-radius: var(--rfull);
+            background: rgba(0,0,0,.52);
+            border: 1.5px solid rgba(255,255,255,.18);
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition:
+                background  var(--dur) var(--ease),
+                box-shadow  var(--dur) var(--ease),
+                border-color var(--dur) var(--ease),
+                opacity     var(--dur) var(--ease);
+        }
+
+        .v11-arrow:hover {
+            background: rgba(0,0,0,.78);
+            border-color: rgba(255,255,255,.35);
+            box-shadow: 0 4px 20px rgba(0,0,0,.35);
+        }
+
+        .v11-arrow:focus-visible {
+            outline: 2px solid var(--cream);
+            outline-offset: 2px;
+        }
+
+        .v11-arrow.is-disabled {
+            opacity: .28;
+            pointer-events: none;
+        }
+
+        .v11-arrow svg {
+            width: 20px; height: 20px;
+            stroke: currentColor;
+            stroke-width: 2.2;    /* thicker for clarity */
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .v11-arrow-prev { left: 16px; }
+        .v11-arrow-next { right: 16px; }
+
+        /* ── Caption + counter strip ── */
+        .v11-caption-bar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 24px 14px;
+            background: var(--white);
+            border-bottom: 1px solid var(--g3);
+        }
+
+        .v11-caption-bar figcaption {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--gm);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .v11-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .v11-counter {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gm);
+            white-space: nowrap;
+            letter-spacing: .03em;
+        }
+
+        /* Dot indicators */
+        .v11-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .v11-dots .v11-dot {
+            width: 6px; height: 6px;
+            border-radius: var(--rfull);
+            background: var(--g3);
+            transition: background var(--dur3) var(--ease), width var(--dur3) var(--ease);
+            cursor: pointer;
+        }
+
+        .v11-dots .v11-dot.is-active {
+            background: var(--sangria);
+            width: 18px;
+        }
+
+        /* ── Thumbnail strip — full-width equal grid (desktop) ── */
+        .v11-thumbs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3px;
+            padding: 0;          /* flush to card edges */
+            background: var(--gd); /* dark gaps between thumbs */
+        }
+
+        .v11-thumb {
+            width: 100%;
+            height: 64px;
+            border-radius: 0;   /* flush, no rounded corners */
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            outline: none;
+            border: none;
+            padding: 0;
+            display: block;
+            transition: opacity var(--dur) var(--ease);
+        }
+
+        .v11-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .v11-thumb:hover img   { transform: scale(1.06); }
+        .v11-thumb:hover       { opacity: .82; }
+
+        /* Active: inset sangria outline — no gap since thumbs are flush */
+        .v11-thumb.is-active {
+            outline: 3px solid var(--sangria);
+            outline-offset: -3px;
+            opacity: 1;
+        }
+
+        .v11-thumb:focus-visible {
+            outline: 3px solid var(--cream);
+            outline-offset: -3px;
+        }
+
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .content-column { padding: 24px 20px; }
+            .variant-label  { padding: 20px 20px 0; }
+            .variant-meta   { padding-left: 64px; padding-right: 20px; }
+
+            .gallery-v7 .bento-grid {
+                grid-template-rows: 180px 180px;
+            }
+
+            .gallery-v10 .mosaic-grid {
+                grid-template-rows: 170px 170px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* V7: stacks to single column */
+            .gallery-v7 .bento-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 8px;
+            }
+            .gallery-v7 .cell-hero           { grid-row: auto; }
+            .gallery-v7 .cell-hero img        { aspect-ratio: 16/9; height: auto; }
+            .gallery-v7 .cell-sm img          { aspect-ratio: 3/2;  height: auto; }
+
+            /* V10: 2-column simplified */
+            .gallery-v10 .mosaic-grid {
+                grid-template-columns: 1fr 1.4fr;
+                grid-template-rows: 150px 150px;
+            }
+            .gallery-v10 .cell-a              { grid-column: 1; grid-row: 1 / 3; }
+            .gallery-v10 .cell-b              { grid-column: 2; grid-row: 1 / 3; }
+            .gallery-v10 .cell-c,
+            .gallery-v10 .cell-d              { display: none; }
+
+            /* V11 thumbs: revert to scrollable flex on mobile */
+            .v11-thumbs {
+                display: flex;
+                gap: 6px;
+                padding: 12px 16px 16px;
+                overflow-x: auto;
+                scrollbar-width: none;
+                background: var(--white);
+            }
+            .v11-thumbs::-webkit-scrollbar { display: none; }
+            .v11-thumb {
+                flex: 0 0 auto;
+                width: 72px;
+                height: 50px;
+                border-radius: var(--rmd);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header    { padding: 48px 20px 32px; }
+            .page-header h1 { font-size: 16px; }
+            .content-column { padding: 20px 16px; }
+            .variant-label  { padding: 16px 16px 0; }
+            .variant-meta   { padding: 6px 16px 0 60px; font-size: 11px; }
+
+            .v11-viewport {
+                height: clamp(240px, 55vw, 380px);
+            }
+            .v11-arrow {
+                width: 40px; height: 40px;
+            }
+            .v11-arrow svg {
+                width: 18px; height: 18px;
+            }
+            .v11-arrow-prev { left: 10px; }
+            .v11-arrow-next { right: 10px; }
+            .v11-caption-bar {
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px 16px 10px;
+            }
+            .v11-meta { align-self: flex-end; }
+        }
+
+        /* ── Page Footer ── */
+        .page-footer {
+            text-align: center;
+            padding: 24px 24px 64px;
+            font-size: 12px;
+            color: var(--platinum);
+        }
+        .page-footer span {
+            font-family: var(--fc);
+            font-weight: 700;
+            color: var(--sangria);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Page Header ── -->
+    <header class="page-header">
+        <h1>Image Gallery — Advanced Variants</h1>
+        <p>Three gallery layouts for Viatu blog posts — editorial split, bento mosaic, and the cinematic immersive slider.</p>
+        <span class="variant-count">Variants 7, 10 &amp; 11</span>
+    </header>
+
+
+    <!-- ════════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 7 — Editorial Feature Split                        -->
+    <!-- ════════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">7</span>
+                <h2>Editorial Feature Split</h2>
+            </div>
+            <p class="variant-meta">
+                Asymmetric 2-column grid within content column.
+                <code>grid-template-columns: 3fr 2fr</code>
+                Hero spans both rows. Gradient vignette + location labels.
+                Pthalo left-edge accent on hero. Mobile: stacks to single column.
+            </p>
+
+            <div class="content-column">
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <div class="gallery-v7">
+                    <figure>
+                        <div class="bento-grid">
+                            <div class="cell-hero">
+                                <img src="../../../../design/reference-images/great-migration/hero-wildebeest-crossing.jpg"
+                                     alt="Thousands of wildebeest crossing the Mara River during the Great Migration">
+                                <div class="cell-label">
+                                    <p class="loc">Mara River Crossing</p>
+                                    <p class="sub">Serengeti–Masai Mara, July–October</p>
+                                </div>
+                            </div>
+                            <div class="cell-sm">
+                                <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg"
+                                     alt="Hot air balloon drifting over the Masai Mara plains at dawn">
+                                <div class="cell-label">
+                                    <p class="loc">Dawn balloon, Masai Mara</p>
+                                </div>
+                            </div>
+                            <div class="cell-sm">
+                                <img src="../../../../design/reference-images/great-migration/cheetah-and-cub-serengeti.jpg"
+                                     alt="Cheetah and cub resting together in the Serengeti">
+                                <div class="cell-label">
+                                    <p class="loc">Cheetah &amp; cub, Serengeti</p>
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption>The Great Migration, East Africa — three moments from the world's largest wildlife spectacle</figcaption>
+                    </figure>
+                </div>
+
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 10 — Bento Magazine Mosaic                         -->
+    <!-- ════════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">10</span>
+                <h2>Bento Magazine Mosaic</h2>
+            </div>
+            <p class="variant-meta">
+                4 images, 3-column asymmetric grid within content column.
+                <code>grid-template-columns: 1fr 1.7fr 1fr</code>
+                Left + centre span both rows. Right splits into 2 stacked cells.
+                Hover reveals slide-up caption label. Sangria accent on featured centre.
+                Mobile: simplifies to 2 columns.
+            </p>
+
+            <div class="content-column">
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <div class="gallery-v10">
+                    <figure>
+                        <div class="mosaic-grid">
+                            <div class="cell-a">
+                                <div class="mosaic-cell">
+                                    <img src="../../../../design/reference-images/great-migration/cheetah-cubs-serengeti.jpg"
+                                         alt="Two cheetah cubs play-fighting in tall Serengeti grass">
+                                    <div class="mosaic-label">
+                                        <p class="mloc">Cheetah cubs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell-b">
+                                <div class="mosaic-cell">
+                                    <img src="../../../../design/reference-images/great-migration/safari-vehicle-masai-mara.jpg"
+                                         alt="Safari vehicle with passengers watching wildlife in the Masai Mara">
+                                    <div class="mosaic-label">
+                                        <p class="mloc">On safari, Masai Mara</p>
+                                        <p class="msub">Kenya · July</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell-c">
+                                <div class="mosaic-cell">
+                                    <img src="../../../../design/reference-images/great-migration/lioness-cub-kenya.jpg"
+                                         alt="Lioness and cub in Kenya's golden savanna light">
+                                    <div class="mosaic-label">
+                                        <p class="mloc">Lioness &amp; cub</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell-d">
+                                <div class="mosaic-cell">
+                                    <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg"
+                                         alt="Hot air balloon above the Masai Mara at sunrise">
+                                    <div class="mosaic-label">
+                                        <p class="mloc">Balloon sunrise</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption>Safari highlights — four perspectives from the Great Migration, Masai Mara &amp; Serengeti</figcaption>
+                    </figure>
+                </div>
+
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 11 — Cinematic Immersive Gallery                   -->
+    <!-- ════════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">11</span>
+                <h2>Cinematic Immersive Gallery</h2>
+            </div>
+            <p class="variant-meta">
+                Full card-width, generous height: <code>clamp(340px, 62vh, 620px)</code>.
+                500ms crossfade. Always-visible high-contrast arrows. 14% image tint for
+                consistent exposure across photos. Full-width equal-grid thumbnail strip.
+                Keyboard ← → nav. Swipe on mobile. No autoplay.
+            </p>
+
+            <div class="content-column">
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+
+            <div class="gallery-v11" id="gallery11">
+
+                <!-- Image viewport -->
+                <div class="v11-viewport" id="v11Viewport">
+
+                    <div class="v11-slide is-active">
+                        <img src="../../../../design/reference-images/great-migration/hero-wildebeest-crossing.jpg"
+                             alt="Thousands of wildebeest crossing the Mara River during the Great Migration">
+                    </div>
+                    <div class="v11-slide">
+                        <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                             alt="Leopard draped over a branch in the Masai Mara at golden hour">
+                    </div>
+                    <div class="v11-slide">
+                        <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg"
+                             alt="Hot air balloon floating above the Masai Mara plains at sunrise">
+                    </div>
+                    <div class="v11-slide">
+                        <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                             alt="A pride of lions resting together in the Serengeti grasslands">
+                    </div>
+                    <div class="v11-slide">
+                        <img src="../../../../design/reference-images/great-migration/game-drive-serengeti.jpg"
+                             alt="Safari vehicle cutting through the golden dust of the Serengeti at dusk">
+                    </div>
+
+                    <!-- Prev / Next — high-contrast dark buttons -->
+                    <button class="v11-arrow v11-arrow-prev is-disabled" id="v11Prev" aria-label="Previous image">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="v11-arrow v11-arrow-next" id="v11Next" aria-label="Next image">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <polyline points="9 6 15 12 9 18"></polyline>
+                        </svg>
+                    </button>
+
+                </div>
+
+                <!-- Caption + counter + dots -->
+                <div class="v11-caption-bar">
+                    <figcaption id="v11Caption">The wildebeest crossing — over a million animals ford the Mara River in one of nature's most dramatic spectacles</figcaption>
+                    <div class="v11-meta">
+                        <span class="v11-counter" id="v11Counter">1 / 5</span>
+                        <div class="v11-dots" id="v11Dots">
+                            <span class="v11-dot is-active" data-index="0"></span>
+                            <span class="v11-dot" data-index="1"></span>
+                            <span class="v11-dot" data-index="2"></span>
+                            <span class="v11-dot" data-index="3"></span>
+                            <span class="v11-dot" data-index="4"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thumbnail strip — equal-width grid, full card width -->
+                <div class="v11-thumbs" id="v11Thumbs" role="list" aria-label="Image thumbnails">
+                    <button class="v11-thumb is-active" data-index="0" aria-label="View image 1">
+                        <img src="../../../../design/reference-images/great-migration/hero-wildebeest-crossing.jpg" alt="">
+                    </button>
+                    <button class="v11-thumb" data-index="1" aria-label="View image 2">
+                        <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg" alt="">
+                    </button>
+                    <button class="v11-thumb" data-index="2" aria-label="View image 3">
+                        <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg" alt="">
+                    </button>
+                    <button class="v11-thumb" data-index="3" aria-label="View image 4">
+                        <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg" alt="">
+                    </button>
+                    <button class="v11-thumb" data-index="4" aria-label="View image 5">
+                        <img src="../../../../design/reference-images/great-migration/game-drive-serengeti.jpg" alt="">
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="content-column">
+                <div class="faux-text" style="margin-top: 0">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ── Footer ── -->
+    <footer class="page-footer">
+        <span>Viatu</span> &mdash; Image Gallery Element · Variants 7, 10 &amp; 11 · Design Mockup
+    </footer>
+
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ── V11: Cinematic Immersive Gallery ── */
+        const CAPTIONS = [
+            'The wildebeest crossing — over a million animals ford the Mara River in one of nature\'s most dramatic spectacles',
+            'A leopard at rest in the Masai Mara — elusive, languid, and utterly in command of its world',
+            'Dawn balloon safari over the Masai Mara plains — one of the most serene ways to witness the Migration',
+            'A lion pride resting in the Serengeti grasslands — the quiet lull between hunts',
+            'Chasing light across the Serengeti — every game drive writes its own story'
+        ];
+
+        const slides     = document.querySelectorAll('#v11Viewport .v11-slide');
+        const thumbs     = document.querySelectorAll('#v11Thumbs .v11-thumb');
+        const dots       = document.querySelectorAll('#v11Dots .v11-dot');
+        const caption    = document.getElementById('v11Caption');
+        const counter    = document.getElementById('v11Counter');
+        const prevBtn    = document.getElementById('v11Prev');
+        const nextBtn    = document.getElementById('v11Next');
+        const viewport   = document.getElementById('v11Viewport');
+        const gallery    = document.getElementById('gallery11');
+
+        const total = slides.length;
+        let current = 0;
+
+        function goTo(n) {
+            if (n < 0 || n >= total) return;
+
+            slides[current].classList.remove('is-active');
+            thumbs[current].classList.remove('is-active');
+            dots[current].classList.remove('is-active');
+
+            current = n;
+
+            slides[current].classList.add('is-active');
+            thumbs[current].classList.add('is-active');
+            dots[current].classList.add('is-active');
+
+            if (caption) caption.textContent = CAPTIONS[current];
+            if (counter) counter.textContent = (current + 1) + ' / ' + total;
+
+            thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+            if (prevBtn) prevBtn.classList.toggle('is-disabled', current === 0);
+            if (nextBtn) nextBtn.classList.toggle('is-disabled', current === total - 1);
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+        if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => goTo(parseInt(dot.dataset.index, 10)));
+        });
+
+        thumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => goTo(parseInt(thumb.dataset.index, 10)));
+        });
+
+        /* Keyboard: only when focus is inside the gallery */
+        document.addEventListener('keydown', e => {
+            if (!gallery || !gallery.contains(document.activeElement)) return;
+            if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+        });
+
+        /* Swipe on the viewport */
+        if (viewport) {
+            let touchX = 0;
+            viewport.addEventListener('touchstart', e => {
+                touchX = e.touches[0].clientX;
+            }, { passive: true });
+            viewport.addEventListener('touchend', e => {
+                const delta = touchX - e.changedTouches[0].clientX;
+                if (Math.abs(delta) > 40) delta > 0 ? goTo(current + 1) : goTo(current - 1);
+            }, { passive: true });
+        }
+
+    })();
+    </script>
+
+</body>
+</html>

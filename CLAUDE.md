@@ -61,10 +61,11 @@ Every time a component, page, or layout is created or modified:
 
 1. **Read all files in `/design/style-guides/`** — follow typography, spacing, and color rules precisely
 2. **Review images in `/design/reference-images/`** — absorb layout patterns and spatial rhythm
-3. **Check `/design/brand/logos/`** — use real logo if present; otherwise use `PlaceholderImage`
-4. **Check `/design/mockups/`** — if a mockup exists for the page/section, follow it
-5. **Adapt, never copy** — reference images are from other sites; all output must be this project's own
-6. **Use the `frontend-design` skill** for all substantial UI implementation
+3. **Study live reference sites** — check `/design/reference-images/inspiration-links.md` for URLs relevant to the current task. Use WebFetch to study 2–3 of the most relevant sites, noting layout structure, typography hierarchy, image-text rhythm, whitespace, and navigation patterns to adapt. Do not copy — extract principles only.
+4. **Check `/design/brand/logos/`** — use real logo if present; otherwise use `PlaceholderImage`
+5. **Check `/design/mockups/`** — if a mockup exists for the page/section, follow it
+6. **Adapt, never copy** — reference images and live sites are inspiration only; all output must be this project's own
+7. **Use the `frontend-design` skill** for all substantial UI implementation
 
 ---
 

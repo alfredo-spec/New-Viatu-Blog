@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Guide to the Great Migration — Viatu Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap"
+        rel="stylesheet">
+    <style>
+
+        /* ─── TOKENS ──────────────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --sangria-hover: #47142e;
+            --sangria-subtle: rgba(84,23,54,.08);
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --g2: #E9ECEF;
+            --earth-warm: #E1E3DE;
+            --earth-sand: #E8E0D6;
+            --earth-stone: #B5A898;
+            --earth-clay: #8B7355;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --sh-xl: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ─── RESET ───────────────────────────────────────────── */
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+        html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
+        body { font-family:var(--fs); color:var(--black); background:var(--white); -webkit-font-smoothing:antialiased; line-height:1.6 }
+        a { text-decoration:none; color:inherit }
+        button { font-family:var(--fs); cursor:pointer; border:none; background:none }
+        img { max-width:100%; height:auto }
+        .wrap { max-width:1200px; margin:0 auto; padding:0 24px }
+
+        /* ─── VARIANT BANNER ──────────────────────────────────── */
+        .demo-banner {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: var(--gd);
+            color: var(--white);
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .demo-banner__pill {
+            background: var(--sangria);
+            color: var(--white);
+            border-radius: var(--rfull);
+            padding: 3px 12px;
+            font-size: 10px;
+        }
+        .demo-banner__sep {
+            height: 16px;
+            width: 1px;
+            background: rgba(255,255,255,.2);
+        }
+
+
+        /* ─── NAV ─────────────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: background var(--dur3) var(--ease), box-shadow var(--dur3) var(--ease);
+        }
+        .nav.scrolled {
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(0,0,0,.06);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1;
+        }
+        .nav-logo img { height: 24px; width: auto; display: block }
+        .nav:not(.scrolled) .logo-dark { display: none }
+        .nav.scrolled .logo-white { display: none }
+        .nav-logo-blog {
+            font-family: var(--fc);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .01em;
+            line-height: 1;
+            margin-top: 2px;
+            align-self: flex-end;
+        }
+        .nav:not(.scrolled) .nav-logo-blog { color: rgba(255,255,255,.88) }
+        .nav.scrolled .nav-logo-blog { color: #1b1b1b }
+        .nav-right { display: flex; align-items: center; gap: 10px }
+        .nav-back-btn {
+            font-family: var(--fs);
+            font-size: 16px;
+            font-weight: 700;
+            padding: 18px 20px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--dur) var(--ease);
+            color: var(--white);
+            background: var(--sangria);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .nav-back-btn:hover { background: #6b1d45; transform: translateY(-1px) }
+
+        /* ─── LANG DROPDOWN ────────────────────────────────────── */
+        .lang { position: relative }
+        .lang-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 7px 10px;
+            border-radius: var(--rmd);
+            min-height: 36px;
+            border: 1px solid transparent;
+            background: none;
+            letter-spacing: .04em;
+            line-height: 1;
+            transition: all var(--dur) var(--ease);
+        }
+        .nav:not(.scrolled) .lang-trigger { color: rgba(255,255,255,.7) }
+        .nav:not(.scrolled) .lang-trigger:hover { color: var(--white); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2) }
+        .nav.scrolled .lang-trigger { color: var(--gm) }
+        .nav.scrolled .lang-trigger:hover { color: var(--sangria); background: rgba(84,23,54,.04); border-color: rgba(84,23,54,.15) }
+        .lang-globe { width: 15px; height: 15px; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0 }
+        .lang-code-label { font-size: 13px; font-weight: 600; letter-spacing: .06em }
+        .lang-chevron { display: block; width: 11px; height: 11px; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--dur) var(--ease) }
+        .lang.open .lang-chevron { transform: rotate(180deg) }
+        .lang-panel {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 210px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-5px) scale(.98);
+            transform-origin: top right;
+            transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+            z-index: 20;
+        }
+        .lang.open .lang-panel { opacity: 1; visibility: visible; transform: translateY(0) scale(1) }
+        .lang-panel-header { display: flex; align-items: center; padding: 11px 16px 9px; border-bottom: 1px solid rgba(0,0,0,.06) }
+        .lang-panel-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gm) }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            width: 100%;
+            padding: 11px 16px;
+            border: none;
+            border-left: 3px solid transparent;
+            background: none;
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gd);
+            cursor: pointer;
+            text-align: left;
+            transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-left-color var(--dur) var(--ease);
+        }
+        .lang-option:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,.045) }
+        .lang-option:hover { background: var(--gl); color: var(--sangria); border-left-color: rgba(84,23,54,.3) }
+        .lang-option.active { color: var(--sangria); border-left-color: var(--sangria); background: rgba(84,23,54,.03) }
+        .lang-option.active .lang-name { font-weight: 600 }
+        .lang-flag { font-size: 18px; line-height: 1; flex-shrink: 0 }
+        .lang-name { flex: 1; font-size: 13px }
+        .lang-check { width: 13px; height: 13px; fill: none; stroke: var(--sangria); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round }
+
+
+        /* ─── ARTICLE HERO ─────────────────────────────────────── */
+        .article-hero {
+            position: relative;
+            min-height: 75vh;
+            min-height: 75svh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+        .article-hero-bg {
+            position: absolute;
+            inset: 0;
+        }
+        .article-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .article-hero-grad {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.4) 45%, rgba(0,0,0,.1) 100%);
+        }
+        .article-hero-body {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 24px 56px;
+        }
+        .article-hero-eyebrow {
+            font-family: var(--fs);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: rgba(255,255,255,.65);
+            margin-bottom: 8px;
+        }
+        .article-hero-tagline {
+            font-family: var(--fc);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--sangria);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .article-hero-title {
+            font-family: var(--fp);
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            margin-bottom: 20px;
+            max-width: 820px;
+        }
+        .article-hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .article-hero-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .article-hero-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,.4);
+            flex-shrink: 0;
+        }
+        .article-hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .article-hero-byline { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85) }
+        .article-hero-byline strong { font-weight: 700; color: var(--white) }
+        .article-hero-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.35); flex-shrink: 0 }
+        .article-hero-date { font-size: 14px; color: rgba(255,255,255,.65) }
+        .article-hero-read { font-size: 14px; color: rgba(255,255,255,.65) }
+        .article-hero-tags { display: flex; flex-wrap: wrap; gap: 8px }
+        .article-hero-tag {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,.75);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: var(--rfull);
+            padding: 4px 12px;
+        }
+
+
+        /* ─── ARTICLE BODY ─────────────────────────────────────── */
+        .article-body {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 64px 24px 0;
+        }
+
+        .article-body p {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--gd);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .article-h2 {
+            font-family: var(--fs);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.2;
+            margin-top: 48px;
+            margin-bottom: 20px;
+        }
+
+        .dropcap::first-letter {
+            font-family: var(--fp);
+            font-size: 4em;
+            font-weight: 400;
+            float: left;
+            line-height: .82;
+            padding-right: .08em;
+            color: var(--sangria);
+        }
+
+        .article-img {
+            margin: 32px -48px;
+        }
+        .article-img img {
+            width: 100%;
+            border-radius: var(--rlg);
+            display: block;
+        }
+        .article-img figcaption {
+            font-size: 13px;
+            color: var(--gm);
+            line-height: 1.5;
+            margin-top: 10px;
+            padding: 0 4px;
+        }
+
+        .article-pullquote {
+            margin: 40px 0;
+            padding: 24px 28px;
+            border-left: 4px solid var(--sangria);
+            background: rgba(84,23,54,.03);
+            border-radius: 0 var(--rlg) var(--rlg) 0;
+        }
+        .article-pullquote p {
+            font-family: var(--fs);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.4;
+            font-style: italic;
+            margin-bottom: 8px !important;
+        }
+        .article-pullquote cite {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--sangria);
+            font-style: normal;
+        }
+
+        /* ─── AUTHOR BIO ───────────────────────────────────────── */
+        .author-bio {
+            margin-top: 56px;
+            padding: 32px;
+            border: 1px solid var(--g3);
+            border-radius: var(--rlg);
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            background: var(--white);
+        }
+        .author-bio-portrait {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--rfull);
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 16px rgba(0,0,0,.1);
+        }
+        .author-bio-portrait img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .author-bio-content { flex: 1 }
+        .author-bio-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gm); margin-bottom: 4px }
+        .author-bio-name { font-size: 20px; font-weight: 700; color: var(--black); line-height: 1.25; margin-bottom: 4px }
+        .author-bio-role { font-size: 13px; font-weight: 500; color: var(--sangria); margin-bottom: 12px }
+        .author-bio-text { font-size: 15px; color: var(--gm); line-height: 1.6; margin-bottom: 16px }
+        .author-bio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--sangria);
+            transition: gap var(--dur3) var(--ease);
+        }
+        .author-bio-link:hover { gap: 8px }
+        .author-bio-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+
+
+        /* ─── NEWSLETTER ───────────────────────────────────────── */
+        .nl { background: var(--earth-warm); padding: 80px 0 }
+        .nl-inner { max-width: 520px; margin: 0 auto; padding: 0 24px; text-align: center }
+        .nl-tag { font-family: var(--fc); font-size: 22px; font-weight: 700; color: var(--sangria); margin-bottom: 4px }
+        .nl-title { font-family: var(--fp); font-size: clamp(20px,2.5vw,28px); font-weight: 400; letter-spacing: -.04em; line-height: 1.2; margin-bottom: 8px }
+        .nl-text { font-size: 15px; color: var(--gm); margin-bottom: 28px; line-height: 1.6 }
+        .nl-form { display: flex; gap: 10px }
+        .nl-input {
+            flex: 1;
+            font-size: 15px;
+            color: var(--black);
+            padding: 12px 16px;
+            border: 1px solid var(--earth-sand);
+            border-radius: var(--rmd);
+            min-height: 48px;
+            outline: none;
+            background: var(--white);
+            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+        }
+        .nl-input::placeholder { color: var(--platinum); font-weight: 300 }
+        .nl-input:focus { border-color: var(--pthalo); box-shadow: 0 0 0 3px rgba(28,68,71,.08) }
+        .nl-btn { font-size: 14px; font-weight: 500; color: var(--white); background: var(--sangria); padding: 12px 28px; border-radius: var(--rmd); min-height: 48px; transition: all var(--dur) var(--ease); white-space: nowrap }
+        .nl-btn:hover { opacity: .9 }
+        .nl-fine { font-size: 12px; color: var(--earth-stone); margin-top: 14px }
+
+
+        /* ─── FOOTER ───────────────────────────────────────────── */
+        .footer { background: #1b1b1b }
+        .footer-upper { padding: 64px 0 56px }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px }
+        .footer-col { display: flex; flex-direction: column; gap: 0 }
+        .footer-col h4 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 20px; line-height: 1.2 }
+        .footer-col a { display: block; font-size: 16px; font-weight: 400; color: rgba(255,255,255,.55); padding: 4px 0; line-height: 1.5; transition: color var(--dur) var(--ease) }
+        .footer-col a:hover { color: var(--white) }
+        .footer-social-link { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 400; color: rgba(255,255,255,.55); padding: 4px 0; line-height: 1.5; transition: color var(--dur) var(--ease) }
+        .footer-social-link:hover { color: var(--white) }
+        .footer-social-link svg { width: 18px; height: 18px; flex-shrink: 0; opacity: .65; transition: opacity var(--dur) var(--ease) }
+        .footer-social-link:hover svg { opacity: 1 }
+        .footer-cert-badge { margin-top: 24px; padding: 16px; border: 1px solid rgba(255,255,255,.08); border-radius: var(--rlg) }
+        .footer-cert-badge-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 10px }
+        .footer-cert-badge-row { display: flex; align-items: center; gap: 12px }
+        .footer-cert-icon { width: 40px; height: 40px; border-radius: var(--rfull); border: 1.5px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: rgba(255,255,255,.5); line-height: 1.1; text-align: center; flex-shrink: 0 }
+        .footer-cert-text { font-size: 11px; color: rgba(255,255,255,.3); line-height: 1.5 }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 24px 0 }
+        .footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px }
+        .footer-bottom-logo img { height: 20px; width: auto; display: block; opacity: .5 }
+        .footer-copy { font-size: 12px; color: rgba(255,255,255,.3) }
+
+
+        /* ─── REVEAL ───────────────────────────────────────────── */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease) }
+        .reveal.vis { opacity: 1; transform: translateY(0) }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT C — INLINE COMPACT CARDS
+           Used mid-article as "also read" references
+           ════════════════════════════════════════════════════════ */
+
+        /* ─ C: Two-up compact inline ─ */
+        .related-c {
+            margin: 32px 0;
+            border-radius: var(--rlg);
+            overflow: hidden;
+            border: 1px solid var(--g3);
+        }
+        .related-c__header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--g3);
+            background: var(--gl);
+        }
+        .related-c__label {
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--gm);
+            white-space: nowrap;
+        }
+        .related-c__rule { flex: 1; height: 1px; background: var(--g3) }
+        .related-c__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 }
+        .related-c__card {
+            display: flex;
+            align-items: center;
+            position: relative;
+            border-left: 3px solid transparent;
+            transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+            overflow: hidden;
+        }
+        .related-c__card:first-child { border-right: 1px solid var(--g3) }
+        .related-c__card:hover { border-left-color: var(--sangria); background: var(--sangria-subtle) }
+        .related-c__card-thumb-wrap {
+            flex-shrink: 0;
+            width: 84px;
+            height: 84px;
+            overflow: hidden;
+        }
+        .related-c__card-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+        .related-c__card:hover .related-c__card-thumb { transform: scale(1.05) }
+        .related-c__card-body { padding: 12px 16px; flex: 1; min-width: 0 }
+        .related-c__card-category {
+            font-family: var(--fs);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--sangria);
+            margin-bottom: 4px;
+        }
+        .related-c__card-title {
+            font-family: var(--fs);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color var(--dur) var(--ease);
+        }
+        .related-c__card:hover .related-c__card-title { color: var(--sangria) }
+
+        /* ─ C: Single inline reference ─ */
+        .related-c-single {
+            margin: 32px 0;
+            border-radius: var(--rlg);
+            overflow: hidden;
+            border: 1px solid var(--g3);
+        }
+        .related-c-single__card {
+            display: flex;
+            align-items: center;
+            border-left: 3px solid var(--sangria);
+            transition: background var(--dur) var(--ease);
+        }
+        .related-c-single__card:hover { background: var(--sangria-subtle) }
+        .related-c-single__thumb-wrap {
+            flex-shrink: 0;
+            width: 120px;
+            height: 80px;
+            overflow: hidden;
+        }
+        .related-c-single__thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+        .related-c-single__card:hover .related-c-single__thumb { transform: scale(1.05) }
+        .related-c-single__body { padding: 14px 18px; flex: 1; display: flex; flex-direction: column; gap: 4px }
+        .related-c-single__eyebrow { display: flex; align-items: center; gap: 8px }
+        .related-c-single__label-text { font-family: var(--fs); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gm) }
+        .related-c-single__sep { width: 1px; height: 10px; background: var(--g3) }
+        .related-c-single__category { font-family: var(--fs); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--sangria) }
+        .related-c-single__title {
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color var(--dur) var(--ease);
+        }
+        .related-c-single__card:hover .related-c-single__title { color: var(--sangria) }
+        .related-c-single__arrow {
+            flex-shrink: 0;
+            padding-right: 18px;
+            color: var(--platinum);
+            font-size: 18px;
+            transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+        }
+        .related-c-single__card:hover .related-c-single__arrow { transform: translateX(3px); color: var(--sangria) }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT F — HORIZONTAL ROW LIST
+           Used as the end-of-article related section
+           ════════════════════════════════════════════════════════ */
+        .related-f {
+            background: var(--earth-warm);
+            padding: 80px 24px;
+        }
+        .related-f__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .related-f__header { margin-bottom: 40px }
+        .related-f__tagline {
+            font-family: var(--fc);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .related-f__title {
+            font-family: var(--fs);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.2;
+        }
+        .related-f__list { display: flex; flex-direction: column; gap: 16px }
+        .related-f__card {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            background: var(--white);
+            border-radius: var(--rlg);
+            overflow: hidden;
+            box-shadow: var(--sh-sm);
+            transition: box-shadow var(--dur3) var(--ease), transform var(--dur3) var(--ease);
+        }
+        .related-f__card:hover { box-shadow: var(--sh-md); transform: translateY(-2px) }
+        .related-f__card-img-wrap { overflow: hidden; position: relative }
+        .related-f__card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform var(--dur3) var(--ease);
+        }
+        .related-f__card:hover .related-f__card-img { transform: scale(1.04) }
+        .related-f__card-body {
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid var(--g3);
+        }
+        .related-f__card-category {
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--sangria);
+            margin-bottom: 8px;
+        }
+        .related-f__card-title {
+            font-family: var(--fs);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.25;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color var(--dur) var(--ease);
+        }
+        .related-f__card:hover .related-f__card-title { color: var(--sangria) }
+        .related-f__card-excerpt {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: var(--gm);
+            line-height: 1.55;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .related-f__card-footer { display: flex; align-items: center; gap: 8px }
+        .related-f__card-author { font-family: var(--fs); font-size: 13px; color: var(--gm) }
+        .related-f__card-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--platinum); flex-shrink: 0 }
+        .related-f__card-date { font-family: var(--fs); font-size: 13px; color: var(--gm) }
+
+
+        /* ─── RESPONSIVE ───────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .related-f__card { grid-template-columns: 220px 1fr }
+            .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px }
+        }
+
+        @media (max-width: 768px) {
+            .nav-inner { height: 72px }
+            .nav-back-btn span { display: none }
+            .nav-back-btn { padding: 12px }
+            .article-hero { min-height: 60vh; min-height: 60svh }
+            .article-hero-title { font-size: clamp(28px,6vw,44px) }
+            .article-body { padding: 48px 20px 0 }
+            .article-body p { font-size: 17px }
+            .article-img { margin: 32px 0 }
+            .author-bio { flex-direction: column; align-items: center; text-align: center }
+            .nl-form { flex-direction: column }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px 32px }
+            .footer-col:first-child { grid-column: 1 / -1 }
+
+            .related-c__grid { grid-template-columns: 1fr }
+            .related-c__card:first-child { border-right: none; border-bottom: 1px solid var(--g3) }
+        }
+
+        @media (max-width: 640px) {
+            .related-f__card { grid-template-columns: 1fr }
+            .related-f__card-img-wrap { aspect-ratio: 16/9; height: auto }
+            .related-f__card-body { border-left: none; border-top: 1px solid var(--g3); padding: 20px }
+            .related-f__card-title { font-size: 17px }
+            .related-f__card-excerpt { display: none }
+        }
+
+        @media (max-width: 480px) {
+            .wrap { padding: 0 20px }
+            .nav-inner { padding: 0 20px }
+            .article-hero-body { padding: 0 20px 40px }
+            .footer-grid { grid-template-columns: 1fr }
+            .footer-bottom-inner { justify-content: center; text-align: center; flex-direction: column; gap: 12px }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ DEMO BANNER ────────────────────────────────────────── -->
+    <div class="demo-banner">
+        <span class="demo-banner__pill">Element mockup</span>
+        <span class="demo-banner__sep"></span>
+        <span>Variant C — Inline compact (mid-article)</span>
+        <span class="demo-banner__sep"></span>
+        <span>Variant F — Horizontal row list (end of article)</span>
+    </div>
+
+
+    <!-- ── NAV ────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <img src="../../../../design/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu">
+                <img src="../../../../design/brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu">
+                <span class="nav-logo-blog">blog</span>
+            </a>
+            <div class="nav-right">
+                <div class="lang" id="lang">
+                    <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+                        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                            <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                        </svg>
+                        <span class="lang-code-label" id="langCurrent">EN</span>
+                        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="lang-panel" id="langPanel" role="listbox">
+                        <div class="lang-panel-header"><span class="lang-panel-label">Language</span></div>
+                        <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+                            <span class="lang-flag">🇬🇧</span><span class="lang-name">English</span>
+                            <svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </button>
+                        <button class="lang-option" data-lang="DE" role="option" aria-selected="false"><span class="lang-flag">🇩🇪</span><span class="lang-name">Deutsch</span></button>
+                        <button class="lang-option" data-lang="FR" role="option" aria-selected="false"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span></button>
+                        <button class="lang-option" data-lang="ES" role="option" aria-selected="false"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span></button>
+                    </div>
+                </div>
+                <a href="/" class="nav-back-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <span>Back to blog</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ── ARTICLE HERO ───────────────────────────────────────── -->
+    <section class="article-hero">
+        <div class="article-hero-bg">
+            <img src="../../../../design/reference-images/great-migration/hero-wildebeest-crossing.jpg"
+                alt="Wildebeest crossing the Mara River during the Great Migration">
+        </div>
+        <div class="article-hero-grad"></div>
+        <div class="article-hero-body">
+            <p class="article-hero-eyebrow">Safari Guide</p>
+            <p class="article-hero-tagline">Everything you need to know</p>
+            <h1 class="article-hero-title">The Ultimate Guide to the Great Migration</h1>
+            <div class="article-hero-meta">
+                <div class="article-hero-author">
+                    <div class="article-hero-avatar">
+                        <img src="../../../../public/images/photos/portrait-safari-specialist.png" alt="Barbara Buchel">
+                    </div>
+                    <span class="article-hero-byline">By <strong>Barbara Buchel</strong></span>
+                </div>
+                <span class="article-hero-dot"></span>
+                <span class="article-hero-date">October 2024</span>
+                <span class="article-hero-dot"></span>
+                <span class="article-hero-read">15 min read</span>
+            </div>
+            <div class="article-hero-tags">
+                <span class="article-hero-tag">Tanzania</span>
+                <span class="article-hero-tag">Kenya</span>
+                <span class="article-hero-tag">Safari Guide</span>
+                <span class="article-hero-tag">Wildlife</span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ── ARTICLE BODY ────────────────────────────────────────── -->
+    <article class="article-body">
+
+        <p class="dropcap reveal">More than two million wildebeest, zebra, and Thomson's gazelle move in a continuous loop between Tanzania's Serengeti and Kenya's Masai Mara, driven by rain and grass. There is no fixed timetable. No guaranteed crossing date. The migration doesn't operate on a schedule that suits your travel agent — it operates on instinct, weather, and the ancient memory of where the grass grows sweetest.</p>
+
+        <p class="reveal">Understanding the Great Migration means understanding the ecosystem. The herds follow the rains counterclockwise through the Serengeti-Mara ecosystem, roughly 1,800 kilometres annually. The spectacle you choose to see depends entirely on when you go — and each season offers something irreplaceable.</p>
+
+        <h2 class="article-h2 reveal">When is the Great Migration?</h2>
+
+        <p class="reveal">The migration is year-round, not seasonal. January and February bring the calving season to the Southern Serengeti — half a million wildebeest born in six weeks, drawing every predator in the ecosystem. March through May: the long rains. The herds scatter and the plains turn impossibly green. June through August: northward movement, and the first crossings of the Grumeti River. July through October: the famous Mara River crossings. November: the herds turn south again.</p>
+
+        <!-- ─ VARIANT C: Two-up inline reference (first occurrence) ─ -->
+        <div class="related-c reveal">
+            <div class="related-c__header">
+                <span class="related-c__label">Also read</span>
+                <span class="related-c__rule"></span>
+            </div>
+            <div class="related-c__grid">
+                <a href="#" class="related-c__card">
+                    <div class="related-c__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/safari-vehicle-masai-mara.jpg"
+                            alt="Safari vehicle in the Masai Mara"
+                            class="related-c__card-thumb">
+                    </div>
+                    <div class="related-c__card-body">
+                        <span class="related-c__card-category">Tanzania</span>
+                        <span class="related-c__card-title">Why is a Safari in East Africa So Expensive?</span>
+                    </div>
+                </a>
+                <a href="#" class="related-c__card">
+                    <div class="related-c__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                            alt="Lion pride in the Serengeti"
+                            class="related-c__card-thumb">
+                    </div>
+                    <div class="related-c__card-body">
+                        <span class="related-c__card-category">Kenya</span>
+                        <span class="related-c__card-title">Is It Safe to Travel to Kenya and Tanzania?</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h2 class="article-h2 reveal">The River Crossings</h2>
+
+        <p class="reveal">The Mara River crossings are what most people picture when they imagine the Great Migration. A thousand wildebeest standing at the bank, milling, hesitating, then one animal commits and the rest pour in behind it. The water turns white. Crocodiles rise. The crossing lasts three minutes. Some make it. Some don't. It is the most dramatic thing I have ever witnessed in the wild, and I have been watching it happen for twenty years.</p>
+
+        <div class="article-pullquote reveal">
+            <p>"The first crossing I watched lasted four minutes. I cried. The second time was worse."</p>
+            <cite>On the Mara River, August 2023</cite>
+        </div>
+
+        <p class="reveal">The challenge is that crossings are unpredictable. The herds may stand at the bank for days before committing. You need time — ideally four or five nights in the Mara to have a reasonable chance of witnessing one. Camps positioned on the river, with vehicles on standby, give you the best odds. Your guide's network matters enormously.</p>
+
+        <figure class="article-img reveal">
+            <img src="../../../../design/reference-images/great-migration/wildebeest-river-crossing.jpg"
+                alt="Wildebeest crossing the Mara River">
+            <figcaption>A Mara River crossing in full: the chaos, the crocodiles, the noise, the sheer scale of the herd pressing forward. Crossings can happen at any of several crossing points along the river.</figcaption>
+        </figure>
+
+        <!-- ─ VARIANT C: Single inline reference (second occurrence) ─ -->
+        <div class="related-c-single reveal">
+            <a href="#" class="related-c-single__card">
+                <div class="related-c-single__thumb-wrap">
+                    <img src="../../../../design/reference-images/great-migration/game-drive-serengeti.jpg"
+                        alt="Game drive in the Serengeti"
+                        class="related-c-single__thumb">
+                </div>
+                <div class="related-c-single__body">
+                    <div class="related-c-single__eyebrow">
+                        <span class="related-c-single__label-text">Related</span>
+                        <span class="related-c-single__sep"></span>
+                        <span class="related-c-single__category">Safari Guide</span>
+                    </div>
+                    <span class="related-c-single__title">National Parks vs Private Game Reserves: What's the Difference?</span>
+                </div>
+                <span class="related-c-single__arrow">→</span>
+            </a>
+        </div>
+
+        <h2 class="article-h2 reveal">How to Plan Your Trip</h2>
+
+        <p class="reveal">Most itineraries that work combine two or three locations timed to the calendar. Calving season means Southern Serengeti: Ndutu, Naabi Hill, the short-grass plains. River crossings mean the Masai Mara: Sekenani, Talek, or the Mara Triangle for the best concentration of crossings. If you have two weeks, you can follow the migration north from the Serengeti in July — arriving in the Mara just as the first crossings begin.</p>
+
+        <p class="reveal">Private conservancies adjacent to the Mara offer what the national park cannot: night drives, walking safaris, off-road game drives, and near-empty sightings. For the crossings themselves, proximity to the river is everything. The camps that matter are the ones with vehicles positioned at the banks from first light. Your guide's radio network is your competitive advantage.</p>
+
+        <!-- ─ AUTHOR BIO ─ -->
+        <div class="author-bio reveal">
+            <div class="author-bio-portrait">
+                <img src="../../../../public/images/photos/portrait-safari-specialist.png" alt="Barbara Buchel">
+            </div>
+            <div class="author-bio-content">
+                <div class="author-bio-label">Written by</div>
+                <div class="author-bio-name">Barbara Buchel</div>
+                <div class="author-bio-role">Safari Specialist &amp; Editor</div>
+                <p class="author-bio-text">Barbara has been planning and leading safaris across East and Southern Africa for over two decades. She has followed the Great Migration nine times and still finds something new in it each year.</p>
+                <a href="#" class="author-bio-link">
+                    View all articles
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div style="height: 64px"></div>
+    </article>
+
+
+    <!-- ── VARIANT F: HORIZONTAL ROW LIST ─────────────────────── -->
+    <section class="related-f">
+        <div class="related-f__inner">
+            <header class="related-f__header reveal">
+                <p class="related-f__tagline">Keep reading</p>
+                <h2 class="related-f__title">Related Articles</h2>
+            </header>
+
+            <div class="related-f__list">
+
+                <a href="#" class="related-f__card reveal">
+                    <div class="related-f__card-img-wrap">
+                        <img src="../../../../design/reference-images/great-migration/safari-vehicle-masai-mara.jpg"
+                            alt="Safari vehicle in the Masai Mara"
+                            class="related-f__card-img">
+                    </div>
+                    <div class="related-f__card-body">
+                        <span class="related-f__card-category">Tanzania</span>
+                        <h3 class="related-f__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                        <p class="related-f__card-excerpt">Breaking down the real costs behind an East African safari — from park fees and concession levies to premium camp rates — and why the price is often worth every cent.</p>
+                        <div class="related-f__card-footer">
+                            <span class="related-f__card-author">Barbara Buchel</span>
+                            <span class="related-f__card-dot"></span>
+                            <span class="related-f__card-date">Sep 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="related-f__card reveal">
+                    <div class="related-f__card-img-wrap">
+                        <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                            alt="Lion pride in the Serengeti"
+                            class="related-f__card-img">
+                    </div>
+                    <div class="related-f__card-body">
+                        <span class="related-f__card-category">Kenya</span>
+                        <h3 class="related-f__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                        <p class="related-f__card-excerpt">Everything you need to know about safety on your East African safari — from health precautions to political context, travel advisories, and what actually matters on the ground.</p>
+                        <div class="related-f__card-footer">
+                            <span class="related-f__card-author">Barbara Buchel</span>
+                            <span class="related-f__card-dot"></span>
+                            <span class="related-f__card-date">Aug 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="related-f__card reveal">
+                    <div class="related-f__card-img-wrap">
+                        <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                            alt="Leopard resting in a tree in the Masai Mara"
+                            class="related-f__card-img">
+                    </div>
+                    <div class="related-f__card-body">
+                        <span class="related-f__card-category">South Africa</span>
+                        <h3 class="related-f__card-title">National Parks vs Private Game Reserves</h3>
+                        <p class="related-f__card-excerpt">Understanding the key differences to help you choose the right safari experience — pricing, access, wildlife density, and which is better for first-timers.</p>
+                        <div class="related-f__card-footer">
+                            <span class="related-f__card-author">Zeldi Smulders</span>
+                            <span class="related-f__card-dot"></span>
+                            <span class="related-f__card-date">Jul 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ── NEWSLETTER ──────────────────────────────────────────── -->
+    <section class="nl">
+        <div class="nl-inner">
+            <p class="nl-tag">Stay inspired</p>
+            <h2 class="nl-title">Safari stories in your inbox</h2>
+            <p class="nl-text">Expert guides, lodge reviews, and trip inspiration. Delivered every two weeks.</p>
+            <div class="nl-form">
+                <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+                <button class="nl-btn">Subscribe</button>
+            </div>
+            <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+
+    <!-- ── FOOTER ──────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-upper">
+            <div class="wrap">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>Explore</h4>
+                        <a href="#">All Trips</a>
+                        <a href="#">All Stays</a>
+                        <a href="#">Destinations</a>
+                        <a href="#">Plan My Trip</a>
+                        <div class="footer-cert-badge">
+                            <div class="footer-cert-badge-label">Certified</div>
+                            <div class="footer-cert-badge-row">
+                                <div class="footer-cert-icon">B<br>Corp</div>
+                                <span class="footer-cert-text">This company meets high standards of social and environmental impact.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Destinations</h4>
+                        <a href="#">Namibia</a>
+                        <a href="#">Botswana</a>
+                        <a href="#">Kenya</a>
+                        <a href="#">Tanzania</a>
+                        <a href="#">South Africa</a>
+                        <a href="#">All destinations</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Sustainability</a>
+                        <a href="#">Reviews</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Follow us</h4>
+                        <a href="#" class="footer-social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                            Instagram
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="footer-bottom-inner">
+                    <div class="footer-bottom-logo">
+                        <img src="../../../../design/brand/logos/viatu-logo-white.svg" alt="Viatu">
+                    </div>
+                    <span class="footer-copy">&copy; 2026 Viatu. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Nav scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+
+        // Language dropdown
+        const langWrap = document.getElementById('lang');
+        const langTrigger = document.getElementById('langTrigger');
+        const langCurrent = document.getElementById('langCurrent');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langWrap.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.lang-option').forEach(o => {
+                    o.classList.remove('active');
+                    o.setAttribute('aria-selected', 'false');
+                    const chk = o.querySelector('.lang-check');
+                    if (chk) chk.remove();
+                });
+                opt.classList.add('active');
+                opt.setAttribute('aria-selected', 'true');
+                opt.insertAdjacentHTML('beforeend',
+                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                langCurrent.textContent = opt.dataset.lang;
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', e => {
+            if (!langWrap.contains(e.target)) {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Reveal on scroll
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('vis'), i * 60);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+
+</body>
+</html>
