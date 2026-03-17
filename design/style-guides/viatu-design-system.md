@@ -38,6 +38,7 @@
 | `--grey-medium` | `#6C757D` | Secondary text, metadata, placeholders |
 | `--grey-dark` | `#343A40` | Dark UI text, icon fills |
 | `--grey-300` | `#DEE2E6` | Input borders, subtle dividers |
+| `--section-alt` | `#E1E3DE` | Alternate section backgrounds (e.g. Travel Styles, expert panels) |
 
 ### 2.3 Semantic / Feedback Colors
 

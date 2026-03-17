@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lena Schmidt — Viatu Travel Journal</title>
+    <meta name="description" content="Articles and guides by Lena Schmidt, Senior Safari Specialist at Viatu. 24 articles across 9 countries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+    <style>
+        /* ─── TOKENS ────────────────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+            --earth-sand: #E8E0D6;
+            --earth-stone: #B5A898;
+            --earth-clay: #8B7355;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+        html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
+        body { font-family:var(--fs); color:var(--black); background:var(--white); -webkit-font-smoothing:antialiased; line-height:1.6 }
+        a { text-decoration:none; color:inherit }
+        button { font-family:var(--fs); cursor:pointer; border:none; background:none }
+        .nums { font-family:var(--fs) }
+        .wrap { max-width:1200px; margin:0 auto; padding:0 24px }
+
+        /* ─── NAV ──────────────────────────────────────────────── */
+        .nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            transition: background var(--dur3) var(--ease), box-shadow var(--dur3) var(--ease)
+        }
+        .nav.scrolled {
+            background:rgba(255,255,255,.96);
+            backdrop-filter:blur(16px);
+            box-shadow:0 1px 0 rgba(0,0,0,.06)
+        }
+        .nav-inner {
+            max-width:1200px; margin:0 auto; padding:0 24px;
+            height:88px; display:flex; align-items:center; justify-content:space-between
+        }
+        .nav-logo { display:flex; flex-direction:column; align-items:flex-start; line-height:1 }
+        .nav-logo img { height:24px; width:auto; display:block }
+        .nav:not(.scrolled) .logo-dark { display:none }
+        .nav.scrolled .logo-white { display:none }
+        .nav-logo-blog {
+            font-family:var(--fc); font-size:14px; font-weight:700;
+            letter-spacing:.01em; line-height:1; margin-top:2px; align-self:flex-end
+        }
+        .nav:not(.scrolled) .nav-logo-blog { color:rgba(255,255,255,.88) }
+        .nav.scrolled .nav-logo-blog { color:#1B1B1B }
+        .nav-right { display:flex; align-items:center; gap:10px }
+        .nav-search {
+            background:transparent; border:none; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            width:38px; height:38px; border-radius:var(--rmd);
+            transition:all var(--dur) var(--ease)
+        }
+        .nav:not(.scrolled) .nav-search { color:rgba(255,255,255,.88) }
+        .nav:not(.scrolled) .nav-search:hover { color:var(--white); background:rgba(255,255,255,.08) }
+        .nav.scrolled .nav-search { color:var(--gm) }
+        .nav.scrolled .nav-search:hover { color:var(--sangria); background:rgba(84,23,54,.04) }
+        .nav-search svg { width:18px; height:18px; stroke-width:2; stroke:currentColor; fill:none }
+        .nav-back-btn {
+            font-size:16px; font-weight:700; line-height:1.2;
+            padding:18px 20px; border-radius:4px;
+            display:inline-flex; align-items:center; gap:5px;
+            transition:all var(--dur) var(--ease); letter-spacing:0;
+            cursor:pointer; white-space:nowrap;
+            color:var(--white); background:var(--sangria); border:none
+        }
+        .nav-back-btn:hover { background:#6b1d45; transform:translateY(-1px) }
+
+        /* ─── LANGUAGE DROPDOWN ─────────────────────────────────── */
+        .lang { position:relative }
+        .lang-trigger {
+            display:inline-flex; align-items:center; gap:5px;
+            font-size:13px; font-weight:500; cursor:pointer;
+            padding:7px 10px; border-radius:var(--rmd); min-height:36px;
+            border:1px solid transparent; background:none;
+            letter-spacing:.04em; line-height:1;
+            transition:all var(--dur) var(--ease)
+        }
+        .nav:not(.scrolled) .lang-trigger { color:rgba(255,255,255,.88) }
+        .nav:not(.scrolled) .lang-trigger:hover { color:var(--white); background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2) }
+        .nav.scrolled .lang-trigger { color:var(--gm) }
+        .nav.scrolled .lang-trigger:hover { color:var(--sangria); background:rgba(84,23,54,.04); border-color:rgba(84,23,54,.15) }
+        .lang-globe { width:15px; height:15px; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0 }
+        .lang-code-label { font-size:13px; font-weight:600; letter-spacing:.06em }
+        .lang-chevron { display:block; width:11px; height:11px; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; transition:transform var(--dur) var(--ease) }
+        .lang.open .lang-chevron { transform:rotate(180deg) }
+        .lang-panel {
+            position:absolute; top:calc(100% + 8px); right:0; min-width:210px;
+            background:var(--white); border-radius:12px;
+            box-shadow:0 8px 24px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
+            overflow:hidden; opacity:0; visibility:hidden;
+            transform:translateY(-5px) scale(.98); transform-origin:top right;
+            transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+            z-index:20
+        }
+        .lang.open .lang-panel { opacity:1; visibility:visible; transform:translateY(0) scale(1) }
+        .lang-panel-header { display:flex; align-items:center; padding:11px 16px 9px; border-bottom:1px solid rgba(0,0,0,.06) }
+        .lang-panel-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gm) }
+        .lang-option {
+            display:flex; align-items:center; gap:11px; width:100%; padding:11px 16px;
+            border:none; border-left:3px solid transparent; background:none;
+            font-size:13px; font-weight:400; color:var(--gd); cursor:pointer;
+            text-align:left;
+            transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-left-color var(--dur) var(--ease)
+        }
+        .lang-option:not(:last-child) { border-bottom:1px solid rgba(0,0,0,.045) }
+        .lang-option:hover { background:var(--gl); color:var(--sangria); border-left-color:rgba(84,23,54,.3) }
+        .lang-option.active { color:var(--sangria); border-left-color:var(--sangria); background:rgba(84,23,54,.03) }
+        .lang-option.active .lang-name { font-weight:600 }
+        .lang-flag { font-size:18px; line-height:1; flex-shrink:0 }
+        .lang-name { flex:1; font-size:13px }
+        .lang-check { width:13px; height:13px; fill:none; stroke:var(--sangria); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; margin-left:auto; flex-shrink:0 }
+
+        /* ─── HERO — ANIMATED GRADIENT ─────────────────────────── */
+        .hero {
+            position:relative;
+            height:100vh; height:100svh;
+            display:flex; align-items:center; justify-content:center;
+            overflow:hidden;
+            background:linear-gradient(135deg,
+                rgba(84,23,54,0.85),
+                rgba(28,68,71,0.75),
+                rgba(84,23,54,0.6),
+                rgba(28,68,71,0.9));
+            background-size:400% 400%;
+            animation:gradientShift 15s ease infinite
+        }
+        @keyframes gradientShift {
+            0% { background-position:0% 50% }
+            25% { background-position:100% 0% }
+            50% { background-position:100% 50% }
+            75% { background-position:0% 100% }
+            100% { background-position:0% 50% }
+        }
+        .hero-canvas {
+            position:absolute; inset:0; z-index:1; pointer-events:none
+        }
+        .hero-content {
+            position:relative; z-index:2;
+            display:flex; flex-direction:column; align-items:center;
+            text-align:center; padding:0 24px
+        }
+
+        /* ─── PORTRAIT WITH PARTICLE RING ──────────────────────── */
+        .portrait-area {
+            position:relative;
+            width:240px; height:240px;
+            display:flex; align-items:center; justify-content:center;
+            margin-bottom:32px
+        }
+        .portrait {
+            width:200px; height:200px;
+            border-radius:var(--rfull);
+            overflow:hidden;
+            border:3px solid rgba(255,255,255,.7);
+            box-shadow:0 12px 48px rgba(0,0,0,.5);
+            position:relative; z-index:3
+        }
+        .portrait img {
+            width:100%; height:100%; object-fit:cover; object-position:top center; display:block
+        }
+        .portrait-verified {
+            position:absolute; bottom:16px; right:16px; z-index:4;
+            width:32px; height:32px;
+            background:var(--sangria);
+            border-radius:var(--rfull);
+            border:2px solid rgba(255,255,255,.9);
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 2px 8px rgba(0,0,0,.4);
+            overflow:hidden
+        }
+        .portrait-verified svg {
+            width:16px; height:16px; stroke:var(--white); fill:none;
+            stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round;
+            position:relative; z-index:1
+        }
+        /* Shine sweep on verified badge */
+        .portrait-verified::after {
+            content:'';
+            position:absolute; top:0; left:0; width:100%; height:100%;
+            background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.5) 50%, transparent 70%);
+            transform:translateX(-100%);
+            animation:shineSweep 4s ease-in-out infinite
+        }
+        @keyframes shineSweep {
+            0%,80% { transform:translateX(-100%) }
+            90% { transform:translateX(100%) }
+            100% { transform:translateX(100%) }
+        }
+
+        /* Particle ring — CSS only orbiting dots */
+        .particle-ring {
+            position:absolute; inset:0; z-index:2;
+            opacity:0;
+            transition:opacity 0.4s var(--ease)
+        }
+        .portrait-area:hover .particle-ring { opacity:1 }
+        .ring-dot {
+            position:absolute;
+            width:6px; height:6px;
+            background:var(--sangria);
+            border-radius:var(--rfull);
+            opacity:0.5;
+            top:50%; left:50%;
+            margin:-3px 0 0 -3px;
+            animation:orbitRing 3s linear infinite
+        }
+        .ring-dot:nth-child(1) { animation-delay:0s }
+        .ring-dot:nth-child(2) { animation-delay:-0.33s }
+        .ring-dot:nth-child(3) { animation-delay:-0.66s }
+        .ring-dot:nth-child(4) { animation-delay:-1s }
+        .ring-dot:nth-child(5) { animation-delay:-1.33s }
+        .ring-dot:nth-child(6) { animation-delay:-1.66s }
+        .ring-dot:nth-child(7) { animation-delay:-2s }
+        .ring-dot:nth-child(8) { animation-delay:-2.33s }
+        .ring-dot:nth-child(9) { animation-delay:-2.66s }
+        @keyframes orbitRing {
+            0% { transform:rotate(0deg) translateX(115px) rotate(0deg) }
+            100% { transform:rotate(360deg) translateX(115px) rotate(-360deg) }
+        }
+
+        /* ─── RADIAL STATS ─────────────────────────────────────── */
+        .stat-radial {
+            position:absolute; z-index:5;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(12px);
+            border:1px solid rgba(255,255,255,0.2);
+            border-radius:var(--rfull);
+            padding:8px 16px;
+            display:flex; align-items:center; gap:6px;
+            white-space:nowrap;
+            animation:radialEntrance 0.8s cubic-bezier(.34,1.56,.64,1) both
+        }
+        .stat-radial-num {
+            font-size:20px; font-weight:700; color:var(--white); line-height:1
+        }
+        .stat-radial-label {
+            font-size:10px; font-weight:500; color:rgba(255,255,255,0.6); line-height:1
+        }
+        /* 10 o'clock position */
+        .stat-radial--articles {
+            top:15%; left:-40px;
+            animation-delay:0.1s
+        }
+        /* 2 o'clock position */
+        .stat-radial--safaris {
+            top:15%; right:-40px;
+            animation-delay:0.25s
+        }
+        /* 6 o'clock position */
+        .stat-radial--countries {
+            bottom:-20px; left:50%; transform:translateX(-50%);
+            animation-delay:0.4s
+        }
+        @keyframes radialEntrance {
+            0% {
+                opacity:0;
+                transform:translate(0,0) scale(0.5)
+            }
+            100% {
+                opacity:1;
+                transform:translate(0,0) scale(1)
+            }
+        }
+        .stat-radial--countries {
+            animation-name:radialEntranceCenter
+        }
+        @keyframes radialEntranceCenter {
+            0% {
+                opacity:0;
+                transform:translateX(-50%) scale(0.5)
+            }
+            100% {
+                opacity:1;
+                transform:translateX(-50%) scale(1)
+            }
+        }
+
+        /* ─── HERO NAME — ROLLING TEXT ─────────────────────────── */
+        .hero-name {
+            font-family:var(--fp);
+            font-size:clamp(28px,4vw,48px);
+            font-weight:400;
+            color:var(--white);
+            letter-spacing:-.04em;
+            line-height:1.2;
+            margin-bottom:8px;
+            overflow:hidden
+        }
+        .hero-name .char {
+            display:inline-block;
+            animation:rollIn 0.5s cubic-bezier(.34,1.56,.64,1) both
+        }
+        .hero-name .char-space { width:0.3em; display:inline-block }
+        @keyframes rollIn {
+            0% { transform:translateY(100%); opacity:0 }
+            100% { transform:translateY(0); opacity:1 }
+        }
+        .hero-role {
+            font-family:var(--fs);
+            font-size:14px; font-weight:500;
+            color:rgba(255,255,255,0.7);
+            opacity:0;
+            animation:fadeUp 0.5s var(--ease) both
+        }
+        @keyframes fadeUp {
+            0% { opacity:0; transform:translateY(12px) }
+            100% { opacity:1; transform:translateY(0) }
+        }
+
+        /* ─── ABOUT TABS ───────────────────────────────────────── */
+        .about-section {
+            background:var(--white);
+            padding:88px 0
+        }
+        .tabs-bar {
+            display:flex; justify-content:center; gap:0;
+            position:relative; margin-bottom:48px;
+            border-bottom:1px solid var(--g3)
+        }
+        .tab-btn {
+            font-family:var(--fs);
+            font-size:14px; font-weight:500;
+            padding:10px 20px;
+            color:var(--gm);
+            border:none; background:none;
+            border-bottom:2px solid transparent;
+            cursor:pointer;
+            transition:color var(--dur3) var(--ease);
+            position:relative; z-index:2
+        }
+        .tab-btn.active {
+            color:var(--sangria);
+            border-bottom-color:var(--sangria)
+        }
+        .tab-btn:hover:not(.active) {
+            color:var(--gd)
+        }
+        .tab-indicator {
+            position:absolute; bottom:-1px; height:2px;
+            background:var(--sangria);
+            transition:left var(--dur3) var(--ease), width var(--dur3) var(--ease);
+            z-index:3
+        }
+        .tab-panel {
+            display:none;
+            opacity:0;
+            transform:translateY(8px);
+            transition:opacity var(--dur3) var(--ease), transform var(--dur3) var(--ease)
+        }
+        .tab-panel.active {
+            display:block;
+            opacity:1;
+            transform:translateY(0)
+        }
+
+        /* Tab 1 — Bio */
+        .bio-text {
+            font-size:16px; font-weight:300; color:var(--gd);
+            line-height:1.75; max-width:680px; margin:0 auto
+        }
+        .bio-text strong { font-weight:600; color:var(--black) }
+        .bio-quote {
+            font-family:var(--fc);
+            font-size:22px; color:var(--sangria);
+            border-left:3px solid var(--sangria);
+            padding-left:20px;
+            margin:32px auto; max-width:680px;
+            line-height:1.5
+        }
+
+        /* Tab 2 — Destinations */
+        .dest-grid {
+            display:grid; grid-template-columns:repeat(3,1fr);
+            gap:16px; max-width:680px; margin:0 auto
+        }
+        .dest-card {
+            border:1px solid var(--g3);
+            border-radius:8px;
+            padding:20px;
+            text-align:center;
+            cursor:pointer;
+            transition:border-color var(--dur) var(--ease), transform var(--dur) var(--ease)
+        }
+        .dest-card:hover {
+            border-color:var(--sangria);
+            transform:scale(1.02)
+        }
+        .dest-card-flag {
+            height:24px; width:auto; margin-bottom:10px; display:inline-block
+        }
+        .dest-card-name {
+            font-size:16px; font-weight:600; color:var(--black); margin-bottom:4px
+        }
+        .dest-card-count {
+            font-size:13px; color:var(--gm)
+        }
+
+        /* Tab 3 — Credentials */
+        .creds-list {
+            max-width:680px; margin:0 auto;
+            display:flex; flex-direction:column; gap:16px
+        }
+        .cred-item {
+            display:flex; align-items:center; gap:12px;
+            font-size:15px; font-weight:400; color:var(--gd);
+            opacity:0; transform:translateY(10px);
+            transition:opacity 0.4s var(--ease), transform 0.4s var(--ease)
+        }
+        .cred-item.vis {
+            opacity:1; transform:translateY(0)
+        }
+        .cred-check {
+            width:20px; height:20px; flex-shrink:0;
+            background:rgba(84,23,54,0.08);
+            border-radius:var(--rfull);
+            display:flex; align-items:center; justify-content:center
+        }
+        .cred-check svg {
+            width:12px; height:12px; stroke:var(--sangria); fill:none;
+            stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round
+        }
+
+        /* ─── SECTION HEADER ───────────────────────────────────── */
+        .section { padding:88px 0 }
+        .section-head { margin-bottom:48px }
+        .section-head .tag {
+            font-family:var(--fc); font-size:22px; font-weight:700;
+            color:var(--sangria); line-height:1.2; margin-bottom:4px
+        }
+        .section-head h2 {
+            font-family:var(--fp); font-size:clamp(20px,2.8vw,32px); font-weight:400;
+            letter-spacing:-.05em; line-height:1.2
+        }
+        .section-head p { font-size:16px; color:var(--gm); margin-top:8px; max-width:440px; line-height:1.6 }
+
+        /* ─── DESTINATION FLIP CARDS ───────────────────────────── */
+        .flip-section { padding:88px 0; background:var(--white) }
+        .flip-row {
+            display:flex; gap:20px;
+            overflow-x:auto;
+            padding:0 24px 16px;
+            scroll-snap-type:x mandatory;
+            -webkit-overflow-scrolling:touch;
+            scrollbar-width:none;
+            -ms-overflow-style:none
+        }
+        .flip-row::-webkit-scrollbar { display:none }
+        .flip-card-wrapper {
+            flex-shrink:0; width:220px; height:280px;
+            perspective:1000px;
+            scroll-snap-align:start
+        }
+        .flip-card {
+            width:100%; height:100%;
+            position:relative;
+            transform-style:preserve-3d;
+            transition:transform 0.6s var(--ease);
+            cursor:pointer
+        }
+        .flip-card-wrapper:hover .flip-card {
+            transform:rotateY(180deg)
+        }
+        .flip-face {
+            position:absolute; inset:0;
+            backface-visibility:hidden;
+            border-radius:12px;
+            overflow:hidden
+        }
+        .flip-front {
+            display:flex; flex-direction:column;
+            box-shadow:var(--sh-md)
+        }
+        .flip-front-flag {
+            flex:1; display:flex; align-items:center; justify-content:center;
+            background:var(--gl); padding:20px;
+            position:relative
+        }
+        .flip-front-flag img {
+            height:60px; width:auto; display:block;
+            filter:drop-shadow(0 2px 6px rgba(0,0,0,.12))
+        }
+        .flip-front-info {
+            background:var(--gd);
+            padding:16px 18px;
+            display:flex; align-items:center; justify-content:space-between
+        }
+        .flip-front-name {
+            font-size:18px; font-weight:600; color:var(--white)
+        }
+        .flip-front-pill {
+            font-size:11px; font-weight:600; color:var(--white);
+            background:var(--sangria);
+            padding:4px 10px; border-radius:var(--rfull)
+        }
+        .flip-back {
+            transform:rotateY(180deg);
+            background:var(--sangria);
+            padding:28px 22px;
+            display:flex; flex-direction:column; justify-content:center;
+            box-shadow:var(--sh-lg)
+        }
+        .flip-back-name {
+            font-family:var(--fp);
+            font-size:20px; font-weight:400; color:var(--white);
+            letter-spacing:-.03em; margin-bottom:12px
+        }
+        .flip-back-desc {
+            font-size:14px; font-weight:300; color:rgba(255,255,255,.75);
+            line-height:1.6; margin-bottom:16px;
+            display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden
+        }
+        .flip-back-count {
+            font-size:13px; color:rgba(255,255,255,.55); margin-bottom:16px
+        }
+        .flip-back-link {
+            font-size:14px; font-weight:500; color:var(--white);
+            display:inline-flex; align-items:center; gap:4px;
+            transition:gap var(--dur) var(--ease)
+        }
+        .flip-back-link:hover { gap:8px }
+
+        /* ─── ARTICLE TIMELINE ─────────────────────────────────── */
+        .timeline-section { padding:88px 0; background:var(--gl) }
+        .timeline {
+            position:relative;
+            max-width:1000px; margin:0 auto;
+            padding:32px 0
+        }
+        .timeline::before {
+            content:'';
+            position:absolute;
+            left:50%; top:0; bottom:0;
+            width:2px;
+            background:var(--g3);
+            transform:translateX(-50%)
+        }
+        .tl-item {
+            position:relative;
+            display:flex;
+            margin-bottom:48px;
+            opacity:0;
+            transition:opacity 0.6s var(--ease), transform 0.6s var(--ease)
+        }
+        .tl-item.vis { opacity:1; transform:translateX(0) !important }
+        .tl-item:nth-child(odd) {
+            justify-content:flex-start;
+            padding-right:calc(50% + 32px);
+            transform:translateX(-30px)
+        }
+        .tl-item:nth-child(even) {
+            justify-content:flex-end;
+            padding-left:calc(50% + 32px);
+            transform:translateX(30px)
+        }
+        .tl-dot {
+            position:absolute;
+            left:50%; top:24px;
+            width:12px; height:12px;
+            background:var(--sangria);
+            border-radius:var(--rfull);
+            border:2px solid var(--white);
+            transform:translateX(-50%);
+            z-index:2;
+            box-shadow:0 0 0 4px rgba(84,23,54,.12)
+        }
+        .tl-card {
+            background:var(--white);
+            border:1px solid var(--g3);
+            border-radius:8px;
+            padding:24px;
+            max-width:480px; width:100%;
+            transition:box-shadow var(--dur) var(--ease), transform 50ms linear;
+            cursor:pointer
+        }
+        .tl-card:hover {
+            box-shadow:var(--sh-lg)
+        }
+        .tl-card-img {
+            border-radius:8px; overflow:hidden;
+            aspect-ratio:3/2; margin-bottom:14px
+        }
+        .tl-card-img img {
+            width:100%; height:100%; object-fit:cover; display:block;
+            transition:transform 0.7s var(--ease)
+        }
+        .tl-card:hover .tl-card-img img { transform:scale(1.04) }
+        .tl-card-date {
+            font-size:12px; font-weight:500; color:var(--gm); margin-bottom:4px
+        }
+        .tl-card-cat {
+            font-size:11px; font-weight:600; letter-spacing:.08em;
+            text-transform:uppercase; color:var(--sangria); margin-bottom:8px
+        }
+        .tl-card-title {
+            font-family:var(--fs); font-size:17px; font-weight:600;
+            color:var(--black); line-height:1.35; margin-bottom:8px
+        }
+        .tl-card-excerpt {
+            font-size:14px; font-weight:300; color:var(--gm); line-height:1.6;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden
+        }
+
+        /* ─── SKILL BADGES ─────────────────────────────────────── */
+        .skills-section { padding:88px 0; background:var(--earth-warm) }
+        .skills-wrap {
+            display:flex; flex-wrap:wrap;
+            justify-content:center; gap:10px;
+            max-width:680px; margin:0 auto
+        }
+        .skill-badge {
+            font-size:14px; font-weight:500; color:var(--gm);
+            padding:10px 20px;
+            border-radius:var(--rfull);
+            border:1.5px solid var(--g3);
+            background:transparent;
+            cursor:pointer;
+            transition:background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease), transform 0.4s var(--ease), opacity 0.4s var(--ease);
+            opacity:0; transform:translateY(12px)
+        }
+        .skill-badge.vis {
+            opacity:1; transform:translateY(0)
+        }
+        .skill-badge:hover {
+            background:var(--sangria);
+            color:var(--white);
+            border-color:var(--sangria)
+        }
+
+        /* ─── CTA SECTION ──────────────────────────────────────── */
+        .cta-section {
+            background:var(--gd);
+            padding:100px 0;
+            position:relative;
+            overflow:hidden
+        }
+        .cta-stars {
+            position:absolute; inset:0; z-index:1
+        }
+        .cta-star {
+            position:absolute;
+            width:2px; height:2px;
+            background:var(--white);
+            border-radius:var(--rfull);
+            animation:twinkle 3s ease-in-out infinite
+        }
+        @keyframes twinkle {
+            0%,100% { opacity:0.1 }
+            50% { opacity:0.5 }
+        }
+        .cta-content {
+            position:relative; z-index:2;
+            max-width:560px; margin:0 auto;
+            text-align:center; padding:0 24px
+        }
+        .cta-tag {
+            font-family:var(--fc); font-size:22px; font-weight:700;
+            color:rgba(255,255,255,.5); margin-bottom:4px
+        }
+        .cta-title {
+            font-family:var(--fp);
+            font-size:clamp(22px,3vw,36px); font-weight:400;
+            color:var(--white); letter-spacing:-.04em;
+            line-height:1.2; margin-bottom:16px
+        }
+        .cta-desc {
+            font-size:16px; font-weight:300;
+            color:rgba(255,255,255,.55);
+            line-height:1.65; margin-bottom:32px
+        }
+        .cta-btn {
+            display:inline-flex; align-items:center; justify-content:center;
+            font-size:16px; font-weight:500;
+            color:var(--white);
+            background:var(--sangria);
+            padding:14px 32px;
+            border-radius:var(--rmd);
+            min-height:48px;
+            position:relative;
+            overflow:hidden;
+            cursor:pointer;
+            transition:background var(--dur) var(--ease), transform var(--dur) var(--ease);
+            border:none
+        }
+        .cta-btn:hover {
+            background:#6b1d45;
+            transform:translateY(-1px)
+        }
+        .ripple {
+            position:absolute;
+            border-radius:var(--rfull);
+            background:rgba(255,255,255,0.3);
+            transform:scale(0);
+            animation:rippleEffect 0.6s ease-out forwards;
+            pointer-events:none
+        }
+        @keyframes rippleEffect {
+            to {
+                transform:scale(2.5);
+                opacity:0
+            }
+        }
+
+        /* ─── NEWSLETTER ────────────────────────────────────────── */
+        .nl { background:var(--earth-warm); padding:80px 0 }
+        .nl-inner { max-width:520px; margin:0 auto; padding:0 24px; text-align:center }
+        .nl-tag { font-family:var(--fc); font-size:22px; font-weight:700; color:var(--sangria); margin-bottom:4px }
+        .nl-title { font-family:var(--fp); font-size:clamp(20px,2.5vw,28px); font-weight:400; letter-spacing:-.04em; line-height:1.2; margin-bottom:8px }
+        .nl-text { font-size:15px; color:var(--gm); margin-bottom:28px; line-height:1.6 }
+        .nl-form { display:flex; gap:10px }
+        .nl-input { flex:1; font-size:15px; color:var(--black); padding:12px 16px; border:1px solid var(--earth-sand); border-radius:var(--rmd); min-height:48px; outline:none; background:var(--white); transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease); font-family:var(--fs) }
+        .nl-input::placeholder { color:var(--platinum); font-weight:300 }
+        .nl-input:focus { border-color:var(--pthalo); box-shadow:0 0 0 3px rgba(28,68,71,.08) }
+        .nl-btn { font-size:14px; font-weight:500; color:var(--white); background:var(--sangria); padding:12px 28px; border-radius:var(--rmd); min-height:48px; transition:all var(--dur) var(--ease); white-space:nowrap; border:none; cursor:pointer; font-family:var(--fs) }
+        .nl-btn:hover { opacity:.9 }
+        .nl-fine { font-size:12px; color:var(--earth-stone); margin-top:14px }
+
+        /* ─── FOOTER ────────────────────────────────────────────── */
+        .footer { background:#1b1b1b }
+        .footer-main { padding:64px 0 56px }
+        .footer-layout { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:48px }
+        .footer-brand { display:flex; flex-direction:column; gap:24px }
+        .footer-logo img { height:24px; width:auto; display:block; opacity:.9 }
+        .footer-tagline { font-size:14px; font-weight:300; color:rgba(255,255,255,.4); line-height:1.6; max-width:220px }
+        .footer-cert { display:flex; align-items:center; gap:12px; margin-top:8px }
+        .footer-cert img { height:40px; width:auto; opacity:.6; transition:opacity var(--dur) var(--ease) }
+        .footer-cert:hover img { opacity:.85 }
+        .footer-cert-text { font-size:11px; color:rgba(255,255,255,.3); line-height:1.5 }
+        .footer-col h4 { font-size:20px; font-weight:700; color:var(--white); margin-bottom:20px; line-height:1.2 }
+        .footer-col a { display:block; font-size:16px; font-weight:400; color:rgba(255,255,255,.55); padding:4px 0; line-height:1.5; transition:color var(--dur) var(--ease) }
+        .footer-col a:hover { color:var(--white) }
+        .footer-social-link { display:flex; align-items:center; gap:10px; font-size:16px; font-weight:400; color:rgba(255,255,255,.55); padding:4px 0; line-height:1.5; transition:color var(--dur) var(--ease) }
+        .footer-social-link:hover { color:var(--white) }
+        .footer-social-link svg { width:18px; height:18px; flex-shrink:0; opacity:.65; transition:opacity var(--dur) var(--ease) }
+        .footer-social-link:hover svg { opacity:1 }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding:24px 0 }
+        .footer-bottom-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px }
+        .footer-copy { font-size:12px; color:rgba(255,255,255,.3) }
+        .footer-legal { display:flex; align-items:center; gap:24px }
+        .footer-legal a { font-size:12px; color:rgba(255,255,255,.3); transition:color var(--dur) var(--ease) }
+        .footer-legal a:hover { color:rgba(255,255,255,.7) }
+
+        /* ─── REVEAL ─────────────────────────────────────────────── */
+        .reveal { opacity:0; transform:translateY(16px); transition:opacity .8s var(--ease), transform .8s var(--ease) }
+        .reveal.vis { opacity:1; transform:translateY(0) }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────────── */
+        @media (max-width:1024px) {
+            .dest-grid { grid-template-columns:repeat(2,1fr) }
+            .tl-item:nth-child(odd),
+            .tl-item:nth-child(even) {
+                padding-left:48px; padding-right:0;
+                justify-content:flex-start;
+                transform:translateX(-30px)
+            }
+            .timeline::before { left:16px }
+            .tl-dot { left:16px }
+            .footer-layout { grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px }
+        }
+        @media (max-width:768px) {
+            .nav-inner { height:72px }
+            .nav-back-btn span { display:none }
+            .nav-back-btn { padding:12px 12px; gap:0 }
+            .nav-right { gap:6px }
+            .portrait-area { width:200px; height:200px }
+            .portrait { width:160px; height:160px }
+            @keyframes orbitRing {
+                0% { transform:rotate(0deg) translateX(92px) rotate(0deg) }
+                100% { transform:rotate(360deg) translateX(92px) rotate(-360deg) }
+            }
+            .stat-radial--articles,
+            .stat-radial--safaris,
+            .stat-radial--countries {
+                position:static;
+                animation-name:fadeUp;
+                transform:none
+            }
+            .hero-stats-mobile {
+                display:flex; gap:10px; flex-wrap:wrap;
+                justify-content:center; margin-top:24px
+            }
+            .section { padding:64px 0 }
+            .nl-form { flex-direction:column }
+            .footer-grid { grid-template-columns:1fr }
+            .dest-grid { grid-template-columns:1fr 1fr }
+            .flip-card-wrapper { width:200px; height:260px }
+        }
+        @media (max-width:480px) {
+            .wrap { padding:0 20px }
+            .nav-inner { padding:0 20px }
+            .hero-name { font-size:clamp(24px,6vw,36px) }
+            .tl-item:nth-child(odd),
+            .tl-item:nth-child(even) {
+                padding-left:40px; padding-right:0
+            }
+            .timeline::before { left:12px }
+            .tl-dot { left:12px }
+            .tl-card { padding:18px }
+            .dest-grid { grid-template-columns:1fr }
+            .flip-card-wrapper { width:180px; height:240px }
+        }
+
+        /* Hide mobile stats container by default, show on mobile */
+        .hero-stats-mobile { display:none }
+        @media (max-width:768px) {
+            .hero-stats-mobile { display:flex }
+            .stat-radial--articles,
+            .stat-radial--safaris,
+            .stat-radial--countries {
+                position:static !important;
+                top:auto !important; left:auto !important;
+                right:auto !important; bottom:auto !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAV ──────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <img src="../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+                <img src="../../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+                <span class="nav-logo-blog">blog</span>
+            </a>
+            <div class="nav-right">
+                <button class="nav-search" aria-label="Search">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+
+                <div class="lang" id="lang">
+                    <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+                        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                            <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                        </svg>
+                        <span class="lang-code-label" id="langCurrent">EN</span>
+                        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div class="lang-panel" id="langPanel" role="listbox">
+                        <div class="lang-panel-header">
+                            <span class="lang-panel-label">Language</span>
+                        </div>
+                        <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+                            <span class="lang-flag">&#127468;&#127463;</span>
+                            <span class="lang-name">English</span>
+                            <svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </button>
+                        <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
+                            <span class="lang-flag">&#127465;&#127466;</span>
+                            <span class="lang-name">Deutsch</span>
+                        </button>
+                        <button class="lang-option" data-lang="FR" role="option" aria-selected="false">
+                            <span class="lang-flag">&#127467;&#127479;</span>
+                            <span class="lang-name">Fran&ccedil;ais</span>
+                        </button>
+                        <button class="lang-option" data-lang="ES" role="option" aria-selected="false">
+                            <span class="lang-flag">&#127466;&#127480;</span>
+                            <span class="lang-name">Espa&ntilde;ol</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="/" class="nav-back-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    <span>Back to homepage</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── HERO — ANIMATED GRADIENT + CENTERED PORTRAIT ─────────── -->
+    <section class="hero" id="hero">
+        <canvas class="hero-canvas" id="particleCanvas"></canvas>
+        <div class="hero-content">
+
+            <!-- Portrait with particle ring and stats -->
+            <div class="portrait-area" id="portraitArea">
+                <!-- Particle ring (CSS only) -->
+                <div class="particle-ring">
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                    <span class="ring-dot"></span>
+                </div>
+
+                <!-- Portrait image -->
+                <div class="portrait">
+                    <img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Lena Schmidt — Senior Safari Specialist">
+                </div>
+                <div class="portrait-verified" title="Verified specialist">
+                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+
+                <!-- Radial stats -->
+                <div class="stat-radial stat-radial--articles">
+                    <span class="stat-radial-num nums">24</span>
+                    <span class="stat-radial-label">Articles</span>
+                </div>
+                <div class="stat-radial stat-radial--safaris">
+                    <span class="stat-radial-num nums">47</span>
+                    <span class="stat-radial-label">Safaris</span>
+                </div>
+                <div class="stat-radial stat-radial--countries">
+                    <span class="stat-radial-num nums">9</span>
+                    <span class="stat-radial-label">Countries</span>
+                </div>
+            </div>
+
+            <!-- Name with rolling text effect -->
+            <h1 class="hero-name" id="heroName"></h1>
+
+            <!-- Role fades in after name -->
+            <p class="hero-role" id="heroRole">Senior Safari Specialist</p>
+
+            <!-- Mobile stats fallback -->
+            <div class="hero-stats-mobile" id="heroStatsMobile"></div>
+        </div>
+    </section>
+
+    <!-- ── ABOUT TABS ───────────────────────────────────────────── -->
+    <section class="about-section">
+        <div class="wrap">
+            <div class="section-head" style="text-align:center">
+                <p class="tag">Get to know</p>
+                <h2>About Lena</h2>
+            </div>
+
+            <div class="tabs-bar" id="tabsBar">
+                <button class="tab-btn active" data-tab="bio">Bio</button>
+                <button class="tab-btn" data-tab="destinations">Destinations</button>
+                <button class="tab-btn" data-tab="credentials">Credentials</button>
+                <div class="tab-indicator" id="tabIndicator"></div>
+            </div>
+
+            <!-- Tab 1: Bio -->
+            <div class="tab-panel active" id="panel-bio">
+                <p class="bio-text">I've spent <strong><span class="nums">12</span> years</strong> planning African safaris and writing about the continent I love. Every article is built on first-hand experience &mdash; I've slept in the camps, driven the roads, and watched the sunsets.</p>
+                <blockquote class="bio-quote">&ldquo;My aim is to help you travel smarter, more deeply, and more responsibly.&rdquo;</blockquote>
+                <p class="bio-text">From the rust-red dunes of Namibia to the emerald canopy of Rwanda, I've built relationships with the lodges, guides, and conservancies that make African travel transformative. Whether it's your first safari or your tenth, I write to help you see more, understand more, and tread more lightly.</p>
+            </div>
+
+            <!-- Tab 2: Destinations -->
+            <div class="tab-panel" id="panel-destinations">
+                <div class="dest-grid">
+                    <div class="dest-card">
+                        <img class="dest-card-flag" src="../../reference-images/viatu-flag-namibia.svg" alt="Namibia">
+                        <div class="dest-card-name">Namibia</div>
+                        <div class="dest-card-count"><span class="nums">8</span> articles</div>
+                    </div>
+                    <div class="dest-card">
+                        <img class="dest-card-flag" src="../../reference-images/viatu-flag-south-africa.svg" alt="South Africa">
+                        <div class="dest-card-name">South Africa</div>
+                        <div class="dest-card-count"><span class="nums">5</span> articles</div>
+                    </div>
+                    <div class="dest-card">
+                        <img class="dest-card-flag" src="../../reference-images/viatu-flag-tanzania.svg" alt="Tanzania">
+                        <div class="dest-card-name">Tanzania</div>
+                        <div class="dest-card-count"><span class="nums">4</span> articles</div>
+                    </div>
+                    <div class="dest-card">
+                        <img class="dest-card-flag" src="../../reference-images/viatu-flag-botswana.svg" alt="Botswana">
+                        <div class="dest-card-name">Botswana</div>
+                        <div class="dest-card-count"><span class="nums">4</span> articles</div>
+                    </div>
+                    <div class="dest-card">
+                        <img class="dest-card-flag" src="../../reference-images/viatu-flag-kenya.svg" alt="Kenya">
+                        <div class="dest-card-name">Kenya</div>
+                        <div class="dest-card-count"><span class="nums">3</span> articles</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Credentials -->
+            <div class="tab-panel" id="panel-credentials">
+                <div class="creds-list" id="credsList">
+                    <div class="cred-item">
+                        <span class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span><span class="nums">12</span> Years Experience</span>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span><span class="nums">47</span> Safaris Planned</span>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Certified Safari Guide</span>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>B Corp Ambassador</span>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Published in Travel + Leisure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DESTINATION FLIP CARDS ───────────────────────────────── -->
+    <section class="flip-section">
+        <div class="wrap">
+            <div class="section-head" style="text-align:center">
+                <p class="tag">Explore with Lena</p>
+                <h2>Destinations</h2>
+            </div>
+        </div>
+        <div class="flip-row">
+            <!-- Namibia -->
+            <div class="flip-card-wrapper">
+                <div class="flip-card">
+                    <div class="flip-face flip-front">
+                        <div class="flip-front-flag">
+                            <img src="../../reference-images/viatu-flag-namibia.svg" alt="Namibia">
+                        </div>
+                        <div class="flip-front-info">
+                            <span class="flip-front-name">Namibia</span>
+                            <span class="flip-front-pill"><span class="nums">8</span></span>
+                        </div>
+                    </div>
+                    <div class="flip-face flip-back">
+                        <div class="flip-back-name">Namibia</div>
+                        <p class="flip-back-desc">Desert landscapes, Etosha wildlife, and the world's oldest dunes. Namibia offers raw, untouched Africa.</p>
+                        <p class="flip-back-count"><span class="nums">8</span> articles by Lena</p>
+                        <a href="#" class="flip-back-link">Read articles &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- South Africa -->
+            <div class="flip-card-wrapper">
+                <div class="flip-card">
+                    <div class="flip-face flip-front">
+                        <div class="flip-front-flag">
+                            <img src="../../reference-images/viatu-flag-south-africa.svg" alt="South Africa">
+                        </div>
+                        <div class="flip-front-info">
+                            <span class="flip-front-name">South Africa</span>
+                            <span class="flip-front-pill"><span class="nums">5</span></span>
+                        </div>
+                    </div>
+                    <div class="flip-face flip-back">
+                        <div class="flip-back-name">South Africa</div>
+                        <p class="flip-back-desc">From the Cape Winelands to Kruger, South Africa blends world-class safaris with vibrant culture.</p>
+                        <p class="flip-back-count"><span class="nums">5</span> articles by Lena</p>
+                        <a href="#" class="flip-back-link">Read articles &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Tanzania -->
+            <div class="flip-card-wrapper">
+                <div class="flip-card">
+                    <div class="flip-face flip-front">
+                        <div class="flip-front-flag">
+                            <img src="../../reference-images/viatu-flag-tanzania.svg" alt="Tanzania">
+                        </div>
+                        <div class="flip-front-info">
+                            <span class="flip-front-name">Tanzania</span>
+                            <span class="flip-front-pill"><span class="nums">4</span></span>
+                        </div>
+                    </div>
+                    <div class="flip-face flip-back">
+                        <div class="flip-back-name">Tanzania</div>
+                        <p class="flip-back-desc">The Serengeti, Ngorongoro Crater, and Zanzibar. Tanzania is the quintessential East African safari.</p>
+                        <p class="flip-back-count"><span class="nums">4</span> articles by Lena</p>
+                        <a href="#" class="flip-back-link">Read articles &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Botswana -->
+            <div class="flip-card-wrapper">
+                <div class="flip-card">
+                    <div class="flip-face flip-front">
+                        <div class="flip-front-flag">
+                            <img src="../../reference-images/viatu-flag-botswana.svg" alt="Botswana">
+                        </div>
+                        <div class="flip-front-info">
+                            <span class="flip-front-name">Botswana</span>
+                            <span class="flip-front-pill"><span class="nums">4</span></span>
+                        </div>
+                    </div>
+                    <div class="flip-face flip-back">
+                        <div class="flip-back-name">Botswana</div>
+                        <p class="flip-back-desc">The Okavango Delta, Chobe elephants, and Kalahari solitude. Botswana is exclusive and unforgettable.</p>
+                        <p class="flip-back-count"><span class="nums">4</span> articles by Lena</p>
+                        <a href="#" class="flip-back-link">Read articles &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Kenya -->
+            <div class="flip-card-wrapper">
+                <div class="flip-card">
+                    <div class="flip-face flip-front">
+                        <div class="flip-front-flag">
+                            <img src="../../reference-images/viatu-flag-kenya.svg" alt="Kenya">
+                        </div>
+                        <div class="flip-front-info">
+                            <span class="flip-front-name">Kenya</span>
+                            <span class="flip-front-pill"><span class="nums">3</span></span>
+                        </div>
+                    </div>
+                    <div class="flip-face flip-back">
+                        <div class="flip-back-name">Kenya</div>
+                        <p class="flip-back-desc">The Mara migration, Amboseli's elephants, and Laikipia's conservancies. Kenya is safari at its most iconic.</p>
+                        <p class="flip-back-count"><span class="nums">3</span> articles by Lena</p>
+                        <a href="#" class="flip-back-link">Read articles &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ARTICLE TIMELINE ─────────────────────────────────────── -->
+    <section class="timeline-section">
+        <div class="wrap">
+            <div class="section-head" style="text-align:center">
+                <p class="tag">The journey so far</p>
+                <h2>Article timeline</h2>
+            </div>
+        </div>
+        <div class="timeline wrap">
+            <!-- Article 1 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card" data-magnetic>
+                    <div class="tl-card-img">
+                        <img src="../../../public/images/photos/hero-safari-camp.jpg" alt="Safari camp at golden hour">
+                    </div>
+                    <p class="tl-card-date"><span class="nums">Feb 2026</span></p>
+                    <p class="tl-card-cat">Guide</p>
+                    <h3 class="tl-card-title">The ultimate first-timer's guide to an African safari</h3>
+                    <p class="tl-card-excerpt">From picking the right park to understanding the difference between self-drive and fly-in safaris.</p>
+                </div>
+            </div>
+            <!-- Article 2 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card" data-magnetic>
+                    <div class="tl-card-img">
+                        <img src="../../../public/images/photos/landscape-etosha-namibia.jpg" alt="Etosha National Park">
+                    </div>
+                    <p class="tl-card-date"><span class="nums">Jan 2026</span></p>
+                    <p class="tl-card-cat">Destination</p>
+                    <h3 class="tl-card-title">The complete guide to Etosha &mdash; Africa's most accessible big-game park</h3>
+                    <p class="tl-card-excerpt">Everything you need to know about Namibia's premier wildlife destination, from waterholes to timing.</p>
+                </div>
+            </div>
+            <!-- Article 3 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card" data-magnetic>
+                    <div class="tl-card-img">
+                        <img src="../../../public/images/photos/wildlife-elephants-namibia.jpg" alt="Elephants at waterhole">
+                    </div>
+                    <p class="tl-card-date"><span class="nums">Dec 2025</span></p>
+                    <p class="tl-card-cat">Experience</p>
+                    <h3 class="tl-card-title">Night drives in Etosha: what we saw, and why you can't skip them</h3>
+                    <p class="tl-card-excerpt">The park after dark is a completely different world. Here's what a specialist sees on a night game drive.</p>
+                </div>
+            </div>
+            <!-- Article 4 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card" data-magnetic>
+                    <div class="tl-card-img">
+                        <img src="../../../public/images/photos/destination-cape-town-beach.jpg" alt="Cape Town coastline">
+                    </div>
+                    <p class="tl-card-date"><span class="nums">Nov 2025</span></p>
+                    <p class="tl-card-cat">Destination</p>
+                    <h3 class="tl-card-title">Cape Town in <span class="nums">5</span> days: the itinerary our specialists actually recommend</h3>
+                    <p class="tl-card-excerpt">Skip the tourist traps. This is the Cape Town itinerary we plan for friends and family.</p>
+                </div>
+            </div>
+            <!-- Article 5 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card" data-magnetic>
+                    <div class="tl-card-img">
+                        <img src="../../../public/images/photos/accommodation-camp-suite.jpg" alt="Luxury safari lodge">
+                    </div>
+                    <p class="tl-card-date"><span class="nums">Oct 2025</span></p>
+                    <p class="tl-card-cat">Travel Style</p>
+                    <h3 class="tl-card-title">Ongava Lodge: Etosha's best-kept secret for the luxury traveller</h3>
+                    <p class="tl-card-excerpt">An honest review of one of Namibia's finest private reserves, right on Etosha's doorstep.</p>
+                </div>
+            </div>
+            <!-- Article 6 -->
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-card" data-magnetic>
+                    <div class="tl-card-img">
+                        <img src="../../../public/images/photos/destination-cape-wine-route.jpg" alt="Cape Winelands">
+                    </div>
+                    <p class="tl-card-date"><span class="nums">Sep 2025</span></p>
+                    <p class="tl-card-cat">Destination</p>
+                    <h3 class="tl-card-title">The Cape wine route: a specialist's pick of the best estates</h3>
+                    <p class="tl-card-excerpt">Franschhoek, Stellenbosch, and the hidden gems in between. Tasting notes from the field.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SKILL BADGES ─────────────────────────────────────────── -->
+    <section class="skills-section">
+        <div class="wrap">
+            <div class="section-head" style="text-align:center">
+                <p class="tag">Areas of expertise</p>
+                <h2>What Lena knows</h2>
+            </div>
+            <div class="skills-wrap" id="skillsWrap">
+                <span class="skill-badge">Big Five</span>
+                <span class="skill-badge">Walking Safaris</span>
+                <span class="skill-badge">Eco-Luxury</span>
+                <span class="skill-badge">Family Travel</span>
+                <span class="skill-badge">Self-Drive</span>
+                <span class="skill-badge">Bird Watching</span>
+                <span class="skill-badge">Conservation</span>
+                <span class="skill-badge">Night Drives</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA SECTION ──────────────────────────────────────────── -->
+    <section class="cta-section" id="ctaSection">
+        <div class="cta-stars" id="ctaStars"></div>
+        <div class="cta-content">
+            <p class="cta-tag">Plan with Lena</p>
+            <h2 class="cta-title">Ready to start planning your African journey?</h2>
+            <p class="cta-desc">Every trip Lena helps plan is tailored from the ground up &mdash; no generic itineraries, no wasted days.</p>
+            <button class="cta-btn" id="ctaBtn">Talk to a specialist</button>
+        </div>
+    </section>
+
+    <!-- ── NEWSLETTER ───────────────────────────────────────────── -->
+    <section class="nl">
+        <div class="nl-inner">
+            <p class="nl-tag">Stay inspired</p>
+            <h2 class="nl-title">Safari stories in your inbox</h2>
+            <p class="nl-text">Expert guides, lodge reviews, and trip inspiration. Delivered every two weeks.</p>
+            <div class="nl-form">
+                <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+                <button class="nl-btn">Subscribe</button>
+            </div>
+            <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ───────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="wrap">
+                <div class="footer-layout">
+                    <div class="footer-brand">
+                        <a href="/" class="footer-logo">
+                            <img src="../../brand/logos/viatu-logo-white.svg" alt="Viatu" width="110" height="24">
+                        </a>
+                        <p class="footer-tagline">African safaris designed around you — tailor-made by specialists who know the continent.</p>
+                        <div class="footer-cert">
+                            <img src="../../reference-images/viatu-b-corp-logo-plain.svg" alt="B Corporation Certified" height="40">
+                            <span class="footer-cert-text">Certified<br>B Corporation</span>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Blog</h4>
+                        <a href="#">Latest</a>
+                        <a href="#">Destinations</a>
+                        <a href="#">Experiences</a>
+                        <a href="#">Guides</a>
+                        <a href="#">Reviews</a>
+                        <a href="#">Travel Styles</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>General</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Sustainability</a>
+                        <a href="#">Testimonials</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Socials</h4>
+                        <a href="#" class="footer-social-link">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10.25 17.0625C14.2886 17.0625 17.5625 13.7886 17.5625 9.75C17.5625 5.71142 14.2886 2.4375 10.25 2.4375C6.21142 2.4375 2.9375 5.71142 2.9375 9.75C2.9375 13.7886 6.21142 17.0625 10.25 17.0625Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.2969 6.70314H12.0781C11.8378 6.70213 11.5996 6.74873 11.3774 6.84025C11.1551 6.93176 10.9532 7.06638 10.7832 7.23634C10.6133 7.4063 10.4786 7.60823 10.3871 7.83048C10.2956 8.05274 10.249 8.29091 10.25 8.53127V17.0625" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.8125 10.9688H12.6875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Facebook
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10.25 13.2969C11.9327 13.2969 13.2969 11.9327 13.2969 10.25C13.2969 8.56726 11.9327 7.20312 10.25 7.20312C8.56726 7.20312 7.20312 8.56726 7.20312 10.25C7.20312 11.9327 8.56726 13.2969 10.25 13.2969Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/>
+                                <path d="M13.6016 3.24219H6.89844C4.87915 3.24219 3.24219 4.87915 3.24219 6.89844V13.6016C3.24219 15.6209 4.87915 17.2578 6.89844 17.2578H13.6016C15.6209 17.2578 17.2578 15.6209 17.2578 13.6016V6.89844C17.2578 4.87915 15.6209 3.24219 13.6016 3.24219Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14.2109 7.20312C14.7158 7.20312 15.125 6.79389 15.125 6.28906C15.125 5.78424 14.7158 5.375 14.2109 5.375C13.7061 5.375 13.2969 5.78424 13.2969 6.28906C13.2969 6.79389 13.7061 7.20312 14.2109 7.20312Z" fill="currentColor"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <svg width="20" height="20" viewBox="0 0 21 20" fill="none">
+                                <path d="M17.0626 2.8125H3.93762C3.59244 2.8125 3.31262 3.09232 3.31262 3.4375V16.5625C3.31262 16.9077 3.59244 17.1875 3.93762 17.1875H17.0626C17.4078 17.1875 17.6876 16.9077 17.6876 16.5625V3.4375C17.6876 3.09232 17.4078 2.8125 17.0626 2.8125Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.875 8.75V13.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.37512 8.75V13.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.875 10.9375C9.875 10.3573 10.1055 9.80094 10.5157 9.3907C10.9259 8.98047 11.4823 8.75 12.0625 8.75C12.6427 8.75 13.1991 8.98047 13.6093 9.3907C14.0195 9.80094 14.25 10.3573 14.25 10.9375V13.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.37512 7.1875C7.89289 7.1875 8.31262 6.76777 8.31262 6.25C8.31262 5.73223 7.89289 5.3125 7.37512 5.3125C6.85736 5.3125 6.43762 5.73223 6.43762 6.25C6.43762 6.76777 6.85736 7.1875 7.37512 7.1875Z" fill="currentColor"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="footer-bottom-inner">
+                    <span class="footer-copy">&copy; <span class="nums">2026</span> Viatu. All rights reserved.</span>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ═══════════════════════════════════════════════════════════
+           HERO — FLOATING PARTICLES (Canvas)
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var canvas = document.getElementById('particleCanvas');
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var PARTICLE_COUNT = 40;
+
+            function resize() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+
+            function createParticle() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + Math.random() * 20,
+                    size: 2 + Math.random() * 2,
+                    opacity: 0.15 + Math.random() * 0.25,
+                    speedY: -(0.2 + Math.random() * 0.5),
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    drift: Math.random() * Math.PI * 2
+                };
+            }
+
+            function init() {
+                resize();
+                particles = [];
+                for (var i = 0; i < PARTICLE_COUNT; i++) {
+                    var p = createParticle();
+                    p.y = Math.random() * canvas.height;
+                    particles.push(p);
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (var i = 0; i < particles.length; i++) {
+                    var p = particles[i];
+                    p.y += p.speedY;
+                    p.x += p.speedX + Math.sin(p.drift + Date.now() * 0.001) * 0.1;
+                    if (p.y < -10) {
+                        particles[i] = createParticle();
+                        continue;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,' + p.opacity + ')';
+                    ctx.fill();
+                }
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', resize, { passive: true });
+            init();
+            animate();
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           HERO — ROLLING NAME TEXT
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var nameEl = document.getElementById('heroName');
+            var roleEl = document.getElementById('heroRole');
+            var name = 'Lena Schmidt';
+            var html = '';
+            var charIndex = 0;
+
+            for (var i = 0; i < name.length; i++) {
+                if (name[i] === ' ') {
+                    html += '<span class="char char-space" style="animation-delay:' + (i * 40) + 'ms">&nbsp;</span>';
+                } else {
+                    html += '<span class="char" style="animation-delay:' + (i * 40) + 'ms">' + name[i] + '</span>';
+                }
+                charIndex++;
+            }
+            nameEl.innerHTML = html;
+
+            // Role fades in 200ms after name animation completes
+            var nameDelay = name.length * 40 + 500 + 200;
+            roleEl.style.animationDelay = nameDelay + 'ms';
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           NAV — SCROLL BEHAVIOR
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var nav = document.getElementById('nav');
+            window.addEventListener('scroll', function() {
+                nav.classList.toggle('scrolled', window.scrollY > 80);
+            }, { passive: true });
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           LANGUAGE DROPDOWN
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var langWrap = document.getElementById('lang');
+            var langTrigger = document.getElementById('langTrigger');
+            var langCurrent = document.getElementById('langCurrent');
+
+            langTrigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var isOpen = langWrap.classList.toggle('open');
+                langTrigger.setAttribute('aria-expanded', isOpen);
+            });
+
+            document.querySelectorAll('.lang-option').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.lang-option').forEach(function(o) {
+                        o.classList.remove('active');
+                        o.setAttribute('aria-selected', 'false');
+                        var chk = o.querySelector('.lang-check');
+                        if (chk) chk.remove();
+                    });
+                    opt.classList.add('active');
+                    opt.setAttribute('aria-selected', 'true');
+                    opt.insertAdjacentHTML('beforeend',
+                        '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                    langCurrent.textContent = opt.dataset.lang;
+                    langWrap.classList.remove('open');
+                    langTrigger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!langWrap.contains(e.target)) {
+                    langWrap.classList.remove('open');
+                    langTrigger.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    langWrap.classList.remove('open');
+                    langTrigger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           TABS — ABOUT SECTION
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var tabBtns = document.querySelectorAll('.tab-btn');
+            var panels = document.querySelectorAll('.tab-panel');
+            var indicator = document.getElementById('tabIndicator');
+
+            function moveIndicator(btn) {
+                indicator.style.left = btn.offsetLeft + 'px';
+                indicator.style.width = btn.offsetWidth + 'px';
+            }
+
+            function activateTab(tabName) {
+                tabBtns.forEach(function(b) { b.classList.remove('active'); });
+                panels.forEach(function(p) {
+                    p.classList.remove('active');
+                    p.style.opacity = '0';
+                    p.style.transform = 'translateY(8px)';
+                });
+
+                var activeBtn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+                var activePanel = document.getElementById('panel-' + tabName);
+
+                activeBtn.classList.add('active');
+                moveIndicator(activeBtn);
+
+                // Cross-fade the panel in
+                setTimeout(function() {
+                    activePanel.classList.add('active');
+                    requestAnimationFrame(function() {
+                        activePanel.style.opacity = '1';
+                        activePanel.style.transform = 'translateY(0)';
+                    });
+                }, 50);
+
+                // Stagger credential items if credentials tab
+                if (tabName === 'credentials') {
+                    var items = activePanel.querySelectorAll('.cred-item');
+                    items.forEach(function(item, i) {
+                        item.classList.remove('vis');
+                        setTimeout(function() {
+                            item.classList.add('vis');
+                        }, 80 * i + 100);
+                    });
+                }
+            }
+
+            tabBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    activateTab(btn.dataset.tab);
+                });
+            });
+
+            // Initialize indicator position
+            var initialBtn = document.querySelector('.tab-btn.active');
+            if (initialBtn) {
+                moveIndicator(initialBtn);
+            }
+
+            // Recompute on resize
+            window.addEventListener('resize', function() {
+                var active = document.querySelector('.tab-btn.active');
+                if (active) moveIndicator(active);
+            }, { passive: true });
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           TIMELINE — SCROLL REVEAL + MAGNETIC HOVER
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            // Scroll reveal for timeline items
+            var tlObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry, idx) {
+                    if (entry.isIntersecting) {
+                        setTimeout(function() {
+                            entry.target.classList.add('vis');
+                        }, idx * 100);
+                        tlObs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.tl-item').forEach(function(item) {
+                tlObs.observe(item);
+            });
+
+            // Magnetic hover effect on timeline cards
+            document.querySelectorAll('[data-magnetic]').forEach(function(card) {
+                card.addEventListener('mousemove', function(e) {
+                    var rect = card.getBoundingClientRect();
+                    var centerX = rect.left + rect.width / 2;
+                    var centerY = rect.top + rect.height / 2;
+                    var deltaX = (e.clientX - centerX) / rect.width * 16;
+                    var deltaY = (e.clientY - centerY) / rect.height * 16;
+                    // Clamp to +/-8px
+                    deltaX = Math.max(-8, Math.min(8, deltaX));
+                    deltaY = Math.max(-8, Math.min(8, deltaY));
+                    card.style.transform = 'translate(' + deltaX + 'px,' + deltaY + 'px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = 'translate(0,0)';
+                    card.style.transition = 'transform 0.3s cubic-bezier(.4,0,.2,1)';
+                    setTimeout(function() {
+                        card.style.transition = 'box-shadow 200ms cubic-bezier(.4,0,.2,1), transform 50ms linear';
+                    }, 300);
+                });
+                card.addEventListener('mouseenter', function() {
+                    card.style.transition = 'box-shadow 200ms cubic-bezier(.4,0,.2,1), transform 50ms linear';
+                });
+            });
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           SKILL BADGES — STAGGER ENTRANCE
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var badges = document.querySelectorAll('.skill-badge');
+            var skillObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        badges.forEach(function(badge, i) {
+                            setTimeout(function() {
+                                badge.classList.add('vis');
+                            }, i * 40);
+                        });
+                        skillObs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            skillObs.observe(document.getElementById('skillsWrap'));
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           CTA — STARS ANIMATION
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var starsContainer = document.getElementById('ctaStars');
+            var STAR_COUNT = 30;
+
+            for (var i = 0; i < STAR_COUNT; i++) {
+                var star = document.createElement('div');
+                star.className = 'cta-star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = (1 + Math.random() * 2) + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = (Math.random() * 3) + 's';
+                star.style.animationDuration = (2 + Math.random() * 3) + 's';
+                starsContainer.appendChild(star);
+            }
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           CTA — RIPPLE BUTTON
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var ctaBtn = document.getElementById('ctaBtn');
+
+            ctaBtn.addEventListener('click', function(e) {
+                var rect = ctaBtn.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                var size = Math.max(rect.width, rect.height) * 2;
+
+                var ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.width = size + 'px';
+                ripple.style.height = size + 'px';
+                ripple.style.left = (x - size / 2) + 'px';
+                ripple.style.top = (y - size / 2) + 'px';
+
+                ctaBtn.appendChild(ripple);
+
+                ripple.addEventListener('animationend', function() {
+                    ripple.remove();
+                });
+            });
+        })();
+
+        /* ═══════════════════════════════════════════════════════════
+           GENERIC REVEAL ON SCROLL
+           ═══════════════════════════════════════════════════════════ */
+        (function() {
+            var revealObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry, i) {
+                    if (entry.isIntersecting) {
+                        setTimeout(function() {
+                            entry.target.classList.add('vis');
+                        }, i * 60);
+                        revealObs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(function(el) {
+                revealObs.observe(el);
+            });
+        })();
+    </script>
+
+</body>
+</html>

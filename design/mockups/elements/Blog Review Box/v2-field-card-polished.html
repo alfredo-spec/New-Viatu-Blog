@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 2 — The Field Card (Polished Tokens)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria-red: #541736; --sangria-hover: #47142e; --sangria-active: #3b1026;
+      --pthalo-green: #1C4447; --platinum-grey: #C4C4C4;
+      --black: #000000; --white: #FFFFFF; --cream: #F3FFB9;
+      --grey-light: #F8F9FA; --grey-medium: #6C757D; --grey-dark: #343A40; --grey-300: #DEE2E6;
+      --font-primary: 'Krona One', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-secondary: 'Hanken Grotesk', Satoshi, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-supporting: 'Caveat', cursive;
+      --font-mono: 'Source Code Pro', Monaco, monospace;
+      --radius-md: .375rem; --radius-lg: .5rem; --radius-xl: .75rem; --radius-2xl: 1rem; --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --duration-200: 200ms; --duration-300: 300ms;
+      --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-secondary); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+    .article { max-width: 720px; margin: 0 auto; padding: 64px 24px 96px; }
+    .article-tag { font-family: var(--font-supporting); font-size: 20px; font-weight: 700; color: var(--sangria-red); margin-bottom: 8px; line-height: 1; }
+    .article-h1 { font-family: var(--font-primary); font-size: clamp(24px, 3.5vw, 40px); font-weight: 400; letter-spacing: -.06em; line-height: 1.34; color: var(--black); margin-bottom: 24px; }
+    .article-meta { font-size: 14px; color: var(--grey-medium); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--platinum-grey); }
+    .article p { font-size: 18px; line-height: 1.78; color: var(--grey-dark); margin-bottom: 24px; max-width: 65ch; }
+    .article h2 { font-family: var(--font-secondary); font-size: 28px; font-weight: 700; color: var(--black); margin: 48px 0 16px; line-height: 1.2; }
+    .review-box-wrapper { margin: 48px 0; }
+
+    /* Concept 2 — The Field Card (Polished) */
+    .glance-2 {
+      border-radius: var(--radius-xl); overflow: hidden;
+      box-shadow: var(--shadow-md); transition: box-shadow var(--duration-300) var(--ease-in-out);
+    }
+    .glance-2:hover { box-shadow: var(--shadow-lg); }
+    .glance-2__header {
+      background: var(--pthalo-green); padding: 24px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .glance-2__header-left { display: flex; flex-direction: column; gap: 4px; }
+    .glance-2__tag { font-family: var(--font-supporting); font-size: 18px; font-weight: 700; color: var(--cream); line-height: 1; }
+    .glance-2__title { font-family: var(--font-primary); font-size: clamp(16px, 1.8vw, 20px); font-weight: 400; color: var(--white); letter-spacing: -.04em; line-height: 1.3; }
+    .glance-2__score-ring {
+      width: 64px; height: 64px; border-radius: var(--radius-full);
+      border: 3px solid rgba(255,255,255,.15);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative;
+    }
+    .glance-2__score-ring::before {
+      content: ''; position: absolute; inset: -3px; border-radius: var(--radius-full);
+      border: 3px solid var(--cream); border-color: var(--cream) var(--cream) var(--cream) transparent;
+      transform: rotate(-36deg);
+    }
+    .glance-2__score-num { font-family: var(--font-secondary); font-size: 22px; font-weight: 700; color: var(--white); line-height: 1; }
+    .glance-2__score-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .06em; }
+    .glance-2__body { background: var(--white); padding: 0; }
+    .glance-2__list { list-style: none; }
+    .glance-2__item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 28px; border-bottom: 1px solid var(--grey-light);
+      transition: background var(--duration-200) var(--ease-in-out);
+    }
+    .glance-2__item:last-child { border-bottom: none; }
+    .glance-2__item:hover { background: var(--grey-light); }
+    .glance-2__item-icon {
+      width: 32px; height: 32px; border-radius: var(--radius-md);
+      background: var(--grey-light); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .glance-2__item-icon svg { width: 16px; height: 16px; stroke: var(--pthalo-green); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .glance-2__item-label { font-size: 12px; font-weight: 600; color: var(--grey-medium); text-transform: uppercase; letter-spacing: .04em; }
+    .glance-2__item-value { font-size: 15px; font-weight: 500; color: var(--grey-dark); line-height: 1.5; }
+    .glance-2__footer { padding: 16px 28px 20px; background: rgba(28, 68, 71, .03); border-top: 1px solid var(--grey-light); }
+    .glance-2__tip { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--grey-dark); line-height: 1.5; }
+    .glance-2__tip strong { font-weight: 700; color: var(--pthalo-green); }
+    .glance-2__tip-icon svg { width: 16px; height: 16px; stroke: var(--pthalo-green); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 3px; }
+  </style>
+</head>
+<body>
+  <div class="article">
+    <p class="article-tag">Travel Journal</p>
+    <h1 class="article-h1">Londolozi Founders Camp — Is It Worth the Hype?</h1>
+    <div class="article-meta">
+      <span>By Sarah Mitchell</span><span class="dot"></span>
+      <span>12 min read</span><span class="dot"></span>
+      <span>January 2026</span>
+    </div>
+    <p>We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special.</p>
+    <p>The Sabi Sands Game Reserve has long been considered the crown jewel of South African safari — private traversing rights, unmatched leopard sightings, and a commitment to community that dates back decades. Londolozi sits right at the heart of it.</p>
+    <p>Before we dive into the day-by-day breakdown, here's a quick snapshot of what you need to know.</p>
+    <div class="review-box-wrapper">
+      <div class="glance-2">
+        <div class="glance-2__header">
+          <div class="glance-2__header-left">
+            <span class="glance-2__tag">Our expert's verdict</span>
+            <span class="glance-2__title">Londolozi Founders Camp</span>
+          </div>
+          <div class="glance-2__score-ring">
+            <span class="glance-2__score-num">4.9</span>
+            <span class="glance-2__score-label">Rating</span>
+          </div>
+        </div>
+        <ul class="glance-2__list">
+          <li class="glance-2__item">
+            <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="glance-2__item-label">Location</div><div class="glance-2__item-value">Sabi Sands Game Reserve, Greater Kruger, South Africa</div></div>
+          </li>
+          <li class="glance-2__item">
+            <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div><div class="glance-2__item-label">Price Class</div><div class="glance-2__item-value">Ultra-Luxury · $$$$</div></div>
+          </li>
+          <li class="glance-2__item">
+            <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div><div class="glance-2__item-label">Best For</div><div class="glance-2__item-value">Honeymooners, Couples, Leopard Enthusiasts, Photographers</div></div>
+          </li>
+          <li class="glance-2__item">
+            <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><div class="glance-2__item-label">Sustainability</div><div class="glance-2__item-value">Gold Eco-Rated · Community-Owned</div></div>
+          </li>
+          <li class="glance-2__item">
+            <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div>
+            <div><div class="glance-2__item-label">Pairs Well With</div><div class="glance-2__item-value">A relaxing 3 nights in the Cape Winelands</div></div>
+          </li>
+        </ul>
+        <div class="glance-2__footer">
+          <div class="glance-2__tip">
+            <div class="glance-2__tip-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div>
+              <span style="font-family:var(--font-supporting);font-size:14px;font-weight:700;color:var(--pthalo-green)">Viatu insider tip —</span>
+              <span style="font-size:14px;color:var(--grey-dark)">"Ask for Room #5 for the best sunset view over the Sand River."</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>The Experience, Day by Day</h2>
+    <p>Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars. Every moment at Londolozi feels curated without being contrived.</p>
+    <p>Our first morning game drive departed at 5:30am. The air was crisp, the coffee was strong, and within thirty minutes we were watching a female leopard and her two cubs navigate the rocky outcrops along the Sand River.</p>
+  </div>
+</body>
+</html>

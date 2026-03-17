@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Nav CTA — v2 (Figma-spec)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria: #541736;
+      --pthalo: #1C4447;
+      --white: #FFF;
+      --gl: #F8F9FA;
+      --gm: #6C757D;
+      --fp: 'Krona One', sans-serif;
+      --fs: 'Hanken Grotesk', sans-serif;
+      --dur: 200ms;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--fs);
+      background: #e2dcd8;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 72px;
+    }
+    a, button { text-decoration: none; color: inherit; cursor: pointer; border: none; background: none; font-family: var(--fs); }
+
+    /* ─── Layout ───────────────────────────────────────── */
+    .section-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gm);
+      padding: 36px 0 14px;
+    }
+    .section-label.before { color: #b33; padding-top: 52px; }
+
+    /* ─── Nav strip ────────────────────────────────────── */
+    .nav-strip {
+      width: 100%;
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    .nav-strip.dark {
+      background: linear-gradient(135deg, #1c3a2a 0%, #0f2e30 50%, #2a1a1a 100%);
+    }
+    .nav-strip.white {
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+    }
+
+    /* ─── Logo ─────────────────────────────────────────── */
+    .logo {
+      font-family: var(--fp);
+      font-size: 18px;
+      letter-spacing: -0.04em;
+    }
+    .dark .logo  { color: var(--white); }
+    .white .logo { color: var(--sangria); }
+
+    /* ─── Right cluster ─────────────────────────────────── */
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+
+    /* ─── Language trigger ──────────────────────────────── */
+    .lang-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 8px;
+      border-radius: 4px;
+      letter-spacing: .05em;
+      line-height: 1;
+    }
+    .dark  .lang-trigger { color: rgba(255,255,255,.7); }
+    .white .lang-trigger { color: var(--gm); }
+
+    .lang-chevron {
+      display: block;
+      width: 11px; height: 11px;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── CTA — v2: Figma-spec primary button ───────────── */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--fs);
+      font-size: 16px;          /* Figma: Desktop/Body L Bold */
+      font-weight: 700;         /* Figma: Bold */
+      line-height: 1.2;
+      padding: 18px 20px;       /* Figma: Large variant (nav uses Large) */
+      border-radius: 4px;       /* Figma: rounded-[4px] */
+      letter-spacing: 0;
+      white-space: nowrap;
+      color: var(--white);
+      background: var(--sangria);
+      border: none;
+      transition: all var(--dur) var(--ease);
+    }
+    .cta-btn:hover {
+      background: #6b1d45;
+      transform: translateY(-1px);
+    }
+
+    /* ─── CTA — v1: old values ──────────────────────────── */
+    .cta-btn-old {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--fs);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 6px;
+      min-height: 38px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      color: var(--white);
+      background: var(--sangria);
+      border: none;
+      transition: all var(--dur) var(--ease);
+    }
+
+    /* ─── Spec callout ──────────────────────────────────── */
+    .spec {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 10px 40px;
+      background: rgba(0,0,0,.04);
+      font-size: 11px;
+      color: var(--gm);
+      letter-spacing: 0.04em;
+    }
+    .spec span { font-weight: 700; color: #333; }
+  </style>
+</head>
+<body>
+
+  <!-- ── V2: FIGMA SPEC ── -->
+  <p class="section-label">✦ v2 — Figma spec (correct)</p>
+
+  <div class="nav-strip dark">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <a href="/" class="cta-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-strip white">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <a href="/" class="cta-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div>Font size: <span>16px</span></div>
+    <div>Weight: <span>700 Bold</span></div>
+    <div>Padding: <span>18px 20px</span></div>
+    <div>Radius: <span>4px</span></div>
+    <div>Nav height: <span>88px</span></div>
+  </div>
+
+  <!-- ── V1: OLD VALUES ── -->
+  <p class="section-label before">Before — v1 (wrong sizes)</p>
+
+  <div class="nav-strip dark">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <a href="/" class="cta-btn-old">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-strip white">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <a href="/" class="cta-btn-old">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div>Font size: <span>13px</span></div>
+    <div>Weight: <span>600</span></div>
+    <div>Padding: <span>8px 16px</span></div>
+    <div>Radius: <span>6px</span></div>
+    <div>Letter-spacing: <span>0.01em</span></div>
+  </div>
+
+</body>
+</html>

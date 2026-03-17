@@ -1,0 +1,240 @@
+================================================================================
+  VIATU — "AT A GLANCE" REVIEW BOX · DEVELOPER NOTES
+================================================================================
+
+OVERVIEW
+--------
+The "At a Glance" review box is a blog component designed to sit early in a
+lodge/camp review or trip showcase post — after the intro paragraph, before the
+deep dive. It gives readers a quick scannable summary of key data points and the
+expert's rating.
+
+Five concepts were designed, each with a distinct visual strategy. All use the
+same underlying data structure and can share a single Vue component with a
+`variant` prop.
+
+
+THE 5 CONCEPTS
+--------------
+
+  1. THE PASSPORT STAMP  (v1, class: .glance-1)
+     Left accent bar + clean two-column data grid.
+     The most conservative option — blends into editorial flow.
+     Score display: Inline number + star row in header.
+     Strategic fit: Default choice for most blog posts.
+
+  2. THE FIELD CARD  (v2, class: .glance-2)
+     Dark Pthalo header band + hoverable list rows.
+     Score display: Circular ring badge in header.
+     Strategic fit: Lodges with strong brand identity, premium feel.
+
+  3. THE POLAROID  (v3, class: .glance-3)
+     Image-forward hero + floating glassmorphic badge + pill tags.
+     Score display: Glassmorphic floating badge (top-right of hero).
+     Strategic fit: Maximum visual impact — best when lodge has a great photo.
+
+  4. THE SPLIT VERDICT  (v4, class: .glance-4)
+     Data table (left) + bold Sangria verdict panel (right).
+     Score display: Large 56px bold number in verdict panel.
+     Strategic fit: When the rating is the hero moment.
+
+  5. THE MAGAZINE CALLOUT  (v5, class: .glance-5)
+     Gradient top accent bar + 3-column spec grid.
+     Score display: Score pill block beside title.
+     Strategic fit: Dense data presentation — shows everything without scrolling.
+
+
+DATA STRUCTURE
+--------------
+All five concepts render the same underlying data model:
+
+  {
+    lodgeName:      string    "Londolozi Founders Camp"
+    tagline:        string    "At a glance" | "Our expert's verdict"
+    rating:         number    4.9
+    ratingMax:      number    5.0
+    location:       string    "Sabi Sands, Greater Kruger, South Africa"
+    priceClass:     string    "Ultra-Luxury · $$$$"
+    bestFor:        string[]  ["Honeymooners", "Photographers", "Leopard Enthusiasts"]
+    notIdealFor:    string    "Travellers needing constant Wi-Fi"
+    sustainability: string    "Gold Eco-Rated · Community-Owned"
+    pairsWellWith:  string    "3 nights in the Cape Winelands"
+    insiderTip:     string    "Ask for Room #5 for the best sunset view..."
+    heroImage?:     string    URL — only used by Concept 3 (Polaroid)
+  }
+
+Optional/variant-specific fields:
+  - heroImage:  Only Concept 3 uses an image hero. Others are text-only.
+  - wildlife:   Concept 5 adds a dedicated "Wildlife" cell.
+  - ownership:  Concept 5 adds a dedicated "Ownership" cell.
+
+
+ATTRIBUTE ICONS
+---------------
+Each data row has an associated SVG icon (Feather-style, stroke-based):
+
+  Location        → map-pin
+  Price Class     → dollar-sign
+  Best For        → users
+  Not Ideal For   → x-circle
+  Sustainability  → shield
+  Pairs Well With → clipboard
+  Wildlife        → puzzle (fingerprint-like shape)
+  Ownership       → users (group variant)
+
+All icons: stroke-width: 1.5, fill: none, stroke: currentColor (or Pthalo).
+Sizes vary by concept (14px–20px). See individual CSS for exact values.
+
+
+CSS CLASS NAMING CONVENTION
+---------------------------
+BEM-style with concept prefix:
+
+  .glance-{N}               → Root card container
+  .glance-{N}__header       → Top section (title + score)
+  .glance-{N}__body         → Main content area
+  .glance-{N}__grid         → Data layout (grid or list)
+  .glance-{N}__row          → Individual data row (Concepts 1, 4)
+  .glance-{N}__item         → Individual data item (Concept 2)
+  .glance-{N}__pill         → Pill tag (Concepts 3, 4)
+  .glance-{N}__cell         → Grid cell (Concept 5)
+  .glance-{N}__tip          → Insider tip section
+  .glance-{N}__score-*      → Score display elements
+  .glance-{N}__verdict      → Verdict panel (Concept 4 only)
+
+Modifiers:
+  .glance-3__pill--highlight → Highlighted pill (sangria accent)
+
+
+CONFIGURATION & CUSTOMIZATION
+------------------------------
+Data-driven fields (change content without CSS changes):
+  - All text content (lodge name, location, values, tip)
+  - Rating number (font always Hanken Grotesk per Numbers Rule)
+  - Star count (SVGs — map from rating)
+  - Icon selection per row
+
+Style customization:
+  - Left accent color (Concept 1): change border-left color
+  - Header band color (Concept 2): change header background
+  - Hero image (Concept 3): replace placeholder with real <img>
+  - Verdict panel color (Concept 4): change background
+  - Accent gradient (Concept 5): change linear-gradient stops
+  - All colors pull from :root tokens — theme by changing tokens
+
+
+RESPONSIVE BEHAVIOR
+-------------------
+All concepts are mobile-friendly with breakpoints at 768px and 480px.
+
+  Concept 1 (Passport Stamp):
+    ≤768px → Grid collapses from 2 columns to 1
+             Even-row left border removed
+
+  Concept 2 (Field Card):
+    No specific responsive changes — list layout is inherently mobile-friendly
+
+  Concept 3 (Polaroid):
+    ≤768px → Details grid collapses from 2 columns to 1
+
+  Concept 4 (Split Verdict):
+    ≤768px → Grid collapses from side-by-side to stacked
+             Verdict panel switches to horizontal row layout
+             Score shrinks from 56px to 40px
+
+  Concept 5 (Magazine Callout):
+    ≤768px → Grid collapses from 3 columns to 2
+             Bottom section (tip + pairs) stacks vertically
+             Pairs box goes full-width
+    ≤480px → Grid collapses to 1 column
+             Score block switches to horizontal row layout
+
+
+VUE COMPONENT CONVERSION GUIDANCE
+----------------------------------
+Recommended component structure:
+
+  <AtAGlanceBox
+    :variant="'passport-stamp' | 'field-card' | 'polaroid' | 'split-verdict' | 'magazine-callout'"
+    :data="reviewData"
+  />
+
+Implementation approach:
+  1. Create a single wrapper component that conditionally renders
+     5 inner templates based on the `variant` prop
+  2. Alternatively: 5 separate components with a factory/resolver
+  3. Extract common tokens into Tailwind config (preferred)
+  4. SVG icons: use a reusable <Icon> component or Heroicons/Feather
+  5. Star rating: create a <StarRating :score="4.9" :max="5" /> component
+  6. Hero image (Concept 3): use <NuxtImg> with fallback placeholder
+
+Props interface (TypeScript):
+
+  interface AtAGlanceData {
+    lodgeName: string
+    tagline?: string
+    rating: number
+    ratingMax?: number       // default 5
+    location: string
+    priceClass: string
+    bestFor: string[]
+    notIdealFor?: string
+    sustainability?: string
+    pairsWellWith?: string
+    insiderTip?: string
+    heroImage?: string       // URL, Concept 3 only
+    wildlife?: string        // Concept 5 only
+    ownership?: string       // Concept 5 only
+  }
+
+
+FILE INVENTORY
+--------------
+  at-a-glance-review-box.html     Original master file (all 5 concepts)
+  developer-notes.txt             This file
+  v1-passport-stamp.html          Concept 1, original CSS, blog context
+  v1-passport-stamp-polished.html Concept 1, design system aligned
+  v2-field-card.html              Concept 2, original CSS, blog context
+  v2-field-card-polished.html     Concept 2, design system aligned
+  v3-polaroid.html                Concept 3, original CSS, blog context
+  v3-polaroid-polished.html       Concept 3, design system aligned
+  v4-split-verdict.html           Concept 4, original CSS, blog context
+  v4-split-verdict-polished.html  Concept 4, design system aligned
+  v5-magazine-callout.html        Concept 5, original CSS, blog context
+  v5-magazine-callout-polished.html Concept 5, design system aligned
+
+
+POLISHED VERSION CHANGES
+-------------------------
+The "-polished" files apply light design system alignment. Key differences:
+
+  Token naming:
+    --sangria    → --sangria-red
+    --pthalo     → --pthalo-green
+    --fp/--fs/--fc → --font-primary/--font-secondary/--font-supporting
+    --gl/--gm/--gd/--g3 → --grey-light/--grey-medium/--grey-dark/--grey-300
+    --rmd/--rlg/--rxl/--r2xl/--rfull → --radius-md/--radius-lg/--radius-xl/--radius-2xl/--radius-full
+    --sh-sm/--sh-md/--sh-lg → --shadow-sm/--shadow-md/--shadow-lg
+    --dur/--dur3 → --duration-200/--duration-300
+    --ease → --ease-in-out
+
+  Font stacks (expanded with system fallbacks):
+    Krona One → Krona One, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif
+    Hanken Grotesk → Hanken Grotesk, Satoshi, -apple-system, BlinkMacSystemFont, sans-serif
+    Caveat → Caveat, cursive
+    + --font-mono: Source Code Pro, Monaco, monospace
+
+  Typography alignment:
+    - Line heights normalized to 1.5 (relaxed) or 1.625 (loose)
+    - Focus ring opacity: rgba(28,68,71,.1) — 10% per DS §11
+
+  Spacing:
+    - Off-grid values (3px, 5px) snapped to 4px/8px grid where possible
+
+  No drastic visual changes — same layout, colors, proportions.
+  The polished files exist for side-by-side comparison with originals.
+
+
+================================================================================
+  Last updated: March 2026
+================================================================================

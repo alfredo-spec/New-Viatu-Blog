@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Nav — CTA Consistency Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria: #541736;
+      --pthalo: #1C4447;
+      --platinum: #C4C4C4;
+      --black: #000;
+      --white: #FFF;
+      --gl: #F8F9FA;
+      --gm: #6C757D;
+      --gd: #343A40;
+      --g3: #DEE2E6;
+      --fp: 'Krona One', sans-serif;
+      --fs: 'Hanken Grotesk', sans-serif;
+      --fc: 'Caveat', cursive;
+      --rmd: .375rem;
+      --rfull: 9999px;
+      --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --dur: 200ms;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--fs); color: var(--black); background: #e8e4e0; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--fs); cursor: pointer; border: none; background: none; }
+
+    /* ─── Page layout ──────────────────────────────────── */
+    .page { display: flex; flex-direction: column; gap: 0; padding-bottom: 64px; }
+
+    .row-label {
+      text-align: center;
+      font-family: var(--fs);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gm);
+      padding: 32px 0 14px;
+    }
+
+    /* ─── Nav strip ────────────────────────────────────── */
+    .nav-strip {
+      width: 100%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      position: relative;
+    }
+
+    .nav-strip.dark {
+      background: linear-gradient(135deg, #1c3a2a 0%, #0f2e30 50%, #2a1a1a 100%);
+    }
+
+    .nav-strip.white {
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+    }
+
+    /* ─── Logo ─────────────────────────────────────────── */
+    .logo {
+      font-family: var(--fp);
+      font-size: 18px;
+      letter-spacing: -0.04em;
+    }
+    .dark .logo  { color: var(--white); }
+    .white .logo { color: var(--sangria); }
+
+    /* ─── Right cluster ─────────────────────────────────── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ─── Language trigger ──────────────────────────────── */
+    .lang-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 8px;
+      border-radius: var(--rmd);
+      letter-spacing: .05em;
+      line-height: 1;
+      cursor: pointer;
+      transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+    }
+    .dark  .lang-trigger { color: rgba(255,255,255,.7); }
+    .white .lang-trigger { color: var(--gm); }
+
+    .lang-chevron {
+      display: block;
+      width: 11px; height: 11px;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ─── CTA Button — NEW: solid filled ────────────────── */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--fs);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--rmd);
+      min-height: 38px;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+      /* Solid fill — matches main site CTA */
+      color: var(--white);
+      background: var(--sangria);
+      border: none;
+    }
+    .cta-btn:hover {
+      background: #6b1d45;
+      transform: translateY(-1px);
+    }
+
+    /* ─── CTA Button — OLD: outline/ghost ───────────────── */
+    .cta-btn-old {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--fs);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--rmd);
+      min-height: 38px;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+    }
+    .dark  .cta-btn-old { color: var(--white); border: 1.5px solid rgba(255,255,255,.35); background: transparent; }
+    .white .cta-btn-old { color: var(--sangria); border: 1.5px solid var(--sangria); background: transparent; }
+
+    /* ─── Badge ────────────────────────────────────────── */
+    .badge {
+      position: absolute;
+      top: 50%;
+      right: 120px;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--rfull);
+    }
+    .badge.new { background: #d4edda; color: #1a6630; }
+    .badge.old { background: #fde8e8; color: #8b1a1a; }
+
+    /* ─── Divider label ────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 40px;
+      margin: 4px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(0,0,0,.1);
+    }
+    .divider-text {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gm);
+      white-space: nowrap;
+    }
+
+    /* ─── State indicator ──────────────────────────────── */
+    .state-pill {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--rfull);
+      position: absolute;
+      left: 40px;
+      bottom: -10px;
+      z-index: 2;
+    }
+    .dark  .state-pill { background: rgba(255,255,255,.12); color: rgba(255,255,255,.5); }
+    .white .state-pill { background: var(--gl); color: var(--gm); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── SECTION: NEW (solid CTA) ── -->
+  <p class="row-label">✦ Updated — Solid CTA (matches main site)</p>
+
+  <!-- Dark / over hero -->
+  <div class="nav-strip dark" style="position:relative">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <a href="/" class="cta-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <!-- Scrolled / white -->
+  <div class="nav-strip white">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <a href="/" class="cta-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <!-- ── SECTION: OLD (outline/ghost) ── -->
+  <p class="row-label" style="color:#c0392b; padding-top:48px;">Before — Outline / Ghost (inconsistent)</p>
+
+  <!-- Dark / over hero -->
+  <div class="nav-strip dark">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <a href="/" class="cta-btn-old">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+  <!-- Scrolled / white -->
+  <div class="nav-strip white">
+    <a href="/" class="logo">viatu</a>
+    <div class="nav-right">
+      <button class="lang-trigger">
+        EN
+        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <a href="/" class="cta-btn-old">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to homepage
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

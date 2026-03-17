@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callout Box Variants — Viatu Blog Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fs);
+            background: var(--white);
+            color: var(--gd);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── Page header ── */
+        .page-header {
+            background: var(--gl);
+            border-bottom: 1px solid var(--g3);
+            padding: 48px 24px 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--fp);
+            font-size: 18px;
+            color: var(--gd);
+            letter-spacing: .02em;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: var(--gm);
+            font-weight: 400;
+        }
+
+        /* ── Variant section wrapper ── */
+        .variant-section {
+            padding: 64px 24px;
+            border-bottom: 1px solid var(--g3);
+        }
+
+        .variant-section:last-child {
+            border-bottom: none;
+        }
+
+        .variant-section--dark {
+            background: #111;
+        }
+
+        .variant-label {
+            font-family: var(--fp);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--gm);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .variant-label span {
+            display: inline-block;
+            background: var(--gl);
+            border: 1px solid var(--g3);
+            padding: 6px 16px;
+            border-radius: var(--rfull);
+        }
+
+        .variant-section--dark .variant-label span {
+            background: rgba(255,255,255,.06);
+            border-color: rgba(255,255,255,.12);
+            color: rgba(255,255,255,.5);
+        }
+
+        /* ── Simulated blog content column ── */
+        .blog-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .body-paragraph {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--gd);
+            line-height: 1.78;
+            max-width: 65ch;
+            margin-bottom: 28px;
+        }
+
+        .body-paragraph:last-child {
+            margin-bottom: 0;
+        }
+
+        .variant-section--dark .body-paragraph {
+            color: rgba(255,255,255,.7);
+        }
+
+        /* ── Lightbulb SVG icon (shared) ── */
+        .callout-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT A — Left Border Light
+           ══════════════════════════════════════ */
+        .callout-a {
+            background: var(--gl);
+            border-left: 4px solid var(--pthalo);
+            border-radius: var(--rlg);
+            padding: 20px 24px;
+            margin: 32px 0;
+        }
+
+        .callout-a .callout-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .callout-a .callout-icon {
+            color: var(--pthalo);
+        }
+
+        .callout-a .callout-label {
+            font-family: var(--fc);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1;
+        }
+
+        .callout-a .callout-body {
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--gd);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT B — Top Accent Boxed
+           ══════════════════════════════════════ */
+        .callout-b {
+            background: var(--white);
+            border: 1px solid var(--g3);
+            border-top: none;
+            border-radius: var(--rxl);
+            padding: 24px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--sh-sm);
+            transition: box-shadow var(--dur3) var(--ease);
+        }
+
+        .callout-b:hover {
+            box-shadow: var(--sh-md);
+        }
+
+        .callout-b::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sangria), var(--pthalo));
+        }
+
+        .callout-b .callout-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .callout-b .callout-icon-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(84, 23, 54, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .callout-b .callout-icon-badge .callout-icon {
+            color: var(--sangria);
+        }
+
+        .callout-b .callout-label {
+            font-family: var(--fc);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1;
+        }
+
+        .callout-b .callout-body {
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--gd);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT C — Dark Mode
+           ══════════════════════════════════════ */
+        .callout-c {
+            background: #1b1b1b;
+            border-left: 4px solid var(--sangria);
+            border-radius: var(--rlg);
+            padding: 20px 24px;
+            margin: 32px 0;
+        }
+
+        .callout-c .callout-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .callout-c .callout-icon {
+            color: var(--sangria);
+        }
+
+        .callout-c .callout-label {
+            font-family: var(--fc);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1;
+        }
+
+        .callout-c .callout-body {
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.80);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT D — Sangria Filled
+           ══════════════════════════════════════ */
+        .callout-d {
+            background: var(--sangria);
+            border-radius: var(--rlg);
+            padding: 24px;
+            margin: 32px 0;
+            box-shadow: var(--sh-md);
+        }
+
+        .callout-d .callout-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .callout-d .callout-icon {
+            color: var(--white);
+        }
+
+        .callout-d .callout-label {
+            font-family: var(--fc);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .callout-d .callout-body {
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.90);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Callout Box Variants</h1>
+        <p>Four visual treatments for informational callouts — Pro Tips, Good to Know, and Important notices</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT A — Left Border Light
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-label"><span>Variant A — Left Border Light</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                Timing is everything when it comes to the Great Migration. While the herds are technically moving year-round, certain months offer dramatically different experiences. The southern Serengeti between January and March is calving season, when hundreds of thousands of wildebeest give birth in a concentrated area.
+            </p>
+
+            <div class="callout-a">
+                <div class="callout-header">
+                    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18h6"/>
+                        <path d="M10 22h4"/>
+                        <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
+                    </svg>
+                    <span class="callout-label">Pro Tip</span>
+                </div>
+                <p class="callout-body">Even if you're not aiming for the river crossings, accommodations near the southern Serengeti for the calving season (January to March) also fill up fast. Calving season is full of action with predators, so don't miss out by booking late.</p>
+            </div>
+
+            <p class="body-paragraph">
+                The predator activity during calving season is remarkable. Lions, cheetahs, hyenas, and wild dogs all converge on the plains, creating some of the most intense wildlife viewing anywhere in Africa. For photographers, the flat, open terrain of the southern plains provides exceptional visibility.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT B — Top Accent Boxed
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-label"><span>Variant B — Top Accent Boxed</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                One of the most common misconceptions about the Great Migration is that it happens in a single dramatic moment. In truth, the migration is a continuous cycle that unfolds across the vast Serengeti-Mara ecosystem throughout the year, with each season offering a distinct chapter.
+            </p>
+
+            <div class="callout-b">
+                <div class="callout-header">
+                    <div class="callout-icon-badge">
+                        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                    </div>
+                    <span class="callout-label">Good to Know</span>
+                </div>
+                <p class="callout-body">The bulk of the migration happens in the Serengeti. It's a continuous journey, so no single event defines the migration. River crossings are unpredictable — you might wait hours (or days) at a riverbank or witness several crossings in one afternoon.</p>
+            </div>
+
+            <p class="body-paragraph">
+                The western corridor of the Serengeti, often overlooked by visitors focused on the northern crossings, offers excellent game viewing from May through July as the herds pass through on their way north. This region tends to be quieter with fewer vehicles, providing a more intimate safari experience.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT C — Dark Mode
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section variant-section--dark">
+        <div class="variant-label"><span>Variant C — Dark Mode</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                Choosing where to stay during your migration safari is as important as choosing when to go. The Serengeti is enormous — roughly the size of Northern Ireland — and different camps and lodges position you for different phases of the migration.
+            </p>
+
+            <div class="callout-c">
+                <div class="callout-header">
+                    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18h6"/>
+                        <path d="M10 22h4"/>
+                        <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
+                    </svg>
+                    <span class="callout-label">Pro Tip</span>
+                </div>
+                <p class="callout-body">In the Serengeti, staying a bit farther from migration hotspots gives you access to the action, but you can still retreat to a more peaceful base at the end of the day.</p>
+            </div>
+
+            <p class="body-paragraph">
+                Mobile camps that follow the herds are an excellent option for travellers who want to be as close to the action as possible. These seasonal camps relocate throughout the year to stay in the path of the migration, offering a front-row seat to the spectacle.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT D — Sangria Filled
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-label"><span>Variant D — Sangria Filled</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                The popularity of the Great Migration means that the best camps and lodges book out well in advance. This is particularly true for the period between July and October when the herds gather along the northern Serengeti and cross into Kenya's Masai Mara, creating the dramatic river crossings that define the migration in most people's minds.
+            </p>
+
+            <div class="callout-d">
+                <div class="callout-header">
+                    <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span class="callout-label">Important</span>
+                </div>
+                <p class="callout-body">Book your accommodations well in advance, especially for peak seasons. The Great Migration draws huge crowds between July and October, and camps fill up fast — plan at least 12 months ahead.</p>
+            </div>
+
+            <p class="body-paragraph">
+                Working with a specialist travel advisor who understands the migration's rhythms can make all the difference. They can help you navigate the complexities of timing, location, and camp selection, and often have access to allocations at sought-after properties that appear fully booked to the general public.
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>

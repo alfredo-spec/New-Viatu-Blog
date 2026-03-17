@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pull Quote Variants — Viatu Blog Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fs);
+            background: var(--white);
+            color: var(--gd);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── Page header ── */
+        .page-header {
+            background: var(--gl);
+            border-bottom: 1px solid var(--g3);
+            padding: 48px 24px 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--fp);
+            font-size: 18px;
+            color: var(--gd);
+            letter-spacing: .02em;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: var(--gm);
+            font-weight: 400;
+        }
+
+        /* ── Variant section wrapper ── */
+        .variant-section {
+            padding: 64px 24px;
+            border-bottom: 1px solid var(--g3);
+        }
+
+        .variant-section:last-child {
+            border-bottom: none;
+        }
+
+        .variant-label {
+            font-family: var(--fp);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--gm);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .variant-label span {
+            display: inline-block;
+            background: var(--gl);
+            border: 1px solid var(--g3);
+            padding: 6px 16px;
+            border-radius: var(--rfull);
+        }
+
+        /* ── Simulated blog content column ── */
+        .blog-content {
+            max-width: 720px;
+            margin: 0 auto;
+            overflow: hidden; /* contain full-width breakouts */
+        }
+
+        .body-paragraph {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--gd);
+            line-height: 1.78;
+            max-width: 65ch;
+            margin-bottom: 28px;
+        }
+
+        .body-paragraph:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT A — Left Border
+           ══════════════════════════════════════ */
+        .pull-quote-a {
+            margin: 48px 0;
+            padding: 24px 0 24px 28px;
+            border-left: 4px solid var(--sangria);
+        }
+
+        .pull-quote-a .quote-text {
+            font-family: var(--fc);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .pull-quote-a .quote-citation {
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gm);
+            font-style: normal;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT B — Centered Decorative
+           ══════════════════════════════════════ */
+        .pull-quote-b {
+            margin: 64px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .pull-quote-b .decorative-mark {
+            font-family: var(--fp);
+            font-size: 80px;
+            color: var(--sangria);
+            opacity: 0.10;
+            line-height: 1;
+            display: block;
+            margin-bottom: -12px;
+            user-select: none;
+        }
+
+        .pull-quote-b .rule {
+            display: block;
+            width: 60%;
+            height: 1px;
+            background: var(--platinum);
+            margin: 0 auto;
+            border: none;
+        }
+
+        .pull-quote-b .rule--top {
+            margin-bottom: 28px;
+        }
+
+        .pull-quote-b .rule--bottom {
+            margin-top: 28px;
+        }
+
+        .pull-quote-b .quote-text {
+            font-family: var(--fc);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.35;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 14px;
+        }
+
+        .pull-quote-b .quote-citation {
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gm);
+            font-style: normal;
+            text-align: center;
+        }
+
+        /* ══════════════════════════════════════
+           VARIANT C — Full-Width Dark
+           ══════════════════════════════════════ */
+        .pull-quote-c {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            background: #1b1b1b;
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pull-quote-c .deco-open,
+        .pull-quote-c .deco-close {
+            position: absolute;
+            font-family: var(--fp);
+            font-size: 120px;
+            color: var(--sangria);
+            opacity: 0.05;
+            line-height: 1;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .pull-quote-c .deco-open {
+            top: 24px;
+            left: 8%;
+        }
+
+        .pull-quote-c .deco-close {
+            bottom: 24px;
+            right: 8%;
+        }
+
+        .pull-quote-c .quote-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pull-quote-c .quote-text {
+            font-family: var(--fc);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.35;
+            margin-bottom: 18px;
+        }
+
+        .pull-quote-c .quote-citation {
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.50);
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Pull Quote Variants</h1>
+        <p>Three visual treatments for editorial pull quotes within blog content</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT A — Left Border
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-label"><span>Variant A — Left Border</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                The Great Migration is one of the most spectacular natural events on earth, involving over 1.5 million wildebeest, hundreds of thousands of zebra, and assorted gazelle making a continuous loop through the Serengeti-Mara ecosystem. It is not a single event but rather a perpetual journey driven by rainfall patterns and the search for fresh grazing.
+            </p>
+
+            <blockquote class="pull-quote-a">
+                <p class="quote-text">"Plan for more time rather than a quick in-and-out trip, as the herds move based on when and where the rain falls."</p>
+                <cite class="quote-citation">On timing your Great Migration safari</cite>
+            </blockquote>
+
+            <p class="body-paragraph">
+                Understanding this rhythm is essential for planning. The wildebeest calving season in the southern Serengeti between January and March is often overlooked in favour of the dramatic river crossings further north, but it offers its own extraordinary wildlife spectacle with predator activity at its peak.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT B — Centered Decorative
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-label"><span>Variant B — Centered Decorative</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                Many first-time visitors assume the migration is a brief spectacle that happens in one location during a single month. In reality, the herds are always on the move, and the experience varies significantly depending on the time of year and the specific region of the Serengeti or Masai Mara you choose to visit.
+            </p>
+
+            <blockquote class="pull-quote-b">
+                <span class="decorative-mark" aria-hidden="true">"</span>
+                <hr class="rule rule--top">
+                <p class="quote-text">"The migration is actually a year-round event, constantly moving through different stages across the Serengeti and Masai Mara."</p>
+                <cite class="quote-citation">Understanding the Great Migration cycle</cite>
+                <hr class="rule rule--bottom">
+            </blockquote>
+
+            <p class="body-paragraph">
+                From the calving grounds of the southern plains to the treacherous Mara River crossings in the north, each phase of the journey tells a different story. A well-planned itinerary takes this into account, positioning travellers at the right latitude for the right season.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         VARIANT C — Full-Width Dark
+         ═══════════════════════════════════════════════ -->
+    <section class="variant-section" style="padding-bottom: 0;">
+        <div class="variant-label"><span>Variant C — Full-Width Dark</span></div>
+        <div class="blog-content">
+            <p class="body-paragraph">
+                The Mara River crossings are the most iconic moments of the Great Migration, where columns of wildebeest plunge into crocodile-infested waters in a desperate dash to reach the other side. These crossings are entirely governed by the animals themselves and cannot be predicted with any certainty.
+            </p>
+
+            <blockquote class="pull-quote-c">
+                <span class="deco-open" aria-hidden="true">"</span>
+                <span class="deco-close" aria-hidden="true">"</span>
+                <div class="quote-inner">
+                    <p class="quote-text">"River crossings are unpredictable. You might wait hours or days at a riverbank, or witness several crossings in one afternoon."</p>
+                    <cite class="quote-citation">The reality of migration safari planning</cite>
+                </div>
+            </blockquote>
+
+            <p class="body-paragraph" style="margin-top: 48px;">
+                This unpredictability is part of the appeal. Experienced guides know the likely crossing points and can read the behaviour of the herds, but nature always has the final say. Patience and flexibility are the most valuable qualities a traveller can bring to this experience.
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>

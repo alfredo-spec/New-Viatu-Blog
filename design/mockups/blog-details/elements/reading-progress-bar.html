@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Progress Bar — Viatu Blog (element mockup)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ─── DESIGN TOKENS ──────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --sangria-hover: #47142e;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+
+            --sh-sm: 0 1px 2px rgba(0, 0, 0, .05);
+            --sh-md: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
+            --sh-lg: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+            --sh-xl: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+        }
+
+        /* ─── RESET ──────────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fs);
+            color: var(--gd);
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ─── VARIANT A: TOP PROGRESS BAR ────────────────────── */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--sangria);
+            z-index: 200;
+            transition: width 100ms linear;
+            will-change: width;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(84, 23, 54, 0.3));
+            opacity: 0;
+            transition: opacity var(--dur3) var(--ease);
+        }
+
+        .progress-bar[data-active="true"]::after {
+            opacity: 1;
+        }
+
+        /* ─── VARIANT B: FLOATING CIRCLE ─────────────────────── */
+        .progress-circle {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            z-index: 200;
+            cursor: pointer;
+            transition: transform var(--dur3) var(--ease), box-shadow var(--dur3) var(--ease);
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, .15));
+        }
+
+        .progress-circle:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 20px 25px rgba(0, 0, 0, .2));
+        }
+
+        .progress-circle__bg {
+            fill: var(--sangria);
+            transition: fill var(--dur) var(--ease);
+        }
+
+        .progress-circle:hover .progress-circle__bg {
+            fill: var(--sangria-hover);
+        }
+
+        .progress-circle__track {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 3;
+        }
+
+        .progress-circle__fill {
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 3;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            transition: stroke-dashoffset 100ms linear;
+        }
+
+        .progress-circle__text {
+            fill: var(--white);
+            font-family: var(--fs);
+            font-size: 12px;
+            font-weight: 600;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+
+        /* ─── TOGGLE CONTROLS ────────────────────────────────── */
+        .controls {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 300;
+            display: flex;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--g3);
+            border-radius: var(--rfull);
+            padding: 4px;
+            box-shadow: var(--sh-lg);
+        }
+
+        .controls__btn {
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 20px;
+            border: none;
+            border-radius: var(--rfull);
+            cursor: pointer;
+            transition: all var(--dur) var(--ease);
+            background: transparent;
+            color: var(--gm);
+            letter-spacing: -0.01em;
+        }
+
+        .controls__btn:hover {
+            color: var(--gd);
+            background: var(--gl);
+        }
+
+        .controls__btn--active {
+            background: var(--sangria);
+            color: var(--white);
+        }
+
+        .controls__btn--active:hover {
+            background: var(--sangria-hover);
+            color: var(--white);
+        }
+
+        /* ─── DEMO ARTICLE CONTENT ───────────────────────────── */
+        .article {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 100px 24px 120px;
+        }
+
+        .article__label {
+            font-family: var(--fc);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--sangria);
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .article__title {
+            font-family: var(--fp);
+            font-size: 36px;
+            line-height: 1.2;
+            color: var(--black);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .article__meta {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: var(--gm);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .article__meta-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: var(--rfull);
+            background: var(--platinum);
+        }
+
+        .article__lead {
+            font-family: var(--fs);
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.65;
+            color: var(--gd);
+            margin-bottom: 32px;
+        }
+
+        .article__heading {
+            font-family: var(--fp);
+            font-size: 22px;
+            line-height: 1.3;
+            color: var(--black);
+            margin-top: 56px;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+
+        .article__subheading {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--gd);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .article__text {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.75;
+            color: var(--gd);
+            margin-bottom: 24px;
+        }
+
+        .article__divider {
+            width: 40px;
+            height: 2px;
+            background: var(--sangria);
+            margin: 48px 0;
+            border: none;
+        }
+
+        .article__image-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--gl);
+            border: 1px dashed var(--g3);
+            border-radius: var(--rlg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 32px 0;
+            color: var(--gm);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .article__pullquote {
+            border-left: 3px solid var(--sangria);
+            padding: 4px 0 4px 24px;
+            margin: 40px 0;
+        }
+
+        .article__pullquote-text {
+            font-family: var(--fs);
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--sangria);
+            font-style: italic;
+        }
+
+        /* ─── SCROLL-TO-TOP (on circle click) ────────────────── */
+        .progress-circle[data-at-top="true"] {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .article__title {
+                font-size: 28px;
+            }
+
+            .article__lead {
+                font-size: 20px;
+            }
+
+            .article__heading {
+                font-size: 20px;
+            }
+
+            .article__text {
+                font-size: 17px;
+            }
+
+            .controls {
+                top: auto;
+                bottom: 96px;
+                left: 50%;
+            }
+
+            .progress-circle {
+                bottom: 24px;
+                right: 24px;
+                width: 48px;
+                height: 48px;
+            }
+
+            .progress-circle__text {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article {
+                padding: 88px 16px 100px;
+            }
+
+            .article__title {
+                font-size: 24px;
+            }
+
+            .article__lead {
+                font-size: 18px;
+            }
+
+            .article__heading {
+                font-size: 18px;
+                margin-top: 40px;
+            }
+
+            .article__text {
+                font-size: 16px;
+            }
+
+            .controls__btn {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+        }
+
+        /* ─── HIDDEN STATE ───────────────────────────────────── */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ─── FADE-IN FOR CIRCLE ─────────────────────────────── */
+        .progress-circle {
+            opacity: 0;
+            transition: opacity var(--dur3) var(--ease), transform var(--dur3) var(--ease), filter var(--dur3) var(--ease);
+        }
+
+        .progress-circle--visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══ VARIANT A: TOP PROGRESS BAR ═══════════════════════ -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ═══ VARIANT B: FLOATING CIRCLE ════════════════════════ -->
+    <svg class="progress-circle hidden" id="progressCircle" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"
+        role="button" aria-label="Scroll progress and back to top" tabindex="0">
+        <circle class="progress-circle__bg" cx="28" cy="28" r="28" />
+        <circle class="progress-circle__track" cx="28" cy="28" r="22" />
+        <circle class="progress-circle__fill" id="progressRing" cx="28" cy="28" r="22"
+            stroke-dasharray="138.23"
+            stroke-dashoffset="138.23" />
+        <text class="progress-circle__text" id="progressText" x="28" y="28">0%</text>
+    </svg>
+
+    <!-- ═══ TOGGLE CONTROLS ═══════════════════════════════════ -->
+    <div class="controls">
+        <button class="controls__btn controls__btn--active" id="btnVariantA" onclick="showVariant('A')">
+            A: Top Bar
+        </button>
+        <button class="controls__btn" id="btnVariantB" onclick="showVariant('B')">
+            B: Circle
+        </button>
+    </div>
+
+    <!-- ═══ DEMO ARTICLE (scroll content) ════════════════════ -->
+    <article class="article" id="articleContent">
+
+        <p class="article__label">Wildlife & Safari</p>
+        <h1 class="article__title">The Great Migration: A Complete Guide to Timing Your Safari</h1>
+
+        <div class="article__meta">
+            <span>Alfredo Seidemann</span>
+            <span class="article__meta-dot"></span>
+            <span>12 min read</span>
+            <span class="article__meta-dot"></span>
+            <span>March 2026</span>
+        </div>
+
+        <p class="article__lead">
+            Ready to witness one of the wildest shows on Earth? The Great Migration is your ticket to nature's most epic
+            road trip. Over a million wildebeest, along with zebras and gazelles, journey across Tanzania and Kenya,
+            making it one of the last massive wildlife migrations on the planet.
+        </p>
+
+        <div class="article__image-placeholder">Hero image: Wildebeest crossing the Mara River</div>
+
+        <p class="article__text">
+            Here's the kicker: while timing is everything, it's unpredictable and depends on what you want to see.
+            Even with all that unpredictability, getting front-row seats to the action is doable with a little planning.
+            The migration follows the rains, and the rains follow their own schedule. But patterns do emerge, and
+            knowing them is your edge.
+        </p>
+
+        <h2 class="article__heading">Understanding the Cycle</h2>
+
+        <p class="article__text">
+            The Great Migration is not a single event but a year-round cycle. It's a continuous loop driven by the
+            search for fresh grazing and water. The herds follow the rains across the Serengeti-Mara ecosystem,
+            covering roughly 1,800 miles each year. It's the largest overland migration on the planet, and it never
+            truly stops.
+        </p>
+
+        <p class="article__text">
+            Think of it as a massive clock, with different "acts" playing out in different regions throughout the year.
+            The calving season in the southern Serengeti. The long march northward through the Western Corridor. The
+            dramatic river crossings in the north. And then the slow return south, completing the circle.
+        </p>
+
+        <hr class="article__divider">
+
+        <h2 class="article__heading">January to March: The Calving Season</h2>
+
+        <p class="article__text">
+            The southern Serengeti plains, around the Ndutu area and the edge of the Ngorongoro Conservation Area,
+            become a nursery. An estimated 500,000 calves are born in a span of just a few weeks, usually peaking in
+            February. The short, mineral-rich grasses of these plains provide the nutrition the mothers need.
+        </p>
+
+        <div class="article__pullquote">
+            <p class="article__pullquote-text">
+                "Watching half a million wildebeest calves take their first wobbly steps across the Serengeti plain
+                is one of nature's most quietly spectacular moments."
+            </p>
+        </div>
+
+        <p class="article__text">
+            This is also prime time for predators. Lions, cheetahs, and hyenas know exactly when the easy meals arrive.
+            The concentration of prey draws predators from across the ecosystem, making the calving season one of the
+            best times to witness raw, unfiltered nature. It's not for the faint of heart, but it is unforgettable.
+        </p>
+
+        <div class="article__image-placeholder">Image: Newborn wildebeest calf on the Serengeti plains</div>
+
+        <h2 class="article__heading">April to June: The Long March</h2>
+
+        <p class="article__text">
+            As the southern plains dry out, the herds begin their long trek north and west. The columns of wildebeest
+            can stretch for miles, a river of bodies flowing across the golden savannah. By May, the herds are
+            typically in the central Serengeti, and by June they've reached the Western Corridor, where the first
+            river crossings of the Grumeti River begin.
+        </p>
+
+        <p class="article__text">
+            The Grumeti crossings are smaller and less publicized than those at the Mara River, but they can be just
+            as dramatic. Enormous Nile crocodiles patrol the deeper pools, and the chaos of thousands of wildebeest
+            funneling into the water creates scenes of extraordinary intensity. The camps in this area tend to be
+            quieter and more exclusive, offering a more intimate experience.
+        </p>
+
+        <h3 class="article__subheading">Where to Stay</h3>
+
+        <p class="article__text">
+            The Western Corridor offers some exceptional lodges and tented camps. Grumeti Serengeti Tented Camp and
+            Singita Faru Faru are standout options. The area is less visited than the northern Serengeti, which means
+            you might have a crossing all to yourself. That kind of exclusivity is increasingly rare in East Africa.
+        </p>
+
+        <hr class="article__divider">
+
+        <h2 class="article__heading">July to October: The River Crossings</h2>
+
+        <p class="article__text">
+            This is the main event. The Mara River crossings are what most people picture when they think of the Great
+            Migration. Thousands of wildebeest gather on the banks, building up courage for hours or even days before
+            suddenly plunging into the churning, crocodile-infested waters. It's chaotic, dangerous, and utterly
+            mesmerizing.
+        </p>
+
+        <p class="article__text">
+            The herds cross and re-cross the Mara River multiple times during this period, moving between the northern
+            Serengeti and Kenya's Masai Mara. Each crossing is different. Some are orderly, almost calm. Others
+            dissolve into pandemonium. The timing depends on rain, grass, and whatever collective instinct drives a
+            million animals to move as one.
+        </p>
+
+        <div class="article__image-placeholder">Image: Wildebeest crossing the Mara River</div>
+
+        <p class="article__text">
+            The northern Serengeti, particularly the Kogatende and Lamai areas, offers the best vantage points for
+            witnessing these crossings on the Tanzanian side. For those heading into Kenya, the Masai Mara's
+            conservancies provide extraordinary access with fewer crowds than the main reserve.
+        </p>
+
+        <h3 class="article__subheading">Practical Timing Tips</h3>
+
+        <p class="article__text">
+            Late July through September is generally considered the sweet spot. August is the busiest month for
+            tourism, so consider July or late September for a less crowded experience. Keep in mind that no guide
+            can guarantee a crossing on any given day. Patience is part of the experience. Build at least three to
+            four nights in crossing territory to maximize your chances.
+        </p>
+
+        <h2 class="article__heading">November to December: The Return South</h2>
+
+        <p class="article__text">
+            The short rains arrive in East Africa around November, and the herds begin their long journey back toward
+            the southern Serengeti. The Mara empties out, the camps become quieter, and the cycle begins again. This
+            transitional period is often overlooked, but it offers excellent game viewing with far fewer tourists.
+        </p>
+
+        <p class="article__text">
+            The landscape transforms rapidly. Within weeks of the first rains, the parched plains turn emerald green.
+            The herds spread out as grazing becomes abundant, and the urgency of the dry season gives way to a more
+            relaxed rhythm. It's a beautiful time to visit, and rates are often lower during this shoulder season.
+        </p>
+
+        <hr class="article__divider">
+
+        <h2 class="article__heading">Planning Your Trip</h2>
+
+        <p class="article__text">
+            The single most important piece of advice: be flexible. The migration doesn't follow a calendar. It
+            follows the rain. Your dates might need to shift by a few weeks depending on conditions. Work with a
+            specialist who knows the ecosystem and has contacts on the ground who can advise on herd movements in
+            real time.
+        </p>
+
+        <p class="article__text">
+            Budget for at least seven to ten days if you want to experience multiple aspects of the migration. A
+            combination of the southern and northern Serengeti, or the Serengeti and the Masai Mara, gives you the
+            best chance of seeing a range of migration behavior. Flying between camps saves time and offers
+            spectacular aerial views of the herds.
+        </p>
+
+        <div class="article__pullquote">
+            <p class="article__pullquote-text">
+                "The migration doesn't wait for you. You go where it leads, and that unpredictability is exactly
+                what makes it so extraordinary."
+            </p>
+        </div>
+
+        <p class="article__text">
+            Whatever window you choose, this is the kind of trip that stays with you. The sound of a million hooves.
+            The dust rising in golden columns. The silence between crossings, when the only sound is the wind across
+            the plain. It's Africa at its most elemental, and there's nothing else quite like it.
+        </p>
+
+    </article>
+
+    <!-- ═══ JAVASCRIPT ═══════════════════════════════════════ -->
+    <script>
+        const bar = document.getElementById('progressBar');
+        const circle = document.getElementById('progressCircle');
+        const ring = document.getElementById('progressRing');
+        const text = document.getElementById('progressText');
+        const btnA = document.getElementById('btnVariantA');
+        const btnB = document.getElementById('btnVariantB');
+
+        // Ring geometry
+        const RADIUS = 22;
+        const CIRCUMFERENCE = 2 * Math.PI * RADIUS; // ~138.23
+
+        let currentVariant = 'A';
+
+        function showVariant(variant) {
+            currentVariant = variant;
+            if (variant === 'A') {
+                bar.classList.remove('hidden');
+                circle.classList.add('hidden');
+                circle.classList.remove('progress-circle--visible');
+                btnA.classList.add('controls__btn--active');
+                btnB.classList.remove('controls__btn--active');
+            } else {
+                bar.classList.add('hidden');
+                circle.classList.remove('hidden');
+                btnA.classList.remove('controls__btn--active');
+                btnB.classList.add('controls__btn--active');
+                // Show/hide circle based on scroll position
+                updateCircleVisibility();
+            }
+            updateProgress();
+        }
+
+        function getScrollProgress() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (docHeight <= 0) return 0;
+            return Math.min(Math.max(scrollTop / docHeight, 0), 1);
+        }
+
+        function updateCircleVisibility() {
+            const progress = getScrollProgress();
+            if (progress > 0.02) {
+                circle.classList.add('progress-circle--visible');
+            } else {
+                circle.classList.remove('progress-circle--visible');
+            }
+        }
+
+        function updateProgress() {
+            const progress = getScrollProgress();
+            const percent = Math.round(progress * 100);
+
+            // Variant A: bar width
+            bar.style.width = percent + '%';
+            bar.dataset.active = percent > 0 && percent < 100 ? 'true' : 'false';
+
+            // Variant B: circle ring + text
+            const offset = CIRCUMFERENCE - (progress * CIRCUMFERENCE);
+            ring.style.strokeDashoffset = offset;
+            text.textContent = percent + '%';
+
+            if (currentVariant === 'B') {
+                updateCircleVisibility();
+            }
+        }
+
+        // Scroll listener with requestAnimationFrame for performance
+        let ticking = false;
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    updateProgress();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Circle click: scroll to top
+        circle.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        circle.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Initialize
+        updateProgress();
+    </script>
+
+</body>
+
+</html>

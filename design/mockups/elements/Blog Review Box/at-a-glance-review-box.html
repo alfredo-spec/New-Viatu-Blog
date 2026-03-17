@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viatu — At a Glance Review Box · 5 Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   VIATU DESIGN TOKENS
+   ═══════════════════════════════════════════════════ */
+:root {
+  --sangria: #541736;
+  --pthalo: #1C4447;
+  --platinum: #C4C4C4;
+  --black: #000000;
+  --white: #FFFFFF;
+  --cream: #F3FFB9;
+  --gl: #F8F9FA;
+  --gm: #6C757D;
+  --gd: #343A40;
+  --g3: #DEE2E6;
+
+  --fp: 'Krona One', sans-serif;
+  --fs: 'Hanken Grotesk', sans-serif;
+  --fc: 'Caveat', cursive;
+
+  --rmd: .375rem;
+  --rlg: .5rem;
+  --rxl: .75rem;
+  --r2xl: 1rem;
+  --rfull: 9999px;
+
+  --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+  --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+
+  --dur: 200ms;
+  --dur3: 300ms;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--fs);
+  color: var(--black);
+  background: var(--gl);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════
+   PAGE SCAFFOLD
+   ═══════════════════════════════════════════════════ */
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+.page-tag {
+  font-family: var(--fc);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sangria);
+  margin-bottom: 8px;
+}
+.page-h1 {
+  font-family: var(--fp);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 400;
+  letter-spacing: -.06em;
+  line-height: 1.34;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+.page-intro {
+  font-size: 16px;
+  color: var(--gm);
+  line-height: 1.6;
+  margin-bottom: 56px;
+  max-width: 60ch;
+}
+
+/* Concept dividers */
+.concept-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 64px 0 12px;
+}
+.concept-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--g3);
+}
+.concept-label {
+  font-family: var(--fc);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--sangria);
+  white-space: nowrap;
+}
+.concept-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+.concept-desc {
+  font-size: 14px;
+  color: var(--gm);
+  margin-bottom: 28px;
+  max-width: 55ch;
+  line-height: 1.5;
+}
+
+/* Simulated blog context */
+.blog-context {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--gd);
+  margin-bottom: 28px;
+  max-width: 65ch;
+}
+.blog-context-after {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--gd);
+  margin-top: 28px;
+  max-width: 65ch;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   CONCEPT 1 — "THE PASSPORT STAMP"
+   Side accent bar + clean two-column data grid
+   ═══════════════════════════════════════════════════ */
+.glance-1 {
+  background: var(--white);
+  border: 1px solid var(--g3);
+  border-left: 5px solid var(--sangria);
+  border-radius: var(--rlg);
+  overflow: hidden;
+  box-shadow: var(--sh-sm);
+  transition: box-shadow var(--dur3) var(--ease);
+}
+.glance-1:hover { box-shadow: var(--sh-md); }
+
+.glance-1__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--g3);
+  background: var(--gl);
+}
+.glance-1__header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.glance-1__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--rfull);
+  background: rgba(84, 23, 54, .08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.glance-1__icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--sangria);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glance-1__label {
+  font-family: var(--fc);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sangria);
+  line-height: 1;
+}
+.glance-1__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.glance-1__rating-score {
+  font-family: var(--fs);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sangria);
+  line-height: 1;
+}
+.glance-1__rating-max {
+  font-size: 14px;
+  color: var(--platinum);
+  font-weight: 500;
+}
+.glance-1__stars {
+  display: flex;
+  gap: 2px;
+}
+.glance-1__stars svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--sangria);
+}
+
+.glance-1__body {
+  padding: 24px 28px 28px;
+}
+.glance-1__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.glance-1__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(222, 226, 230, .5);
+}
+.glance-1__row:nth-last-child(-n+2) { border-bottom: none; }
+.glance-1__row:nth-child(odd) { padding-right: 20px; }
+.glance-1__row:nth-child(even) { padding-left: 20px; border-left: 1px solid rgba(222, 226, 230, .3); }
+
+.glance-1__row-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.glance-1__row-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glance-1__row-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 2px;
+}
+.glance-1__row-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gd);
+  line-height: 1.4;
+}
+
+.glance-1__tip {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(84, 23, 54, .03);
+  border: 1px dashed rgba(84, 23, 54, .15);
+  border-radius: var(--rmd);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.glance-1__tip-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.glance-1__tip-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--sangria);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glance-1__tip-label {
+  font-family: var(--fc);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--sangria);
+  margin-bottom: 2px;
+}
+.glance-1__tip-text {
+  font-size: 14px;
+  color: var(--gd);
+  line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   CONCEPT 2 — "THE FIELD CARD"
+   Dark header band with pthalo + clean white body
+   ═══════════════════════════════════════════════════ */
+.glance-2 {
+  border-radius: var(--rxl);
+  overflow: hidden;
+  box-shadow: var(--sh-md);
+  transition: box-shadow var(--dur3) var(--ease);
+}
+.glance-2:hover { box-shadow: var(--sh-lg); }
+
+.glance-2__header {
+  background: var(--pthalo);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.glance-2__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.glance-2__tag {
+  font-family: var(--fc);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1;
+}
+.glance-2__title {
+  font-family: var(--fp);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: -.04em;
+  line-height: 1.3;
+}
+
+.glance-2__score-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--rfull);
+  border: 3px solid rgba(255,255,255,.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.glance-2__score-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--rfull);
+  border: 3px solid var(--cream);
+  border-color: var(--cream) var(--cream) var(--cream) transparent;
+  transform: rotate(-36deg);
+}
+.glance-2__score-num {
+  font-family: var(--fs);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+.glance-2__score-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255,255,255,.5);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.glance-2__body {
+  background: var(--white);
+  padding: 0;
+}
+.glance-2__list {
+  list-style: none;
+}
+.glance-2__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--gl);
+  transition: background var(--dur) var(--ease);
+}
+.glance-2__item:last-child { border-bottom: none; }
+.glance-2__item:hover { background: var(--gl); }
+
+.glance-2__item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--rmd);
+  background: var(--gl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.glance-2__item-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glance-2__item-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.glance-2__item-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gd);
+  line-height: 1.4;
+}
+
+.glance-2__footer {
+  padding: 16px 28px 20px;
+  background: rgba(28, 68, 71, .03);
+  border-top: 1px solid var(--gl);
+}
+.glance-2__tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gd);
+  line-height: 1.5;
+}
+.glance-2__tip strong {
+  font-weight: 700;
+  color: var(--pthalo);
+}
+.glance-2__tip-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   CONCEPT 3 — "THE POLAROID"
+   Image-forward with bottom data strip
+   ═══════════════════════════════════════════════════ */
+.glance-3 {
+  border-radius: var(--rxl);
+  overflow: hidden;
+  box-shadow: var(--sh-md);
+  background: var(--white);
+  transition: box-shadow var(--dur3) var(--ease);
+}
+.glance-3:hover { box-shadow: var(--sh-lg); }
+
+.glance-3__hero {
+  position: relative;
+  height: 240px;
+  background: linear-gradient(135deg, var(--pthalo) 0%, #2A5A5E 50%, var(--sangria) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.glance-3__hero-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: .4;
+}
+.glance-3__hero-placeholder svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--white);
+  fill: none;
+  stroke-width: 1;
+}
+.glance-3__hero-placeholder span {
+  font-size: 11px;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.glance-3__hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 28px 20px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.6) 100%);
+}
+.glance-3__hero-tag {
+  font-family: var(--fc);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.glance-3__hero-title {
+  font-family: var(--fp);
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: -.04em;
+  line-height: 1.3;
+}
+.glance-3__hero-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(8px);
+  border-radius: var(--rlg);
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--sh-md);
+}
+.glance-3__hero-badge-score {
+  font-family: var(--fs);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--sangria);
+  line-height: 1;
+}
+.glance-3__hero-badge-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.glance-3__hero-badge-stars {
+  display: flex;
+  gap: 1px;
+  margin-top: 4px;
+}
+.glance-3__hero-badge-stars svg {
+  width: 12px;
+  height: 12px;
+  fill: var(--sangria);
+}
+
+.glance-3__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--gl);
+}
+.glance-3__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--gl);
+  border: 1px solid var(--g3);
+  border-radius: var(--rfull);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gd);
+  transition: all var(--dur) var(--ease);
+}
+.glance-3__pill:hover {
+  background: rgba(84, 23, 54, .04);
+  border-color: rgba(84, 23, 54, .15);
+}
+.glance-3__pill svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glance-3__pill--highlight {
+  background: rgba(84, 23, 54, .06);
+  border-color: rgba(84, 23, 54, .12);
+  color: var(--sangria);
+  font-weight: 600;
+}
+.glance-3__pill--highlight svg {
+  stroke: var(--sangria);
+}
+
+.glance-3__details {
+  padding: 16px 28px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+.glance-3__detail-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.glance-3__detail-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gd);
+  line-height: 1.4;
+}
+
+.glance-3__tip {
+  margin: 0 28px 20px;
+  padding: 14px 16px;
+  background: rgba(28, 68, 71, .04);
+  border-radius: var(--rmd);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.glance-3__tip svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.glance-3__tip-label {
+  font-family: var(--fc);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pthalo);
+}
+.glance-3__tip-text {
+  font-size: 13px;
+  color: var(--gd);
+  line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   CONCEPT 4 — "THE SPLIT VERDICT"
+   Two-column: data left, verdict right
+   ═══════════════════════════════════════════════════ */
+.glance-4 {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  border-radius: var(--rxl);
+  overflow: hidden;
+  border: 1px solid var(--g3);
+  box-shadow: var(--sh-sm);
+  transition: box-shadow var(--dur3) var(--ease);
+}
+.glance-4:hover { box-shadow: var(--sh-md); }
+
+.glance-4__main {
+  background: var(--white);
+  padding: 28px;
+}
+.glance-4__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.glance-4__header-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--rfull);
+  background: var(--sangria);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.glance-4__header-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--white);
+  fill: none;
+  stroke-width: 2;
+}
+.glance-4__header-text {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--gd);
+}
+
+.glance-4__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.glance-4__table tr {
+  border-bottom: 1px solid var(--gl);
+}
+.glance-4__table tr:last-child {
+  border-bottom: none;
+}
+.glance-4__table td {
+  padding: 12px 0;
+  vertical-align: top;
+}
+.glance-4__table td:first-child {
+  width: 130px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  padding-right: 16px;
+}
+.glance-4__table td:last-child {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gd);
+  line-height: 1.4;
+}
+.glance-4__table .attr-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -2px;
+}
+.glance-4__table .attr-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.glance-4__verdict {
+  background: var(--sangria);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.glance-4__verdict-tag {
+  font-family: var(--fc);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.glance-4__verdict-score {
+  font-family: var(--fs);
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.glance-4__verdict-max {
+  font-size: 14px;
+  color: rgba(255,255,255,.4);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.glance-4__verdict-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 20px;
+}
+.glance-4__verdict-stars svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--cream);
+}
+.glance-4__verdict-divider {
+  width: 32px;
+  height: 2px;
+  background: rgba(255,255,255,.15);
+  margin-bottom: 16px;
+  border-radius: 1px;
+}
+.glance-4__verdict-bestfor-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,.45);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px;
+}
+.glance-4__verdict-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.glance-4__verdict-pill {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 4px 12px;
+  border-radius: var(--rfull);
+}
+.glance-4__verdict-tip {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.glance-4__verdict-tip-label {
+  font-family: var(--fc);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.glance-4__verdict-tip-text {
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.5;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   CONCEPT 5 — "THE MAGAZINE CALLOUT"
+   Full-width editorial band with subtle texture
+   ═══════════════════════════════════════════════════ */
+.glance-5 {
+  position: relative;
+  border-radius: var(--rxl);
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--g3);
+  box-shadow: var(--sh-sm);
+  transition: box-shadow var(--dur3) var(--ease);
+}
+.glance-5:hover { box-shadow: var(--sh-md); }
+
+.glance-5__accent {
+  height: 4px;
+  background: linear-gradient(90deg, var(--sangria) 0%, var(--pthalo) 100%);
+}
+
+.glance-5__body {
+  padding: 28px;
+}
+.glance-5__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.glance-5__top-left {
+  flex: 1;
+}
+.glance-5__tag {
+  font-family: var(--fc);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sangria);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.glance-5__title {
+  font-family: var(--fp);
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 400;
+  color: var(--black);
+  letter-spacing: -.04em;
+  line-height: 1.34;
+  margin-bottom: 6px;
+}
+.glance-5__subtitle {
+  font-size: 14px;
+  color: var(--gm);
+  line-height: 1.5;
+}
+
+.glance-5__score-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 12px 20px;
+  background: var(--gl);
+  border-radius: var(--rlg);
+  border: 1px solid var(--g3);
+}
+.glance-5__score-num {
+  font-family: var(--fs);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--sangria);
+  line-height: 1;
+}
+.glance-5__score-max {
+  font-size: 12px;
+  color: var(--platinum);
+  font-weight: 500;
+}
+.glance-5__score-stars {
+  display: flex;
+  gap: 2px;
+}
+.glance-5__score-stars svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--sangria);
+}
+
+.glance-5__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--g3);
+  border-radius: var(--rmd);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.glance-5__cell {
+  background: var(--white);
+  padding: 16px 20px;
+}
+.glance-5__cell:nth-child(n+4) {
+  background: var(--gl);
+}
+.glance-5__cell-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.glance-5__cell-label svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--pthalo);
+  fill: none;
+  stroke-width: 1.5;
+}
+.glance-5__cell-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gd);
+  line-height: 1.4;
+}
+
+.glance-5__bottom {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.glance-5__tip {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(84, 23, 54, .03);
+  border-radius: var(--rmd);
+  border: 1px dashed rgba(84, 23, 54, .12);
+}
+.glance-5__tip svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--sangria);
+  fill: none;
+  stroke-width: 1.5;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.glance-5__tip-label {
+  font-family: var(--fc);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sangria);
+}
+.glance-5__tip-text {
+  font-size: 13px;
+  color: var(--gd);
+  line-height: 1.5;
+}
+.glance-5__pairs-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gm);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+.glance-5__pairs-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pthalo);
+  line-height: 1.4;
+}
+.glance-5__pairs {
+  flex-shrink: 0;
+  width: 200px;
+  padding: 14px 16px;
+  background: rgba(28, 68, 71, .03);
+  border-radius: var(--rmd);
+  border: 1px solid rgba(28, 68, 71, .08);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .glance-1__grid {
+    grid-template-columns: 1fr;
+  }
+  .glance-1__row:nth-child(odd) { padding-right: 0; }
+  .glance-1__row:nth-child(even) { padding-left: 0; border-left: none; }
+  .glance-1__row:nth-last-child(-n+2) { border-bottom: 1px solid rgba(222,226,230,.5); }
+  .glance-1__row:last-child { border-bottom: none; }
+
+  .glance-4 {
+    grid-template-columns: 1fr;
+  }
+  .glance-4__verdict {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+  .glance-4__verdict-score {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
+  .glance-4__verdict-tip { width: 100%; }
+
+  .glance-5__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .glance-5__bottom {
+    flex-direction: column;
+  }
+  .glance-5__pairs {
+    width: 100%;
+  }
+  .glance-3__details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .glance-5__grid {
+    grid-template-columns: 1fr;
+  }
+  .glance-5__top {
+    flex-direction: column;
+  }
+  .glance-5__score-block {
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<p class="page-tag">Blog component design</p>
+<h1 class="page-h1">"At a Glance" review box — five concepts</h1>
+<p class="page-intro">Each concept is designed to sit early in a review or trip showcase blog post — after the intro paragraph, before the deep dive. All use real sample data from a Londolozi Founders Camp review. Shown in a simulated blog content flow.</p>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CONCEPT 1 — THE PASSPORT STAMP
+     ═══════════════════════════════════════════════════ -->
+<div class="concept-divider"><span class="concept-label">Concept 1</span></div>
+<p class="concept-name">The Passport Stamp</p>
+<p class="concept-desc">Classic left-accent bar with a two-column data grid. Familiar, scannable, and elegant. The most conservative option — blends easily into editorial flow.</p>
+
+<p class="blog-context">We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special. Here's what you need to know before you book.</p>
+
+<div class="glance-1">
+  <div class="glance-1__header">
+    <div class="glance-1__header-left">
+      <div class="glance-1__icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <span class="glance-1__label">At a glance</span>
+    </div>
+    <div class="glance-1__rating">
+      <div>
+        <div class="glance-1__stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+      </div>
+      <span class="glance-1__rating-score">4.9</span>
+      <span class="glance-1__rating-max">/ 5.0</span>
+    </div>
+  </div>
+  <div class="glance-1__body">
+    <div class="glance-1__grid">
+      <div class="glance-1__row">
+        <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div>
+          <div class="glance-1__row-label">Location</div>
+          <div class="glance-1__row-value">Sabi Sands, Greater Kruger, South Africa</div>
+        </div>
+      </div>
+      <div class="glance-1__row">
+        <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div>
+          <div class="glance-1__row-label">Price Class</div>
+          <div class="glance-1__row-value">Ultra-Luxury · $$$$</div>
+        </div>
+      </div>
+      <div class="glance-1__row">
+        <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div>
+          <div class="glance-1__row-label">Best For</div>
+          <div class="glance-1__row-value">Honeymooners, Photographers, Leopard Enthusiasts</div>
+        </div>
+      </div>
+      <div class="glance-1__row">
+        <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+        <div>
+          <div class="glance-1__row-label">Not Ideal For</div>
+          <div class="glance-1__row-value">Travellers needing constant Wi-Fi</div>
+        </div>
+      </div>
+      <div class="glance-1__row">
+        <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <div class="glance-1__row-label">Sustainability</div>
+          <div class="glance-1__row-value">Gold Eco-Rated · Community-Owned</div>
+        </div>
+      </div>
+      <div class="glance-1__row">
+        <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div>
+        <div>
+          <div class="glance-1__row-label">Pairs Well With</div>
+          <div class="glance-1__row-value">3 nights in the Cape Winelands</div>
+        </div>
+      </div>
+    </div>
+    <div class="glance-1__tip">
+      <div class="glance-1__tip-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+      <div>
+        <div class="glance-1__tip-label">Viatu insider tip</div>
+        <div class="glance-1__tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="blog-context-after">Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars…</p>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CONCEPT 2 — THE FIELD CARD
+     ═══════════════════════════════════════════════════ -->
+<div class="concept-divider"><span class="concept-label">Concept 2</span></div>
+<p class="concept-name">The Field Card</p>
+<p class="concept-desc">Dark Pthalo header band creates instant visual separation from the article body. Rows have a subtle hover effect — feels interactive and data-rich. Good for lodges with strong identity.</p>
+
+<p class="blog-context">We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special. Here's what you need to know before you book.</p>
+
+<div class="glance-2">
+  <div class="glance-2__header">
+    <div class="glance-2__header-left">
+      <span class="glance-2__tag">Our expert's verdict</span>
+      <span class="glance-2__title">Londolozi Founders Camp</span>
+    </div>
+    <div class="glance-2__score-ring">
+      <span class="glance-2__score-num">4.9</span>
+      <span class="glance-2__score-label">Rating</span>
+    </div>
+  </div>
+  <ul class="glance-2__list">
+    <li class="glance-2__item">
+      <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div>
+        <div class="glance-2__item-label">Location</div>
+        <div class="glance-2__item-value">Sabi Sands Game Reserve, Greater Kruger, South Africa</div>
+      </div>
+    </li>
+    <li class="glance-2__item">
+      <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div>
+        <div class="glance-2__item-label">Price Class</div>
+        <div class="glance-2__item-value">Ultra-Luxury · $$$$</div>
+      </div>
+    </li>
+    <li class="glance-2__item">
+      <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div>
+        <div class="glance-2__item-label">Best For</div>
+        <div class="glance-2__item-value">Honeymooners, Couples, Leopard Enthusiasts, Photographers</div>
+      </div>
+    </li>
+    <li class="glance-2__item">
+      <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div>
+        <div class="glance-2__item-label">Sustainability</div>
+        <div class="glance-2__item-value">Gold Eco-Rated · Community-Owned</div>
+      </div>
+    </li>
+    <li class="glance-2__item">
+      <div class="glance-2__item-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div>
+      <div>
+        <div class="glance-2__item-label">Pairs Well With</div>
+        <div class="glance-2__item-value">A relaxing 3 nights in the Cape Winelands</div>
+      </div>
+    </li>
+  </ul>
+  <div class="glance-2__footer">
+    <div class="glance-2__tip">
+      <div class="glance-2__tip-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+      <div>
+        <span class="glance-2__tip-label" style="font-family:var(--fc);font-size:14px;font-weight:700;color:var(--pthalo)">Viatu insider tip —</span>
+        <span class="glance-2__tip-text" style="font-size:14px;color:var(--gd)">"Ask for Room #5 for the best sunset view over the Sand River."</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="blog-context-after">Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars…</p>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CONCEPT 3 — THE POLAROID
+     ═══════════════════════════════════════════════════ -->
+<div class="concept-divider"><span class="concept-label">Concept 3</span></div>
+<p class="concept-name">The Polaroid</p>
+<p class="concept-desc">Image-forward hero with floating score badge, pill-style attributes, and a compact data grid. Maximum visual impact — feels like opening a travel magazine spread.</p>
+
+<p class="blog-context">We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special. Here's what you need to know before you book.</p>
+
+<div class="glance-3">
+  <div class="glance-3__hero">
+    <div class="glance-3__hero-placeholder">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Lodge hero image · 800 × 240</span>
+    </div>
+    <div class="glance-3__hero-overlay">
+      <div class="glance-3__hero-tag">Our expert's verdict</div>
+      <div class="glance-3__hero-title">Londolozi Founders Camp</div>
+    </div>
+    <div class="glance-3__hero-badge">
+      <span class="glance-3__hero-badge-score">4.9</span>
+      <span class="glance-3__hero-badge-label">Rating</span>
+      <div class="glance-3__hero-badge-stars">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+    </div>
+  </div>
+  <div class="glance-3__pills">
+    <span class="glance-3__pill"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Sabi Sands, South Africa</span>
+    <span class="glance-3__pill--highlight glance-3__pill"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>Honeymooners</span>
+    <span class="glance-3__pill"><svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15 19v1.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V19"/><path d="M10 9.5C10 10.33 9.33 11 8.5 11h-5C2.67 11 2 10.33 2 9.5S2.67 8 3.5 8h5c.83 0 1.5.67 1.5 1.5z"/><path d="M10 5V3.5c0-.83-.67-1.5-1.5-1.5S7 2.67 7 3.5V5"/></svg>Leopard Country</span>
+    <span class="glance-3__pill"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ultra-Luxury</span>
+    <span class="glance-3__pill"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Gold Eco-Rated</span>
+  </div>
+  <div class="glance-3__details">
+    <div>
+      <div class="glance-3__detail-label">Not Ideal For</div>
+      <div class="glance-3__detail-value">Travellers needing constant Wi-Fi</div>
+    </div>
+    <div>
+      <div class="glance-3__detail-label">Pairs Well With</div>
+      <div class="glance-3__detail-value">3 nights in the Cape Winelands</div>
+    </div>
+  </div>
+  <div class="glance-3__tip">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <div>
+      <div class="glance-3__tip-label">Viatu insider tip</div>
+      <div class="glance-3__tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div>
+    </div>
+  </div>
+</div>
+
+<p class="blog-context-after">Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars…</p>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CONCEPT 4 — THE SPLIT VERDICT
+     ═══════════════════════════════════════════════════ -->
+<div class="concept-divider"><span class="concept-label">Concept 4</span></div>
+<p class="concept-name">The Split Verdict</p>
+<p class="concept-desc">Two-column layout: structured data on the left, bold Sangria verdict panel on the right. The score is unmissable. Works especially well when the rating is the hero moment.</p>
+
+<p class="blog-context">We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special. Here's what you need to know before you book.</p>
+
+<div class="glance-4">
+  <div class="glance-4__main">
+    <div class="glance-4__header">
+      <div class="glance-4__header-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <span class="glance-4__header-text">At a glance</span>
+    </div>
+    <table class="glance-4__table">
+      <tr>
+        <td>Location</td>
+        <td>Sabi Sands Game Reserve, Greater Kruger, South Africa</td>
+      </tr>
+      <tr>
+        <td>Price Class</td>
+        <td>Ultra-Luxury · $$$$</td>
+      </tr>
+      <tr>
+        <td>Best For</td>
+        <td>Honeymooners, Couples, Leopard Enthusiasts, Photographers</td>
+      </tr>
+      <tr>
+        <td>Not Ideal For</td>
+        <td>Travellers needing constant Wi-Fi</td>
+      </tr>
+      <tr>
+        <td>Sustainability</td>
+        <td>Gold Eco-Rated · Community-Owned</td>
+      </tr>
+      <tr>
+        <td>Pairs With</td>
+        <td>A relaxing 3 nights in the Cape Winelands</td>
+      </tr>
+    </table>
+  </div>
+  <div class="glance-4__verdict">
+    <span class="glance-4__verdict-tag">Our expert's rating</span>
+    <span class="glance-4__verdict-score">4.9</span>
+    <span class="glance-4__verdict-max">out of 5.0</span>
+    <div class="glance-4__verdict-stars">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="glance-4__verdict-divider"></div>
+    <div class="glance-4__verdict-bestfor-label">Best for</div>
+    <div class="glance-4__verdict-pills">
+      <span class="glance-4__verdict-pill">Honeymooners</span>
+      <span class="glance-4__verdict-pill">Photographers</span>
+      <span class="glance-4__verdict-pill">Leopards</span>
+    </div>
+    <div class="glance-4__verdict-tip">
+      <div class="glance-4__verdict-tip-label">Viatu insider tip</div>
+      <div class="glance-4__verdict-tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div>
+    </div>
+  </div>
+</div>
+
+<p class="blog-context-after">Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars…</p>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CONCEPT 5 — THE MAGAZINE CALLOUT
+     ═══════════════════════════════════════════════════ -->
+<div class="concept-divider"><span class="concept-label">Concept 5</span></div>
+<p class="concept-name">The Magazine Callout</p>
+<p class="concept-desc">Gradient top accent + a 3-column data grid that feels like a spec sheet from a luxury magazine. Balanced density — shows everything at once without scrolling. Pairs the insider tip with a "pairs well with" suggestion.</p>
+
+<p class="blog-context">We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special. Here's what you need to know before you book.</p>
+
+<div class="glance-5">
+  <div class="glance-5__accent"></div>
+  <div class="glance-5__body">
+    <div class="glance-5__top">
+      <div class="glance-5__top-left">
+        <div class="glance-5__tag">At a glance</div>
+        <div class="glance-5__title">Londolozi Founders Camp</div>
+        <div class="glance-5__subtitle">Sabi Sands Game Reserve, Greater Kruger, South Africa</div>
+      </div>
+      <div class="glance-5__score-block">
+        <span class="glance-5__score-num">4.9</span>
+        <div>
+          <span class="glance-5__score-max">/ 5.0</span>
+          <div class="glance-5__score-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glance-5__grid">
+      <div class="glance-5__cell">
+        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Price Class</div>
+        <div class="glance-5__cell-value">Ultra-Luxury · $$$$</div>
+      </div>
+      <div class="glance-5__cell">
+        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Best For</div>
+        <div class="glance-5__cell-value">Honeymooners, Photographers</div>
+      </div>
+      <div class="glance-5__cell">
+        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Not Ideal For</div>
+        <div class="glance-5__cell-value">Constant Wi-Fi needs</div>
+      </div>
+      <div class="glance-5__cell">
+        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sustainability</div>
+        <div class="glance-5__cell-value">Gold Eco-Rated</div>
+      </div>
+      <div class="glance-5__cell">
+        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Wildlife</div>
+        <div class="glance-5__cell-value">Leopard specialist</div>
+      </div>
+      <div class="glance-5__cell">
+        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1.5a3 3 0 0 0-3-3h-.5"/></svg>Ownership</div>
+        <div class="glance-5__cell-value">Community-Owned</div>
+      </div>
+    </div>
+
+    <div class="glance-5__bottom">
+      <div class="glance-5__tip">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div>
+          <div class="glance-5__tip-label">Viatu insider tip</div>
+          <div class="glance-5__tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div>
+        </div>
+      </div>
+      <div class="glance-5__pairs">
+        <div class="glance-5__pairs-label">Pairs Well With</div>
+        <div class="glance-5__pairs-text">3 nights in the Cape Winelands</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="blog-context-after">Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars…</p>
+
+</div><!-- .page -->
+
+</body>
+</html>

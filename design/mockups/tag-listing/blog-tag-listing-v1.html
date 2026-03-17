@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namibia — Viatu Travel Journal</title>
+    <meta name="description" content="75 articles about Namibia — safari guides, destination reviews, and travel inspiration from our specialists.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+    <style>
+        /* ─── TOKENS ────────────────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+            --earth-sand: #E8E0D6;
+            --earth-stone: #B5A898;
+            --earth-clay: #8B7355;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+        html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
+        body { font-family:var(--fs); color:var(--black); background:var(--white); -webkit-font-smoothing:antialiased; line-height:1.6 }
+        a { text-decoration:none; color:inherit }
+        button { font-family:var(--fs); cursor:pointer; border:none; background:none }
+        .nums { font-family:var(--fs) }
+        .wrap { max-width:1200px; margin:0 auto; padding:0 24px }
+
+        /* ─── NAV ──────────────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: background var(--dur3) var(--ease), box-shadow var(--dur3) var(--ease)
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, .06)
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1
+        }
+
+        .nav-logo img {
+            height: 24px;
+            width: auto;
+            display: block
+        }
+
+        .nav:not(.scrolled) .logo-dark {
+            display: none
+        }
+
+        .nav.scrolled .logo-white {
+            display: none
+        }
+
+        .nav-logo-blog {
+            font-family: var(--fc);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .01em;
+            line-height: 1;
+            margin-top: 2px;
+            align-self: flex-end
+        }
+
+        .nav:not(.scrolled) .nav-logo-blog {
+            color: rgba(255, 255, 255, .88)
+        }
+
+        .nav.scrolled .nav-logo-blog {
+            color: #1B1B1B
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .nav-back-btn {
+            font-family: var(--fs);
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.2;
+            padding: 18px 20px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--dur) var(--ease);
+            letter-spacing: 0;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--white);
+            background: var(--sangria);
+            border: none
+        }
+
+        .nav-back-btn:hover {
+            background: #6b1d45;
+            transform: translateY(-1px)
+        }
+
+        .nav-back-btn svg {
+            flex-shrink: 0;
+            transition: inherit
+        }
+
+        /* ─── LANGUAGE DROPDOWN ─────────────────────────────────── */
+        .lang {
+            position: relative
+        }
+
+        .lang-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 7px 10px;
+            border-radius: var(--rmd);
+            min-height: 36px;
+            border: 1px solid transparent;
+            background: none;
+            letter-spacing: .04em;
+            line-height: 1;
+            transition: all var(--dur) var(--ease)
+        }
+
+        .nav:not(.scrolled) .lang-trigger {
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .nav:not(.scrolled) .lang-trigger:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .2)
+        }
+
+        .nav.scrolled .lang-trigger {
+            color: var(--gm)
+        }
+
+        .nav.scrolled .lang-trigger:hover {
+            color: var(--sangria);
+            background: rgba(84, 23, 54, .04);
+            border-color: rgba(84, 23, 54, .15)
+        }
+
+        .lang-globe {
+            width: 15px;
+            height: 15px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0
+        }
+
+        .lang-code-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .06em
+        }
+
+        .lang-chevron {
+            display: block;
+            width: 11px;
+            height: 11px;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform var(--dur) var(--ease)
+        }
+
+        .lang.open .lang-chevron {
+            transform: rotate(180deg)
+        }
+
+        .lang-panel {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 210px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .12), 0 0 0 1px rgba(0, 0, 0, .04);
+            padding: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-5px) scale(.98);
+            transform-origin: top right;
+            transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+            z-index: 20
+        }
+
+        .lang.open .lang-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1)
+        }
+
+        .lang-panel-header {
+            display: flex;
+            align-items: center;
+            padding: 11px 16px 9px;
+            border-bottom: 1px solid rgba(0, 0, 0, .06)
+        }
+
+        .lang-panel-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gm)
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            width: 100%;
+            padding: 11px 16px;
+            border: none;
+            border-left: 3px solid transparent;
+            background: none;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gd);
+            cursor: pointer;
+            text-align: left;
+            transition:
+                background var(--dur) var(--ease),
+                color var(--dur) var(--ease),
+                border-left-color var(--dur) var(--ease)
+        }
+
+        .lang-option:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, .045)
+        }
+
+        .lang-option:hover {
+            background: var(--gl);
+            color: var(--sangria);
+            border-left-color: rgba(84, 23, 54, .3)
+        }
+
+        .lang-option.active {
+            color: var(--sangria);
+            border-left-color: var(--sangria);
+            background: rgba(84, 23, 54, .03)
+        }
+
+        .lang-option.active .lang-name {
+            font-weight: 600
+        }
+
+        .lang-flag {
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0
+        }
+
+        .lang-name {
+            flex: 1;
+            font-size: 13px
+        }
+
+        .lang-check {
+            width: 13px;
+            height: 13px;
+            fill: none;
+            stroke: var(--sangria);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-left: auto;
+            flex-shrink: 0
+        }
+
+        /* ─── TAG HERO ─────────────────────────────────────────── */
+        .tag-hero {
+            position:relative;
+            min-height:45vh;
+            min-height:45svh;
+            display:flex;
+            align-items:flex-end;
+            overflow:hidden
+        }
+        .tag-hero-bg { position:absolute; inset:0 }
+        .tag-hero-bg img { width:100%; height:100%; object-fit:cover; display:block }
+        .tag-hero-grad {
+            position:absolute; inset:0; pointer-events:none;
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.2) 10%, transparent 22%),
+                linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.6) 30%, rgba(0,0,0,.25) 60%, transparent 100%)
+        }
+        .tag-hero-body {
+            position:relative; z-index:2; width:100%;
+            max-width:1200px; margin:0 auto;
+            padding:0 24px 56px
+        }
+        .tag-hero-breadcrumb {
+            font-size:11px; font-weight:600; letter-spacing:.1em;
+            text-transform:uppercase; color:rgba(255,255,255,.5);
+            margin-bottom:16px; display:flex; align-items:center; gap:8px
+        }
+        .tag-hero-breadcrumb a { transition:color var(--dur) var(--ease) }
+        .tag-hero-breadcrumb a:hover { color:rgba(255,255,255,.8) }
+        .tag-hero-breadcrumb-sep { opacity:.4 }
+        .tag-hero-flag-row {
+            display:flex; align-items:center; gap:14px; margin-bottom:10px
+        }
+        .tag-hero-flag {
+            height:24px; width:auto; border-radius:3px;
+            box-shadow:0 2px 8px rgba(0,0,0,.35); flex-shrink:0
+        }
+        .tag-hero-title {
+            font-family:var(--fp);
+            font-size:clamp(36px, 5vw, 64px);
+            font-weight:400;
+            color:var(--white);
+            letter-spacing:-.06em;
+            line-height:1.1;
+            text-shadow:0 4px 24px rgba(0,0,0,.45)
+        }
+        .tag-hero-meta {
+            display:flex; align-items:center; gap:12px;
+            margin-top:14px; margin-bottom:16px
+        }
+        .tag-hero-count {
+            font-size:14px; font-weight:500; color:rgba(255,255,255,.65);
+            display:flex; align-items:center; gap:6px
+        }
+        .tag-hero-count-dot {
+            width:4px; height:4px; border-radius:50%;
+            background:rgba(255,255,255,.3)
+        }
+        .tag-hero-desc {
+            font-size:16px; font-weight:300; color:rgba(255,255,255,.7);
+            line-height:1.65; max-width:540px;
+            text-shadow:0 2px 12px rgba(0,0,0,.4)
+        }
+
+        /* ─── BROWSE BAR ───────────────────────────────────────── */
+        .browse-bar {
+            position:sticky; top:88px; z-index:90;
+            background:rgba(255,255,255,.97);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--g3)
+        }
+        .browse-bar-inner {
+            max-width:1200px; margin:0 auto; padding:0 24px;
+            overflow-x:auto; -webkit-overflow-scrolling:touch;
+            scrollbar-width:none; -ms-overflow-style:none
+        }
+        .browse-bar-inner::-webkit-scrollbar { display:none }
+        .browse-bar .browse-row { padding:14px 0; flex-wrap:nowrap; gap:8px }
+
+        /* ─── BROWSE PILLS ──────────────────────────────────────── */
+        .browse-row { display:flex; flex-wrap:wrap; gap:10px }
+        .browse-pill {
+            font-size:13px; font-weight:500; color:var(--gm);
+            padding:7px 18px; border-radius:var(--rfull);
+            border:1.5px solid var(--g3);
+            transition:all var(--dur) var(--ease);
+            min-height:36px; display:inline-flex; align-items:center;
+            letter-spacing:.01em; white-space:nowrap
+        }
+        .browse-pill:hover { border-color:var(--sangria); color:var(--sangria); background:rgba(84,23,54,.04) }
+        .browse-pill.active { background:var(--sangria); border-color:var(--sangria); color:var(--white) }
+
+        /* ─── COUNT BAR ─────────────────────────────────────────── */
+        .count-bar {
+            border-bottom:1px solid var(--g3);
+            background:var(--white)
+        }
+        .count-bar-inner {
+            max-width:1200px; margin:0 auto; padding:10px 24px;
+            display:flex; align-items:center; justify-content:space-between; gap:16px
+        }
+        .count-bar-text {
+            font-size:13px; color:var(--gm); font-weight:400
+        }
+        .count-bar-text strong { font-weight:600; color:var(--gd) }
+        .count-sort {
+            display:flex; align-items:center; gap:6px;
+            font-size:13px; font-weight:500; color:var(--gm);
+            cursor:pointer; padding:5px 10px; border-radius:var(--rmd);
+            border:1px solid var(--g3); background:var(--white);
+            transition:all var(--dur) var(--ease); min-height:32px
+        }
+        .count-sort:hover { border-color:var(--sangria); color:var(--sangria) }
+        .count-sort svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0 }
+        .count-sort-label { font-size:10px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:inherit }
+
+        /* ─── ARTICLE GRID ──────────────────────────────────────── */
+        .section { padding:88px 0 }
+
+        .card {
+            display:flex; flex-direction:column;
+            cursor:pointer; transition:transform var(--dur3) var(--ease)
+        }
+        .card:hover { transform:translateY(-3px) }
+        .card-img {
+            position:relative; overflow:hidden;
+            border-radius:var(--rlg); aspect-ratio:3/2; margin-bottom:16px
+        }
+        .card-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .7s var(--ease) }
+        .card:hover .card-img img { transform:scale(1.04) }
+        .card-cat {
+            font-size:12px; font-weight:500; letter-spacing:.06em;
+            text-transform:uppercase; color:var(--gm); margin-bottom:8px
+        }
+        .card-title {
+            font-family:var(--fs); font-size:18px; font-weight:600;
+            line-height:1.35; color:var(--black); margin-bottom:8px;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden
+        }
+        .card-meta { font-size:13px; color:var(--platinum) }
+        .card-meta strong { color:var(--gm); font-weight:500 }
+
+        .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:32px }
+
+        /* ─── PAGINATION ────────────────────────────────────────── */
+        .pagination {
+            display:flex; align-items:center; justify-content:center;
+            gap:6px; margin-top:64px; flex-wrap:wrap
+        }
+        .pg-btn {
+            display:inline-flex; align-items:center; justify-content:center;
+            width:36px; height:36px; border-radius:var(--rfull);
+            border:1.5px solid var(--g3); font-size:13px; font-weight:500;
+            color:var(--gm); cursor:pointer; transition:all var(--dur) var(--ease);
+            text-decoration:none
+        }
+        .pg-btn:hover { border-color:var(--sangria); color:var(--sangria); background:rgba(84,23,54,.04) }
+        .pg-btn.active { background:var(--sangria); border-color:var(--sangria); color:var(--white) }
+        .pg-btn.ellipsis { border-color:transparent; cursor:default; pointer-events:none; color:var(--gm) }
+        .pg-arrow {
+            display:inline-flex; align-items:center; justify-content:center;
+            width:36px; height:36px; border-radius:var(--rfull);
+            border:1.5px solid var(--g3); color:var(--gm); cursor:pointer;
+            transition:all var(--dur) var(--ease); text-decoration:none
+        }
+        .pg-arrow:hover { border-color:var(--sangria); color:var(--sangria); background:rgba(84,23,54,.04) }
+        .pg-arrow svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
+        .pg-arrow.disabled { opacity:.35; cursor:not-allowed; pointer-events:none }
+
+        /* ─── SPREAD ────────────────────────────────────────────── */
+        .spread { position:relative; width:100%; overflow:hidden }
+        .spread-full { min-height:70vh; min-height:70svh }
+        .spread-bg { position:absolute; inset:0 }
+        .spread-bg img { width:100%; height:100%; object-fit:cover; display:block }
+        .spread-grad {
+            position:absolute; inset:0; pointer-events:none;
+            background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.45) 35%, rgba(0,0,0,.12) 65%, transparent 100%)
+        }
+        .spread-content {
+            position:relative; z-index:2; max-width:1200px; margin:0 auto;
+            padding:0 24px; display:flex; flex-direction:column;
+            justify-content:flex-end; min-height:inherit; padding-bottom:56px
+        }
+        .spread-tag {
+            font-size:12px; font-weight:500; letter-spacing:.08em;
+            text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:12px
+        }
+        .spread-title {
+            font-family:var(--fp); font-size:clamp(22px,3.5vw,40px); font-weight:400;
+            color:var(--white); letter-spacing:-.05em; line-height:1.2;
+            max-width:560px; margin-bottom:16px
+        }
+        .spread-text {
+            font-size:15px; font-weight:300; color:rgba(255,255,255,.6);
+            max-width:420px; line-height:1.6; margin-bottom:24px
+        }
+        .spread-link {
+            display:inline-flex; align-items:center; gap:6px;
+            font-size:14px; font-weight:500; color:var(--white);
+            padding:10px 24px; border-radius:var(--rmd);
+            border:1px solid rgba(255,255,255,.25);
+            transition:all var(--dur) var(--ease); min-height:44px;
+            width:fit-content; backdrop-filter:blur(4px);
+            background:rgba(255,255,255,.06)
+        }
+        .spread-link:hover { background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.4) }
+        .spread-link svg { width:16px; height:16px; stroke:var(--white); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
+
+        /* ─── NEWSLETTER ────────────────────────────────────────── */
+        .nl { background:var(--earth-warm); padding:80px 0 }
+        .nl-inner { max-width:520px; margin:0 auto; padding:0 24px; text-align:center }
+        .nl-tag { font-family:var(--fc); font-size:22px; font-weight:700; color:var(--sangria); margin-bottom:4px }
+        .nl-title { font-family:var(--fp); font-size:clamp(20px,2.5vw,28px); font-weight:400; letter-spacing:-.04em; line-height:1.2; margin-bottom:8px }
+        .nl-text { font-size:15px; color:var(--gm); margin-bottom:28px; line-height:1.6 }
+        .nl-form { display:flex; gap:10px }
+        .nl-input {
+            flex:1; font-size:15px; color:var(--black); padding:12px 16px;
+            border:1px solid var(--earth-sand); border-radius:var(--rmd); min-height:48px;
+            outline:none; background:var(--white);
+            transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease)
+        }
+        .nl-input::placeholder { color:var(--platinum); font-weight:300 }
+        .nl-input:focus { border-color:var(--pthalo); box-shadow:0 0 0 3px rgba(28,68,71,.08) }
+        .nl-btn {
+            font-size:14px; font-weight:500; color:var(--white); background:var(--sangria);
+            padding:12px 28px; border-radius:var(--rmd); min-height:48px;
+            transition:all var(--dur) var(--ease); white-space:nowrap
+        }
+        .nl-btn:hover { opacity:.9 }
+        .nl-fine { font-size:12px; color:var(--earth-stone); margin-top:14px }
+
+        /* ─── FOOTER ────────────────────────────────────────────── */
+        .footer { background:#1b1b1b }
+        .footer-main { padding:64px 0 56px }
+        .footer-layout { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:48px }
+        .footer-brand { display:flex; flex-direction:column; gap:24px }
+        .footer-logo img { height:24px; width:auto; display:block; opacity:.9 }
+        .footer-tagline { font-size:14px; font-weight:300; color:rgba(255,255,255,.4); line-height:1.6; max-width:220px }
+        .footer-cert { display:flex; align-items:center; gap:12px; margin-top:8px }
+        .footer-cert img { height:40px; width:auto; opacity:.6; transition:opacity var(--dur) var(--ease) }
+        .footer-cert:hover img { opacity:.85 }
+        .footer-cert-text { font-size:11px; color:rgba(255,255,255,.3); line-height:1.5 }
+        .footer-col h4 { font-size:20px; font-weight:700; color:var(--white); margin-bottom:20px; line-height:1.2 }
+        .footer-col a { display:block; font-size:16px; font-weight:400; color:rgba(255,255,255,.55); padding:4px 0; line-height:1.5; transition:color var(--dur) var(--ease) }
+        .footer-col a:hover { color:var(--white) }
+        .footer-social-link { display:flex; align-items:center; gap:10px; font-size:16px; font-weight:400; color:rgba(255,255,255,.55); padding:4px 0; line-height:1.5; transition:color var(--dur) var(--ease) }
+        .footer-social-link:hover { color:var(--white) }
+        .footer-social-link svg { width:18px; height:18px; flex-shrink:0; opacity:.65; transition:opacity var(--dur) var(--ease) }
+        .footer-social-link:hover svg { opacity:1 }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding:24px 0 }
+        .footer-bottom-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px }
+        .footer-copy { font-size:12px; color:rgba(255,255,255,.3) }
+        .footer-legal { display:flex; align-items:center; gap:24px }
+        .footer-legal a { font-size:12px; color:rgba(255,255,255,.3); transition:color var(--dur) var(--ease) }
+        .footer-legal a:hover { color:rgba(255,255,255,.7) }
+
+        /* ─── REVEAL ─────────────────────────────────────────────── */
+        .reveal { opacity:0; transform:translateY(16px); transition:opacity .8s var(--ease), transform .8s var(--ease) }
+        .reveal.vis { opacity:1; transform:translateY(0) }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────────── */
+        @media (max-width:1024px) {
+            .grid-3 { grid-template-columns:1fr 1fr; gap:24px }
+            .footer-layout { grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px }
+        }
+        @media (max-width:768px) {
+            .nav-inner { height:72px }
+            .browse-bar { top:72px }
+            .nav-back-btn span { display:none }
+            .nav-back-btn { padding:12px; gap:0 }
+            .nav-right { gap:6px }
+            .tag-hero { min-height:55vh; min-height:55svh }
+            .section { padding:64px 0 }
+            .nl-form { flex-direction:column }
+            .footer-layout { grid-template-columns:1fr 1fr; gap:40px 32px }
+            .footer-brand { grid-column:1 / -1 }
+            .footer-tagline { max-width:320px }
+            .footer-bottom-inner { justify-content:center; text-align:center; flex-direction:column; gap:12px }
+            .footer-legal { gap:20px }
+        }
+        @media (max-width:480px) {
+            .wrap { padding:0 20px }
+            .nav-inner { padding:0 20px }
+            .browse-bar { top:72px }
+            .tag-hero-body { padding:0 20px 36px }
+            .tag-hero-title { font-size:clamp(28px,8vw,40px) }
+            .grid-3 { grid-template-columns:1fr; gap:24px }
+            .footer-main { padding:48px 0 40px }
+            .footer-layout { grid-template-columns:1fr; gap:32px }
+            .footer-brand { grid-column:auto }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── NAV ──────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <img src="../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+                <img src="../../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+                <span class="nav-logo-blog">blog</span>
+            </a>
+            <div class="nav-right">
+                <div class="lang" id="lang">
+                    <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox"
+                        aria-label="Select language">
+                        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10" stroke-width="1.75" />
+                            <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                stroke-width="1.5" />
+                        </svg>
+                        <span class="lang-code-label" id="langCurrent">EN</span>
+                        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+                    <div class="lang-panel" id="langPanel" role="listbox">
+                        <div class="lang-panel-header">
+                            <span class="lang-panel-label">Language</span>
+                        </div>
+                        <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                            <svg class="lang-check" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </button>
+                        <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
+                            <span class="lang-flag">🇩🇪</span>
+                            <span class="lang-name">Deutsch</span>
+                        </button>
+                        <button class="lang-option" data-lang="FR" role="option" aria-selected="false">
+                            <span class="lang-flag">🇫🇷</span>
+                            <span class="lang-name">Français</span>
+                        </button>
+                        <button class="lang-option" data-lang="ES" role="option" aria-selected="false">
+                            <span class="lang-flag">🇪🇸</span>
+                            <span class="lang-name">Español</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="/" class="nav-back-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    <span>Back to homepage</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── TAG HERO ──────────────────────────────────────────────── -->
+    <section class="tag-hero">
+        <div class="tag-hero-bg">
+            <img src="../../../public/images/photos/landscape-etosha-namibia.jpg" alt="Aerial view of Etosha salt pan, Namibia">
+        </div>
+        <div class="tag-hero-grad"></div>
+        <div class="tag-hero-body">
+            <p class="tag-hero-breadcrumb">
+                <a href="/tag/destinations">Destinations</a>
+                <span class="tag-hero-breadcrumb-sep">·</span>
+                <span>Namibia</span>
+            </p>
+            <div class="tag-hero-flag-row">
+                <img src="../../reference-images/viatu-flag-namibia.svg" class="tag-hero-flag" alt="Namibia flag">
+                <h1 class="tag-hero-title">Namibia</h1>
+            </div>
+            <div class="tag-hero-meta">
+                <span class="tag-hero-count">
+                    <span class="nums">75</span> articles
+                </span>
+            </div>
+            <p class="tag-hero-desc">From the red dunes of Sossusvlei to the wildlife of Etosha — our complete guide to Africa's most dramatic destination.</p>
+        </div>
+    </section>
+
+    <!-- ── BROWSE BAR ─────────────────────────────────────────────── -->
+    <div class="browse-bar">
+        <div class="browse-bar-inner">
+            <div class="browse-row">
+                <a href="/" class="browse-pill">All</a>
+                <a href="/tag/destinations" class="browse-pill active">Destinations</a>
+                <a href="/tag/experiences" class="browse-pill">Experiences</a>
+                <a href="/tag/guides" class="browse-pill">Guides</a>
+                <a href="/tag/reviews" class="browse-pill">Reviews</a>
+                <a href="/tag/travel-styles" class="browse-pill">Travel Styles</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── COUNT BAR ──────────────────────────────────────────────── -->
+    <div class="count-bar">
+        <div class="count-bar-inner">
+            <p class="count-bar-text"><strong class="nums">75</strong> articles in Namibia</p>
+            <button class="count-sort">
+                <span class="count-sort-label">Sort</span>
+                Latest
+                <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ── ARTICLE GRID ───────────────────────────────────────────── -->
+    <section class="section">
+        <div class="wrap">
+            <div class="grid-3 reveal">
+
+                <!-- Card 1 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/landscape-etosha-namibia.jpg" alt="Etosha National Park salt pan">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Destination · Namibia</p>
+                        <h3 class="card-title">The complete guide to Etosha — Africa's most accessible big-game park</h3>
+                        <p class="card-meta"><strong>Lena S.</strong> · <span class="nums">14</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-5.jpg" alt="Springbok in Namib desert at dusk">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Guide · Namibia</p>
+                        <h3 class="card-title">Sossusvlei in <span class="nums">3</span> days: dunes, dead trees, and a sky full of stars</h3>
+                        <p class="card-meta"><strong>Marco R.</strong> · <span class="nums">10</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/wildlife-elephants-namibia.jpg" alt="Desert elephants in Damaraland">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Destination · Namibia</p>
+                        <h3 class="card-title">Desert elephants of Damaraland — one of Africa's most remarkable wildlife encounters</h3>
+                        <p class="card-meta"><strong>Bárbara R.</strong> · <span class="nums">9</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-1.jpg" alt="Luxury tent camp in Namibia">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Review · Namibia</p>
+                        <h3 class="card-title">Hoanib Valley Camp: the most remote — and most rewarding — lodge in Namibia</h3>
+                        <p class="card-meta"><strong>Lena S.</strong> · <span class="nums">12</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-3.jpg" alt="Himba village near Kunene, Namibia">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Experience · Namibia</p>
+                        <h3 class="card-title">A cultural encounter with the Himba — what to expect and how to go respectfully</h3>
+                        <p class="card-meta"><strong>Marco R.</strong> · <span class="nums">8</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 6 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-2.jpg" alt="Self-drive vehicle on Namibian gravel road">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Guide · Namibia</p>
+                        <h3 class="card-title">Self-driving Namibia: the ultimate <span class="nums">14</span>-day itinerary from Windhoek to Cape Cross</h3>
+                        <p class="card-meta"><strong>Bárbara R.</strong> · <span class="nums">18</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 7 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-4.jpg" alt="Lion at a waterhole in Etosha">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Experience · Namibia</p>
+                        <h3 class="card-title">Night drives in Etosha: what we saw, and why you can't skip them</h3>
+                        <p class="card-meta"><strong>Lena S.</strong> · <span class="nums">7</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 8 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-6.jpg" alt="Zebras at Namibia waterhole">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Guide · Namibia</p>
+                        <h3 class="card-title">When to visit Namibia — a month-by-month breakdown for wildlife and weather</h3>
+                        <p class="card-meta"><strong>Marco R.</strong> · <span class="nums">11</span> min</p>
+                    </div>
+                </a>
+
+                <!-- Card 9 -->
+                <a href="#" class="card">
+                    <div class="card-img">
+                        <img src="../../../public/images/photos/rect-8.jpg" alt="Swakopmund coastline at dusk">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-cat">Destination · Namibia</p>
+                        <h3 class="card-title">Swakopmund: the surprising coastal town every Namibia trip needs at its end</h3>
+                        <p class="card-meta"><strong>Bárbara R.</strong> · <span class="nums">9</span> min</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="pg-arrow disabled" aria-label="Previous page">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+                <a href="#" class="pg-btn active">1</a>
+                <a href="#" class="pg-btn">2</a>
+                <a href="#" class="pg-btn">3</a>
+                <a href="#" class="pg-btn">4</a>
+                <span class="pg-btn ellipsis">…</span>
+                <a href="#" class="pg-btn">9</a>
+                <a href="#" class="pg-arrow" aria-label="Next page">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── CTA SPREAD ─────────────────────────────────────────────── -->
+    <section class="spread spread-full reveal">
+        <div class="spread-bg">
+            <img src="../../../public/images/photos/wildlife-leopard-timbavati.jpg" alt="Leopard resting in an acacia tree, Timbavati">
+        </div>
+        <div class="spread-grad"></div>
+        <div class="spread-content">
+            <p class="spread-tag">Start planning</p>
+            <h2 class="spread-title">Ready to explore Namibia?</h2>
+            <p class="spread-text">Talk to a specialist who knows every corner of the country. We'll build a trip that goes beyond the postcards.</p>
+            <a href="#" class="spread-link">Plan your trip
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── NEWSLETTER ─────────────────────────────────────────────── -->
+    <section class="nl">
+        <div class="nl-inner">
+            <p class="nl-tag">Stay inspired</p>
+            <h2 class="nl-title">Safari stories in your inbox</h2>
+            <p class="nl-text">Expert guides, lodge reviews, and trip inspiration. Delivered every two weeks.</p>
+            <div class="nl-form">
+                <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+                <button class="nl-btn">Subscribe</button>
+            </div>
+            <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="wrap">
+                <div class="footer-layout">
+
+                    <!-- Brand column -->
+                    <div class="footer-brand">
+                        <a href="/" class="footer-logo">
+                            <img src="../../brand/logos/viatu-logo-white.svg" alt="Viatu" width="110" height="24">
+                        </a>
+                        <p class="footer-tagline">African safaris designed around you — tailor-made by specialists who know the continent.</p>
+                        <div class="footer-cert">
+                            <img src="../../reference-images/viatu-b-corp-logo-plain.svg" alt="B Corporation Certified" height="40">
+                            <span class="footer-cert-text">Certified<br>B Corporation</span>
+                        </div>
+                    </div>
+
+                    <!-- Blog column -->
+                    <div class="footer-col">
+                        <h4>Blog</h4>
+                        <a href="#">Latest</a>
+                        <a href="#">Destinations</a>
+                        <a href="#">Experiences</a>
+                        <a href="#">Guides</a>
+                        <a href="#">Reviews</a>
+                        <a href="#">Travel Styles</a>
+                    </div>
+
+                    <!-- General column -->
+                    <div class="footer-col">
+                        <h4>General</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Sustainability</a>
+                        <a href="#">Testimonials</a>
+                        <a href="#">Contact</a>
+                    </div>
+
+                    <!-- Socials column -->
+                    <div class="footer-col">
+                        <h4>Socials</h4>
+                        <a href="#" class="footer-social-link">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10.25 17.0625C14.2886 17.0625 17.5625 13.7886 17.5625 9.75C17.5625 5.71142 14.2886 2.4375 10.25 2.4375C6.21142 2.4375 2.9375 5.71142 2.9375 9.75C2.9375 13.7886 6.21142 17.0625 10.25 17.0625Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.2969 6.70314H12.0781C11.8378 6.70213 11.5996 6.74873 11.3774 6.84025C11.1551 6.93176 10.9532 7.06638 10.7832 7.23634C10.6133 7.4063 10.4786 7.60823 10.3871 7.83048C10.2956 8.05274 10.249 8.29091 10.25 8.53127V17.0625" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.8125 10.9688H12.6875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Facebook
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10.25 13.2969C11.9327 13.2969 13.2969 11.9327 13.2969 10.25C13.2969 8.56726 11.9327 7.20312 10.25 7.20312C8.56726 7.20312 7.20312 8.56726 7.20312 10.25C7.20312 11.9327 8.56726 13.2969 10.25 13.2969Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/>
+                                <path d="M13.6016 3.24219H6.89844C4.87915 3.24219 3.24219 4.87915 3.24219 6.89844V13.6016C3.24219 15.6209 4.87915 17.2578 6.89844 17.2578H13.6016C15.6209 17.2578 17.2578 15.6209 17.2578 13.6016V6.89844C17.2578 4.87915 15.6209 3.24219 13.6016 3.24219Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14.2109 7.20312C14.7158 7.20312 15.125 6.79389 15.125 6.28906C15.125 5.78424 14.7158 5.375 14.2109 5.375C13.7061 5.375 13.2969 5.78424 13.2969 6.28906C13.2969 6.79389 13.7061 7.20312 14.2109 7.20312Z" fill="currentColor"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <svg width="20" height="20" viewBox="0 0 21 20" fill="none">
+                                <path d="M17.0626 2.8125H3.93762C3.59244 2.8125 3.31262 3.09232 3.31262 3.4375V16.5625C3.31262 16.9077 3.59244 17.1875 3.93762 17.1875H17.0626C17.4078 17.1875 17.6876 16.9077 17.6876 16.5625V3.4375C17.6876 3.09232 17.4078 2.8125 17.0626 2.8125Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.875 8.75V13.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.37512 8.75V13.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9.875 10.9375C9.875 10.3573 10.1055 9.80094 10.5157 9.3907C10.9259 8.98047 11.4823 8.75 12.0625 8.75C12.6427 8.75 13.1991 8.98047 13.6093 9.3907C14.0195 9.80094 14.25 10.3573 14.25 10.9375V13.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.37512 7.1875C7.89289 7.1875 8.31262 6.76777 8.31262 6.25C8.31262 5.73223 7.89289 5.3125 7.37512 5.3125C6.85736 5.3125 6.43762 5.73223 6.43762 6.25C6.43762 6.76777 6.85736 7.1875 7.37512 7.1875Z" fill="currentColor"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="footer-bottom-inner">
+                    <span class="footer-copy">&copy; <span class="nums">2026</span> Viatu. All rights reserved.</span>
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Nav scroll ────────────────────────────────────────────
+        // ── Scroll-triggered nav background ──────────────────────────────
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+
+        // ── Language dropdown ──────────────────────────────────────────
+        const langWrap = document.getElementById('lang');
+        const langTrigger = document.getElementById('langTrigger');
+        const langCurrent = document.getElementById('langCurrent');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langWrap.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.lang-option').forEach(o => {
+                    o.classList.remove('active');
+                    o.setAttribute('aria-selected', 'false');
+                    const chk = o.querySelector('.lang-check');
+                    if (chk) chk.remove();
+                });
+                opt.classList.add('active');
+                opt.setAttribute('aria-selected', 'true');
+                opt.insertAdjacentHTML('beforeend',
+                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                langCurrent.textContent = opt.dataset.lang;
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', e => {
+            if (!langWrap.contains(e.target)) {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+
+
+        // ── Language dropdown ─────────────────────────────────────
+        const langWrap = document.getElementById('lang');
+        const langTrigger = document.getElementById('langTrigger');
+        const langCurrent = document.getElementById('langCurrent');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langWrap.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.lang-option').forEach(o => {
+                    o.classList.remove('active');
+                    o.setAttribute('aria-selected', 'false');
+                    const chk = o.querySelector('.lang-check');
+                    if (chk) chk.remove();
+                });
+                opt.classList.add('active');
+                opt.setAttribute('aria-selected', 'true');
+                opt.insertAdjacentHTML('beforeend',
+                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                langCurrent.textContent = opt.dataset.lang;
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', e => {
+            if (!langWrap.contains(e.target)) {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // ── Reveal on scroll ──────────────────────────────────────
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('vis'), i * 60);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+
+</body>
+</html>

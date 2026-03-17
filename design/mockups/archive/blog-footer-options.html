@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viatu Blog — Footer Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── Reset & Base ───────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --sangria:      #541736;
+            --sangria-dark: #3f1128;
+            --sangria-deep: #2e0c1d;
+            --pthalo:       #1C4447;
+            --pthalo-dark:  #163739;
+            --pthalo-deep:  #0f2a2c;
+            --charcoal:     #111111;
+            --charcoal-bar: #0a0a0a;
+            --platinum:     #C4C4C4;
+            --cream:        #F3FFB9;
+            --white:        #FFFFFF;
+            --black:        #000000;
+            --grey-light:   #F8F9FA;
+            --grey-medium:  #6C757D;
+            --grey-dark:    #343A40;
+            --grey-300:     #DEE2E6;
+
+            --font-display:   'Krona One', sans-serif;
+            --font-body:      'Hanken Grotesk', sans-serif;
+            --font-accent:    'Caveat', cursive;
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: var(--font-body);
+            color: var(--white);
+        }
+
+        /* ─── Comparison page chrome ─────────────────────────────────── */
+        .comparison-header {
+            text-align: center;
+            padding: 80px 24px 60px;
+        }
+        .comparison-header .eyebrow {
+            font-family: var(--font-accent);
+            font-size: 22px;
+            color: var(--cream);
+            display: block;
+            margin-bottom: 12px;
+        }
+        .comparison-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(28px, 4vw, 48px);
+            color: var(--white);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+        .comparison-header p {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: #888;
+            margin-top: 16px;
+        }
+
+        .option-label {
+            text-align: center;
+            padding: 56px 24px 32px;
+        }
+        .option-label .tag {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #555;
+            background: #222;
+            border: 1px solid #333;
+            padding: 4px 12px;
+            border-radius: 99px;
+            margin-bottom: 16px;
+        }
+        .option-label h2 {
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3vw, 34px);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .option-label p {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .option-label.a h2 { color: #a8cfcf; }
+        .option-label.b h2 { color: #d4a0a0; }
+        .option-label.c h2 { color: #b8c8a8; }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #333, transparent);
+            margin: 0 5%;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════════
+           OPTION A — EXPANDED EDITORIAL (Pthalo green)
+        ═══════════════════════════════════════════════════════════════ */
+
+        .footer-a {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        /* Top bar */
+        .footer-a .ft-top {
+            border-bottom: 1px solid rgba(243, 255, 185, 0.2);
+            padding: 40px 64px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .footer-a .ft-top-logo {
+            flex-shrink: 0;
+        }
+        .footer-a .ft-top-tagline {
+            flex: 1;
+            font-family: var(--font-accent);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--cream);
+            letter-spacing: 0.01em;
+        }
+        .footer-a .ft-nl {
+            display: flex;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .footer-a .ft-nl input {
+            font-family: var(--font-body);
+            font-size: 14px;
+            padding: 11px 16px;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            border-right: none;
+            background: rgba(255,255,255,0.08);
+            color: var(--white);
+            border-radius: 6px 0 0 6px;
+            outline: none;
+            width: 220px;
+            transition: border-color 200ms, box-shadow 200ms;
+        }
+        .footer-a .ft-nl input::placeholder { color: rgba(255,255,255,0.4); }
+        .footer-a .ft-nl input:focus {
+            border-color: var(--pthalo);
+            box-shadow: 0 0 0 3px rgba(28, 68, 71, 0.4);
+            background: rgba(255,255,255,0.12);
+        }
+        .footer-a .ft-nl button {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 11px 22px;
+            background: var(--sangria);
+            color: var(--white);
+            border: none;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            transition: background 200ms, transform 200ms;
+            white-space: nowrap;
+        }
+        .footer-a .ft-nl button:hover { background: var(--sangria-dark); transform: none; }
+
+        /* Main grid */
+        .footer-a .ft-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.4fr;
+            gap: 48px;
+            padding: 48px 64px;
+        }
+        .footer-a .ft-brand p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.65);
+            margin-top: 16px;
+            max-width: 240px;
+        }
+
+        /* Certification badges */
+        .ft-certs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+        .footer-a .cert-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2px;
+            border: 1.5px solid rgba(243, 255, 185, 0.4);
+            border-radius: 8px;
+            padding: 8px 12px;
+            transition: border-color 200ms, background 200ms;
+            cursor: default;
+        }
+        .footer-a .cert-badge:hover {
+            border-color: var(--cream);
+            background: rgba(243, 255, 185, 0.06);
+        }
+        .footer-a .cert-logo {
+            height: 56px;
+            width: auto;
+            opacity: 0.8;
+            transition: opacity 200ms;
+            flex-shrink: 0;
+        }
+        .footer-a .cert-logo:hover { opacity: 1; }
+        .footer-a .cert-badge .cert-label {
+            font-family: var(--font-body);
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(243,255,185,0.7);
+            line-height: 1;
+        }
+        .footer-a .cert-badge .cert-main {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.1;
+        }
+
+        /* Link columns */
+        .footer-a .ft-col h4 {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 20px;
+        }
+        .footer-a .ft-col a {
+            display: block;
+            font-size: 14px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            padding: 5px 0;
+            transition: color 200ms, padding-left 200ms;
+        }
+        .footer-a .ft-col a:hover { color: var(--cream); padding-left: 4px; }
+
+        /* Social + certs column */
+        .footer-a .ft-social-col h4 {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 20px;
+        }
+        .ft-social-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .footer-a .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: border-color 200ms, color 200ms, background 200ms;
+        }
+        .footer-a .social-icon:hover {
+            border-color: var(--cream);
+            color: var(--cream);
+            background: rgba(243,255,185,0.06);
+        }
+        .footer-a .social-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+        /* Bottom bar */
+        .footer-a .ft-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 20px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-a .ft-copy {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+        }
+        .footer-a .ft-copy .nums { font-family: var(--font-body); }
+        .footer-a .ft-legal {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-a .ft-legal a {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: color 200ms;
+        }
+        .footer-a .ft-legal a:hover { color: var(--cream); }
+        .footer-a .ft-made {
+            font-family: var(--font-accent);
+            font-size: 17px;
+            font-style: italic;
+            color: rgba(243,255,185,0.55);
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════════
+           OPTION B — SANGRIA DARK (bold brand statement)
+        ═══════════════════════════════════════════════════════════════ */
+
+        .footer-b {
+            background: var(--sangria);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background pattern — CSS-only organic curves */
+        .footer-b::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 900px 600px at -10% 130%, rgba(243,255,185,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse 600px 400px at 110% -20%, rgba(243,255,185,0.03) 0%, transparent 55%),
+                radial-gradient(ellipse 400px 300px at 50% 110%, rgba(243,255,185,0.025) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .footer-b::after {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            border: 1px solid rgba(243,255,185,0.06);
+            top: -200px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .footer-b .ft-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-b .ft-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding: 64px 64px 48px;
+        }
+
+        /* Brand column */
+        .footer-b .ft-brand-col .logo-wrap {
+            margin-bottom: 20px;
+        }
+        .footer-b .ft-brand-col .brand-tagline {
+            font-family: var(--font-accent);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+        .footer-b .ft-brand-col .brand-desc {
+            font-size: 14px;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.6);
+            max-width: 260px;
+            margin-bottom: 28px;
+        }
+
+        /* Pill badges */
+        .ft-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .footer-b .cert-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1.5px solid rgba(243,255,185,0.45);
+            border-radius: 99px;
+            padding: 5px 12px;
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--cream);
+            transition: background 200ms, border-color 200ms;
+            cursor: default;
+        }
+        .footer-b .cert-pill:hover {
+            background: rgba(243,255,185,0.1);
+            border-color: var(--cream);
+        }
+        .footer-b .cert-pill::before {
+            content: '✦';
+            font-size: 8px;
+            opacity: 0.7;
+        }
+
+        /* Link columns */
+        .footer-b .ft-link-col h4 {
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(243,255,185,0.45);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(243,255,185,0.12);
+        }
+        .footer-b .ft-link-col a {
+            display: block;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 6px 0;
+            transition: color 200ms;
+        }
+        .footer-b .ft-link-col a:hover { color: var(--cream); }
+
+        /* Bottom bar */
+        .footer-b .ft-bottom {
+            background: var(--sangria-deep);
+            padding: 18px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-b .ft-copy {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            font-family: var(--font-body);
+        }
+        .footer-b .ft-copy .nums { font-family: var(--font-body); }
+        .footer-b .ft-socials {
+            display: flex;
+            gap: 8px;
+        }
+        .footer-b .social-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 200ms, background 200ms;
+        }
+        .footer-b .social-icon:hover {
+            color: var(--cream);
+            background: rgba(243,255,185,0.08);
+        }
+        .footer-b .social-icon svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .footer-b .ft-since {
+            font-family: var(--font-accent);
+            font-size: 18px;
+            color: rgba(243,255,185,0.45);
+            font-weight: 700;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════════
+           OPTION C — LIGHT / MINIMAL (editorial lightness)
+        ═══════════════════════════════════════════════════════════════ */
+
+        .footer-c {
+            background: var(--grey-light);
+            color: var(--black);
+            border-top: 4px solid var(--sangria);
+        }
+
+        .footer-c .ft-main {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding: 56px 64px 48px;
+        }
+
+        /* Brand column */
+        .footer-c .ft-brand-col .logo-wrap {
+            margin-bottom: 18px;
+        }
+        .footer-c .ft-brand-col .brand-tagline {
+            font-family: var(--font-accent);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+        .footer-c .ft-brand-col .brand-desc {
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--grey-medium);
+            max-width: 240px;
+            margin-bottom: 28px;
+        }
+
+        /* Cert badges outlined */
+        .footer-c .cert-rect {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid var(--pthalo);
+            border-radius: 4px;
+            padding: 6px 10px;
+            min-width: 48px;
+            min-height: 44px;
+            transition: background 200ms;
+            cursor: default;
+        }
+        .footer-c .cert-rect:hover { background: rgba(28,68,71,0.06); }
+        .footer-c .cert-rect .cert-main {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--pthalo);
+            line-height: 1.1;
+        }
+        .footer-c .cert-rect .cert-sub {
+            font-family: var(--font-body);
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: rgba(28,68,71,0.6);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .footer-c .ft-certs { gap: 8px; }
+
+        /* Link columns */
+        .footer-c .ft-link-col h4 {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--grey-dark);
+            margin-bottom: 20px;
+        }
+        .footer-c .ft-link-col a {
+            display: block;
+            font-size: 14px;
+            color: var(--grey-medium);
+            text-decoration: none;
+            padding: 5px 0;
+            transition: color 200ms;
+        }
+        .footer-c .ft-link-col a:hover { color: var(--sangria); }
+
+        /* Bottom bar */
+        .footer-c .ft-bottom {
+            border-top: 1px solid var(--platinum);
+            padding: 20px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-c .ft-copy {
+            font-size: 13px;
+            color: var(--grey-medium);
+            font-family: var(--font-body);
+        }
+        .footer-c .ft-copy .nums { font-family: var(--font-body); }
+        .footer-c .ft-socials {
+            display: flex;
+            gap: 6px;
+        }
+        .footer-c .social-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--grey-300);
+            border-radius: 6px;
+            color: var(--grey-dark);
+            text-decoration: none;
+            transition: border-color 200ms, color 200ms, background 200ms;
+        }
+        .footer-c .social-icon:hover {
+            border-color: var(--sangria);
+            color: var(--sangria);
+            background: rgba(84,23,54,0.04);
+        }
+        .footer-c .social-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+        /* Trust badge */
+        .footer-c .ft-trust {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid var(--grey-300);
+            border-radius: 8px;
+            padding: 6px 14px;
+        }
+        .footer-c .ft-trust .trust-label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--grey-dark);
+        }
+        .footer-c .ft-trust .trust-score {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--sangria);
+        }
+        .footer-c .ft-trust .trust-stars {
+            font-size: 11px;
+            color: #f59e0b;
+            letter-spacing: 0.05em;
+        }
+
+
+        /* ─── Responsive ─────────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .footer-a .ft-grid,
+            .footer-b .ft-main,
+            .footer-c .ft-main {
+                grid-template-columns: 1fr 1fr;
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .footer-a .ft-top { padding: 32px 40px; }
+            .footer-a .ft-bottom,
+            .footer-b .ft-bottom,
+            .footer-c .ft-bottom { padding: 18px 40px; }
+        }
+
+        @media (max-width: 640px) {
+            .footer-a .ft-top {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 28px 24px;
+                gap: 20px;
+            }
+            .footer-a .ft-nl { width: 100%; }
+            .footer-a .ft-nl input { flex: 1; width: auto; }
+
+            .footer-a .ft-grid,
+            .footer-b .ft-main,
+            .footer-c .ft-main {
+                grid-template-columns: 1fr;
+                padding: 32px 24px;
+                gap: 32px;
+            }
+
+            .footer-a .ft-bottom,
+            .footer-b .ft-bottom,
+            .footer-c .ft-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px 24px;
+                gap: 10px;
+            }
+            .footer-a .ft-legal { flex-wrap: wrap; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Page header ────────────────────────────────────────────────── -->
+    <div class="comparison-header">
+        <span class="eyebrow">Design review — February 2026</span>
+        <h1>Blog Footer — Three Options</h1>
+        <p>Compare layouts, tones, and certification treatments below. Scroll to evaluate each.</p>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         OPTION A LABEL
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="option-label a">
+        <div class="tag">Option A</div>
+        <h2>Expanded Editorial — Charcoal</h2>
+        <p>Charcoal black · Newsletter integrated · Real B Corp &amp; 1% logos · Three-part bottom bar</p>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FOOTER A
+    ══════════════════════════════════════════════════════════════════ -->
+    <footer class="footer-a">
+
+        <!-- Top bar: logo + tagline + newsletter -->
+        <div class="ft-top">
+            <div class="ft-top-logo">
+                <img src="../../public/images/brand/logos/viatu-logo-white.svg" alt="Viatu" width="110">
+            </div>
+            <p class="ft-top-tagline">Conscious travel,&nbsp;positive impact</p>
+            <form class="ft-nl" onsubmit="return false;">
+                <input type="email" placeholder="Your email address" aria-label="Email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Main grid -->
+        <div class="ft-grid">
+
+            <!-- Brand column -->
+            <div class="ft-brand">
+                <p>Tailor-made, positive impact trips: curated by us, created by you. We craft journeys that connect people with the wild and support the communities who protect it.</p>
+                <div class="ft-certs">
+                    <img src="../../public/images/brand/Other Logos/B-corp logo.svg"
+                         alt="Certified B Corporation"
+                         class="cert-logo"
+                         title="Certified B Corporation">
+                    <img src="../../public/images/brand/Other Logos/1-for-the-planet-white.png"
+                         alt="1% for the Planet"
+                         class="cert-logo"
+                         title="1% for the Planet">
+                    <div class="cert-badge" title="UN Global Compact">
+                        <span class="cert-main">UN&nbsp;GC</span>
+                        <span class="cert-label">Global Compact</span>
+                    </div>
+                    <div class="cert-badge" title="Future of Tourism">
+                        <span class="cert-main">FoT</span>
+                        <span class="cert-label">Future of Tourism</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explore column -->
+            <div class="ft-col">
+                <h4>Explore</h4>
+                <a href="#">All Trips</a>
+                <a href="#">All Stays</a>
+                <a href="#">Destinations</a>
+                <a href="#">Plan My Trip</a>
+                <a href="#">Reviews</a>
+            </div>
+
+            <!-- Destinations column -->
+            <div class="ft-col">
+                <h4>Destinations</h4>
+                <a href="#">Namibia</a>
+                <a href="#">Botswana</a>
+                <a href="#">Kenya</a>
+                <a href="#">Tanzania</a>
+                <a href="#">South Africa</a>
+            </div>
+
+            <!-- Social + Company column -->
+            <div class="ft-social-col">
+                <h4>Follow us</h4>
+                <div class="ft-social-icons">
+                    <!-- Instagram -->
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+                <h4 style="margin-top:0;">Company</h4>
+                <div class="ft-col" style="display:contents;">
+                    <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.75);text-decoration:none;padding:5px 0;transition:color 200ms,padding-left 200ms;" onmouseover="this.style.color='#F3FFB9';this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.75)';this.style.paddingLeft='0'">About Us</a>
+                    <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.75);text-decoration:none;padding:5px 0;transition:color 200ms,padding-left 200ms;" onmouseover="this.style.color='#F3FFB9';this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.75)';this.style.paddingLeft='0'">Sustainability</a>
+                    <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.75);text-decoration:none;padding:5px 0;transition:color 200ms,padding-left 200ms;" onmouseover="this.style.color='#F3FFB9';this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.75)';this.style.paddingLeft='0'">Blog</a>
+                    <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.75);text-decoration:none;padding:5px 0;transition:color 200ms,padding-left 200ms;" onmouseover="this.style.color='#F3FFB9';this.style.paddingLeft='4px'" onmouseout="this.style.color='rgba(255,255,255,0.75)';this.style.paddingLeft='0'">Contact</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="ft-bottom">
+            <span class="ft-copy">© <span class="nums">2026</span> Viatu Travel. All rights reserved.</span>
+            <nav class="ft-legal" aria-label="Legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Cookies</a>
+            </nav>
+            <span class="ft-made">Made for conscious travellers</span>
+        </div>
+
+    </footer>
+
+
+    <div class="divider" style="margin-top:0;"></div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         OPTION B LABEL
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="option-label b">
+        <div class="tag">Option B</div>
+        <h2>Sangria Dark</h2>
+        <p>Bold Sangria brand statement · Cream accents · Pill cert badges · Organic background pattern</p>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FOOTER B
+    ══════════════════════════════════════════════════════════════════ -->
+    <footer class="footer-b">
+        <div class="ft-inner">
+
+            <!-- Main grid -->
+            <div class="ft-main">
+
+                <!-- Brand column (wide) -->
+                <div class="ft-brand-col">
+                    <div class="logo-wrap">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" alt="Viatu" width="120">
+                    </div>
+                    <p class="brand-tagline">Tailor-made journeys.<br>Positive impact, always.</p>
+                    <p class="brand-desc">We craft deeply personal African adventures that connect you with the wild — and ensure the communities who protect it thrive.</p>
+                    <div class="ft-pills">
+                        <span class="cert-pill">B Corp</span>
+                        <span class="cert-pill">1% for the Planet</span>
+                        <span class="cert-pill">UN Global Compact</span>
+                        <span class="cert-pill">Future of Tourism</span>
+                    </div>
+                </div>
+
+                <!-- Explore column -->
+                <div class="ft-link-col">
+                    <h4>Explore</h4>
+                    <a href="#">All Trips</a>
+                    <a href="#">All Stays</a>
+                    <a href="#">Destinations</a>
+                    <a href="#">Plan My Trip</a>
+                    <a href="#">Reviews</a>
+                </div>
+
+                <!-- Destinations column -->
+                <div class="ft-link-col">
+                    <h4>Destinations</h4>
+                    <a href="#">Namibia</a>
+                    <a href="#">Botswana</a>
+                    <a href="#">Kenya</a>
+                    <a href="#">Tanzania</a>
+                    <a href="#">South Africa</a>
+                </div>
+
+                <!-- Company column -->
+                <div class="ft-link-col">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Sustainability</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Reviews</a>
+                    <a href="#">Contact</a>
+                </div>
+
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="ft-bottom">
+                <span class="ft-copy">© <span class="nums">2026</span> Viatu Travel. All rights reserved.</span>
+                <div class="ft-socials">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+                <span class="ft-since">Conscious travel since <span style="font-family:var(--font-body);">2019</span></span>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <div class="divider" style="margin-top:0;"></div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         OPTION C LABEL
+    ══════════════════════════════════════════════════════════════════ -->
+    <div class="option-label c">
+        <div class="tag">Option C</div>
+        <h2>Light &amp; Minimal</h2>
+        <p>Editorial lightness · Dark logo · Pthalo-bordered cert tiles · Reviews.io trust badge</p>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FOOTER C
+    ══════════════════════════════════════════════════════════════════ -->
+    <footer class="footer-c">
+
+        <!-- Main grid -->
+        <div class="ft-main">
+
+            <!-- Brand column -->
+            <div class="ft-brand-col">
+                <div class="logo-wrap">
+                    <img src="../../public/images/brand/logos/viatu-logo-dark.svg" alt="Viatu" width="110">
+                </div>
+                <p class="brand-tagline">Conscious travel, positive impact</p>
+                <p class="brand-desc">Tailor-made African journeys crafted with care — for travellers who want their adventures to leave the world better than they found it.</p>
+                <div class="ft-certs" style="display:flex;flex-wrap:wrap;gap:8px;">
+                    <div class="cert-rect" title="Certified B Corporation">
+                        <span class="cert-main">B Corp</span>
+                        <span class="cert-sub">Certified</span>
+                    </div>
+                    <div class="cert-rect" title="1% for the Planet">
+                        <span class="cert-main" style="font-family:var(--font-body);">1%</span>
+                        <span class="cert-sub">For the Planet</span>
+                    </div>
+                    <div class="cert-rect" title="UN Global Compact">
+                        <span class="cert-main">UN GC</span>
+                        <span class="cert-sub">Global Compact</span>
+                    </div>
+                    <div class="cert-rect" title="Future of Tourism">
+                        <span class="cert-main">FoT</span>
+                        <span class="cert-sub">Future Tourism</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explore column -->
+            <div class="ft-link-col">
+                <h4>Explore</h4>
+                <a href="#">All Trips</a>
+                <a href="#">All Stays</a>
+                <a href="#">Destinations</a>
+                <a href="#">Plan My Trip</a>
+                <a href="#">Reviews</a>
+            </div>
+
+            <!-- Destinations column -->
+            <div class="ft-link-col">
+                <h4>Destinations</h4>
+                <a href="#">Namibia</a>
+                <a href="#">Botswana</a>
+                <a href="#">Kenya</a>
+                <a href="#">Tanzania</a>
+                <a href="#">South Africa</a>
+            </div>
+
+            <!-- Company column -->
+            <div class="ft-link-col">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Sustainability</a>
+                <a href="#">Blog</a>
+                <a href="#">Reviews</a>
+                <a href="#">Contact</a>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="ft-bottom">
+            <span class="ft-copy">© <span class="nums">2026</span> Viatu Travel. All rights reserved.</span>
+            <div class="ft-socials">
+                <a href="#" class="social-icon" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+            </div>
+            <div class="ft-trust" title="Reviews.io verified rating">
+                <span class="trust-stars">★★★★★</span>
+                <span class="trust-score"><span class="nums">5.0</span></span>
+                <span class="trust-label">Reviews.io · <span class="nums">153</span> reviews</span>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- bottom spacer -->
+    <div style="height:80px;"></div>
+
+</body>
+</html>

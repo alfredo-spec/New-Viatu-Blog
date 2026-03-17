@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Accordion — Element Variants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria: #541736;
+      --sangria-hover: #47142e;
+      --pthalo: #1C4447;
+      --platinum: #C4C4C4;
+      --black: #000;
+      --white: #FFF;
+      --cream: #F3FFB9;
+      --gl: #F8F9FA;
+      --gm: #6C757D;
+      --gd: #343A40;
+      --g3: #DEE2E6;
+      --earth-warm: #E1E3DE;
+      --fp: 'Krona One', sans-serif;
+      --fs: 'Hanken Grotesk', sans-serif;
+      --fc: 'Caveat', cursive;
+      --rmd: .375rem;
+      --rlg: .5rem;
+      --rxl: .75rem;
+      --rfull: 9999px;
+      --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+      --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --dur: 200ms;
+      --dur3: 300ms;
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--fs);
+      color: var(--gd);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+    }
+
+    /* ─── Page scaffold ─── */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 64px 24px 120px;
+    }
+
+    .page-title {
+      font-family: var(--fp);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 400;
+      letter-spacing: -.04em;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .page-subtitle {
+      font-size: 15px;
+      color: var(--gm);
+      margin-bottom: 56px;
+      line-height: 1.5;
+    }
+
+    .variant-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--gm);
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      background: var(--gl);
+      border-radius: var(--rfull);
+      border: 1px solid var(--g3);
+    }
+
+    .variant-label .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sangria);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px dashed var(--g3);
+      margin: 64px 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       VARIANT A — Minimal Lines
+       ═══════════════════════════════════════════ */
+
+    .faq-section {
+      width: 100%;
+    }
+
+    .faq-section__tagline {
+      font-family: var(--fc);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--sangria);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .faq-section__heading {
+      font-family: var(--fs);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 32px;
+    }
+
+    /* Variant A items */
+    .faq-a__list {
+      border-top: 1px solid var(--g3);
+    }
+
+    .faq-a__item {
+      border-bottom: 1px solid var(--g3);
+    }
+
+    .faq-a__question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--fs);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--gd);
+      line-height: 1.4;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .faq-a__question:hover {
+      color: var(--sangria);
+    }
+
+    .faq-a__icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      transition: transform var(--dur3) var(--ease);
+    }
+
+    .faq-a__icon svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
+    .faq-a__icon .icon-line {
+      stroke: var(--gm);
+      transition: stroke var(--dur) var(--ease), transform var(--dur3) var(--ease);
+      transform-origin: center;
+    }
+
+    .faq-a__item[data-open="true"] .faq-a__icon .icon-line {
+      stroke: var(--sangria);
+    }
+
+    .faq-a__item[data-open="true"] .faq-a__icon .icon-h {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+
+    .faq-a__answer-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--dur3) var(--ease);
+    }
+
+    .faq-a__answer {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gd);
+      line-height: 1.65;
+      padding: 0 0 20px 0;
+      padding-top: 0;
+      max-width: 92%;
+    }
+
+    .faq-a__item[data-open="true"] .faq-a__answer-wrap {
+      /* max-height set by JS */
+    }
+
+    /* ═══════════════════════════════════════════
+       VARIANT B — Bordered Cards
+       ═══════════════════════════════════════════ */
+
+    .faq-b__list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-b__item {
+      border: 1px solid var(--g3);
+      border-radius: var(--rlg);
+      transition:
+        box-shadow var(--dur3) var(--ease),
+        border-color var(--dur3) var(--ease),
+        background var(--dur) var(--ease);
+      overflow: hidden;
+    }
+
+    .faq-b__item:hover:not([data-open="true"]) {
+      background: var(--gl);
+    }
+
+    .faq-b__item[data-open="true"] {
+      box-shadow: var(--sh-sm);
+      border-color: rgba(84, 23, 54, .2);
+    }
+
+    .faq-b__question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--fs);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--gd);
+      line-height: 1.4;
+      transition: color var(--dur) var(--ease);
+    }
+
+    .faq-b__question:hover {
+      color: var(--sangria);
+    }
+
+    .faq-b__chevron {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--dur3) var(--ease);
+    }
+
+    .faq-b__chevron svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--gm);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke var(--dur) var(--ease);
+    }
+
+    .faq-b__item[data-open="true"] .faq-b__chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-b__item[data-open="true"] .faq-b__chevron svg {
+      stroke: var(--sangria);
+    }
+
+    /* Grid-template-rows animation */
+    .faq-b__answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--dur3) var(--ease);
+    }
+
+    .faq-b__item[data-open="true"] .faq-b__answer-wrap {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-b__answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-b__answer {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gd);
+      line-height: 1.65;
+      padding: 0 24px 20px;
+      max-width: 92%;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 600px) {
+      .page {
+        padding: 40px 16px 80px;
+      }
+
+      .faq-section__heading {
+        font-size: 24px;
+        margin-bottom: 24px;
+      }
+
+      .faq-a__question {
+        font-size: 15px;
+        padding: 16px 0;
+      }
+
+      .faq-a__answer {
+        font-size: 15px;
+        max-width: 100%;
+      }
+
+      .faq-b__question {
+        font-size: 15px;
+        padding: 16px 20px;
+      }
+
+      .faq-b__answer {
+        font-size: 15px;
+        padding: 0 20px 16px;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <h1 class="page-title">FAQ Accordion</h1>
+    <p class="page-subtitle">Two variants for the Great Migration blog post FAQ section.</p>
+
+    <!-- ═══════════════════════════════════════════
+         VARIANT A — Minimal Lines
+         ═══════════════════════════════════════════ -->
+
+    <div class="variant-label"><span class="dot"></span> Variant A — Minimal Lines</div>
+
+    <section class="faq-section" id="faq-variant-a">
+      <p class="faq-section__tagline">Common questions</p>
+      <h2 class="faq-section__heading">Frequently Asked Questions</h2>
+
+      <div class="faq-a__list">
+
+        <!-- Item 1 -->
+        <div class="faq-a__item" data-open="false">
+          <button class="faq-a__question" aria-expanded="false">
+            <span>What's the difference between the Serengeti and Masai Mara portions of the Migration?</span>
+            <span class="faq-a__icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line class="icon-line icon-h" x1="10" y1="4" x2="10" y2="16" stroke-width="1.8" stroke-linecap="round"/>
+                <line class="icon-line icon-v" x1="4" y1="10" x2="16" y2="10" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-a__answer-wrap">
+            <p class="faq-a__answer">The Serengeti (Tanzania) makes up the majority of the Great Migration's route, covering a much larger area. The herds spend most of the year here, especially during calving season (January to March). The Masai Mara (Kenya) is where they move between July and October during the dry season. The famous Mara River crossings happen in this section.</p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="faq-a__item" data-open="false">
+          <button class="faq-a__question" aria-expanded="false">
+            <span>How do I plan a safari to witness the Great Migration?</span>
+            <span class="faq-a__icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line class="icon-line icon-h" x1="10" y1="4" x2="10" y2="16" stroke-width="1.8" stroke-linecap="round"/>
+                <line class="icon-line icon-v" x1="4" y1="10" x2="16" y2="10" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-a__answer-wrap">
+            <p class="faq-a__answer">First decide which stage of the migration you want to see. For calving season, visit the southern Serengeti (January to March). For dramatic river crossings, head to the Mara River (July to October). Book accommodations well in advance, especially for peak seasons.</p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="faq-a__item" data-open="false">
+          <button class="faq-a__question" aria-expanded="false">
+            <span>Why do the wildebeest migrate?</span>
+            <span class="faq-a__icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line class="icon-line icon-h" x1="10" y1="4" x2="10" y2="16" stroke-width="1.8" stroke-linecap="round"/>
+                <line class="icon-line icon-v" x1="4" y1="10" x2="16" y2="10" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-a__answer-wrap">
+            <p class="faq-a__answer">Wildebeest migrate in search of fresh grass and water, driven by seasonal rains that change resource availability across the Serengeti-Mara ecosystem. This movement is an ongoing, circular journey that keeps them moving throughout the year.</p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="faq-a__item" data-open="false">
+          <button class="faq-a__question" aria-expanded="false">
+            <span>When is the best time to see the Great Migration?</span>
+            <span class="faq-a__icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line class="icon-line icon-h" x1="10" y1="4" x2="10" y2="16" stroke-width="1.8" stroke-linecap="round"/>
+                <line class="icon-line icon-v" x1="4" y1="10" x2="16" y2="10" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-a__answer-wrap">
+            <p class="faq-a__answer">It depends on what you want to see. Calving season runs February to March in the southern Serengeti. The legendary Mara River crossings happen July to October. The herds are always moving, so there's something to witness year-round.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════════════════════════════════════
+         VARIANT B — Bordered Cards
+         ═══════════════════════════════════════════ -->
+
+    <div class="variant-label"><span class="dot"></span> Variant B — Bordered Cards</div>
+
+    <section class="faq-section" id="faq-variant-b">
+      <p class="faq-section__tagline">Common questions</p>
+      <h2 class="faq-section__heading">Frequently Asked Questions</h2>
+
+      <div class="faq-b__list">
+
+        <!-- Item 1 -->
+        <div class="faq-b__item" data-open="false">
+          <button class="faq-b__question" aria-expanded="false">
+            <span>What's the difference between the Serengeti and Masai Mara portions of the Migration?</span>
+            <span class="faq-b__chevron">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="5 8 10 13 15 8"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-b__answer-wrap">
+            <div class="faq-b__answer-inner">
+              <p class="faq-b__answer">The Serengeti (Tanzania) makes up the majority of the Great Migration's route, covering a much larger area. The herds spend most of the year here, especially during calving season (January to March). The Masai Mara (Kenya) is where they move between July and October during the dry season. The famous Mara River crossings happen in this section.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="faq-b__item" data-open="false">
+          <button class="faq-b__question" aria-expanded="false">
+            <span>How do I plan a safari to witness the Great Migration?</span>
+            <span class="faq-b__chevron">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="5 8 10 13 15 8"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-b__answer-wrap">
+            <div class="faq-b__answer-inner">
+              <p class="faq-b__answer">First decide which stage of the migration you want to see. For calving season, visit the southern Serengeti (January to March). For dramatic river crossings, head to the Mara River (July to October). Book accommodations well in advance, especially for peak seasons.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="faq-b__item" data-open="false">
+          <button class="faq-b__question" aria-expanded="false">
+            <span>Why do the wildebeest migrate?</span>
+            <span class="faq-b__chevron">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="5 8 10 13 15 8"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-b__answer-wrap">
+            <div class="faq-b__answer-inner">
+              <p class="faq-b__answer">Wildebeest migrate in search of fresh grass and water, driven by seasonal rains that change resource availability across the Serengeti-Mara ecosystem. This movement is an ongoing, circular journey that keeps them moving throughout the year.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="faq-b__item" data-open="false">
+          <button class="faq-b__question" aria-expanded="false">
+            <span>When is the best time to see the Great Migration?</span>
+            <span class="faq-b__chevron">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="5 8 10 13 15 8"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-b__answer-wrap">
+            <div class="faq-b__answer-inner">
+              <p class="faq-b__answer">It depends on what you want to see. Calving season runs February to March in the southern Serengeti. The legendary Mara River crossings happen July to October. The herds are always moving, so there's something to witness year-round.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    /* ─── Variant A — max-height accordion ─── */
+    (function () {
+      const variantA = document.getElementById('faq-variant-a');
+      const itemsA = variantA.querySelectorAll('.faq-a__item');
+
+      itemsA.forEach(function (item) {
+        const btn = item.querySelector('.faq-a__question');
+        const wrap = item.querySelector('.faq-a__answer-wrap');
+        const answer = item.querySelector('.faq-a__answer');
+
+        btn.addEventListener('click', function () {
+          const isOpen = item.getAttribute('data-open') === 'true';
+
+          // Close all others in this variant
+          itemsA.forEach(function (other) {
+            if (other !== item) {
+              other.setAttribute('data-open', 'false');
+              other.querySelector('.faq-a__question').setAttribute('aria-expanded', 'false');
+              other.querySelector('.faq-a__answer-wrap').style.maxHeight = '0';
+            }
+          });
+
+          if (isOpen) {
+            // Close this one
+            item.setAttribute('data-open', 'false');
+            btn.setAttribute('aria-expanded', 'false');
+            wrap.style.maxHeight = '0';
+          } else {
+            // Open this one
+            item.setAttribute('data-open', 'true');
+            btn.setAttribute('aria-expanded', 'true');
+            wrap.style.maxHeight = answer.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+
+    /* ─── Variant B — grid-template-rows accordion ─── */
+    (function () {
+      const variantB = document.getElementById('faq-variant-b');
+      const itemsB = variantB.querySelectorAll('.faq-b__item');
+
+      itemsB.forEach(function (item) {
+        var btn = item.querySelector('.faq-b__question');
+
+        btn.addEventListener('click', function () {
+          var isOpen = item.getAttribute('data-open') === 'true';
+
+          // Close all others in this variant
+          itemsB.forEach(function (other) {
+            if (other !== item) {
+              other.setAttribute('data-open', 'false');
+              other.querySelector('.faq-b__question').setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (isOpen) {
+            item.setAttribute('data-open', 'false');
+            btn.setAttribute('aria-expanded', 'false');
+          } else {
+            item.setAttribute('data-open', 'true');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

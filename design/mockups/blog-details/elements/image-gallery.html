@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery Variants — Viatu Blog</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Design System Tokens ── */
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-x: hidden;
+            font-family: var(--fs);
+            font-weight: 400;
+            color: var(--gd);
+            background: var(--gl);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        /* ── Page Shell ── */
+        .page-header {
+            padding: 64px 24px 48px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: var(--fp);
+            font-size: 20px;
+            color: var(--pthalo);
+            letter-spacing: .02em;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--gm);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .page-header .variant-count {
+            display: inline-block;
+            margin-top: 16px;
+            font-family: var(--fc);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--sangria);
+        }
+
+        /* ── Variant Section ── */
+        .variant-section {
+            margin-bottom: 48px;
+        }
+
+        .variant-card {
+            background: var(--white);
+            border-radius: var(--rxl);
+            box-shadow: var(--sh-md);
+            overflow: hidden;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .variant-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 32px 0;
+        }
+
+        .variant-label .number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--rfull);
+            background: var(--pthalo);
+            color: var(--white);
+            font-family: var(--fp);
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .variant-label h2 {
+            font-family: var(--fp);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gd);
+            letter-spacing: .03em;
+            text-transform: uppercase;
+        }
+
+        .variant-meta {
+            padding: 8px 32px 0 76px;
+            font-size: 12px;
+            color: var(--gm);
+            line-height: 1.5;
+        }
+
+        .variant-meta code {
+            font-size: 11px;
+            background: var(--gl);
+            padding: 1px 5px;
+            border-radius: var(--rmd);
+            color: var(--pthalo);
+        }
+
+        /* ── Content Column (simulates blog body) ── */
+        .content-column {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Faux body text for context */
+        .faux-text {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--gm);
+            margin-bottom: 24px;
+        }
+
+        .faux-text:last-child {
+            margin-top: 24px;
+            margin-bottom: 0;
+        }
+
+        .faux-text-line {
+            display: block;
+            height: 10px;
+            background: var(--g3);
+            border-radius: var(--rfull);
+            margin-bottom: 8px;
+            opacity: .4;
+        }
+
+        .faux-text-line:nth-child(2) { width: 92%; }
+        .faux-text-line:nth-child(3) { width: 78%; }
+        .faux-text-line:nth-child(4) { width: 85%; }
+        .faux-text-line:nth-child(5) { width: 60%; }
+
+        /* ── Variant 1: Single Inline ── */
+        .gallery-single-inline figure {
+            margin: 0;
+        }
+
+        .gallery-single-inline img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: var(--rlg);
+            box-shadow: var(--sh-sm);
+        }
+
+        .gallery-single-inline figcaption {
+            font-size: 13px;
+            color: var(--gm);
+            font-style: italic;
+            padding-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* ── Variant 2: Single Full-Bleed ── */
+        .gallery-full-bleed {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .gallery-full-bleed figure {
+            position: relative;
+        }
+
+        .gallery-full-bleed img {
+            width: 100%;
+            aspect-ratio: 21 / 9;
+            object-fit: cover;
+        }
+
+        .gallery-full-bleed figcaption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 48px 32px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 50%, transparent 100%);
+            color: var(--white);
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* ── Variant 3: 2-Up Bordered ── */
+        .gallery-2up-bordered .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .gallery-2up-bordered .img-wrap {
+            overflow: hidden;
+            border-radius: var(--rlg);
+            box-shadow: var(--sh-sm);
+        }
+
+        .gallery-2up-bordered .img-wrap img {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .gallery-2up-bordered .img-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .gallery-2up-bordered figcaption {
+            font-size: 13px;
+            color: var(--gm);
+            font-style: italic;
+            padding-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* ── Variant 4: 2-Up Full-Bleed ── */
+        .gallery-2up-fullbleed {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .gallery-2up-fullbleed .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+
+        .gallery-2up-fullbleed .img-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-2up-fullbleed .img-wrap img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-2up-fullbleed .img-wrap figcaption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 36px 16px 12px;
+            background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.2) 50%, transparent 100%);
+            color: var(--white);
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* ── Variant 5: 3-Up Bordered ── */
+        .gallery-3up-bordered .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .gallery-3up-bordered .img-wrap {
+            overflow: hidden;
+            border-radius: var(--rlg);
+            box-shadow: var(--sh-sm);
+        }
+
+        .gallery-3up-bordered .img-wrap img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .gallery-3up-bordered .img-wrap:hover img {
+            transform: scale(1.02);
+        }
+
+        .gallery-3up-bordered figcaption {
+            font-size: 13px;
+            color: var(--gm);
+            font-style: italic;
+            padding-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* ── Variant 6: 3-Up Full-Bleed ── */
+        .gallery-3up-fullbleed {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .gallery-3up-fullbleed .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+        }
+
+        .gallery-3up-fullbleed .img-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-3up-fullbleed .img-wrap img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+            transition: filter var(--dur3) var(--ease);
+        }
+
+        .gallery-3up-fullbleed .img-wrap:hover img {
+            filter: brightness(1.05);
+        }
+
+        .gallery-3up-fullbleed .img-wrap figcaption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 14px 14px;
+            background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.2) 50%, transparent 100%);
+            color: var(--white);
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* ── Responsive ── */
+
+        /* Tablet */
+        @media (max-width: 768px) {
+            .content-column {
+                padding: 24px 20px;
+            }
+
+            .variant-label {
+                padding: 20px 20px 0;
+            }
+
+            .variant-meta {
+                padding-left: 64px;
+                padding-right: 20px;
+            }
+
+            .gallery-3up-bordered .gallery-grid {
+                gap: 10px;
+            }
+
+            .gallery-full-bleed figcaption {
+                padding: 40px 20px 16px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 48px 20px 32px;
+            }
+
+            .page-header h1 {
+                font-size: 16px;
+            }
+
+            .content-column {
+                padding: 20px 16px;
+            }
+
+            .variant-label {
+                padding: 16px 16px 0;
+            }
+
+            .variant-meta {
+                padding: 6px 16px 0 60px;
+                font-size: 11px;
+            }
+
+            /* V3: 2-up bordered -> single column */
+            .gallery-2up-bordered .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* V4: 2-up full-bleed -> single column, no gap */
+            .gallery-2up-fullbleed .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            /* V5: 3-up bordered -> single column */
+            .gallery-3up-bordered .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* V6: 3-up full-bleed -> single column, 2px gap */
+            .gallery-3up-fullbleed .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            .gallery-full-bleed img {
+                aspect-ratio: 16 / 9;
+            }
+
+            .gallery-full-bleed figcaption {
+                font-size: 12px;
+                padding: 32px 16px 12px;
+            }
+        }
+
+        /* ── Page Footer ── */
+        .page-footer {
+            text-align: center;
+            padding: 24px 24px 64px;
+            font-size: 12px;
+            color: var(--platinum);
+        }
+
+        .page-footer span {
+            font-family: var(--fc);
+            font-weight: 700;
+            color: var(--sangria);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Page Header ── -->
+    <header class="page-header">
+        <h1>Image Gallery Element</h1>
+        <p>Six layout variants for embedding photo galleries within Viatu blog posts. Each variant is shown inside a simulated 720px content column.</p>
+        <span class="variant-count">6 variants</span>
+    </header>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 1 — Single Inline                              -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">1</span>
+                <h2>Single Inline</h2>
+            </div>
+            <p class="variant-meta">
+                Contained within the 720px content column.
+                <code>border-radius: var(--rlg)</code>
+                <code>aspect-ratio: 16/9</code>
+                <code>box-shadow: var(--sh-sm)</code>
+            </p>
+
+            <div class="content-column">
+                <!-- Faux body text -->
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-single-inline">
+                    <figure>
+                        <img src="../../../../design/reference-images/great-migration/cheetah-and-cub-serengeti.jpg"
+                             alt="Cheetah and cub resting together in the Serengeti grasslands">
+                        <figcaption>Cheetah and cub in the Serengeti, Tanzania</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Faux body text -->
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 2 — Single Full-Bleed                          -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">2</span>
+                <h2>Single Full-Bleed</h2>
+            </div>
+            <p class="variant-meta">
+                Breaks out to full viewport width.
+                <code>width: 100vw</code>
+                <code>aspect-ratio: 21/9</code>
+                No border-radius. Overlaid caption with gradient.
+            </p>
+
+            <div class="content-column">
+                <!-- Faux body text -->
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-full-bleed">
+                    <figure>
+                        <img src="../../../../design/reference-images/great-migration/hero-wildebeest-crossing.jpg"
+                             alt="Massive herd of wildebeest crossing the Mara River during the Great Migration">
+                        <figcaption>Wildebeest crossing the Mara River during the Great Migration — Serengeti, Tanzania</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Faux body text -->
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 3 — 2-Up Bordered                              -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">3</span>
+                <h2>2-Up Bordered</h2>
+            </div>
+            <p class="variant-meta">
+                Two-column grid within content column.
+                <code>gap: 16px</code>
+                <code>aspect-ratio: 3/2</code>
+                <code>border-radius: var(--rlg)</code>
+                Hover: <code>scale(1.02)</code>
+                Mobile: single column.
+            </p>
+
+            <div class="content-column">
+                <!-- Faux body text -->
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-2up-bordered">
+                    <figure>
+                        <div class="gallery-grid">
+                            <div class="img-wrap">
+                                <img src="../../../../design/reference-images/great-migration/cheetah-cubs-serengeti.jpg"
+                                     alt="Two cheetah cubs sitting together in the Serengeti grasslands">
+                            </div>
+                            <div class="img-wrap">
+                                <img src="../../../../design/reference-images/great-migration/lion-serengeti.jpg"
+                                     alt="Male lion with full mane in the Serengeti">
+                            </div>
+                        </div>
+                        <figcaption>Wildlife of the Serengeti — cheetah cubs and a male lion</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Faux body text -->
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 4 — 2-Up Full-Bleed                            -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">4</span>
+                <h2>2-Up Full-Bleed</h2>
+            </div>
+            <p class="variant-meta">
+                Full viewport width, tight grid.
+                <code>gap: 4px</code>
+                <code>aspect-ratio: 4/3</code>
+                No border-radius. Individual overlaid captions.
+                Mobile: single column, no gap.
+            </p>
+
+            <div class="content-column">
+                <!-- Faux body text -->
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-2up-fullbleed">
+                    <div class="gallery-grid">
+                        <figure class="img-wrap">
+                            <img src="../../../../design/reference-images/great-migration/cheetah-tree-serengeti.jpg"
+                                 alt="Cheetah perched in a tree in the Serengeti">
+                            <figcaption>Cheetah in tree, Serengeti</figcaption>
+                        </figure>
+                        <figure class="img-wrap">
+                            <img src="../../../../design/reference-images/great-migration/zebra-serengeti.jpg"
+                                 alt="Zebra standing in the Serengeti plains">
+                            <figcaption>Zebra, Serengeti</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- Faux body text -->
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 5 — 3-Up Bordered                              -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">5</span>
+                <h2>3-Up Bordered</h2>
+            </div>
+            <p class="variant-meta">
+                Three-column grid within content column.
+                <code>gap: 16px</code>
+                <code>aspect-ratio: 1/1</code>
+                <code>border-radius: var(--rlg)</code>
+                Hover: <code>scale(1.02)</code>
+                Tablet: tighter gap. Mobile: single column.
+            </p>
+
+            <div class="content-column">
+                <!-- Faux body text -->
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-3up-bordered">
+                    <figure>
+                        <div class="gallery-grid">
+                            <div class="img-wrap">
+                                <img src="../../../../design/reference-images/great-migration/lioness-cub-kenya.jpg"
+                                     alt="Lioness with her cub in Kenya">
+                            </div>
+                            <div class="img-wrap">
+                                <img src="../../../../design/reference-images/great-migration/safari-vehicle-masai-mara.jpg"
+                                     alt="Safari vehicle driving through the Masai Mara">
+                            </div>
+                            <div class="img-wrap">
+                                <img src="../../../../design/reference-images/great-migration/wildebeest-river-crossing.jpg"
+                                     alt="Wildebeest crossing a river during migration">
+                            </div>
+                        </div>
+                        <figcaption>Scenes from the Great Migration — Kenya to Tanzania</figcaption>
+                    </figure>
+                </div>
+
+                <!-- Faux body text -->
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════ -->
+    <!-- VARIANT 6 — 3-Up Full-Bleed                            -->
+    <!-- ════════════════════════════════════════════════════════ -->
+    <section class="variant-section">
+        <div class="variant-card">
+            <div class="variant-label">
+                <span class="number">6</span>
+                <h2>3-Up Full-Bleed</h2>
+            </div>
+            <p class="variant-meta">
+                Full viewport width, no gaps, images touch.
+                <code>aspect-ratio: 3/4</code>
+                No border-radius. Overlaid captions.
+                Hover: <code>brightness(1.05)</code>
+                Mobile: single column, 2px gap.
+            </p>
+
+            <div class="content-column">
+                <!-- Faux body text -->
+                <div class="faux-text">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-3up-fullbleed">
+                    <div class="gallery-grid">
+                        <figure class="img-wrap">
+                            <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                                 alt="Leopard resting in a tree in the Masai Mara">
+                            <figcaption>Leopard, Masai Mara</figcaption>
+                        </figure>
+                        <figure class="img-wrap">
+                            <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                                 alt="A pride of lions in the Serengeti">
+                            <figcaption>Lion pride, Serengeti</figcaption>
+                        </figure>
+                        <figure class="img-wrap">
+                            <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg"
+                                 alt="Hot air balloon floating over the Masai Mara at sunrise">
+                            <figcaption>Balloon safari at sunrise</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- Faux body text -->
+                <div class="faux-text" style="margin-top:24px">
+                    <span class="faux-text-line" style="width:100%"></span>
+                    <span class="faux-text-line"></span>
+                    <span class="faux-text-line"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ── Footer ── -->
+    <footer class="page-footer">
+        <span>Viatu</span> &mdash; Image Gallery Element &middot; Design Mockup
+    </footer>
+
+</body>
+</html>

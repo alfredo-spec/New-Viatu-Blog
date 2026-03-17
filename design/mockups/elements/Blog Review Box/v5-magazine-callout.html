@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 5 — The Magazine Callout (Original Tokens)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria: #541736; --pthalo: #1C4447; --platinum: #C4C4C4;
+      --black: #000000; --white: #FFFFFF; --cream: #F3FFB9;
+      --gl: #F8F9FA; --gm: #6C757D; --gd: #343A40; --g3: #DEE2E6;
+      --fp: 'Krona One', sans-serif; --fs: 'Hanken Grotesk', sans-serif; --fc: 'Caveat', cursive;
+      --rmd: .375rem; --rlg: .5rem; --rxl: .75rem; --r2xl: 1rem; --rfull: 9999px;
+      --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+      --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --dur: 200ms; --dur3: 300ms; --ease: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--fs); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+    .article { max-width: 720px; margin: 0 auto; padding: 64px 24px 96px; }
+    .article-tag { font-family: var(--fc); font-size: 20px; font-weight: 700; color: var(--sangria); margin-bottom: 8px; line-height: 1; }
+    .article-h1 { font-family: var(--fp); font-size: clamp(24px, 3.5vw, 40px); font-weight: 400; letter-spacing: -.06em; line-height: 1.34; color: var(--black); margin-bottom: 24px; }
+    .article-meta { font-size: 14px; color: var(--gm); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--platinum); }
+    .article p { font-size: 18px; line-height: 1.78; color: var(--gd); margin-bottom: 24px; max-width: 65ch; }
+    .article h2 { font-family: var(--fs); font-size: 28px; font-weight: 700; color: var(--black); margin: 48px 0 16px; line-height: 1.2; }
+    .review-box-wrapper { margin: 48px 0; }
+
+    /* Concept 5 — The Magazine Callout */
+    .glance-5 {
+      position: relative; border-radius: var(--rxl); overflow: hidden;
+      background: var(--white); border: 1px solid var(--g3);
+      box-shadow: var(--sh-sm); transition: box-shadow var(--dur3) var(--ease);
+    }
+    .glance-5:hover { box-shadow: var(--sh-md); }
+    .glance-5__accent { height: 4px; background: linear-gradient(90deg, var(--sangria) 0%, var(--pthalo) 100%); }
+    .glance-5__body { padding: 28px; }
+    .glance-5__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+    .glance-5__top-left { flex: 1; }
+    .glance-5__tag { font-family: var(--fc); font-size: 20px; font-weight: 700; color: var(--sangria); line-height: 1; margin-bottom: 6px; }
+    .glance-5__title { font-family: var(--fp); font-size: clamp(15px, 1.5vw, 18px); font-weight: 400; color: var(--black); letter-spacing: -.04em; line-height: 1.34; margin-bottom: 6px; }
+    .glance-5__subtitle { font-size: 14px; color: var(--gm); line-height: 1.5; }
+    .glance-5__score-block { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; padding: 12px 20px; background: var(--gl); border-radius: var(--rlg); border: 1px solid var(--g3); }
+    .glance-5__score-num { font-family: var(--fs); font-size: 32px; font-weight: 900; color: var(--sangria); line-height: 1; }
+    .glance-5__score-max { font-size: 12px; color: var(--platinum); font-weight: 500; }
+    .glance-5__score-stars { display: flex; gap: 2px; }
+    .glance-5__score-stars svg { width: 14px; height: 14px; fill: var(--sangria); }
+    .glance-5__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--g3); border-radius: var(--rmd); overflow: hidden; margin-bottom: 20px; }
+    .glance-5__cell { background: var(--white); padding: 16px 20px; }
+    .glance-5__cell:nth-child(n+4) { background: var(--gl); }
+    .glance-5__cell-label { font-size: 11px; font-weight: 600; color: var(--gm); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+    .glance-5__cell-label svg { width: 13px; height: 13px; stroke: var(--pthalo); fill: none; stroke-width: 1.5; }
+    .glance-5__cell-value { font-size: 14px; font-weight: 500; color: var(--gd); line-height: 1.4; }
+    .glance-5__bottom { display: flex; align-items: flex-start; gap: 20px; }
+    .glance-5__tip { flex: 1; display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; background: rgba(84, 23, 54, .03); border-radius: var(--rmd); border: 1px dashed rgba(84, 23, 54, .12); }
+    .glance-5__tip svg { width: 16px; height: 16px; stroke: var(--sangria); fill: none; stroke-width: 1.5; flex-shrink: 0; margin-top: 1px; }
+    .glance-5__tip-label { font-family: var(--fc); font-size: 14px; font-weight: 700; color: var(--sangria); }
+    .glance-5__tip-text { font-size: 13px; color: var(--gd); line-height: 1.5; }
+    .glance-5__pairs-label { font-size: 11px; font-weight: 600; color: var(--gm); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+    .glance-5__pairs-text { font-size: 14px; font-weight: 500; color: var(--pthalo); line-height: 1.4; }
+    .glance-5__pairs { flex-shrink: 0; width: 200px; padding: 14px 16px; background: rgba(28, 68, 71, .03); border-radius: var(--rmd); border: 1px solid rgba(28, 68, 71, .08); }
+
+    @media (max-width: 768px) {
+      .glance-5__grid { grid-template-columns: 1fr 1fr; }
+      .glance-5__bottom { flex-direction: column; }
+      .glance-5__pairs { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .glance-5__grid { grid-template-columns: 1fr; }
+      .glance-5__top { flex-direction: column; }
+      .glance-5__score-block { flex-direction: row; gap: 12px; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="article">
+    <p class="article-tag">Travel Journal</p>
+    <h1 class="article-h1">Londolozi Founders Camp — Is It Worth the Hype?</h1>
+    <div class="article-meta">
+      <span>By Sarah Mitchell</span><span class="dot"></span>
+      <span>12 min read</span><span class="dot"></span>
+      <span>January 2026</span>
+    </div>
+    <p>We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special.</p>
+    <p>The Sabi Sands Game Reserve has long been considered the crown jewel of South African safari — private traversing rights, unmatched leopard sightings, and a commitment to community that dates back decades. Londolozi sits right at the heart of it.</p>
+    <p>Before we dive into the day-by-day breakdown, here's a quick snapshot of what you need to know.</p>
+    <div class="review-box-wrapper">
+      <div class="glance-5">
+        <div class="glance-5__accent"></div>
+        <div class="glance-5__body">
+          <div class="glance-5__top">
+            <div class="glance-5__top-left">
+              <div class="glance-5__tag">At a glance</div>
+              <div class="glance-5__title">Londolozi Founders Camp</div>
+              <div class="glance-5__subtitle">Sabi Sands Game Reserve, Greater Kruger, South Africa</div>
+            </div>
+            <div class="glance-5__score-block">
+              <span class="glance-5__score-num">4.9</span>
+              <div>
+                <span class="glance-5__score-max">/ 5.0</span>
+                <div class="glance-5__score-stars">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="glance-5__grid">
+            <div class="glance-5__cell">
+              <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Price Class</div>
+              <div class="glance-5__cell-value">Ultra-Luxury · $$$$</div>
+            </div>
+            <div class="glance-5__cell">
+              <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Best For</div>
+              <div class="glance-5__cell-value">Honeymooners, Photographers</div>
+            </div>
+            <div class="glance-5__cell">
+              <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Not Ideal For</div>
+              <div class="glance-5__cell-value">Constant Wi-Fi needs</div>
+            </div>
+            <div class="glance-5__cell">
+              <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sustainability</div>
+              <div class="glance-5__cell-value">Gold Eco-Rated</div>
+            </div>
+            <div class="glance-5__cell">
+              <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Wildlife</div>
+              <div class="glance-5__cell-value">Leopard specialist</div>
+            </div>
+            <div class="glance-5__cell">
+              <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1.5a3 3 0 0 0-3-3h-.5"/></svg>Ownership</div>
+              <div class="glance-5__cell-value">Community-Owned</div>
+            </div>
+          </div>
+          <div class="glance-5__bottom">
+            <div class="glance-5__tip">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div><div class="glance-5__tip-label">Viatu insider tip</div><div class="glance-5__tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div></div>
+            </div>
+            <div class="glance-5__pairs">
+              <div class="glance-5__pairs-label">Pairs Well With</div>
+              <div class="glance-5__pairs-text">3 nights in the Cape Winelands</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>The Experience, Day by Day</h2>
+    <p>Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars. Every moment at Londolozi feels curated without being contrived.</p>
+    <p>Our first morning game drive departed at 5:30am. The air was crisp, the coffee was strong, and within thirty minutes we were watching a female leopard and her two cubs navigate the rocky outcrops along the Sand River.</p>
+  </div>
+</body>
+</html>

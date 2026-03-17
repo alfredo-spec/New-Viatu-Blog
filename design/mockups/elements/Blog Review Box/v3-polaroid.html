@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 3 — The Polaroid (Original Tokens)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria: #541736; --pthalo: #1C4447; --platinum: #C4C4C4;
+      --black: #000000; --white: #FFFFFF; --cream: #F3FFB9;
+      --gl: #F8F9FA; --gm: #6C757D; --gd: #343A40; --g3: #DEE2E6;
+      --fp: 'Krona One', sans-serif; --fs: 'Hanken Grotesk', sans-serif; --fc: 'Caveat', cursive;
+      --rmd: .375rem; --rlg: .5rem; --rxl: .75rem; --r2xl: 1rem; --rfull: 9999px;
+      --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+      --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --dur: 200ms; --dur3: 300ms; --ease: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--fs); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+    .article { max-width: 720px; margin: 0 auto; padding: 64px 24px 96px; }
+    .article-tag { font-family: var(--fc); font-size: 20px; font-weight: 700; color: var(--sangria); margin-bottom: 8px; line-height: 1; }
+    .article-h1 { font-family: var(--fp); font-size: clamp(24px, 3.5vw, 40px); font-weight: 400; letter-spacing: -.06em; line-height: 1.34; color: var(--black); margin-bottom: 24px; }
+    .article-meta { font-size: 14px; color: var(--gm); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--platinum); }
+    .article p { font-size: 18px; line-height: 1.78; color: var(--gd); margin-bottom: 24px; max-width: 65ch; }
+    .article h2 { font-family: var(--fs); font-size: 28px; font-weight: 700; color: var(--black); margin: 48px 0 16px; line-height: 1.2; }
+    .review-box-wrapper { margin: 48px 0; }
+
+    /* Concept 3 — The Polaroid */
+    .glance-3 {
+      border-radius: var(--rxl); overflow: hidden;
+      box-shadow: var(--sh-md); background: var(--white);
+      transition: box-shadow var(--dur3) var(--ease);
+    }
+    .glance-3:hover { box-shadow: var(--sh-lg); }
+    .glance-3__hero {
+      position: relative; height: 240px;
+      background: linear-gradient(135deg, var(--pthalo) 0%, #2A5A5E 50%, var(--sangria) 100%);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .glance-3__hero-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: .4;
+    }
+    .glance-3__hero-placeholder svg { width: 48px; height: 48px; stroke: var(--white); fill: none; stroke-width: 1; }
+    .glance-3__hero-placeholder span { font-size: 11px; color: var(--white); text-transform: uppercase; letter-spacing: .06em; }
+    .glance-3__hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 24px 28px 20px;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.6) 100%);
+    }
+    .glance-3__hero-tag { font-family: var(--fc); font-size: 18px; font-weight: 700; color: var(--cream); line-height: 1; margin-bottom: 4px; }
+    .glance-3__hero-title { font-family: var(--fp); font-size: clamp(16px, 1.6vw, 20px); font-weight: 400; color: var(--white); letter-spacing: -.04em; line-height: 1.3; }
+    .glance-3__hero-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,.95); backdrop-filter: blur(8px);
+      border-radius: var(--rlg); padding: 10px 16px;
+      display: flex; flex-direction: column; align-items: center;
+      box-shadow: var(--sh-md);
+    }
+    .glance-3__hero-badge-score { font-family: var(--fs); font-size: 26px; font-weight: 700; color: var(--sangria); line-height: 1; }
+    .glance-3__hero-badge-label { font-size: 10px; font-weight: 600; color: var(--gm); text-transform: uppercase; letter-spacing: .05em; }
+    .glance-3__hero-badge-stars { display: flex; gap: 1px; margin-top: 4px; }
+    .glance-3__hero-badge-stars svg { width: 12px; height: 12px; fill: var(--sangria); }
+    .glance-3__pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      padding: 20px 28px; border-bottom: 1px solid var(--gl);
+    }
+    .glance-3__pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; background: var(--gl); border: 1px solid var(--g3);
+      border-radius: var(--rfull); font-size: 13px; font-weight: 500; color: var(--gd);
+      transition: all var(--dur) var(--ease);
+    }
+    .glance-3__pill:hover { background: rgba(84, 23, 54, .04); border-color: rgba(84, 23, 54, .15); }
+    .glance-3__pill svg { width: 14px; height: 14px; stroke: var(--pthalo); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .glance-3__pill--highlight { background: rgba(84, 23, 54, .06); border-color: rgba(84, 23, 54, .12); color: var(--sangria); font-weight: 600; }
+    .glance-3__pill--highlight svg { stroke: var(--sangria); }
+    .glance-3__details {
+      padding: 16px 28px 20px; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 12px 24px;
+    }
+    .glance-3__detail-label { font-size: 11px; font-weight: 600; color: var(--gm); text-transform: uppercase; letter-spacing: .04em; }
+    .glance-3__detail-value { font-size: 14px; font-weight: 500; color: var(--gd); line-height: 1.4; }
+    .glance-3__tip {
+      margin: 0 28px 20px; padding: 14px 16px;
+      background: rgba(28, 68, 71, .04); border-radius: var(--rmd);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .glance-3__tip svg { width: 16px; height: 16px; stroke: var(--pthalo); fill: none; stroke-width: 1.5; flex-shrink: 0; margin-top: 2px; }
+    .glance-3__tip-label { font-family: var(--fc); font-size: 14px; font-weight: 700; color: var(--pthalo); }
+    .glance-3__tip-text { font-size: 13px; color: var(--gd); line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .glance-3__details { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="article">
+    <p class="article-tag">Travel Journal</p>
+    <h1 class="article-h1">Londolozi Founders Camp — Is It Worth the Hype?</h1>
+    <div class="article-meta">
+      <span>By Sarah Mitchell</span><span class="dot"></span>
+      <span>12 min read</span><span class="dot"></span>
+      <span>January 2026</span>
+    </div>
+    <p>We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special.</p>
+    <p>The Sabi Sands Game Reserve has long been considered the crown jewel of South African safari — private traversing rights, unmatched leopard sightings, and a commitment to community that dates back decades. Londolozi sits right at the heart of it.</p>
+    <p>Before we dive into the day-by-day breakdown, here's a quick snapshot of what you need to know.</p>
+    <div class="review-box-wrapper">
+      <div class="glance-3">
+        <div class="glance-3__hero">
+          <div class="glance-3__hero-placeholder">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Lodge hero image · 800 × 240</span>
+          </div>
+          <div class="glance-3__hero-overlay">
+            <div class="glance-3__hero-tag">Our expert's verdict</div>
+            <div class="glance-3__hero-title">Londolozi Founders Camp</div>
+          </div>
+          <div class="glance-3__hero-badge">
+            <span class="glance-3__hero-badge-score">4.9</span>
+            <span class="glance-3__hero-badge-label">Rating</span>
+            <div class="glance-3__hero-badge-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="glance-3__pills">
+          <span class="glance-3__pill"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Sabi Sands, South Africa</span>
+          <span class="glance-3__pill--highlight glance-3__pill"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>Honeymooners</span>
+          <span class="glance-3__pill"><svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15 19v1.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V19"/><path d="M10 9.5C10 10.33 9.33 11 8.5 11h-5C2.67 11 2 10.33 2 9.5S2.67 8 3.5 8h5c.83 0 1.5.67 1.5 1.5z"/><path d="M10 5V3.5c0-.83-.67-1.5-1.5-1.5S7 2.67 7 3.5V5"/></svg>Leopard Country</span>
+          <span class="glance-3__pill"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ultra-Luxury</span>
+          <span class="glance-3__pill"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Gold Eco-Rated</span>
+        </div>
+        <div class="glance-3__details">
+          <div><div class="glance-3__detail-label">Not Ideal For</div><div class="glance-3__detail-value">Travellers needing constant Wi-Fi</div></div>
+          <div><div class="glance-3__detail-label">Pairs Well With</div><div class="glance-3__detail-value">3 nights in the Cape Winelands</div></div>
+        </div>
+        <div class="glance-3__tip">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div><div class="glance-3__tip-label">Viatu insider tip</div><div class="glance-3__tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div></div>
+        </div>
+      </div>
+    </div>
+    <h2>The Experience, Day by Day</h2>
+    <p>Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars. Every moment at Londolozi feels curated without being contrived.</p>
+    <p>Our first morning game drive departed at 5:30am. The air was crisp, the coffee was strong, and within thirty minutes we were watching a female leopard and her two cubs navigate the rocky outcrops along the Sand River.</p>
+  </div>
+</body>
+</html>

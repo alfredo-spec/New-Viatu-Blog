@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viatu Blog — Design Mockups</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria:       #541736;
+      --sangria-hover: #47142e;
+      --pthalo:        #1C4447;
+      --pthalo-dark:   #122e30;
+      --pthalo-deeper: #0c2123;
+      --platinum:      #C4C4C4;
+      --cream:         #F3FFB9;
+      --white:         #FFFFFF;
+      --font-primary:   'Krona One', sans-serif;
+      --font-secondary: 'Hanken Grotesk', sans-serif;
+      --font-supporting:'Caveat', cursive;
+      --radius-md:   6px;
+      --radius-lg:   8px;
+      --radius-full: 9999px;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--pthalo-deeper);
+      color: var(--white);
+      font-family: var(--font-secondary);
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* ── Header ────────────────────────────────────────────── */
+    .site-header {
+      background: rgba(18, 46, 48, 0.92);
+      border-bottom: 1px solid rgba(196, 196, 196, 0.08);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .logo-text {
+      font-family: var(--font-primary);
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: -0.03em;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(196, 196, 196, 0.25);
+      align-self: center;
+    }
+
+    .header-label {
+      font-family: var(--font-supporting);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .header-meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    .hero {
+      padding: 72px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(84, 23, 54, 0.25) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(196, 196, 196, 0.12), transparent);
+    }
+
+    .hero-tagline {
+      font-family: var(--font-supporting);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: var(--font-primary);
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    /* ── Stats bar ─────────────────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(196, 196, 196, 0.06);
+    }
+
+    .stat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 24px 48px;
+      border-right: 1px solid rgba(196, 196, 196, 0.06);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-secondary);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Main ──────────────────────────────────────────────── */
+    .main {
+      padding: 56px 48px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* ── Section ───────────────────────────────────────────── */
+    .section { margin-bottom: 56px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(196, 196, 196, 0.08);
+    }
+
+    .section-accent {
+      width: 3px;
+      height: 18px;
+      background: var(--sangria);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .section-accent.pthalo { background: var(--pthalo); }
+    .section-accent.cream  { background: var(--cream); }
+
+    .section-title {
+      font-family: var(--font-primary);
+      font-size: 18px;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .section-count {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-left: auto;
+    }
+
+    /* ── Grid ──────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    /* ── Card ──────────────────────────────────────────────── */
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(196, 196, 196, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: background 200ms var(--ease), border-color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(84, 23, 54, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(84, 23, 54, 0.2);
+    }
+
+    .card-stripe {
+      height: 3px;
+      background: var(--sangria);
+      flex-shrink: 0;
+    }
+
+    .card-stripe.pthalo { background: var(--pthalo); }
+    .card-stripe.cream  { background: var(--cream); }
+    .card-stripe.multi  {
+      background: linear-gradient(to right, var(--sangria) 33.33%, var(--pthalo) 33.33% 66.66%, var(--cream) 66.66%);
+    }
+
+    .card-body {
+      padding: 14px 16px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.35;
+    }
+
+    .card-path {
+      font-size: 11px;
+      font-family: 'Source Code Pro', 'Menlo', monospace;
+      color: rgba(255, 255, 255, 0.25);
+      letter-spacing: 0.01em;
+      word-break: break-all;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .card-cta {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--sangria);
+      opacity: 0;
+      transition: opacity 200ms var(--ease);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .card:hover .card-cta { opacity: 1; }
+
+    /* ── Divider ───────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: rgba(196, 196, 196, 0.05);
+      margin: 48px 0;
+    }
+
+    /* ── Archive toggle ────────────────────────────────────── */
+    .archive-toggle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      padding: 0 0 14px;
+      margin-bottom: 0;
+      width: 100%;
+      border-bottom: 1px solid rgba(196, 196, 196, 0.08);
+    }
+
+    .archive-toggle .section-title {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.45);
+      transition: color 200ms var(--ease);
+    }
+
+    .archive-toggle[aria-expanded="true"] .section-title { color: var(--white); }
+
+    .chevron {
+      color: rgba(255, 255, 255, 0.3);
+      transition: transform 200ms var(--ease), color 200ms var(--ease);
+      flex-shrink: 0;
+    }
+
+    .archive-toggle[aria-expanded="true"] .chevron {
+      transform: rotate(90deg);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .archive-grid {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .archive-grid.open { display: grid; }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    .site-footer {
+      padding: 28px 48px;
+      border-top: 1px solid rgba(196, 196, 196, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.03em;
+    }
+
+    .footer-mark {
+      font-family: var(--font-supporting);
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(84, 23, 54, 0.4);
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .site-header { padding: 16px 24px; }
+      .hero { padding: 48px 24px 40px; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat { padding: 16px 24px; flex: 0 0 50%; }
+      .main { padding: 32px 24px; }
+      .site-footer { padding: 24px; }
+    }
+
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .stat { flex: 0 0 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-brand">
+      <span class="logo-text">Viatu</span>
+      <div class="header-divider"></div>
+      <span class="header-label">Design Mockups</span>
+    </div>
+    <span class="header-meta">Internal · Blog Project</span>
+  </header>
+
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <div class="hero">
+    <p class="hero-tagline">Design Team</p>
+    <h1 class="hero-title">Mockup Index</h1>
+    <p class="hero-subtitle">All design explorations, page variants, and component experiments for the Viatu Blog.</p>
+  </div>
+
+  <!-- ── Stats ──────────────────────────────────────────────── -->
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-number">74</span>
+      <span class="stat-label">Total files</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">10</span>
+      <span class="stat-label">Sections</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">50</span>
+      <span class="stat-label">Active</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">24</span>
+      <span class="stat-label">Archived</span>
+    </div>
+  </div>
+
+  <!-- ── Main ───────────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Blog Homepage -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Blog Homepage</h2>
+        <span class="section-count">2 files</span>
+      </div>
+      <div class="grid">
+        <a href="blog-homepage/viatu_blog_master.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Blog Master</span>
+            <span class="card-path">blog-homepage/viatu_blog_master.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-homepage/viatu_master_staging.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Master Staging</span>
+            <span class="card-path">blog-homepage/viatu_master_staging.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Blog Post -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Blog Post</h2>
+        <span class="section-count">6 files</span>
+      </div>
+      <div class="grid">
+        <a href="blog-post/blog-post-v1-passport-stamp-wide.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v1 — Passport Stamp Wide</span>
+            <span class="card-path">blog-post/blog-post-v1-passport-stamp-wide.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-post/blog-post-v1-passport-stamp.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v1 — Passport Stamp</span>
+            <span class="card-path">blog-post/blog-post-v1-passport-stamp.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-post/blog-post-v2-field-card.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">v2 — Field Card</span>
+            <span class="card-path">blog-post/blog-post-v2-field-card.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-post/blog-post-v3-polaroid.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">v3 — Polaroid</span>
+            <span class="card-path">blog-post/blog-post-v3-polaroid.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-post/blog-post-v4-split-verdict.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">v4 — Split Verdict</span>
+            <span class="card-path">blog-post/blog-post-v4-split-verdict.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-post/blog-post-v5-magazine-callout.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v5 — Magazine Callout</span>
+            <span class="card-path">blog-post/blog-post-v5-magazine-callout.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Blog Details -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Blog Details</h2>
+        <span class="section-count">4 files</span>
+      </div>
+      <div class="grid">
+        <a href="blog-details/v1-classic-editorial.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v1 — Classic Editorial</span>
+            <span class="card-path">blog-details/v1-classic-editorial.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/v2-magazine-bold.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">v2 — Magazine Bold</span>
+            <span class="card-path">blog-details/v2-magazine-bold.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/v3-immersive-cinematic.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">v3 — Immersive Cinematic</span>
+            <span class="card-path">blog-details/v3-immersive-cinematic.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/v4-earth-editorial.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">v4 — Earth Editorial</span>
+            <span class="card-path">blog-details/v4-earth-editorial.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Blog Details — Elements -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent pthalo"></div>
+        <h2 class="section-title">Blog Details — Elements</h2>
+        <span class="section-count">12 files</span>
+      </div>
+      <div class="grid">
+        <a href="blog-details/elements/hero-section.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Hero Section</span>
+            <span class="card-path">blog-details/elements/hero-section.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/lead-paragraph.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Lead Paragraph</span>
+            <span class="card-path">blog-details/elements/lead-paragraph.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/pull-quote.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Pull Quote</span>
+            <span class="card-path">blog-details/elements/pull-quote.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/callout-box.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Callout Box</span>
+            <span class="card-path">blog-details/elements/callout-box.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/faq-accordion.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">FAQ Accordion</span>
+            <span class="card-path">blog-details/elements/faq-accordion.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/image-gallery.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">Image Gallery</span>
+            <span class="card-path">blog-details/elements/image-gallery.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/table-of-contents.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Table of Contents</span>
+            <span class="card-path">blog-details/elements/table-of-contents.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/month-timeline.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Month Timeline</span>
+            <span class="card-path">blog-details/elements/month-timeline.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/reading-progress-bar.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Reading Progress Bar</span>
+            <span class="card-path">blog-details/elements/reading-progress-bar.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/related-posts.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Related Posts</span>
+            <span class="card-path">blog-details/elements/related-posts.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/related-posts-v2.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Related Posts v2</span>
+            <span class="card-path">blog-details/elements/related-posts-v2.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="blog-details/elements/author-bio-card.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Author Bio Card</span>
+            <span class="card-path">blog-details/elements/author-bio-card.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Elements — Blog Review Box -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Elements — Blog Review Box</h2>
+        <span class="section-count">11 files</span>
+      </div>
+      <div class="grid">
+        <a href="elements/Blog Review Box/at-a-glance-review-box.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">At-a-Glance Review Box</span>
+            <span class="card-path">elements/Blog Review Box/at-a-glance-review-box.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v1-passport-stamp.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v1 — Passport Stamp</span>
+            <span class="card-path">elements/Blog Review Box/v1-passport-stamp.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v1-passport-stamp-polished.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v1 — Passport Stamp Polished</span>
+            <span class="card-path">elements/Blog Review Box/v1-passport-stamp-polished.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v2-field-card.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">v2 — Field Card</span>
+            <span class="card-path">elements/Blog Review Box/v2-field-card.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v2-field-card-polished.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">v2 — Field Card Polished</span>
+            <span class="card-path">elements/Blog Review Box/v2-field-card-polished.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v3-polaroid.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">v3 — Polaroid</span>
+            <span class="card-path">elements/Blog Review Box/v3-polaroid.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v3-polaroid-polished.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">v3 — Polaroid Polished</span>
+            <span class="card-path">elements/Blog Review Box/v3-polaroid-polished.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v4-split-verdict.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">v4 — Split Verdict</span>
+            <span class="card-path">elements/Blog Review Box/v4-split-verdict.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v4-split-verdict-polished.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">v4 — Split Verdict Polished</span>
+            <span class="card-path">elements/Blog Review Box/v4-split-verdict-polished.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v5-magazine-callout.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v5 — Magazine Callout</span>
+            <span class="card-path">elements/Blog Review Box/v5-magazine-callout.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/Blog Review Box/v5-magazine-callout-polished.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">v5 — Magazine Callout Polished</span>
+            <span class="card-path">elements/Blog Review Box/v5-magazine-callout-polished.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Elements — CTA Calculator -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Elements — CTA Calculator</h2>
+        <span class="section-count">7 files</span>
+      </div>
+      <div class="grid">
+        <a href="elements/CTA Calculator/viatu-cta-six-versions.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">Six Versions Overview</span>
+            <span class="card-path">elements/CTA Calculator/viatu-cta-six-versions.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/CTA Calculator/cta-version-a-lively.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Version A — Lively</span>
+            <span class="card-path">elements/CTA Calculator/cta-version-a-lively.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/CTA Calculator/cta-version-a-muted.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Version A — Muted</span>
+            <span class="card-path">elements/CTA Calculator/cta-version-a-muted.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/CTA Calculator/cta-version-b-lively.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Version B — Lively</span>
+            <span class="card-path">elements/CTA Calculator/cta-version-b-lively.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/CTA Calculator/cta-version-b-muted.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Version B — Muted</span>
+            <span class="card-path">elements/CTA Calculator/cta-version-b-muted.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/CTA Calculator/cta-version-c-lively.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Version C — Lively</span>
+            <span class="card-path">elements/CTA Calculator/cta-version-c-lively.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="elements/CTA Calculator/cta-version-c-muted.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Version C — Muted</span>
+            <span class="card-path">elements/CTA Calculator/cta-version-c-muted.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Elements — Footer -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent pthalo"></div>
+        <h2 class="section-title">Elements — Footer</h2>
+        <span class="section-count">1 file</span>
+      </div>
+      <div class="grid">
+        <a href="elements/Footer/footer-v1.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Footer v1</span>
+            <span class="card-path">elements/Footer/footer-v1.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Author Page -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Author Page</h2>
+        <span class="section-count">1 file</span>
+      </div>
+      <div class="grid">
+        <a href="author-page/blog-author-page.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Blog Author Page</span>
+            <span class="card-path">author-page/blog-author-page.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Author Listing -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent pthalo"></div>
+        <h2 class="section-title">Author Listing</h2>
+        <span class="section-count">1 file</span>
+      </div>
+      <div class="grid">
+        <a href="author-listing/blog-author-listing-v1.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog Author Listing v1</span>
+            <span class="card-path">author-listing/blog-author-listing-v1.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Tag Listing -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-accent"></div>
+        <h2 class="section-title">Tag Listing</h2>
+        <span class="section-count">2 files</span>
+      </div>
+      <div class="grid">
+        <a href="tag-listing/blog-tag-listing-v1.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Blog Tag Listing v1</span>
+            <span class="card-path">tag-listing/blog-tag-listing-v1.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="tag-listing/blog-tag-listing-reviews-v1.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog Tag Listing — Reviews v1</span>
+            <span class="card-path">tag-listing/blog-tag-listing-reviews-v1.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Archive -->
+    <section class="section">
+      <button class="archive-toggle" aria-expanded="false" onclick="toggleArchive(this)">
+        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h2 class="section-title">Archive</h2>
+        <span class="section-count">24 files</span>
+      </button>
+      <div class="grid archive-grid" id="archiveGrid">
+        <a href="archive/blog-v10.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v10</span>
+            <span class="card-path">archive/blog-v10.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v10-destinations-editorial.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v10 — Destinations Editorial</span>
+            <span class="card-path">archive/blog-v10-destinations-editorial.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v10-scroll-indicator.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v10 — Scroll Indicator</span>
+            <span class="card-path">archive/blog-v10-scroll-indicator.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v9-refined.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v9 — Refined</span>
+            <span class="card-path">archive/blog-v9-refined.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v8-nav-cta.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v8 — Nav CTA</span>
+            <span class="card-path">archive/blog-v8-nav-cta.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v6-lang-globe.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v6 — Lang Globe</span>
+            <span class="card-path">archive/blog-v6-lang-globe.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v5-nav-cta.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v5 — Nav CTA</span>
+            <span class="card-path">archive/blog-v5-nav-cta.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v5-restructured.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v5 — Restructured</span>
+            <span class="card-path">archive/blog-v5-restructured.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v4-nav-polish.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v4 — Nav Polish</span>
+            <span class="card-path">archive/blog-v4-nav-polish.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-v3-nav-polish.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Blog v3 — Nav Polish</span>
+            <span class="card-path">archive/blog-v3-nav-polish.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-author-v2.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Author v2</span>
+            <span class="card-path">archive/blog-author-v2.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-author-v2-immersive.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Author v2 — Immersive</span>
+            <span class="card-path">archive/blog-author-v2-immersive.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-author-v3-editorial.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Author v3 — Editorial</span>
+            <span class="card-path">archive/blog-author-v3-editorial.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-author-v4-interactive.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Author v4 — Interactive</span>
+            <span class="card-path">archive/blog-author-v4-interactive.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-author-variants.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Author Variants</span>
+            <span class="card-path">archive/blog-author-variants.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-nav-cta-preview.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Nav CTA Preview</span>
+            <span class="card-path">archive/blog-nav-cta-preview.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-nav-cta-v2-preview.html" class="card">
+          <div class="card-stripe"></div>
+          <div class="card-body">
+            <span class="card-name">Nav CTA v2 Preview</span>
+            <span class="card-path">archive/blog-nav-cta-v2-preview.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-footer-variants.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Footer Variants</span>
+            <span class="card-path">archive/blog-footer-variants.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-footer-options.html" class="card">
+          <div class="card-stripe pthalo"></div>
+          <div class="card-body">
+            <span class="card-name">Footer Options</span>
+            <span class="card-path">archive/blog-footer-options.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-mobile-nav-options.html" class="card">
+          <div class="card-stripe multi"></div>
+          <div class="card-body">
+            <span class="card-name">Mobile Nav Options</span>
+            <span class="card-path">archive/blog-mobile-nav-options.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-travel-styles-descriptions.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Travel Styles — Descriptions</span>
+            <span class="card-path">archive/blog-travel-styles-descriptions.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-travel-styles-portals.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Travel Styles — Portals</span>
+            <span class="card-path">archive/blog-travel-styles-portals.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/blog-travel-styles-shapes.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Travel Styles — Shapes</span>
+            <span class="card-path">archive/blog-travel-styles-shapes.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+        <a href="archive/lang-toggle-variants.html" class="card">
+          <div class="card-stripe cream"></div>
+          <div class="card-body">
+            <span class="card-name">Lang Toggle Variants</span>
+            <span class="card-path">archive/lang-toggle-variants.html</span>
+            <div class="card-footer"><span class="card-cta">Open →</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="footer-text">Viatu Blog · Design Mockups · Internal use only</span>
+    <span class="footer-mark">Viatu</span>
+  </footer>
+
+  <script>
+    function toggleArchive(btn) {
+      const grid = document.getElementById('archiveGrid');
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      grid.classList.toggle('open', !isOpen);
+    }
+  </script>
+
+</body>
+</html>

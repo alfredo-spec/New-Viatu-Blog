@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Nav — Mobile Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #F7F3EF;
+            --earth-sand: #E8E0D6;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --dur: 200ms;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        html { -webkit-text-size-adjust: 100% }
+
+        body {
+            font-family: var(--fs);
+            background: #F0EDE8;
+            color: var(--black);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            padding: 48px 24px 80px;
+        }
+
+        a { text-decoration: none; color: inherit }
+        button { font-family: var(--fs); cursor: pointer; border: none; background: none }
+
+        /* ─── PAGE HEADER ───────────────────────────── */
+        .page-header {
+            max-width: 900px;
+            margin: 0 auto 48px;
+        }
+
+        .page-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--sangria);
+            margin-bottom: 10px;
+            opacity: .7;
+        }
+
+        .page-title {
+            font-family: var(--fp);
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: -.04em;
+            color: #1B1B1B;
+            margin-bottom: 6px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--gm);
+            line-height: 1.5;
+        }
+
+        .page-divider {
+            height: 1px;
+            background: rgba(0,0,0,.1);
+            margin-top: 20px;
+        }
+
+        /* ─── FRAMES ROW ────────────────────────────── */
+        .frames-row {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .frame-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* ─── PHONE FRAME ───────────────────────────── */
+        .phone-frame {
+            width: 390px;
+            height: 680px;
+            border-radius: 44px;
+            overflow: hidden;
+            box-shadow:
+                0 32px 80px rgba(0, 0, 0, .22),
+                0 0 0 1px rgba(0, 0, 0, .08),
+                inset 0 0 0 2px rgba(255, 255, 255, .08);
+            background: #000;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .phone-screen {
+            border-radius: 36px;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            background: #000;
+        }
+
+        /* Dynamic island notch */
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 34px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 20;
+        }
+
+        /* ─── HERO IMAGE ────────────────────────────── */
+        .hero {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            display: block;
+        }
+
+        .hero-grad {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top,
+                rgba(0, 0, 0, .82) 0%,
+                rgba(0, 0, 0, .55) 25%,
+                rgba(0, 0, 0, .2) 55%,
+                rgba(0, 0, 0, .06) 75%,
+                transparent 100%);
+            pointer-events: none;
+        }
+
+        /* ─── HERO CONTENT ──────────────────────────── */
+        .hero-body {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 0 24px 36px;
+            z-index: 5;
+        }
+
+        .hero-cat {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-family: var(--fp);
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--white);
+            letter-spacing: -.04em;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            max-width: 280px;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, .4);
+        }
+
+        .hero-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-av {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 600;
+            color: var(--white);
+            flex-shrink: 0;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-byline {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .6);
+        }
+
+        /* ─── NAV (shared base) ─────────────────────── */
+        .nav {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+        }
+
+        .nav-inner {
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Blog logo lockup */
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .nav-logo .logo-dark { display: none }
+
+        .nav-logo-blog {
+            font-family: var(--fc);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .01em;
+            line-height: 1;
+            margin-top: 2px;
+            color: rgba(255, 255, 255, .7);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Search button */
+        .nav-search {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px; height: 36px;
+            border-radius: 6px;
+            color: rgba(255, 255, 255, .7);
+            transition: all var(--dur) var(--ease);
+        }
+
+        .nav-search:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, .08);
+        }
+
+        .nav-search svg {
+            width: 18px; height: 18px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* Language trigger */
+        .lang-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--fs);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .06em;
+            color: rgba(255, 255, 255, .7);
+            padding: 6px 8px;
+            border-radius: 6px;
+            min-height: 32px;
+            border: 1px solid transparent;
+            transition: all var(--dur) var(--ease);
+        }
+
+        .lang-trigger:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .2);
+        }
+
+        .lang-globe {
+            width: 14px; height: 14px;
+            stroke: currentColor; fill: none;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .lang-chevron {
+            width: 10px; height: 10px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* ─── OPTION A — House icon ─────────────────── */
+        .nav-home-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px; height: 44px;
+            border-radius: 6px;
+            background: var(--sangria);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background var(--dur) var(--ease);
+        }
+
+        .nav-home-btn:hover { background: #6b1d45 }
+
+        .nav-home-btn svg {
+            width: 18px; height: 18px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        /* ─── OPTION B — Full CTA ───────────────────── */
+        .nav-back-cta {
+            font-family: var(--fs);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0;
+            padding: 11px 16px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--white);
+            background: var(--sangria);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background var(--dur) var(--ease);
+            line-height: 1.2;
+        }
+
+        .nav-back-cta:hover { background: #6b1d45 }
+
+        .nav-back-cta svg {
+            width: 14px; height: 14px;
+            stroke: currentColor; fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* ─── FRAME LABELS ──────────────────────────── */
+        .frame-label {
+            text-align: center;
+            max-width: 320px;
+        }
+
+        .label-pill {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--sangria);
+            background: rgba(84, 23, 54, .08);
+            padding: 4px 10px;
+            border-radius: 99px;
+            margin-bottom: 10px;
+        }
+
+        .label-title {
+            font-family: var(--fp);
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: -.03em;
+            color: #1B1B1B;
+            margin-bottom: 5px;
+        }
+
+        .label-desc {
+            font-size: 13px;
+            color: var(--gm);
+            line-height: 1.5;
+        }
+
+        /* ─── SCROLL PREVIEW BADGE ──────────────────── */
+        .scroll-note {
+            max-width: 900px;
+            margin: 40px auto 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,.5);
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,.06);
+        }
+
+        .scroll-note-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: rgba(84,23,54,.08);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .scroll-note-icon svg {
+            width: 16px; height: 16px;
+            stroke: var(--sangria); fill: none;
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        }
+
+        .scroll-note p {
+            font-size: 13px;
+            color: var(--gm);
+            line-height: 1.5;
+        }
+
+        .scroll-note strong { color: #1B1B1B; font-weight: 600 }
+
+        /* ─── SCROLLED STATE PREVIEWS ───────────────── */
+        .scrolled-row {
+            max-width: 900px;
+            margin: 48px auto 0;
+        }
+
+        .scrolled-heading {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gm);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scrolled-heading::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0,0,0,.1);
+        }
+
+        .scrolled-frames {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        /* Scrolled nav pill previews — narrow horizontal strips */
+        .nav-strip {
+            width: 390px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,.1), 0 0 0 1px rgba(0,0,0,.06);
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(16px);
+            flex-shrink: 0;
+        }
+
+        .nav-strip-inner {
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+        }
+
+        /* Scrolled logo colours */
+        .nav-strip .nav-logo .logo-white { display: none }
+        .nav-strip .nav-logo .logo-dark  { display: block }
+        .nav-strip .nav-logo-blog { color: var(--sangria) }
+
+        /* Scrolled search */
+        .nav-strip .nav-search { color: var(--gm) }
+        .nav-strip .nav-search:hover { color: var(--sangria); background: rgba(84,23,54,.04) }
+
+        /* Scrolled lang */
+        .nav-strip .lang-trigger { color: var(--gm) }
+        .nav-strip .lang-trigger:hover { color: var(--sangria); background: rgba(84,23,54,.04); border-color: rgba(84,23,54,.15) }
+
+        /* ─── RESPONSIVE ────────────────────────────── */
+        @media (max-width: 860px) {
+            .frames-row { flex-direction: column; align-items: center }
+            .scrolled-frames { flex-direction: column; align-items: center }
+            .lv-grid { grid-template-columns: repeat(2, 1fr) !important }
+        }
+
+        /* ══════════════════════════════════════════════
+           LOGO VARIANTS SECTION
+        ══════════════════════════════════════════════ */
+        .lv-section {
+            max-width: 900px;
+            margin: 64px auto 0;
+        }
+
+        .lv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 0;
+        }
+
+        /* Card shell */
+        .lv-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.06);
+        }
+
+        /* Dark + light swatches */
+        .lv-swatch {
+            padding: 22px 24px;
+        }
+
+        .lv-dark  { background: #18201f }
+        .lv-light { background: #ffffff; border-top: 1px solid rgba(0,0,0,.06) }
+
+        /* Logo base inside swatches */
+        .lv-logo {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1;
+        }
+
+        /* Logo image visibility */
+        .lv-dark  .lv-logo .logo-dark  { display: none }
+        .lv-dark  .lv-logo .logo-white { display: block }
+        .lv-light .lv-logo .logo-white { display: none }
+        .lv-light .lv-logo .logo-dark  { display: block }
+
+        /* "blog" base */
+        .lv-blog {
+            font-family: var(--fc);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .01em;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        /* ── V1: left-aligned, muted (existing baseline) ── */
+        .lv-v1 .lv-blog           { align-self: flex-start }
+        .lv-dark  .lv-v1 .lv-blog { color: rgba(255,255,255,.65) }
+        .lv-light .lv-v1 .lv-blog { color: rgba(0,0,0,.38) }
+
+        /* ── V2: right-aligned under wordmark, accent colour ── */
+        /* align-self: flex-end pushes "blog" to right edge of the 90px logo,
+           sitting beneath the "viatu" wordmark rather than the icon. */
+        .lv-v2 .lv-blog           { align-self: flex-end }
+        .lv-dark  .lv-v2 .lv-blog { color: var(--cream) }     /* cream highlight on dark */
+        .lv-light .lv-v2 .lv-blog { color: var(--sangria) }   /* sangria on white */
+
+        /* ── V3: right-aligned, monochrome (same colour as logo) ── */
+        .lv-v3 .lv-blog           { align-self: flex-end }
+        .lv-dark  .lv-v3 .lv-blog { color: rgba(255,255,255,.88) }
+        .lv-light .lv-v3 .lv-blog { color: #1B1B1B }
+
+        /* Card label area */
+        .lv-label {
+            padding: 14px 16px 16px;
+            background: rgba(255,255,255,.55);
+            border-top: 1px solid rgba(0,0,0,.06);
+        }
+
+        .lv-pill {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--sangria);
+            background: rgba(84,23,54,.08);
+            padding: 3px 8px;
+            border-radius: 99px;
+            margin-bottom: 6px;
+        }
+
+        .lv-title {
+            font-family: var(--fp);
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: -.03em;
+            color: #1B1B1B;
+            margin-bottom: 3px;
+        }
+
+        .lv-desc {
+            font-size: 12px;
+            color: var(--gm);
+            line-height: 1.45;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── PAGE HEADER ──────────────────────────────────── -->
+    <header class="page-header">
+        <p class="page-eyebrow">Design exploration · Blog</p>
+        <h1 class="page-title">Blog nav — mobile options</h1>
+        <p class="page-subtitle">Two treatments for the back-to-homepage action, with the new blog logo lockup</p>
+        <div class="page-divider"></div>
+    </header>
+
+    <!-- ── HERO STATE (transparent over image) ──────────── -->
+    <div class="frames-row">
+
+        <!-- OPTION A -->
+        <div class="frame-col">
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+
+                    <!-- Hero image -->
+                    <div class="hero">
+                        <img src="../../public/images/photos/hero-safari-camp.jpg" alt="Safari camp at sunset">
+                        <div class="hero-grad"></div>
+                    </div>
+
+                    <!-- Hero content -->
+                    <div class="hero-body">
+                        <p class="hero-cat">Guide</p>
+                        <h2 class="hero-title">The ultimate first-timer's guide to an African safari</h2>
+                        <div class="hero-author">
+                            <div class="hero-av">LS</div>
+                            <span class="hero-byline">Lena Schmidt · 12 min read</span>
+                        </div>
+                    </div>
+
+                    <!-- Nav A: house icon -->
+                    <nav class="nav">
+                        <div class="nav-inner">
+                            <a href="/" class="nav-logo">
+                                <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                                <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                                <span class="nav-logo-blog">blog</span>
+                            </a>
+                            <div class="nav-right">
+                                <button class="nav-search" aria-label="Search">
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                </button>
+                                <button class="lang-trigger" aria-label="Language">
+                                    <svg class="lang-globe" viewBox="0 0 24 24" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                                        <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                                    </svg>
+                                    EN
+                                    <svg class="lang-chevron" viewBox="0 0 24 24" stroke="currentColor">
+                                        <polyline points="6 9 12 15 18 9"/>
+                                    </svg>
+                                </button>
+                                <a href="/" class="nav-home-btn" aria-label="Back to homepage">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                        <polyline points="9 22 9 12 15 12 15 22"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+
+            <div class="frame-label">
+                <span class="label-pill">Option A</span>
+                <h3 class="label-title">House icon</h3>
+                <p class="label-desc">Search + language kept.<br>Compact sangria square — instantly recognisable.</p>
+            </div>
+        </div>
+
+        <!-- OPTION B -->
+        <div class="frame-col">
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+
+                    <!-- Hero image -->
+                    <div class="hero">
+                        <img src="../../public/images/photos/hero-safari-camp.jpg" alt="Safari camp at sunset">
+                        <div class="hero-grad"></div>
+                    </div>
+
+                    <!-- Hero content -->
+                    <div class="hero-body">
+                        <p class="hero-cat">Guide</p>
+                        <h2 class="hero-title">The ultimate first-timer's guide to an African safari</h2>
+                        <div class="hero-author">
+                            <div class="hero-av">LS</div>
+                            <span class="hero-byline">Lena Schmidt · 12 min read</span>
+                        </div>
+                    </div>
+
+                    <!-- Nav B: full CTA, no search -->
+                    <nav class="nav">
+                        <div class="nav-inner">
+                            <a href="/" class="nav-logo">
+                                <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                                <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                                <span class="nav-logo-blog">blog</span>
+                            </a>
+                            <div class="nav-right">
+                                <button class="lang-trigger" aria-label="Language">
+                                    <svg class="lang-globe" viewBox="0 0 24 24" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                                        <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                                    </svg>
+                                    EN
+                                    <svg class="lang-chevron" viewBox="0 0 24 24" stroke="currentColor">
+                                        <polyline points="6 9 12 15 18 9"/>
+                                    </svg>
+                                </button>
+                                <a href="/" class="nav-back-cta">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="15 18 9 12 15 6"/>
+                                    </svg>
+                                    Back to homepage
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+
+            <div class="frame-label">
+                <span class="label-pill">Option B</span>
+                <h3 class="label-title">Full CTA</h3>
+                <p class="label-desc">Search removed on mobile.<br>Label always visible — mirrors the homepage nav style.</p>
+            </div>
+        </div>
+
+    </div><!-- /frames-row -->
+
+    <!-- ── NOTE ─────────────────────────────────────────── -->
+    <div class="scroll-note">
+        <div class="scroll-note-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <p><strong>Scrolled state below</strong> — when the user scrolls down, the nav switches to a white background. Both options adapt: logo turns dark, "blog" turns sangria, action buttons keep their styles.</p>
+    </div>
+
+    <!-- ── SCROLLED STATE STRIPS ─────────────────────────── -->
+    <div class="scrolled-row">
+        <p class="scrolled-heading">Scrolled state (white nav)</p>
+        <div class="scrolled-frames">
+
+            <!-- Option A scrolled -->
+            <div class="nav-strip">
+                <div class="nav-strip-inner">
+                    <a href="/" class="nav-logo">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="nav-logo-blog">blog</span>
+                    </a>
+                    <div class="nav-right">
+                        <button class="nav-search" aria-label="Search">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                        </button>
+                        <button class="lang-trigger" aria-label="Language">
+                            <svg class="lang-globe" viewBox="0 0 24 24" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                                <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                            </svg>
+                            EN
+                            <svg class="lang-chevron" viewBox="0 0 24 24" stroke="currentColor">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        <a href="/" class="nav-home-btn" aria-label="Back to homepage">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option B scrolled -->
+            <div class="nav-strip">
+                <div class="nav-strip-inner">
+                    <a href="/" class="nav-logo">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="nav-logo-blog">blog</span>
+                    </a>
+                    <div class="nav-right">
+                        <button class="lang-trigger" aria-label="Language">
+                            <svg class="lang-globe" viewBox="0 0 24 24" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                                <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                            </svg>
+                            EN
+                            <svg class="lang-chevron" viewBox="0 0 24 24" stroke="currentColor">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        <a href="/" class="nav-back-cta">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                            Back to homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── LOGO VARIANTS ────────────────────────────────── -->
+    <section class="lv-section">
+        <p class="scrolled-heading" style="margin-bottom:20px">Logo lockup variants</p>
+
+        <div class="lv-grid">
+
+            <!-- V1: Baseline — left-aligned, muted -->
+            <div class="lv-card">
+                <div class="lv-swatch lv-dark">
+                    <a href="/" class="lv-logo lv-v1">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="lv-blog">blog</span>
+                    </a>
+                </div>
+                <div class="lv-swatch lv-light">
+                    <a href="/" class="lv-logo lv-v1">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="lv-blog">blog</span>
+                    </a>
+                </div>
+                <div class="lv-label">
+                    <span class="lv-pill">Current</span>
+                    <p class="lv-title">Left · Muted</p>
+                    <p class="lv-desc">Flush left under icon. Subdued — de-emphasises the label.</p>
+                </div>
+            </div>
+
+            <!-- V2: Right-aligned, accent colour -->
+            <div class="lv-card">
+                <div class="lv-swatch lv-dark">
+                    <a href="/" class="lv-logo lv-v2">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="lv-blog">blog</span>
+                    </a>
+                </div>
+                <div class="lv-swatch lv-light">
+                    <a href="/" class="lv-logo lv-v2">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="lv-blog">blog</span>
+                    </a>
+                </div>
+                <div class="lv-label">
+                    <span class="lv-pill">Option A</span>
+                    <p class="lv-title">Right · Accent</p>
+                    <p class="lv-desc">Under wordmark. Cream on dark, sangria on light — energetic contrast.</p>
+                </div>
+            </div>
+
+            <!-- V3: Right-aligned, monochrome -->
+            <div class="lv-card">
+                <div class="lv-swatch lv-dark">
+                    <a href="/" class="lv-logo lv-v3">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="lv-blog">blog</span>
+                    </a>
+                </div>
+                <div class="lv-swatch lv-light">
+                    <a href="/" class="lv-logo lv-v3">
+                        <img src="../../public/images/brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="90" height="20">
+                        <img src="../../public/images/brand/logos/viatu-logo-dark.svg"  class="logo-dark"  alt="Viatu" width="90" height="20">
+                        <span class="lv-blog">blog</span>
+                    </a>
+                </div>
+                <div class="lv-label">
+                    <span class="lv-pill">Option B</span>
+                    <p class="lv-title">Right · Monochrome</p>
+                    <p class="lv-desc">Under wordmark. Same colour as the logo — unified, refined.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

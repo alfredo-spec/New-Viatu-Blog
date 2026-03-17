@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Paragraph — Viatu Blog (element mockup)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ─── DESIGN TOKENS ──────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+
+            --sh-sm: 0 1px 2px rgba(0, 0, 0, .05);
+            --sh-md: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
+
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+        }
+
+        /* ─── RESET ──────────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fs);
+            color: var(--gd);
+            background: var(--gl);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+        }
+
+        /* ─── PAGE WRAPPER ───────────────────────────────────── */
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 64px 24px 120px;
+        }
+
+        .page__title {
+            font-family: var(--fp);
+            font-size: 28px;
+            color: var(--black);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .page__subtitle {
+            font-family: var(--fs);
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--gm);
+            margin-bottom: 56px;
+            line-height: 1.5;
+        }
+
+        /* ─── VARIANT SECTION ────────────────────────────────── */
+        .variant {
+            margin-bottom: 80px;
+        }
+
+        .variant:last-child {
+            margin-bottom: 0;
+        }
+
+        .variant__header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--g3);
+        }
+
+        .variant__badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--rfull);
+            background: var(--sangria);
+            color: var(--white);
+            font-family: var(--fs);
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .variant__label {
+            font-family: var(--fp);
+            font-size: 18px;
+            color: var(--black);
+            letter-spacing: -0.01em;
+        }
+
+        .variant__description {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gm);
+            font-weight: 400;
+            margin-left: auto;
+        }
+
+        /* ─── CONTENT CARD ───────────────────────────────────── */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--rxl);
+            padding: 56px 48px;
+            box-shadow: var(--sh-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        /* ─── VARIANT A: DROP CAP ────────────────────────────── */
+        .lead-dropcap {
+            font-family: var(--fs);
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--gd);
+            max-width: 65ch;
+            margin-bottom: 28px;
+        }
+
+        .lead-dropcap::first-letter {
+            font-family: var(--fp);
+            color: var(--sangria);
+            font-size: 4.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 8px;
+            padding-top: 6px;
+        }
+
+        /* ─── VARIANT B: HORIZONTAL RULE ─────────────────────── */
+        .lead-rule__line {
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--sangria);
+            border: none;
+            margin-bottom: 24px;
+        }
+
+        .lead-rule__text {
+            font-family: var(--fs);
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--gd);
+            max-width: 65ch;
+            margin-bottom: 28px;
+        }
+
+        /* ─── VARIANT C: DECORATIVE INITIAL ──────────────────── */
+        .lead-initial {
+            font-family: var(--fs);
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--gd);
+            max-width: 65ch;
+            margin-bottom: 28px;
+        }
+
+        /* CSS initial-letter with fallback */
+        .lead-initial::first-letter {
+            font-family: var(--fp);
+            color: var(--sangria);
+            initial-letter: 3;
+            -webkit-initial-letter: 3;
+            /* Fallback for browsers that don't support initial-letter */
+            font-size: 4em;
+            line-height: 1;
+            margin-right: 6px;
+        }
+
+        /* Fallback: if initial-letter is not supported, use float */
+        @supports not (initial-letter: 3) {
+            .lead-initial::first-letter {
+                float: left;
+                font-size: 4em;
+                line-height: 0.78;
+                margin-right: 8px;
+                padding-top: 6px;
+                /* Differentiate from drop cap with a subtle background */
+                background: linear-gradient(135deg, var(--sangria) 0%, #722448 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
+
+        /* When initial-letter IS supported, style differently from Variant A */
+        @supports (initial-letter: 3) {
+            .lead-initial::first-letter {
+                float: none;
+                background: linear-gradient(135deg, var(--sangria) 0%, #722448 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-right: 4px;
+            }
+        }
+
+        /* ─── NORMAL PARAGRAPH (shared) ──────────────────────── */
+        .body-text {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.75;
+            color: var(--gd);
+            max-width: 65ch;
+        }
+
+        /* ─── COMPARISON LABEL ───────────────────────────────── */
+        .comparison-label {
+            display: inline-block;
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gm);
+            background: var(--gl);
+            padding: 4px 10px;
+            border-radius: var(--rfull);
+            margin-bottom: 16px;
+        }
+
+        .comparison-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--g3);
+            border: none;
+            margin: 32px 0;
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .page {
+                padding: 48px 20px 80px;
+            }
+
+            .page__title {
+                font-size: 24px;
+            }
+
+            .page__subtitle {
+                margin-bottom: 40px;
+            }
+
+            .variant {
+                margin-bottom: 56px;
+            }
+
+            .variant__header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .variant__description {
+                margin-left: 52px;
+                width: 100%;
+            }
+
+            .content-card {
+                padding: 36px 28px;
+            }
+
+            .lead-dropcap,
+            .lead-rule__text,
+            .lead-initial {
+                font-size: 21px;
+            }
+
+            .lead-dropcap::first-letter {
+                font-size: 4em;
+            }
+
+            .body-text {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                padding: 36px 16px 64px;
+            }
+
+            .page__title {
+                font-size: 20px;
+            }
+
+            .page__subtitle {
+                font-size: 14px;
+                margin-bottom: 32px;
+            }
+
+            .variant {
+                margin-bottom: 48px;
+            }
+
+            .variant__label {
+                font-size: 15px;
+            }
+
+            .variant__description {
+                display: none;
+            }
+
+            .content-card {
+                padding: 28px 20px;
+                border-radius: var(--rlg);
+            }
+
+            .lead-dropcap,
+            .lead-rule__text,
+            .lead-initial {
+                font-size: 19px;
+            }
+
+            .lead-dropcap::first-letter {
+                font-size: 3.5em;
+                margin-right: 6px;
+                padding-top: 4px;
+            }
+
+            .lead-initial::first-letter {
+                font-size: 3.5em;
+            }
+
+            @supports (initial-letter: 3) {
+                .lead-initial::first-letter {
+                    initial-letter: 2;
+                    -webkit-initial-letter: 2;
+                }
+            }
+
+            .body-text {
+                font-size: 16px;
+            }
+
+            .comparison-label {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- ─── PAGE HEADER ──────────────────────────────────── -->
+        <h1 class="page__title">Lead Paragraph Styles</h1>
+        <p class="page__subtitle">
+            Three approaches to styling the opening paragraph of a blog post.
+            Each variant pairs a distinctive lead with a standard body paragraph for comparison.
+        </p>
+
+        <!-- ═══ VARIANT A: DROP CAP ══════════════════════════ -->
+        <section class="variant">
+            <div class="variant__header">
+                <span class="variant__badge">A</span>
+                <h2 class="variant__label">Drop Cap</h2>
+                <span class="variant__description">Krona One initial, floated left, 4.5em</span>
+            </div>
+
+            <div class="content-card">
+                <span class="comparison-label">Lead paragraph (24px)</span>
+                <p class="lead-dropcap">
+                    Ready to witness one of the wildest shows on Earth? The Great Migration is your ticket to
+                    nature's most epic road trip. Over a million wildebeest, along with zebras and gazelles,
+                    journey across Tanzania and Kenya, making it one of the last massive wildlife migrations
+                    on the planet.
+                </p>
+
+                <hr class="comparison-divider">
+
+                <span class="comparison-label">Normal paragraph (18px)</span>
+                <p class="body-text">
+                    Here's the kicker: while timing is everything, it's unpredictable and depends on what you
+                    want to see. Even with all that unpredictability, getting front-row seats to the action is
+                    doable with a little planning.
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══ VARIANT B: HORIZONTAL RULE ═══════════════════ -->
+        <section class="variant">
+            <div class="variant__header">
+                <span class="variant__badge">B</span>
+                <h2 class="variant__label">Horizontal Rule</h2>
+                <span class="variant__description">Sangria accent line, weight 300 for elegant lightness</span>
+            </div>
+
+            <div class="content-card">
+                <span class="comparison-label">Lead paragraph (24px, light)</span>
+                <hr class="lead-rule__line">
+                <p class="lead-rule__text">
+                    Ready to witness one of the wildest shows on Earth? The Great Migration is your ticket to
+                    nature's most epic road trip. Over a million wildebeest, along with zebras and gazelles,
+                    journey across Tanzania and Kenya, making it one of the last massive wildlife migrations
+                    on the planet.
+                </p>
+
+                <hr class="comparison-divider">
+
+                <span class="comparison-label">Normal paragraph (18px)</span>
+                <p class="body-text">
+                    Here's the kicker: while timing is everything, it's unpredictable and depends on what you
+                    want to see. Even with all that unpredictability, getting front-row seats to the action is
+                    doable with a little planning.
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══ VARIANT C: DECORATIVE INITIAL ════════════════ -->
+        <section class="variant">
+            <div class="variant__header">
+                <span class="variant__badge">C</span>
+                <h2 class="variant__label">Decorative Initial</h2>
+                <span class="variant__description">CSS initial-letter with gradient, fallback to float</span>
+            </div>
+
+            <div class="content-card">
+                <span class="comparison-label">Lead paragraph (24px)</span>
+                <p class="lead-initial">
+                    Ready to witness one of the wildest shows on Earth? The Great Migration is your ticket to
+                    nature's most epic road trip. Over a million wildebeest, along with zebras and gazelles,
+                    journey across Tanzania and Kenya, making it one of the last massive wildlife migrations
+                    on the planet.
+                </p>
+
+                <hr class="comparison-divider">
+
+                <span class="comparison-label">Normal paragraph (18px)</span>
+                <p class="body-text">
+                    Here's the kicker: while timing is everything, it's unpredictable and depends on what you
+                    want to see. Even with all that unpredictability, getting front-row seats to the action is
+                    doable with a little planning.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

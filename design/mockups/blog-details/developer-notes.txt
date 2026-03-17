@@ -1,0 +1,338 @@
+═══════════════════════════════════════════════════════════════
+  BLOG DETAILS PAGE — DEVELOPER NOTES
+  Created: March 2026
+  Reference content: "The Ultimate Guide to the Great Migration"
+═══════════════════════════════════════════════════════════════
+
+1. OVERVIEW
+───────────────────────────────────────────────────────────────
+This folder contains design mockups for a dedicated long-form
+blog details page. Unlike the existing /blog-post/ mockups
+(which model lodge review articles with rating boxes), these
+target editorial guide content: 15+ min reads with multiple
+sections, image galleries, timelines, FAQs, and CTAs.
+
+Three full-page variants explore different design philosophies:
+
+  v1-classic-editorial   Book-like, minimal, readability-first
+  v2-magazine-bold       Bold typography, section color rhythm
+  v3-immersive-cinematic Photography-driven, dark sections, drama
+
+
+2. FILE INVENTORY
+───────────────────────────────────────────────────────────────
+
+Full-page variants:
+  v1-classic-editorial.html      Clean, white, sidebar TOC
+  v2-magazine-bold.html          Full-bleed hero, pill TOC bar
+  v3-immersive-cinematic.html    90vh hero, floating TOC panel
+
+Element mockups (blog-details/elements/):
+  reading-progress-bar.html      Top bar + floating circle
+  lead-paragraph.html            Drop cap, rule, decorative initial
+  pull-quote.html                Left-border, centered, dark
+  callout-box.html               4 styles for tips/notes
+  faq-accordion.html             Minimal lines + bordered cards
+  author-bio-card.html           Light + dark variants
+  image-gallery.html             6 gallery layouts
+  month-timeline.html            Vertical, horiz cards, horiz photos
+  table-of-contents.html         Sidebar, pill bar, floating panel
+  hero-section.html              Centered white, overlay, cinematic
+  related-posts.html             Light + dark backgrounds
+
+Reference images (design/reference-images/great-migration/):
+  14 images downloaded from the live viatu.com blog post
+
+
+3. VARIANT COMPARISON
+───────────────────────────────────────────────────────────────
+
+Feature               v1 Classic         v2 Magazine        v3 Cinematic
+─────────────────     ──────────────     ──────────────     ──────────────
+Hero                  White centered     Full-bleed 70vh    Full-bleed 90vh
+Hero title            Black on white     White on image     White centered
+TOC                   Sticky sidebar     Horizontal pills   Floating panel
+Content width         65ch               720px              780px
+Lead paragraph        Drop cap           Rule + weight-300  Decorative initial
+Section bg            All white          Alternating gl     Dark sections
+Pull quotes           Left border        Centered decor     Full-width dark
+Callout boxes         Left border light  Top accent boxed   Dark mode
+Timeline              Vertical list      Horiz scroll cards Horiz scroll photos
+Image treatment       Rounded + shadow   Break to 1000px    Full-bleed edge
+Progress indicator    Sangria top bar    Gradient top bar   SVG circle float
+Mid-article CTA       Simple button      Pthalo section     Dark + bg image
+FAQ style             Minimal lines      Bordered cards     Minimal lines
+Author bio            Light card         Light card         Dark section
+Related posts bg      Earth-warm         Earth-warm         Dark #1b1b1b
+Newsletter bg         Earth-warm         Earth-warm         Dark + bg image
+
+
+4. SHARED DATA STRUCTURE
+───────────────────────────────────────────────────────────────
+
+All three variants use the same underlying content model:
+
+  Article {
+    title:        string    // H1 headline
+    subtitle?:    string    // Lead text (v3 uses in hero)
+    author: {
+      name:       string    // "Barbara Buchel"
+      role:       string    // "Safari Specialist & Editor"
+      avatar:     string    // image path
+      bio:        string    // 2-3 sentences
+    }
+    published:    string    // "October 2024"
+    readingTime:  string    // "15 min read"
+    category:     string    // "Safari Guide" (eyebrow)
+    tags:         string[]  // ["Tanzania","Safari","Wildlife Guide","Great Migration"]
+    breadcrumbs:  string[]  // ["Blog","Destinations","Tanzania"]
+    heroImage:    string    // image path
+    sections:     Section[] // ordered content blocks
+    faqs:         FAQ[]     // question/answer pairs
+    relatedPosts: Card[]    // 3 related article cards
+  }
+
+  Section {
+    id:           string    // anchor ID for TOC
+    tagline?:     string    // Caveat tagline (v2 only)
+    heading:      string    // H2 text
+    content:      Block[]   // mixed content blocks
+  }
+
+  Block = TextBlock | ImageBlock | GalleryBlock | PullQuoteBlock
+        | CalloutBlock | TimelineBlock | ListBlock | CTABlock
+
+  TimelineEntry {
+    month:        string    // "January" or "Feb – Mar"
+    location:     string    // "Southern Serengeti"
+    description:  string    // brief text
+    season:       'calving' | 'breeding' | 'crossings' | 'return'
+    image?:       string    // photo path (v3 only)
+  }
+
+
+5. CSS CLASS NAMING
+───────────────────────────────────────────────────────────────
+
+All variants use BEM-inspired naming scoped to the component:
+
+  Navigation:     .nav, .nav-inner, .nav-logo, .nav-back-btn
+  Language:        .lang, .lang-trigger, .lang-panel, .lang-option
+  Hero:            .hero, .hero-inner, .hero-tags, .hero-meta
+  Article:         .article-wrap, .article-body, .article-img
+  TOC sidebar:     .toc-sidebar, .toc-link, .toc-mobile
+  TOC pills:       .toc-bar, .toc-pill (v2)
+  TOC float:       .toc-fab, .toc-panel, .toc-overlay (v3)
+  Pull quote:      .pullquote
+  Callout:         .callout, .callout-icon, .callout-label
+  Timeline:        .timeline, .tl-season, .tl-item, .tl-dot
+  Gallery:         .gallery-2, .gallery-cell, .gallery-caption
+  FAQ:             .faq, .faq-item, .faq-q, .faq-a
+  Author bio:      .author-bio, .author-bio-portrait
+  Newsletter:      .nl, .nl-inner, .nl-form
+  Related:         .related, .related-grid, .related-card
+  Footer:          .footer, .footer-grid, .footer-col
+  Progress:        .progress (bar) / .toc-fab (circle, v3)
+  Reveal:          .reveal, .vis
+
+
+6. TOKEN SYSTEM
+───────────────────────────────────────────────────────────────
+
+Shorthand tokens (matching existing blog-post mockups):
+
+  Colors:    --sangria --pthalo --platinum --cream
+             --gl --gm --gd --g3
+             --earth-warm --earth-sand --earth-stone --earth-clay
+  Fonts:     --fp (Krona One) --fs (Hanken Grotesk) --fc (Caveat)
+  Radii:     --rmd(6px) --rlg(8px) --rxl(12px) --rfull(9999px)
+  Shadows:   --sh-sm --sh-md --sh-lg
+  Timing:    --dur(200ms) --dur3(300ms) --ease(cubic-bezier)
+  Seasons:   --s-calving --s-breed --s-cross --s-return
+
+
+7. RESPONSIVE BREAKPOINTS
+───────────────────────────────────────────────────────────────
+
+  > 1024px    Full desktop (sidebar TOC visible in v1)
+  768-1024    Tablet: TOC collapses, grids reduce columns
+  480-768     Mobile: single column, stacked layouts
+  < 480       Small mobile: reduced padding, smaller type
+
+
+8. JAVASCRIPT PATTERNS
+───────────────────────────────────────────────────────────────
+
+Shared across all variants:
+  - Nav scroll toggle (.scrolled at scrollY > 80)
+  - Language dropdown (click, outside-click, escape)
+  - Reveal on scroll (IntersectionObserver, .vis class)
+  - FAQ accordion (click toggle, single-open)
+
+Variant-specific:
+  v1: TOC scroll spy (sidebar), mobile TOC toggle
+  v2: TOC scroll spy (pill bar), auto-scroll active pill,
+      reading progress bar (gradient)
+  v3: Parallax hero, floating TOC toggle + panel,
+      SVG circle progress, overlay close handlers
+
+
+9. VUE COMPONENT CONVERSION GUIDANCE
+───────────────────────────────────────────────────────────────
+
+Recommended component architecture:
+
+  BlogDetailPage.vue
+  ├── ReadingProgressBar.vue     (v1/v2: bar, v3: circle)
+  ├── BlogDetailHero.vue         (props: variant, image, title...)
+  │   └── variant = 'centered' | 'overlay' | 'cinematic'
+  ├── TableOfContents.vue        (props: variant, sections[])
+  │   └── variant = 'sidebar' | 'pills' | 'floating'
+  ├── ArticleContent.vue         (renders Section[] blocks)
+  │   ├── LeadParagraph.vue      (props: variant)
+  │   ├── ContentBlock.vue       (text blocks with H2/H3/p)
+  │   ├── InlineImage.vue        (props: src, caption, bleed)
+  │   ├── ImageGallery.vue       (props: images[], columns, bleed)
+  │   ├── PullQuote.vue          (props: variant, quote, cite)
+  │   ├── CalloutBox.vue         (props: variant, label, icon)
+  │   ├── MonthTimeline.vue      (props: variant, entries[])
+  │   ├── FaqAccordion.vue       (props: variant, items[])
+  │   └── MidArticleCta.vue      (props: variant, text, url)
+  ├── ArticleTags.vue            (props: tags[])
+  ├── AuthorBio.vue              (props: variant, author)
+  ├── NewsletterSection.vue      (props: variant)
+  ├── RelatedPosts.vue           (props: variant, posts[])
+  └── SiteFooter.vue
+
+TypeScript interfaces:
+
+  interface BlogArticle {
+    title: string
+    subtitle?: string
+    author: Author
+    published: string
+    readingTime: string
+    category: string
+    tags: string[]
+    breadcrumbs: string[]
+    heroImage: string
+    sections: ArticleSection[]
+    faqs: FaqItem[]
+    relatedPosts: RelatedPost[]
+  }
+
+  interface Author {
+    name: string
+    role: string
+    avatar: string
+    bio: string
+  }
+
+  interface ArticleSection {
+    id: string
+    tagline?: string
+    heading: string
+    blocks: ContentBlock[]
+  }
+
+  type ContentBlock =
+    | { type: 'text'; html: string }
+    | { type: 'image'; src: string; caption?: string; bleed?: boolean }
+    | { type: 'gallery'; images: GalleryImage[]; columns: number; bleed?: boolean }
+    | { type: 'pullquote'; quote: string; cite?: string }
+    | { type: 'callout'; label: string; text: string; icon?: string }
+    | { type: 'timeline'; entries: TimelineEntry[] }
+    | { type: 'list'; items: string[]; ordered?: boolean }
+    | { type: 'cta'; text: string; url: string }
+
+  interface TimelineEntry {
+    month: string
+    location: string
+    description: string
+    season: 'calving' | 'breeding' | 'crossings' | 'return'
+    image?: string
+  }
+
+  interface FaqItem {
+    question: string
+    answer: string
+  }
+
+  interface RelatedPost {
+    title: string
+    excerpt: string
+    category: string
+    author: string
+    date: string
+    image: string
+    url: string
+  }
+
+
+10. IMAGE PATHS
+───────────────────────────────────────────────────────────────
+
+Reference images (from mockup files, relative to blog-details/):
+  ../../reference-images/great-migration/hero-wildebeest-crossing.jpg
+  ../../reference-images/great-migration/cheetah-and-cub-serengeti.jpg
+  ../../reference-images/great-migration/migration-map.png
+  ../../reference-images/great-migration/cheetah-cubs-serengeti.jpg
+  ../../reference-images/great-migration/lion-serengeti.jpg
+  ../../reference-images/great-migration/cheetah-tree-serengeti.jpg
+  ../../reference-images/great-migration/zebra-serengeti.jpg
+  ../../reference-images/great-migration/lioness-cub-kenya.jpg
+  ../../reference-images/great-migration/safari-vehicle-masai-mara.jpg
+  ../../reference-images/great-migration/wildebeest-river-crossing.jpg
+  ../../reference-images/great-migration/leopard-tree-masai-mara.jpg
+  ../../reference-images/great-migration/lion-pride-serengeti.jpg
+  ../../reference-images/great-migration/game-drive-serengeti.jpg
+  ../../reference-images/great-migration/balloon-safari-masai-mara.jpg
+
+Brand assets:
+  ../../brand/logos/viatu-logo-white.svg
+  ../../brand/logos/viatu-logo-dark.svg
+  ../../../public/images/photos/portrait-safari-specialist.png
+
+
+11. DESIGN DECISIONS & RATIONALE
+───────────────────────────────────────────────────────────────
+
+Heading hierarchy fixed:
+  The original blog uses H1 → H3 (skipping H2). All variants
+  correct this to H1 → H2 → H3 for semantic HTML.
+
+Reading progress:
+  At 15 min / 4000+ words, a progress indicator reduces reader
+  overwhelm and encourages completion. v1/v2 use a subtle top
+  bar; v3 uses a floating circle for cinematic cleanliness.
+
+Table of contents:
+  Three approaches tested: sidebar (traditional), pill bar
+  (modern/scrollable), floating panel (minimal). All include
+  scroll-spy to track reading position.
+
+Section color alternation (v2):
+  Only used for "feature" sections (galleries, timeline, FAQ) —
+  not every section. This signals content-type changes without
+  disrupting reading flow.
+
+Dark sections (v3):
+  Used sparingly for maximum impact: galleries, timeline, pull
+  quotes, author bio, newsletter, related posts. The contrast
+  between white reading sections and dark visual sections creates
+  a cinema-like experience.
+
+Month-by-month timeline:
+  Replaces the original wall-of-text month paragraphs with
+  scannable visual formats. Three approaches: simple vertical
+  (v1), scrollable cards (v2), photo-rich horizontal (v3).
+
+Mid-article CTA:
+  Added at ~60% of the article to catch readers who won't reach
+  the bottom. Uses distinctly different styling per variant so it
+  doesn't feel intrusive.
+
+Pull quotes:
+  Three styles offer different levels of visual interruption.
+  v1 is subtle (left border), v2 is decorative (centered), v3
+  is dramatic (full-width dark section).

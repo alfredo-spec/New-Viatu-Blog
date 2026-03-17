@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 4 — The Split Verdict (Polished / Design-System Tokens)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sangria-red: #541736; --sangria-hover: #47142e; --sangria-active: #3b1026;
+      --pthalo-green: #1C4447; --platinum-grey: #C4C4C4;
+      --black: #000000; --white: #FFFFFF; --cream: #F3FFB9;
+      --grey-light: #F8F9FA; --grey-medium: #6C757D; --grey-dark: #343A40; --grey-300: #DEE2E6;
+      --font-primary: 'Krona One', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-secondary: 'Hanken Grotesk', Satoshi, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-supporting: 'Caveat', cursive;
+      --font-mono: 'Source Code Pro', Monaco, monospace;
+      --radius-md: .375rem; --radius-lg: .5rem; --radius-xl: .75rem; --radius-2xl: 1rem; --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --duration-200: 200ms; --duration-300: 300ms;
+      --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-secondary); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+
+    .article { max-width: 720px; margin: 0 auto; padding: 64px 24px 96px; }
+    .article-tag { font-family: var(--font-supporting); font-size: 20px; font-weight: 700; color: var(--sangria-red); margin-bottom: 8px; line-height: 1; }
+    .article-h1 { font-family: var(--font-primary); font-size: clamp(24px, 3.5vw, 40px); font-weight: 400; letter-spacing: -.06em; line-height: 1.34; color: var(--black); margin-bottom: 24px; }
+    .article-meta { font-size: 14px; color: var(--grey-medium); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--platinum-grey); }
+    .article p { font-size: 18px; line-height: 1.78; color: var(--grey-dark); margin-bottom: 24px; max-width: 65ch; }
+    .article h2 { font-family: var(--font-secondary); font-size: 28px; font-weight: 700; color: var(--black); margin: 48px 0 16px; line-height: 1.2; }
+    .review-box-wrapper { margin: 48px 0; }
+
+    /* Concept 4 — The Split Verdict (Polished) */
+    .glance-4 {
+      display: grid; grid-template-columns: 1fr 300px;
+      border-radius: var(--radius-xl); overflow: hidden;
+      border: 1px solid var(--grey-300); box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--duration-300) var(--ease-in-out);
+    }
+    .glance-4:hover { box-shadow: var(--shadow-md); }
+    .glance-4__main { background: var(--white); padding: 28px; }
+    .glance-4__header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .glance-4__header-icon {
+      width: 28px; height: 28px; border-radius: var(--radius-full);
+      background: var(--sangria-red); display: flex; align-items: center; justify-content: center;
+    }
+    .glance-4__header-icon svg { width: 14px; height: 14px; stroke: var(--white); fill: none; stroke-width: 2; }
+    .glance-4__header-text { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--grey-dark); }
+    .glance-4__table { width: 100%; border-collapse: collapse; }
+    .glance-4__table tr { border-bottom: 1px solid var(--grey-light); }
+    .glance-4__table tr:last-child { border-bottom: none; }
+    .glance-4__table td { padding: 12px 0; vertical-align: top; }
+    .glance-4__table td:first-child { width: 130px; font-size: 12px; font-weight: 600; color: var(--grey-medium); text-transform: uppercase; letter-spacing: .03em; padding-right: 16px; }
+    .glance-4__table td:last-child { font-size: 15px; font-weight: 500; color: var(--grey-dark); line-height: 1.5; }
+    .glance-4__table .attr-icon { display: inline-flex; width: 16px; height: 16px; margin-right: 6px; vertical-align: -2px; }
+    .glance-4__table .attr-icon svg { width: 16px; height: 16px; stroke: var(--pthalo-green); fill: none; stroke-width: 1.5; }
+    .glance-4__verdict { background: var(--sangria-red); padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+    .glance-4__verdict-tag { font-family: var(--font-supporting); font-size: 18px; font-weight: 700; color: var(--cream); margin-bottom: 8px; line-height: 1; }
+    .glance-4__verdict-score { font-family: var(--font-secondary); font-size: 56px; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 4px; }
+    .glance-4__verdict-max { font-size: 14px; color: rgba(255,255,255,.4); font-weight: 500; margin-bottom: 16px; }
+    .glance-4__verdict-stars { display: flex; gap: 4px; margin-bottom: 20px; }
+    .glance-4__verdict-stars svg { width: 18px; height: 18px; fill: var(--cream); }
+    .glance-4__verdict-divider { width: 32px; height: 2px; background: rgba(255,255,255,.15); margin-bottom: 16px; border-radius: 1px; }
+    .glance-4__verdict-bestfor-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+    .glance-4__verdict-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .glance-4__verdict-pill { font-size: 12px; font-weight: 500; color: var(--white); background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.15); padding: 4px 12px; border-radius: var(--radius-full); }
+    .glance-4__verdict-tip { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.1); }
+    .glance-4__verdict-tip-label { font-family: var(--font-supporting); font-size: 14px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+    .glance-4__verdict-tip-text { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .glance-4 { grid-template-columns: 1fr; }
+      .glance-4__verdict { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px; }
+      .glance-4__verdict-score { font-size: 40px; margin-bottom: 0; }
+      .glance-4__verdict-tip { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="article">
+    <p class="article-tag">Travel Journal</p>
+    <h1 class="article-h1">Londolozi Founders Camp — Is It Worth the Hype?</h1>
+    <div class="article-meta">
+      <span>By Sarah Mitchell</span><span class="dot"></span>
+      <span>12 min read</span><span class="dot"></span>
+      <span>January 2026</span>
+    </div>
+    <p>We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special.</p>
+    <p>The Sabi Sands Game Reserve has long been considered the crown jewel of South African safari — private traversing rights, unmatched leopard sightings, and a commitment to community that dates back decades. Londolozi sits right at the heart of it.</p>
+    <p>Before we dive into the day-by-day breakdown, here's a quick snapshot of what you need to know.</p>
+    <div class="review-box-wrapper">
+      <div class="glance-4">
+        <div class="glance-4__main">
+          <div class="glance-4__header">
+            <div class="glance-4__header-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <span class="glance-4__header-text">At a glance</span>
+          </div>
+          <table class="glance-4__table">
+            <tr><td>Location</td><td>Sabi Sands Game Reserve, Greater Kruger, South Africa</td></tr>
+            <tr><td>Price Class</td><td>Ultra-Luxury · $$$$</td></tr>
+            <tr><td>Best For</td><td>Honeymooners, Couples, Leopard Enthusiasts, Photographers</td></tr>
+            <tr><td>Not Ideal For</td><td>Travellers needing constant Wi-Fi</td></tr>
+            <tr><td>Sustainability</td><td>Gold Eco-Rated · Community-Owned</td></tr>
+            <tr><td>Pairs With</td><td>A relaxing 3 nights in the Cape Winelands</td></tr>
+          </table>
+        </div>
+        <div class="glance-4__verdict">
+          <span class="glance-4__verdict-tag">Our expert's rating</span>
+          <span class="glance-4__verdict-score">4.9</span>
+          <span class="glance-4__verdict-max">out of 5.0</span>
+          <div class="glance-4__verdict-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="glance-4__verdict-divider"></div>
+          <div class="glance-4__verdict-bestfor-label">Best for</div>
+          <div class="glance-4__verdict-pills">
+            <span class="glance-4__verdict-pill">Honeymooners</span>
+            <span class="glance-4__verdict-pill">Photographers</span>
+            <span class="glance-4__verdict-pill">Leopards</span>
+          </div>
+          <div class="glance-4__verdict-tip">
+            <div class="glance-4__verdict-tip-label">Viatu insider tip</div>
+            <div class="glance-4__verdict-tip-text">"Ask for Room #5 for the best sunset view over the Sand River."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>The Experience, Day by Day</h2>
+    <p>Now let me walk you through the experience day by day — from the first game drive at dawn to the candlelit dinner under the stars. Every moment at Londolozi feels curated without being contrived.</p>
+    <p>Our first morning game drive departed at 5:30am. The air was crisp, the coffee was strong, and within thirty minutes we were watching a female leopard and her two cubs navigate the rocky outcrops along the Sand River.</p>
+  </div>
+</body>
+</html>

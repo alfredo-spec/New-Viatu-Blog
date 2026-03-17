@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept 1 — The Passport Stamp (Original Tokens)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    /* ── Tokens (original shorthand) ── */
+    :root {
+      --sangria: #541736;
+      --pthalo: #1C4447;
+      --platinum: #C4C4C4;
+      --black: #000000;
+      --white: #FFFFFF;
+      --cream: #F3FFB9;
+      --gl: #F8F9FA;
+      --gm: #6C757D;
+      --gd: #343A40;
+      --g3: #DEE2E6;
+      --fp: 'Krona One', sans-serif;
+      --fs: 'Hanken Grotesk', sans-serif;
+      --fc: 'Caveat', cursive;
+      --rmd: .375rem;
+      --rlg: .5rem;
+      --rxl: .75rem;
+      --r2xl: 1rem;
+      --rfull: 9999px;
+      --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+      --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+      --dur: 200ms;
+      --dur3: 300ms;
+      --ease: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--fs); background: var(--white); color: var(--gd); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    /* ── Nav placeholder ── */
+    .nav-placeholder {
+      height: 64px;
+      background: var(--gl);
+      border-bottom: 1px solid var(--g3);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      font-family: var(--fp);
+      font-size: 14px;
+      color: var(--platinum);
+      letter-spacing: -.02em;
+    }
+
+    /* ── Hero placeholder ── */
+    .hero-placeholder {
+      width: 100%;
+      height: clamp(200px, 30vw, 360px);
+      background: linear-gradient(135deg, rgba(84,23,54,.06) 0%, rgba(28,68,71,.06) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fs);
+      font-size: 14px;
+      color: var(--platinum);
+    }
+
+    /* ── Article wrapper ── */
+    .article { max-width: 720px; margin: 0 auto; padding: 64px 24px 96px; }
+    .article-tag { font-family: var(--fc); font-size: 20px; font-weight: 700; color: var(--sangria); margin-bottom: 8px; line-height: 1; }
+    .article-h1 { font-family: var(--fp); font-size: clamp(24px, 3.5vw, 40px); font-weight: 400; letter-spacing: -.06em; line-height: 1.34; color: var(--black); margin-bottom: 24px; }
+    .article-meta { font-size: 14px; color: var(--gm); margin-bottom: 40px; display: flex; align-items: center; gap: 12px; }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--platinum); }
+    .article p { font-size: 18px; line-height: 1.78; color: var(--gd); margin-bottom: 24px; max-width: 65ch; }
+    .article h2 { font-family: var(--fs); font-size: 28px; font-weight: 700; color: var(--black); margin: 48px 0 16px; line-height: 1.2; }
+    .review-box-wrapper { margin: 48px 0; }
+
+    /* ── Concept 1: The Passport Stamp ── */
+    .glance-1 {
+      background: var(--white);
+      border: 1px solid var(--g3);
+      border-left: 5px solid var(--sangria);
+      border-radius: var(--rlg);
+      overflow: hidden;
+      box-shadow: var(--sh-sm);
+      transition: box-shadow var(--dur3) var(--ease);
+    }
+    .glance-1:hover { box-shadow: var(--sh-md); }
+    .glance-1__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 28px; border-bottom: 1px solid var(--g3); background: var(--gl);
+    }
+    .glance-1__header-left { display: flex; align-items: center; gap: 12px; }
+    .glance-1__icon {
+      width: 36px; height: 36px; border-radius: var(--rfull);
+      background: rgba(84, 23, 54, .08); display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .glance-1__icon svg { width: 18px; height: 18px; stroke: var(--sangria); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .glance-1__label { font-family: var(--fc); font-size: 20px; font-weight: 700; color: var(--sangria); line-height: 1; }
+    .glance-1__rating { display: flex; align-items: center; gap: 8px; }
+    .glance-1__rating-score { font-family: var(--fs); font-size: 28px; font-weight: 700; color: var(--sangria); line-height: 1; }
+    .glance-1__rating-max { font-size: 14px; color: var(--platinum); font-weight: 500; }
+    .glance-1__stars { display: flex; gap: 2px; }
+    .glance-1__stars svg { width: 16px; height: 16px; fill: var(--sangria); }
+    .glance-1__body { padding: 24px 28px 28px; }
+    .glance-1__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .glance-1__row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 0; border-bottom: 1px solid rgba(222, 226, 230, .5);
+    }
+    .glance-1__row:nth-last-child(-n+2) { border-bottom: none; }
+    .glance-1__row:nth-child(odd) { padding-right: 20px; }
+    .glance-1__row:nth-child(even) { padding-left: 20px; border-left: 1px solid rgba(222, 226, 230, .3); }
+    .glance-1__row-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+    .glance-1__row-icon svg { width: 20px; height: 20px; stroke: var(--pthalo); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .glance-1__row-label { font-size: 12px; font-weight: 600; color: var(--gm); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+    .glance-1__row-value { font-size: 15px; font-weight: 500; color: var(--gd); line-height: 1.4; }
+    .glance-1__tip {
+      margin-top: 20px; padding: 16px 20px;
+      background: rgba(84, 23, 54, .03); border: 1px dashed rgba(84, 23, 54, .15);
+      border-radius: var(--rmd); display: flex; align-items: flex-start; gap: 10px;
+    }
+    .glance-1__tip-icon { flex-shrink: 0; margin-top: 1px; }
+    .glance-1__tip-icon svg { width: 16px; height: 16px; stroke: var(--sangria); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .glance-1__tip-label { font-family: var(--fc); font-size: 15px; font-weight: 700; color: var(--sangria); margin-bottom: 2px; }
+    .glance-1__tip-text { font-size: 14px; color: var(--gd); line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .glance-1__grid { grid-template-columns: 1fr; }
+      .glance-1__row:nth-child(odd) { padding-right: 0; }
+      .glance-1__row:nth-child(even) { padding-left: 0; border-left: none; }
+      .glance-1__row:nth-last-child(-n+2) { border-bottom: 1px solid rgba(222,226,230,.5); }
+      .glance-1__row:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav placeholder -->
+  <div class="nav-placeholder">viatu blog &mdash; nav placeholder</div>
+
+  <!-- Hero placeholder -->
+  <div class="hero-placeholder">Hero image placeholder &middot; 1440 &times; 360</div>
+
+  <!-- Article -->
+  <div class="article">
+    <p class="article-tag">Travel Journal</p>
+    <h1 class="article-h1">Londolozi Founders Camp &mdash; Is It Worth the Hype?</h1>
+    <div class="article-meta">
+      <span>By Sarah Mitchell</span>
+      <span class="dot"></span>
+      <span>12 min read</span>
+      <span class="dot"></span>
+      <span>January 2026</span>
+    </div>
+
+    <p>We arrived at Londolozi Founders Camp just as the afternoon light turned everything gold. From the moment our guide, Stix, met us at the airstrip with that signature warm smile, we knew this was going to be something special.</p>
+
+    <p>The Sabi Sands Game Reserve has long been considered the crown jewel of South African safari &mdash; private traversing rights, unmatched leopard sightings, and a commitment to community that dates back decades. Londolozi sits right at the heart of it.</p>
+
+    <p>Before we dive into the day-by-day breakdown, here&rsquo;s a quick snapshot of what you need to know.</p>
+
+    <div class="review-box-wrapper">
+      <!-- Concept 1: The Passport Stamp -->
+      <div class="glance-1">
+        <div class="glance-1__header">
+          <div class="glance-1__header-left">
+            <div class="glance-1__icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <span class="glance-1__label">At a glance</span>
+          </div>
+          <div class="glance-1__rating">
+            <div>
+              <div class="glance-1__stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+            </div>
+            <span class="glance-1__rating-score">4.9</span>
+            <span class="glance-1__rating-max">/ 5.0</span>
+          </div>
+        </div>
+        <div class="glance-1__body">
+          <div class="glance-1__grid">
+            <div class="glance-1__row">
+              <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div>
+                <div class="glance-1__row-label">Location</div>
+                <div class="glance-1__row-value">Sabi Sands, Greater Kruger, South Africa</div>
+              </div>
+            </div>
+            <div class="glance-1__row">
+              <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div>
+                <div class="glance-1__row-label">Price Class</div>
+                <div class="glance-1__row-value">Ultra-Luxury &middot; $$$$</div>
+              </div>
+            </div>
+            <div class="glance-1__row">
+              <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <div>
+                <div class="glance-1__row-label">Best For</div>
+                <div class="glance-1__row-value">Honeymooners, Photographers, Leopard Enthusiasts</div>
+              </div>
+            </div>
+            <div class="glance-1__row">
+              <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+              <div>
+                <div class="glance-1__row-label">Not Ideal For</div>
+                <div class="glance-1__row-value">Travellers needing constant Wi-Fi</div>
+              </div>
+            </div>
+            <div class="glance-1__row">
+              <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="glance-1__row-label">Sustainability</div>
+                <div class="glance-1__row-value">Gold Eco-Rated &middot; Community-Owned</div>
+              </div>
+            </div>
+            <div class="glance-1__row">
+              <div class="glance-1__row-icon"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div>
+              <div>
+                <div class="glance-1__row-label">Pairs Well With</div>
+                <div class="glance-1__row-value">3 nights in the Cape Winelands</div>
+              </div>
+            </div>
+          </div>
+          <div class="glance-1__tip">
+            <div class="glance-1__tip-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div>
+              <div class="glance-1__tip-label">Viatu insider tip</div>
+              <div class="glance-1__tip-text">&ldquo;Ask for Room #5 for the best sunset view over the Sand River.&rdquo;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Experience, Day by Day</h2>
+
+    <p>Now let me walk you through the experience day by day &mdash; from the first game drive at dawn to the candlelit dinner under the stars. Every moment at Londolozi feels curated without being contrived.</p>
+
+    <p>Our first morning game drive departed at 5:30am. The air was crisp, the coffee was strong, and within thirty minutes we were watching a female leopard and her two cubs navigate the rocky outcrops along the Sand River.</p>
+  </div>
+
+</body>
+</html>

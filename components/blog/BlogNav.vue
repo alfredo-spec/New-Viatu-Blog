@@ -63,7 +63,7 @@ onUnmounted(() => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-  height: 64px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,7 +95,7 @@ onUnmounted(() => {
   font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
-  padding: 12px 15px;
+  padding: 18px 20px;
   border-radius: 4px;
   letter-spacing: 0;
   white-space: nowrap;
@@ -123,7 +123,7 @@ onUnmounted(() => {
 /* ─── Mobile ─────────────────────────────────────────── */
 @media (max-width: 480px) {
   .blog-back-label { display: none; }
-  .blog-back-btn   { padding: 10px 12px; gap: 0; }
+  .blog-back-btn   { padding: 14px 14px; gap: 0; }
   .blog-nav-inner  { padding: 0 20px; }
 }
 </style>

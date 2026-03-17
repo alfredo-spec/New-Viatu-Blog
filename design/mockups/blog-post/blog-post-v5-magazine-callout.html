@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tawana Camp Review (Magazine Callout) — Viatu Travel Journal</title>
+    <meta name="description" content="Honest Tawana Camp review from a Christmas 2025 stay. Rooms, wildlife, food, pricing ($1,895–$3,895/night), and whether Natural Selection's flagship justifies Botswana rates. 4.5/5.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+    <style>
+        /* ─── TOKENS ────────────────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+            --earth-sand: #E8E0D6;
+            --earth-stone: #B5A898;
+            --earth-clay: #8B7355;
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+            --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+            --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+            --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4,0,.2,1);
+        }
+
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+        html { scroll-behavior:smooth; -webkit-text-size-adjust:100% }
+        body { font-family:var(--fs); color:var(--black); background:var(--white); -webkit-font-smoothing:antialiased; line-height:1.6 }
+        a { text-decoration:none; color:inherit }
+        button { font-family:var(--fs); cursor:pointer; border:none; background:none }
+        img { max-width:100%; height:auto }
+        .nums { font-family:var(--fs) }
+        .wrap { max-width:1200px; margin:0 auto; padding:0 24px }
+
+        /* ─── NAV ──────────────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: background var(--dur3) var(--ease), box-shadow var(--dur3) var(--ease)
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, .06)
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1
+        }
+
+        .nav-logo img {
+            height: 24px;
+            width: auto;
+            display: block
+        }
+
+        .nav:not(.scrolled) .logo-dark {
+            display: none
+        }
+
+        .nav.scrolled .logo-white {
+            display: none
+        }
+
+        .nav-logo-blog {
+            font-family: var(--fc);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .01em;
+            line-height: 1;
+            margin-top: 2px;
+            align-self: flex-end
+        }
+
+        .nav:not(.scrolled) .nav-logo-blog {
+            color: rgba(255, 255, 255, .88)
+        }
+
+        .nav.scrolled .nav-logo-blog {
+            color: #1B1B1B
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .nav-back-btn {
+            font-family: var(--fs);
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.2;
+            padding: 18px 20px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--dur) var(--ease);
+            letter-spacing: 0;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--white);
+            background: var(--sangria);
+            border: none
+        }
+
+        .nav-back-btn:hover {
+            background: #6b1d45;
+            transform: translateY(-1px)
+        }
+
+        .nav-back-btn svg {
+            flex-shrink: 0;
+            transition: inherit
+        }
+
+        /* ─── LANGUAGE DROPDOWN ─────────────────────────────────── */
+        .lang {
+            position: relative
+        }
+
+        .lang-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 7px 10px;
+            border-radius: var(--rmd);
+            min-height: 36px;
+            border: 1px solid transparent;
+            background: none;
+            letter-spacing: .04em;
+            line-height: 1;
+            transition: all var(--dur) var(--ease)
+        }
+
+        .nav:not(.scrolled) .lang-trigger {
+            color: rgba(255, 255, 255, .7)
+        }
+
+        .nav:not(.scrolled) .lang-trigger:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .2)
+        }
+
+        .nav.scrolled .lang-trigger {
+            color: var(--gm)
+        }
+
+        .nav.scrolled .lang-trigger:hover {
+            color: var(--sangria);
+            background: rgba(84, 23, 54, .04);
+            border-color: rgba(84, 23, 54, .15)
+        }
+
+        .lang-globe {
+            width: 15px;
+            height: 15px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0
+        }
+
+        .lang-code-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .06em
+        }
+
+        .lang-chevron {
+            display: block;
+            width: 11px;
+            height: 11px;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform var(--dur) var(--ease)
+        }
+
+        .lang.open .lang-chevron {
+            transform: rotate(180deg)
+        }
+
+        .lang-panel {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 210px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .12), 0 0 0 1px rgba(0, 0, 0, .04);
+            padding: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-5px) scale(.98);
+            transform-origin: top right;
+            transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+            z-index: 20
+        }
+
+        .lang.open .lang-panel {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1)
+        }
+
+        .lang-panel-header {
+            display: flex;
+            align-items: center;
+            padding: 11px 16px 9px;
+            border-bottom: 1px solid rgba(0, 0, 0, .06)
+        }
+
+        .lang-panel-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gm)
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            width: 100%;
+            padding: 11px 16px;
+            border: none;
+            border-left: 3px solid transparent;
+            background: none;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gd);
+            cursor: pointer;
+            text-align: left;
+            transition:
+                background var(--dur) var(--ease),
+                color var(--dur) var(--ease),
+                border-left-color var(--dur) var(--ease)
+        }
+
+        .lang-option:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, .045)
+        }
+
+        .lang-option:hover {
+            background: var(--gl);
+            color: var(--sangria);
+            border-left-color: rgba(84, 23, 54, .3)
+        }
+
+        .lang-option.active {
+            color: var(--sangria);
+            border-left-color: var(--sangria);
+            background: rgba(84, 23, 54, .03)
+        }
+
+        .lang-option.active .lang-name {
+            font-weight: 600
+        }
+
+        .lang-flag {
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0
+        }
+
+        .lang-name {
+            flex: 1;
+            font-size: 13px
+        }
+
+        .lang-check {
+            width: 13px;
+            height: 13px;
+            fill: none;
+            stroke: var(--sangria);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-left: auto;
+            flex-shrink: 0
+        }
+
+        /* ─── ARTICLE HERO ─────────────────────────────────────── */
+        .article-hero {
+            position:relative;
+            min-height:70vh;
+            min-height:70svh;
+            display:flex;
+            align-items:flex-end;
+            overflow:hidden
+        }
+        .article-hero-bg { position:absolute; inset:0 }
+        .article-hero-bg img { width:100%; height:100%; object-fit:cover; display:block }
+        .article-hero-grad {
+            position:absolute; inset:0; pointer-events:none;
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.2) 10%, transparent 22%),
+                linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.65) 35%, rgba(0,0,0,.25) 65%, transparent 100%)
+        }
+        .article-hero-body {
+            position:relative; z-index:2; width:100%;
+            max-width:1200px; margin:0 auto;
+            padding:0 24px 64px
+        }
+        .article-hero-eyebrow {
+            font-size:11px; font-weight:600; letter-spacing:.12em;
+            text-transform:uppercase; color:rgba(255,255,255,.45);
+            margin-bottom:16px
+        }
+        .article-hero-tagline {
+            font-family:var(--fc); font-size:22px; font-weight:700;
+            color:rgba(255,255,255,.55); margin-bottom:10px
+        }
+        .article-hero-title {
+            font-family:var(--fp);
+            font-size:clamp(32px, 4.5vw, 56px);
+            font-weight:400;
+            color:var(--white);
+            letter-spacing:-.06em;
+            line-height:1.15;
+            max-width:820px;
+            text-shadow:0 4px 24px rgba(0,0,0,.45);
+            margin-bottom:20px
+        }
+        .article-hero-meta {
+            display:flex; align-items:center; gap:16px;
+            flex-wrap:wrap; margin-bottom:16px
+        }
+        .article-hero-author {
+            display:flex; align-items:center; gap:10px
+        }
+        .article-hero-avatar {
+            width:36px; height:36px; border-radius:var(--rfull);
+            overflow:hidden; border:2px solid rgba(255,255,255,.3);
+            flex-shrink:0
+        }
+        .article-hero-avatar img { width:100%; height:100%; object-fit:cover; display:block }
+        .article-hero-byline {
+            font-size:14px; font-weight:500; color:rgba(255,255,255,.75)
+        }
+        .article-hero-byline strong { font-weight:600; color:var(--white) }
+        .article-hero-dot {
+            width:3px; height:3px; border-radius:var(--rfull);
+            background:rgba(255,255,255,.3)
+        }
+        .article-hero-date {
+            font-size:14px; font-weight:400; color:rgba(255,255,255,.5)
+        }
+        .article-hero-read {
+            font-size:13px; font-weight:400; color:rgba(255,255,255,.4)
+        }
+        .article-hero-tags {
+            display:flex; flex-wrap:wrap; gap:8px
+        }
+        .article-hero-tag {
+            font-size:12px; font-weight:500; color:rgba(255,255,255,.7);
+            padding:5px 14px; border-radius:var(--rfull);
+            border:1px solid rgba(255,255,255,.15);
+            background:rgba(255,255,255,.06);
+            backdrop-filter:blur(4px);
+            transition:all var(--dur) var(--ease)
+        }
+        .article-hero-tag:hover {
+            background:rgba(255,255,255,.12);
+            border-color:rgba(255,255,255,.3);
+            color:var(--white)
+        }
+
+        /* ─── ARTICLE BODY ─────────────────────────────────────── */
+        .article-body {
+            max-width:720px; margin:0 auto;
+            padding:64px 24px 0
+        }
+        .article-body p {
+            font-size:18px; font-weight:400; color:var(--gd);
+            line-height:1.78; margin-bottom:24px;
+            max-width:65ch
+        }
+        .article-body p.dropcap::first-letter {
+            font-family:var(--fp);
+            font-size:3.8em;
+            float:left;
+            line-height:.78;
+            margin-right:10px;
+            margin-top:6px;
+            color:var(--sangria);
+            font-weight:400
+        }
+        .article-h2 {
+            font-family:var(--fs); font-size:28px; font-weight:700;
+            color:var(--black); line-height:1.25;
+            margin-top:56px; margin-bottom:20px;
+            letter-spacing:-.01em
+        }
+        .article-h3 {
+            font-family:var(--fs); font-size:22px; font-weight:700;
+            color:var(--black); line-height:1.3;
+            margin-top:40px; margin-bottom:16px
+        }
+        .article-img {
+            margin:40px 0;
+            border-radius:var(--rlg);
+            overflow:hidden;
+            box-shadow:var(--sh-md)
+        }
+        .article-img img {
+            width:100%; display:block
+        }
+        .article-img figcaption {
+            padding:12px 0 0;
+            font-size:13px; font-weight:400; color:var(--gm);
+            line-height:1.5
+        }
+        .article-pullquote {
+            margin:48px 0;
+            padding:24px 0 24px 28px;
+            border-left:4px solid var(--sangria);
+            position:relative
+        }
+        .article-pullquote p {
+            font-family:var(--fc);
+            font-size:26px;
+            font-weight:700;
+            color:var(--sangria);
+            line-height:1.35;
+            margin-bottom:8px
+        }
+        .article-pullquote cite {
+            font-family:var(--fs);
+            font-size:13px;
+            font-weight:500;
+            color:var(--gm);
+            font-style:normal;
+            letter-spacing:.02em
+        }
+
+        /* ─── CONCEPT 5 — THE MAGAZINE CALLOUT ──────────────────── */
+        .glance-5 {
+            position: relative;
+            border-radius: var(--rxl);
+            overflow: hidden;
+            background: var(--white);
+            border: 1px solid var(--g3);
+            box-shadow: var(--sh-sm);
+            transition: box-shadow var(--dur3) var(--ease);
+            margin: 48px 0;
+        }
+        .glance-5:hover { box-shadow: var(--sh-md); }
+
+        .glance-5__accent {
+            height: 4px;
+            background: linear-gradient(90deg, var(--sangria) 0%, var(--pthalo) 100%);
+        }
+
+        .glance-5__body {
+            padding: 28px;
+        }
+        .glance-5__top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        .glance-5__top-left {
+            flex: 1;
+        }
+        .glance-5__tag {
+            font-family: var(--fc);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .glance-5__title {
+            font-family: var(--fp);
+            font-size: clamp(15px, 1.5vw, 18px);
+            font-weight: 400;
+            color: var(--black);
+            letter-spacing: -.04em;
+            line-height: 1.34;
+            margin-bottom: 6px;
+        }
+        .glance-5__subtitle {
+            font-size: 14px;
+            color: var(--gm);
+            line-height: 1.5;
+        }
+
+        .glance-5__score-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+            padding: 12px 20px;
+            background: var(--gl);
+            border-radius: var(--rlg);
+            border: 1px solid var(--g3);
+        }
+        .glance-5__score-num {
+            font-family: var(--fs);
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--sangria);
+            line-height: 1;
+        }
+        .glance-5__score-max {
+            font-size: 12px;
+            color: var(--platinum);
+            font-weight: 500;
+        }
+        .glance-5__score-stars {
+            display: flex;
+            gap: 2px;
+        }
+        .glance-5__score-stars svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--sangria);
+        }
+
+        .glance-5__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--g3);
+            border-radius: var(--rmd);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .glance-5__cell {
+            background: var(--white);
+            padding: 16px 20px;
+        }
+        .glance-5__cell:nth-child(n+4) {
+            background: var(--gl);
+        }
+        .glance-5__cell-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gm);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .glance-5__cell-label svg {
+            width: 13px;
+            height: 13px;
+            stroke: var(--pthalo);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .glance-5__cell-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gd);
+            line-height: 1.4;
+        }
+
+        .glance-5__bottom {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .glance-5__tip {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 14px 16px;
+            background: rgba(84, 23, 54, .03);
+            border-radius: var(--rmd);
+            border: 1px dashed rgba(84, 23, 54, .12);
+        }
+        .glance-5__tip svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--sangria);
+            fill: none;
+            stroke-width: 1.5;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .glance-5__tip-label {
+            font-family: var(--fc);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--sangria);
+        }
+        .glance-5__tip-text {
+            font-size: 13px;
+            color: var(--gd);
+            line-height: 1.5;
+        }
+        .glance-5__pairs-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gm);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            margin-bottom: 6px;
+        }
+        .glance-5__pairs-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--pthalo);
+            line-height: 1.4;
+        }
+        .glance-5__pairs {
+            flex-shrink: 0;
+            width: 200px;
+            padding: 14px 16px;
+            background: rgba(28, 68, 71, .03);
+            border-radius: var(--rmd);
+            border: 1px solid rgba(28, 68, 71, .08);
+        }
+
+        /* ─── RATING BREAKDOWN ─────────────────────────────────── */
+        .rating-section {
+            margin-top:56px; padding-top:48px;
+            border-top:1px solid var(--g3)
+        }
+        .rating-header {
+            display:flex; align-items:flex-end; justify-content:space-between;
+            margin-bottom:32px; gap:24px
+        }
+        .rating-header-left {}
+        .rating-header-tag {
+            font-family:var(--fc); font-size:20px; font-weight:700;
+            color:var(--sangria); line-height:1; margin-bottom:6px
+        }
+        .rating-header-title {
+            font-family:var(--fs); font-size:24px; font-weight:700;
+            color:var(--black); line-height:1.25
+        }
+        .rating-overall {
+            display:flex; align-items:center; gap:12px;
+            padding:16px 24px; background:var(--gl);
+            border-radius:var(--rlg); border:1px solid var(--g3);
+            flex-shrink:0
+        }
+        .rating-overall-score {
+            font-family:var(--fs); font-size:36px; font-weight:700;
+            color:var(--sangria); line-height:1
+        }
+        .rating-overall-meta { display:flex; flex-direction:column; gap:2px }
+        .rating-overall-max { font-size:13px; color:var(--platinum); font-weight:500 }
+        .rating-overall-stars { display:flex; gap:2px }
+        .rating-overall-stars svg { width:14px; height:14px; fill:var(--sangria) }
+
+        .rating-table { width:100% }
+        .rating-row {
+            display:grid; grid-template-columns:180px 1fr 60px;
+            align-items:center; gap:16px;
+            padding:14px 0; border-bottom:1px solid rgba(222,226,230,.4)
+        }
+        .rating-row:last-child { border-bottom:none }
+        .rating-cat {
+            font-size:14px; font-weight:600; color:var(--gd)
+        }
+        .rating-bar-track {
+            height:6px; background:var(--g3); border-radius:3px;
+            overflow:hidden
+        }
+        .rating-bar-fill {
+            height:100%; border-radius:3px;
+            background:var(--sangria);
+            transition:width .8s var(--ease)
+        }
+        .rating-bar-fill.high { background:var(--pthalo) }
+        .rating-score {
+            font-family:var(--fs); font-size:15px; font-weight:700;
+            color:var(--gd); text-align:right
+        }
+        .rating-note {
+            font-size:13px; color:var(--gm); margin-top:4px; line-height:1.4
+        }
+
+        /* ─── PRICING TABLE ────────────────────────────────────── */
+        .pricing-section {
+            margin-top:48px; padding-top:40px;
+            border-top:1px solid var(--g3)
+        }
+        .pricing-tag {
+            font-family:var(--fc); font-size:20px; font-weight:700;
+            color:var(--sangria); margin-bottom:6px
+        }
+        .pricing-title {
+            font-family:var(--fs); font-size:22px; font-weight:700;
+            color:var(--black); margin-bottom:24px
+        }
+        .pricing-table-wrap {
+            border:1px solid var(--g3); border-radius:var(--rlg);
+            overflow:hidden
+        }
+        .pricing-table {
+            width:100%; border-collapse:collapse
+        }
+        .pricing-table thead th {
+            padding:12px 20px; font-size:11px; font-weight:700;
+            text-transform:uppercase; letter-spacing:.06em;
+            color:var(--gm); background:var(--gl);
+            text-align:left; border-bottom:1px solid var(--g3)
+        }
+        .pricing-table tbody td {
+            padding:14px 20px; font-size:15px; font-weight:500;
+            color:var(--gd); border-bottom:1px solid rgba(222,226,230,.4)
+        }
+        .pricing-table tbody tr:last-child td { border-bottom:none }
+        .pricing-table tbody td:last-child {
+            font-weight:700; color:var(--sangria)
+        }
+        .pricing-table .season-badge {
+            display:inline-block; font-size:11px; font-weight:600;
+            text-transform:uppercase; letter-spacing:.04em;
+            padding:3px 10px; border-radius:var(--rfull);
+            margin-right:8px
+        }
+        .pricing-table .season-badge.low { background:rgba(34,197,94,.08); color:#16a34a }
+        .pricing-table .season-badge.mid { background:rgba(245,158,11,.08); color:#d97706 }
+        .pricing-table .season-badge.high { background:rgba(239,68,68,.08); color:#dc2626 }
+        .pricing-table .season-badge.peak { background:rgba(84,23,54,.08); color:var(--sangria) }
+        .pricing-inclusions {
+            margin-top:20px; font-size:14px; color:var(--gm); line-height:1.6
+        }
+        .pricing-inclusions strong { font-weight:600; color:var(--gd) }
+
+        /* ─── AUTHOR BIO CARD ──────────────────────────────────── */
+        .author-bio {
+            margin-top:56px; padding:32px;
+            border:1px solid var(--g3); border-radius:var(--rlg);
+            display:flex; gap:24px; align-items:flex-start;
+            background:var(--white)
+        }
+        .author-bio-portrait {
+            width:80px; height:80px; border-radius:var(--rfull);
+            overflow:hidden; flex-shrink:0;
+            border:3px solid var(--white);
+            box-shadow:0 4px 16px rgba(0,0,0,.1)
+        }
+        .author-bio-portrait img { width:100%; height:100%; object-fit:cover; display:block }
+        .author-bio-content { flex:1 }
+        .author-bio-label {
+            font-size:11px; font-weight:600; letter-spacing:.08em;
+            text-transform:uppercase; color:var(--gm); margin-bottom:4px
+        }
+        .author-bio-name {
+            font-size:20px; font-weight:700; color:var(--black);
+            line-height:1.25; margin-bottom:4px
+        }
+        .author-bio-role {
+            font-size:13px; font-weight:500; color:var(--sangria);
+            margin-bottom:12px
+        }
+        .author-bio-text {
+            font-size:15px; font-weight:400; color:var(--gm);
+            line-height:1.6; margin-bottom:16px
+        }
+        .author-bio-link {
+            display:inline-flex; align-items:center; gap:5px;
+            font-size:14px; font-weight:500; color:var(--sangria);
+            transition:gap var(--dur3) var(--ease)
+        }
+        .author-bio-link:hover { gap:8px }
+        .author-bio-link svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
+
+        /* ─── NEWSLETTER ───────────────────────────────────────── */
+        .nl { background:var(--earth-warm); padding:80px 0 }
+        .nl-inner { max-width:520px; margin:0 auto; padding:0 24px; text-align:center }
+        .nl-tag { font-family:var(--fc); font-size:22px; font-weight:700; color:var(--sangria); margin-bottom:4px }
+        .nl-title { font-family:var(--fp); font-size:clamp(20px,2.5vw,28px); font-weight:400; letter-spacing:-.04em; line-height:1.2; margin-bottom:8px }
+        .nl-text { font-size:15px; color:var(--gm); margin-bottom:28px; line-height:1.6 }
+        .nl-form { display:flex; gap:10px }
+        .nl-input {
+            flex:1; font-size:15px; color:var(--black); padding:12px 16px;
+            border:1px solid var(--earth-sand); border-radius:var(--rmd); min-height:48px;
+            outline:none; background:var(--white);
+            transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease)
+        }
+        .nl-input::placeholder { color:var(--platinum); font-weight:300 }
+        .nl-input:focus { border-color:var(--pthalo); box-shadow:0 0 0 3px rgba(28,68,71,.08) }
+        .nl-btn {
+            font-size:14px; font-weight:500; color:var(--white); background:var(--sangria);
+            padding:12px 28px; border-radius:var(--rmd); min-height:48px;
+            transition:all var(--dur) var(--ease); white-space:nowrap
+        }
+        .nl-btn:hover { opacity:.9 }
+        .nl-fine { font-size:12px; color:var(--earth-stone); margin-top:14px }
+
+        /* ─── FOOTER ───────────────────────────────────────────── */
+        .footer { background:#1b1b1b }
+        .footer-upper { padding:64px 0 56px }
+        .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:48px }
+        .footer-col { display:flex; flex-direction:column; gap:0 }
+        .footer-col h4 { font-size:20px; font-weight:700; color:var(--white); margin-bottom:20px; line-height:1.2 }
+        .footer-col a { display:block; font-size:16px; font-weight:400; color:rgba(255,255,255,.55); padding:4px 0; line-height:1.5; transition:color var(--dur) var(--ease) }
+        .footer-col a:hover { color:var(--white) }
+        .footer-social-link { display:flex; align-items:center; gap:10px; font-size:16px; font-weight:400; color:rgba(255,255,255,.55); padding:4px 0; line-height:1.5; transition:color var(--dur) var(--ease) }
+        .footer-social-link:hover { color:var(--white) }
+        .footer-social-link svg { width:18px; height:18px; flex-shrink:0; opacity:.65; transition:opacity var(--dur) var(--ease) }
+        .footer-social-link:hover svg { opacity:1 }
+        .footer-cert-badge {
+            margin-top:24px; padding:16px;
+            border:1px solid rgba(255,255,255,.08);
+            border-radius:var(--rlg)
+        }
+        .footer-cert-badge-label {
+            font-size:9px; font-weight:700; letter-spacing:.1em;
+            text-transform:uppercase; color:rgba(255,255,255,.3);
+            margin-bottom:10px
+        }
+        .footer-cert-badge-row { display:flex; align-items:center; gap:12px }
+        .footer-cert-icon {
+            width:40px; height:40px; border-radius:var(--rfull);
+            border:1.5px solid rgba(255,255,255,.2);
+            display:flex; align-items:center; justify-content:center;
+            font-size:10px; font-weight:800; color:rgba(255,255,255,.5);
+            line-height:1.1; text-align:center; flex-shrink:0
+        }
+        .footer-cert-text { font-size:11px; color:rgba(255,255,255,.3); line-height:1.5 }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding:24px 0 }
+        .footer-bottom-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px }
+        .footer-bottom-logo img { height:20px; width:auto; display:block; opacity:.5 }
+        .footer-copy { font-size:12px; color:rgba(255,255,255,.3) }
+
+        /* ─── REVEAL ───────────────────────────────────────────── */
+        .reveal { opacity:0; transform:translateY(16px); transition:opacity .8s var(--ease), transform .8s var(--ease) }
+        .reveal.vis { opacity:1; transform:translateY(0) }
+
+        /* ─── RESPONSIVE ───────────────────────────────────────── */
+        @media (max-width:1024px) {
+            .footer-grid { grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px }
+        }
+        @media (max-width:768px) {
+            .nav-inner { height:72px }
+            .nav-back-btn span { display:none }
+            .nav-back-btn { padding:12px 12px; gap:0 }
+            .nav-right { gap:6px }
+            .article-hero { min-height:60vh; min-height:60svh }
+            .article-hero-title { font-size:clamp(28px,6vw,44px) }
+            .article-body { padding:48px 24px 0 }
+            .glance-5__grid { grid-template-columns:1fr 1fr }
+            .glance-5__bottom { flex-direction:column }
+            .glance-5__pairs { width:100% }
+            .rating-header { flex-direction:column; align-items:flex-start }
+            .rating-row { grid-template-columns:140px 1fr 50px; gap:12px }
+            .author-bio { flex-direction:column; align-items:center; text-align:center }
+            .nl-form { flex-direction:column }
+            .footer-grid { grid-template-columns:1fr 1fr; gap:40px 32px }
+            .footer-col:first-child { grid-column:1 / -1 }
+            .footer-bottom-inner { justify-content:center; text-align:center; flex-direction:column; gap:12px }
+        }
+        @media (max-width:480px) {
+            .wrap { padding:0 20px }
+            .nav-inner { padding:0 20px }
+            .article-hero-body { padding:0 20px 40px }
+            .article-hero-title { font-size:clamp(24px,7vw,36px) }
+            .article-body { padding:40px 20px 0 }
+            .article-body p { font-size:17px }
+            .glance-5__grid { grid-template-columns:1fr }
+            .glance-5__top { flex-direction:column }
+            .glance-5__score-block { flex-direction:row; gap:12px; width:100%; justify-content:center }
+            .pricing-table thead th { padding:10px 14px; font-size:10px }
+            .pricing-table tbody td { padding:12px 14px; font-size:14px }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Half-star gradient definition -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="halfStar">
+                <stop offset="50%" stop-color="#541736"/>
+                <stop offset="50%" stop-color="#DEE2E6"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- ── NAV ──────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <img src="../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+                <img src="../../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+                <span class="nav-logo-blog">blog</span>
+            </a>
+            <div class="nav-right">
+                <div class="lang" id="lang">
+                    <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox"
+                        aria-label="Select language">
+                        <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10" stroke-width="1.75" />
+                            <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5" />
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                stroke-width="1.5" />
+                        </svg>
+                        <span class="lang-code-label" id="langCurrent">EN</span>
+                        <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </button>
+                    <div class="lang-panel" id="langPanel" role="listbox">
+                        <div class="lang-panel-header">
+                            <span class="lang-panel-label">Language</span>
+                        </div>
+                        <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                            <svg class="lang-check" viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </button>
+                        <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
+                            <span class="lang-flag">🇩🇪</span>
+                            <span class="lang-name">Deutsch</span>
+                        </button>
+                        <button class="lang-option" data-lang="FR" role="option" aria-selected="false">
+                            <span class="lang-flag">🇫🇷</span>
+                            <span class="lang-name">Français</span>
+                        </button>
+                        <button class="lang-option" data-lang="ES" role="option" aria-selected="false">
+                            <span class="lang-flag">🇪🇸</span>
+                            <span class="lang-name">Español</span>
+                        </button>
+                    </div>
+                </div>
+
+                <a href="/" class="nav-back-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    <span>Back to homepage</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── ARTICLE HERO ────────────────────────────────────────── -->
+    <section class="article-hero">
+        <div class="article-hero-bg">
+            <img src="../../../public/images/photos/hero-safari-camp.jpg" alt="Tawana Camp at golden hour on the Gomoti River">
+        </div>
+        <div class="article-hero-grad"></div>
+        <div class="article-hero-body">
+            <p class="article-hero-eyebrow">Lodge Review</p>
+            <p class="article-hero-tagline">Honest reviews from the field</p>
+            <h1 class="article-hero-title">Tawana Camp Review: Natural Selection's Flagship Delivers &mdash; Almost</h1>
+            <div class="article-hero-meta">
+                <div class="article-hero-author">
+                    <div class="article-hero-avatar">
+                        <img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Alfredo Seidemann">
+                    </div>
+                    <span class="article-hero-byline">By <strong>Alfredo Seidemann</strong></span>
+                </div>
+                <span class="article-hero-dot"></span>
+                <span class="article-hero-date nums">December 2025</span>
+                <span class="article-hero-dot"></span>
+                <span class="article-hero-read">12 min read</span>
+            </div>
+            <div class="article-hero-tags">
+                <span class="article-hero-tag">Botswana</span>
+                <span class="article-hero-tag">Okavango Delta</span>
+                <span class="article-hero-tag">Luxury Safari</span>
+                <span class="article-hero-tag">Lodge Review</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ARTICLE BODY ────────────────────────────────────────── -->
+    <article class="article-body">
+
+        <!-- Intro / The Arrival -->
+        <p class="dropcap reveal">Forty-five minutes on a dirt track from the airstrip. Dust on the dashboard, mopane scrub thinning as the Gomoti River pulls the landscape open. Then a woven boca tunnel &mdash; the kind of entrance that makes you slow down, lower your voice &mdash; and suddenly the Delta is in front of you. One of its arms, green and wide, stretching toward a horizon line that doesn't exist.</p>
+
+        <p class="reveal">Tawana opened in May 2024. When I visited over Christmas 2025, it was barely 18 months old. And here's the context that matters: this is Natural Selection's first lodge they fully own and operate. Not managed. Not co-branded. Theirs. After years of building their reputation through North Island, Jack's Camp, and Tuludi &mdash; this is the property where they put their name on the door and said, "Judge us by this."</p>
+
+        <p class="reveal">Eight suites on the Gomoti River, in the southeastern corner of Moremi Game Reserve. Their thesis statement as a Botswana safari lodge. So does it hold up? Mostly. Beautifully. With one caveat I'll get to.</p>
+
+        <!-- ── REVIEW BOX — CONCEPT 5: THE MAGAZINE CALLOUT ──────── -->
+        <div class="glance-5 reveal">
+            <div class="glance-5__accent"></div>
+            <div class="glance-5__body">
+                <div class="glance-5__top">
+                    <div class="glance-5__top-left">
+                        <div class="glance-5__tag">At a glance</div>
+                        <div class="glance-5__title">Tawana Camp</div>
+                        <div class="glance-5__subtitle">Moremi Game Reserve, Gomoti River, Okavango Delta</div>
+                    </div>
+                    <div class="glance-5__score-block">
+                        <span class="glance-5__score-num nums">4.5</span>
+                        <div>
+                            <span class="glance-5__score-max">/ 5.0</span>
+                            <div class="glance-5__score-stars">
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <svg viewBox="0 0 24 24" fill="url(#halfStar)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glance-5__grid">
+                    <div class="glance-5__cell">
+                        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Price Class</div>
+                        <div class="glance-5__cell-value">Ultra-Luxury &middot; $$$$ (<span class="nums">$1,895</span>&ndash;<span class="nums">$3,895</span>/night)</div>
+                    </div>
+                    <div class="glance-5__cell">
+                        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Best For</div>
+                        <div class="glance-5__cell-value">Predator sightings, Photographers</div>
+                    </div>
+                    <div class="glance-5__cell">
+                        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Not Ideal For</div>
+                        <div class="glance-5__cell-value">Walking safaris, night drives, mokoro</div>
+                    </div>
+                    <div class="glance-5__cell">
+                        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sustainability</div>
+                        <div class="glance-5__cell-value">Unfenced camp &middot; Batawana heritage</div>
+                    </div>
+                    <div class="glance-5__cell">
+                        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Wildlife</div>
+                        <div class="glance-5__cell-value">Leopard specialist &middot; Gomoti River corridor</div>
+                    </div>
+                    <div class="glance-5__cell">
+                        <div class="glance-5__cell-label"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1.5a3 3 0 0 0-3-3h-.5"/></svg>Operator</div>
+                        <div class="glance-5__cell-value">Natural Selection</div>
+                    </div>
+                </div>
+
+                <div class="glance-5__bottom">
+                    <div class="glance-5__tip">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        <div>
+                            <div class="glance-5__tip-label">Viatu insider tip</div>
+                            <div class="glance-5__tip-text">"Request rooms 5&ndash;7 &mdash; closest to the main area. Room 8 requires Lord of the Rings-style journeys to reach dinner."</div>
+                        </div>
+                    </div>
+                    <div class="glance-5__pairs">
+                        <div class="glance-5__pairs-label">Pairs Well With</div>
+                        <div class="glance-5__pairs-text">A private concession Delta water camp</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Vibe -->
+        <h2 class="article-h2 reveal">The Vibe</h2>
+
+        <p class="reveal">The architecture hits you before the details do. Modern, but not trying to prove anything &mdash; think clean geometric lines softened by organic materials. Blues and turquoise and pale wood. Earthy tones pulled from the local Batawana tribal palette, though rendered in a way that feels contemporary rather than ethnographic.</p>
+
+        <p class="reveal">The camp is unfenced. Completely. Elephants browse behind the suites. Baboons cross the walkways at 6 AM like commuters. An impala stood fifteen meters from the pool one afternoon, utterly indifferent. This isn't a lodge that promises wilderness proximity &mdash; it's a lodge where wilderness has voting rights.</p>
+
+        <div class="article-pullquote reveal">
+            <p>"Impressive" and "unforgettable" aren't the same word.</p>
+            <cite>On Tawana's search for its soul</cite>
+        </div>
+
+        <p class="reveal">Here's what keeps it from the top shelf. Walk through Duke's Camp &mdash; another Natural Selection property, older, rougher around the edges &mdash; and you feel personality radiating from every crooked bookshelf, every faded map on the wall. Jack's Camp has its own mythology. Xigera has its art collection. Tawana doesn't have that yet. It's gorgeous, immaculately designed, impressive in every measurable dimension. But beauty without eccentricity is just a very expensive hotel.</p>
+
+        <!-- Inline image -->
+        <figure class="article-img reveal">
+            <img src="../../../public/images/photos/accommodation-camp-suite.jpg" alt="Tawana Camp suite interior with panoramic Delta views">
+            <figcaption>Villa-scale suites at Tawana Camp: 100 square metres of space, cork flooring, and a private plunge pool overlooking the Gomoti River.</figcaption>
+        </figure>
+
+        <!-- The Rooms -->
+        <h2 class="article-h2 reveal">The Rooms</h2>
+
+        <p class="reveal">Call them suites and you'd be underselling it. These are villas. A hundred square metres each (130 for the family configurations). Living room, bedroom, bathroom &mdash; each zone distinct enough that you forget they're technically one structure. The spatial separation is deliberate, and it's one of the clearest improvements over North Island, where the open-plan approach sometimes felt like sleeping in a very luxurious fishbowl.</p>
+
+        <p class="reveal">Cork flooring underfoot. Silent. Cool. A Jura coffee machine stocked with fresh ground beans, the bag marked with the origin farm. Private plunge pool on the terrace. An outdoor sala. One of those hanging basket chairs that looks ridiculous and is extraordinarily comfortable. Skipping a morning game drive and spending it on your terrace with that Jura espresso is not wasted time. It might be the point.</p>
+
+        <!-- The Food -->
+        <h2 class="article-h2 reveal">The Food (and the Wine That Saves It)</h2>
+
+        <p class="reveal">I'll be direct. The food at Tawana is fine. Not bad. Not exciting. Fine. This is a lodge that charges between $1,895 and $3,895 per person per night. At that price point, "fine" lands like a disappointment &mdash; not because it's objectively poor, but because everything else around it is operating at a higher altitude. The problem is the buffets. When your room has origin-labelled coffee beans and hand-selected South African gins, a buffet lunch feels like it belongs to a different property.</p>
+
+        <p class="reveal">Now &mdash; the wine program. This is where Tawana overcorrects for the kitchen, and overcorrects beautifully. A dedicated walk-in wine cellar. An actual sommelier, trained in Stellenbosch. Standard included wines plus a premium selection that would hold up in most Cape Town restaurants. Wine tasting is offered as an activity between drives. I'd take a Stellenbosch Chenin Blanc in a bush cellar over another afternoon by the pool.</p>
+
+        <!-- Inline image -->
+        <figure class="article-img reveal">
+            <img src="../../../public/images/photos/wildlife-leopard-timbavati.jpg" alt="Leopard sighting on the Gomoti River corridor">
+            <figcaption>The Gomoti River corridor delivered multiple leopard sightings &mdash; including a pair mating close enough to hear.</figcaption>
+        </figure>
+
+        <!-- Wildlife -->
+        <h2 class="article-h2 reveal">Wildlife &amp; Activities</h2>
+
+        <p class="reveal">Moremi Game Reserve is a national park: sunset curfew at 6:30 PM, no walking safaris, no boating, no night drives. If you're comparing this to a private concession like Jao or Xigera, the activity menu looks thin. On paper, it is. In practice, the game concentration on the Gomoti River corridor makes the restrictions almost irrelevant.</p>
+
+        <p class="reveal">What actually happened: multiple leopards across two days. A pair mating, close enough to the vehicle that I could hear them. Towers of giraffe backlit by the kind of light that only exists between a thunderstorm and sunset. Buffalo herds in the hundreds. And barely another vehicle in two days &mdash; Moremi's southeastern corner is, for now, under the radar.</p>
+
+        <div class="article-pullquote reveal">
+            <p>"Botswana pricing justified. Rare sentence, that."</p>
+            <cite>On whether the rates are worth it</cite>
+        </div>
+
+        <!-- The Verdict -->
+        <h2 class="article-h2 reveal">The Verdict</h2>
+
+        <p class="reveal">Natural Selection built something extraordinary here. The most visually impressive lodge in the Okavango Delta. The design is sharp without being cold. The rooms improve meaningfully on everything they learned from North Island. The wildlife on the Gomoti River justifies the trip on its own terms, park restrictions and all.</p>
+
+        <p class="reveal">What's missing? Personality. The 0.5 it didn't earn. Tawana has beauty, precision, and comfort &mdash; but not yet a story. It's 18 months old. These things can develop. Would I go back? Yes. For the leopards and the thunderstorm sunsets and the gin and that toilet with the view. Without hesitation.</p>
+
+        <!-- ── RATING BREAKDOWN ────────────────────────────────── -->
+        <div class="rating-section reveal">
+            <div class="rating-header">
+                <div class="rating-header-left">
+                    <div class="rating-header-tag">Rating breakdown</div>
+                    <div class="rating-header-title">Tawana Camp &mdash; Category Scores</div>
+                </div>
+                <div class="rating-overall">
+                    <span class="rating-overall-score nums">4.5</span>
+                    <div class="rating-overall-meta">
+                        <span class="rating-overall-max">/ 5.0</span>
+                        <div class="rating-overall-stars">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="url(#halfStar)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rating-table">
+                <div class="rating-row">
+                    <span class="rating-cat">Design &amp; Architecture</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
+                    <span class="rating-score nums">5.0</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Rooms</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
+                    <span class="rating-score nums">5.0</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Wildlife &amp; Location</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
+                    <span class="rating-score nums">5.0</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Food &amp; Dining</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
+                    <span class="rating-score nums">3.5</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Wine &amp; Drinks</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:90%"></div></div>
+                    <span class="rating-score nums">4.5</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Activities</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%"></div></div>
+                    <span class="rating-score nums">4.0</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Guiding</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
+                    <span class="rating-score nums">3.5</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Character &amp; Personality</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
+                    <span class="rating-score nums">3.5</span>
+                </div>
+                <div class="rating-row">
+                    <span class="rating-cat">Value for Money</span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%"></div></div>
+                    <span class="rating-score nums">4.0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PRICING TABLE ───────────────────────────────────── -->
+        <div class="pricing-section reveal">
+            <div class="pricing-tag">2026 Rates</div>
+            <div class="pricing-title">Tawana Camp Pricing</div>
+            <div class="pricing-table-wrap">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Season</th>
+                            <th>Dates</th>
+                            <th>Per Person / Night</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="season-badge low">Low</span>Low</td>
+                            <td>Jan 10 &ndash; Mar 31</td>
+                            <td class="nums">from $1,895</td>
+                        </tr>
+                        <tr>
+                            <td><span class="season-badge mid">Mid</span>Mid</td>
+                            <td>Apr &middot; Nov 1 &ndash; Dec 19</td>
+                            <td class="nums">$2,795</td>
+                        </tr>
+                        <tr>
+                            <td><span class="season-badge mid">Mid</span>Mid/High</td>
+                            <td>May &middot; Oct</td>
+                            <td class="nums">$2,935</td>
+                        </tr>
+                        <tr>
+                            <td><span class="season-badge high">High</span>High</td>
+                            <td>Jun &middot; Sep &middot; Dec 20 &ndash; Jan 9</td>
+                            <td class="nums">$3,295&ndash;$3,495</td>
+                        </tr>
+                        <tr>
+                            <td><span class="season-badge peak">Peak</span>Peak</td>
+                            <td>Jul &ndash; Aug</td>
+                            <td class="nums">$3,895</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pricing-inclusions">
+                <p><strong>Included:</strong> All meals, local-brand drinks, two daily game drives, park fees, airstrip transfers, limited laundry.</p>
+                <p><strong>Not included:</strong> Premium wines and spirits, gratuities, helicopter flights, international flights.</p>
+                <p><strong>Children:</strong> 6 and older are welcome. Families with children under 9 must pre-book a private safari vehicle.</p>
+            </div>
+        </div>
+
+        <!-- ── AUTHOR BIO ──────────────────────────────────────── -->
+        <div class="author-bio reveal">
+            <div class="author-bio-portrait">
+                <img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Alfredo Seidemann">
+            </div>
+            <div class="author-bio-content">
+                <div class="author-bio-label">Written by</div>
+                <div class="author-bio-name">Alfredo Seidemann</div>
+                <div class="author-bio-role">Founder &amp; Editor</div>
+                <p class="author-bio-text">Alfredo founded Viatu to share Africa's stories with honesty and care. He writes about conservation, community tourism, and the future of travel. This review is based on a personal visit over Christmas 2025.</p>
+                <a href="/author/alfredo-seidemann" class="author-bio-link">
+                    View all articles
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="margin-top:48px; padding:32px; background:rgba(84,23,54,.03); border:1px dashed rgba(84,23,54,.15); border-radius:var(--rlg); text-align:center" class="reveal">
+            <p style="font-family:var(--fc); font-size:22px; font-weight:700; color:var(--sangria); margin-bottom:4px">Planning a Botswana safari?</p>
+            <p style="font-size:15px; color:var(--gm); line-height:1.6; margin-bottom:20px; max-width:480px; margin-left:auto; margin-right:auto">Tawana is best paired with a private concession property for contrast. Our Botswana specialists can build the right combination.</p>
+            <a href="#" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:500; color:var(--white); background:var(--sangria); padding:14px 32px; border-radius:var(--rmd); transition:all 200ms ease; min-height:48px">
+                Speak to a Specialist
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <div style="height:64px"></div>
+    </article>
+
+    <!-- ── NEWSLETTER ──────────────────────────────────────────── -->
+    <section class="nl">
+        <div class="nl-inner">
+            <p class="nl-tag">Stay inspired</p>
+            <h2 class="nl-title">Safari stories in your inbox</h2>
+            <p class="nl-text">Expert guides, lodge reviews, and trip inspiration. Delivered every two weeks.</p>
+            <div class="nl-form">
+                <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+                <button class="nl-btn">Subscribe</button>
+            </div>
+            <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ──────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="footer-upper">
+            <div class="wrap">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h4>Explore</h4>
+                        <a href="#">All Trips</a>
+                        <a href="#">All Stays</a>
+                        <a href="#">Destinations</a>
+                        <a href="#">Plan My Trip</a>
+                        <div class="footer-cert-badge">
+                            <div class="footer-cert-badge-label">Certified</div>
+                            <div class="footer-cert-badge-row">
+                                <div class="footer-cert-icon">B<br>Corp</div>
+                                <span class="footer-cert-text">This company meets high standards of social and environmental impact.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Destinations</h4>
+                        <a href="#">Namibia</a>
+                        <a href="#">Botswana</a>
+                        <a href="#">Kenya</a>
+                        <a href="#">Tanzania</a>
+                        <a href="#">South Africa</a>
+                        <a href="#">All destinations</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Sustainability</a>
+                        <a href="#">Reviews</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Follow us</h4>
+                        <a href="#" class="footer-social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                            Instagram
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <div class="footer-bottom-inner">
+                    <div class="footer-bottom-logo">
+                        <img src="../../brand/logos/viatu-logo-white.svg" alt="Viatu" width="90" height="20">
+                    </div>
+                    <span class="footer-copy">&copy; <span class="nums">2026</span> Viatu. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Nav scroll ────────────────────────────────────────────
+        // ── Scroll-triggered nav background ──────────────────────────────
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
+
+        // ── Language dropdown ──────────────────────────────────────────
+        const langWrap = document.getElementById('lang');
+        const langTrigger = document.getElementById('langTrigger');
+        const langCurrent = document.getElementById('langCurrent');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langWrap.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.lang-option').forEach(o => {
+                    o.classList.remove('active');
+                    o.setAttribute('aria-selected', 'false');
+                    const chk = o.querySelector('.lang-check');
+                    if (chk) chk.remove();
+                });
+                opt.classList.add('active');
+                opt.setAttribute('aria-selected', 'true');
+                opt.insertAdjacentHTML('beforeend',
+                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                langCurrent.textContent = opt.dataset.lang;
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', e => {
+            if (!langWrap.contains(e.target)) {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+
+
+        // ── Language dropdown ─────────────────────────────────────
+        const langWrap = document.getElementById('lang');
+        const langTrigger = document.getElementById('langTrigger');
+        const langCurrent = document.getElementById('langCurrent');
+
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langWrap.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.lang-option').forEach(o => {
+                    o.classList.remove('active');
+                    o.setAttribute('aria-selected', 'false');
+                    const chk = o.querySelector('.lang-check');
+                    if (chk) chk.remove();
+                });
+                opt.classList.add('active');
+                opt.setAttribute('aria-selected', 'true');
+                opt.insertAdjacentHTML('beforeend',
+                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+                langCurrent.textContent = opt.dataset.lang;
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', e => {
+            if (!langWrap.contains(e.target)) {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                langWrap.classList.remove('open');
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // ── Reveal on scroll ──────────────────────────────────────
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('vis'), i * 60);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+
+</body>
+</html>

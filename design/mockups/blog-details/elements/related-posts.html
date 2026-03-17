@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Related Posts — Viatu Blog (element mockup)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ─── DESIGN TOKENS ──────────────────────────────────── */
+        :root {
+            --sangria: #541736;
+            --sangria-hover: #47142e;
+            --pthalo: #1C4447;
+            --platinum: #C4C4C4;
+            --black: #000;
+            --white: #FFF;
+            --cream: #F3FFB9;
+            --gl: #F8F9FA;
+            --gm: #6C757D;
+            --gd: #343A40;
+            --g3: #DEE2E6;
+            --earth-warm: #E1E3DE;
+
+            --fp: 'Krona One', sans-serif;
+            --fs: 'Hanken Grotesk', sans-serif;
+            --fc: 'Caveat', cursive;
+
+            --rmd: .375rem;
+            --rlg: .5rem;
+            --rxl: .75rem;
+            --rfull: 9999px;
+
+            --sh-sm: 0 1px 2px rgba(0, 0, 0, .05);
+            --sh-md: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -1px rgba(0, 0, 0, .06);
+            --sh-lg: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+            --sh-xl: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+
+            --dur: 200ms;
+            --dur3: 300ms;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+        }
+
+        /* ─── RESET ──────────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--fs);
+            color: var(--gd);
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ─── VARIANT LABEL ──────────────────────────────────── */
+        .variant-label {
+            background: var(--gd);
+            color: var(--white);
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 14px 24px;
+            text-align: center;
+        }
+
+        .variant-separator {
+            height: 4px;
+            background: linear-gradient(90deg, var(--sangria), var(--pthalo));
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT A: LIGHT BACKGROUND
+           ════════════════════════════════════════════════════════ */
+        .related-a {
+            background: var(--earth-warm);
+            padding: 80px 24px;
+        }
+
+        .related-a__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section header */
+        .related-a__header {
+            margin-bottom: 40px;
+        }
+
+        .related-a__tagline {
+            font-family: var(--fc);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .related-a__title {
+            font-family: var(--fs);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.2;
+        }
+
+        /* Card grid */
+        .related-a__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* Card */
+        .related-a__card {
+            background: var(--white);
+            border-radius: var(--rlg);
+            overflow: hidden;
+            box-shadow: var(--sh-sm);
+            transition: box-shadow var(--dur3) var(--ease), transform var(--dur3) var(--ease);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .related-a__card:hover {
+            box-shadow: var(--sh-md);
+            transform: translateY(-2px);
+        }
+
+        /* Card image */
+        .related-a__card-image-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .related-a__card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .related-a__card:hover .related-a__card-img {
+            transform: scale(1.03);
+        }
+
+        /* Card body */
+        .related-a__card-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .related-a__card-category {
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--sangria);
+            margin-bottom: 8px;
+        }
+
+        .related-a__card-title {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .related-a__card-excerpt {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: var(--gm);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .related-a__card-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .related-a__card-author {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gm);
+        }
+
+        .related-a__card-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--platinum);
+            flex-shrink: 0;
+        }
+
+        .related-a__card-date {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gm);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .related-a__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .related-a {
+                padding: 56px 20px;
+            }
+
+            .related-a__grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .related-a__title {
+                font-size: 24px;
+            }
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT B: DARK BACKGROUND
+           ════════════════════════════════════════════════════════ */
+        .related-b {
+            background: #1b1b1b;
+            padding: 80px 24px;
+        }
+
+        .related-b__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section header */
+        .related-b__header {
+            margin-bottom: 40px;
+        }
+
+        .related-b__tagline {
+            font-family: var(--fc);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .related-b__title {
+            font-family: var(--fs);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        /* Card grid */
+        .related-b__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* Card */
+        .related-b__card {
+            background: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--rlg);
+            overflow: hidden;
+            transition: border-color var(--dur3) var(--ease), transform var(--dur3) var(--ease);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .related-b__card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Card image */
+        .related-b__card-image-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .related-b__card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            transition: filter var(--dur3) var(--ease);
+        }
+
+        .related-b__card:hover .related-b__card-img {
+            filter: brightness(1.08);
+        }
+
+        /* Card body */
+        .related-b__card-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .related-b__card-category {
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--sangria);
+            margin-bottom: 8px;
+        }
+
+        .related-b__card-title {
+            font-family: var(--fs);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .related-b__card-excerpt {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .related-b__card-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .related-b__card-author {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .related-b__card-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .related-b__card-date {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .related-b__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .related-b {
+                padding: 56px 20px;
+            }
+
+            .related-b__grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .related-b__title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT A: LIGHT BACKGROUND
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant A — Light Background (Earth Warm)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-a">
+        <div class="related-a__inner">
+            <!-- Section header -->
+            <header class="related-a__header">
+                <p class="related-a__tagline">Keep reading</p>
+                <h2 class="related-a__title">Related Articles</h2>
+            </header>
+
+            <!-- Card grid -->
+            <div class="related-a__grid">
+
+                <!-- Card 1 -->
+                <a href="#" class="related-a__card">
+                    <div class="related-a__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/safari-vehicle-masai-mara.jpg"
+                            alt="Safari vehicle navigating the Masai Mara grasslands"
+                            class="related-a__card-img">
+                    </div>
+                    <div class="related-a__card-body">
+                        <span class="related-a__card-category">Tanzania</span>
+                        <h3 class="related-a__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                        <p class="related-a__card-excerpt">Breaking down the real costs behind an East African safari — from park fees to premium camps.</p>
+                        <div class="related-a__card-footer">
+                            <span class="related-a__card-author">Barbara Buchel</span>
+                            <span class="related-a__card-dot"></span>
+                            <span class="related-a__card-date">Sep 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="related-a__card">
+                    <div class="related-a__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                            alt="Lion pride resting in the Serengeti grasslands"
+                            class="related-a__card-img">
+                    </div>
+                    <div class="related-a__card-body">
+                        <span class="related-a__card-category">Kenya</span>
+                        <h3 class="related-a__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                        <p class="related-a__card-excerpt">Everything you need to know about safety on your East African safari adventure.</p>
+                        <div class="related-a__card-footer">
+                            <span class="related-a__card-author">Barbara Buchel</span>
+                            <span class="related-a__card-dot"></span>
+                            <span class="related-a__card-date">Aug 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="related-a__card">
+                    <div class="related-a__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                            alt="Leopard resting in a tree in the Masai Mara"
+                            class="related-a__card-img">
+                    </div>
+                    <div class="related-a__card-body">
+                        <span class="related-a__card-category">South Africa</span>
+                        <h3 class="related-a__card-title">National Parks vs Private Game Reserves</h3>
+                        <p class="related-a__card-excerpt">Understanding the key differences to choose the right safari experience for you.</p>
+                        <div class="related-a__card-footer">
+                            <span class="related-a__card-author">Zeldi Smulders</span>
+                            <span class="related-a__card-dot"></span>
+                            <span class="related-a__card-date">Jul 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT B: DARK BACKGROUND
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant B — Dark Background</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-b">
+        <div class="related-b__inner">
+            <!-- Section header -->
+            <header class="related-b__header">
+                <p class="related-b__tagline">Keep reading</p>
+                <h2 class="related-b__title">Related Articles</h2>
+            </header>
+
+            <!-- Card grid -->
+            <div class="related-b__grid">
+
+                <!-- Card 1 -->
+                <a href="#" class="related-b__card">
+                    <div class="related-b__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/safari-vehicle-masai-mara.jpg"
+                            alt="Safari vehicle navigating the Masai Mara grasslands"
+                            class="related-b__card-img">
+                    </div>
+                    <div class="related-b__card-body">
+                        <span class="related-b__card-category">Tanzania</span>
+                        <h3 class="related-b__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                        <p class="related-b__card-excerpt">Breaking down the real costs behind an East African safari — from park fees to premium camps.</p>
+                        <div class="related-b__card-footer">
+                            <span class="related-b__card-author">Barbara Buchel</span>
+                            <span class="related-b__card-dot"></span>
+                            <span class="related-b__card-date">Sep 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="related-b__card">
+                    <div class="related-b__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                            alt="Lion pride resting in the Serengeti grasslands"
+                            class="related-b__card-img">
+                    </div>
+                    <div class="related-b__card-body">
+                        <span class="related-b__card-category">Kenya</span>
+                        <h3 class="related-b__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                        <p class="related-b__card-excerpt">Everything you need to know about safety on your East African safari adventure.</p>
+                        <div class="related-b__card-footer">
+                            <span class="related-b__card-author">Barbara Buchel</span>
+                            <span class="related-b__card-dot"></span>
+                            <span class="related-b__card-date">Aug 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="related-b__card">
+                    <div class="related-b__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                            alt="Leopard resting in a tree in the Masai Mara"
+                            class="related-b__card-img">
+                    </div>
+                    <div class="related-b__card-body">
+                        <span class="related-b__card-category">South Africa</span>
+                        <h3 class="related-b__card-title">National Parks vs Private Game Reserves</h3>
+                        <p class="related-b__card-excerpt">Understanding the key differences to choose the right safari experience for you.</p>
+                        <div class="related-b__card-footer">
+                            <span class="related-b__card-author">Zeldi Smulders</span>
+                            <span class="related-b__card-dot"></span>
+                            <span class="related-b__card-date">Jul 2024</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
