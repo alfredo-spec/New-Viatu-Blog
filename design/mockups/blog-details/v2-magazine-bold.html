@@ -103,15 +103,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero-tag{font-size:12px;font-weight:500;color:rgba(255,255,255,.85);padding:5px 14px;border-radius:var(--rfull);border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:all var(--dur) var(--ease)}
 .hero-tag:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
 
-/* -- Horizontal TOC Bar --------------------------------------------- */
-.toc-bar{position:sticky;top:91px;z-index:90;background:var(--gl);border-bottom:1px solid var(--g3);transition:box-shadow var(--dur3) var(--ease)}
-.toc-bar.has-shadow{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.toc-bar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;gap:8px;height:52px;white-space:nowrap}
-.toc-bar-inner::-webkit-scrollbar{display:none}
-.toc-pill{font-size:13px;font-weight:500;color:var(--gd);padding:8px 18px;border-radius:var(--rfull);border:1px solid var(--g3);background:transparent;cursor:pointer;transition:all var(--dur) var(--ease);flex-shrink:0;line-height:1}
-.toc-pill:hover{color:var(--sangria);border-color:rgba(84,23,54,.25)}
-.toc-pill.active{background:var(--sangria);color:var(--white);border-color:var(--sangria)}
-
 /* -- Article Layout ------------------------------------------------- */
 .article-col{max-width:720px;margin:0 auto;padding:56px 24px 0}
 .article-col p{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px}
@@ -284,14 +275,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* ===================================================================
    RESPONSIVE
    =================================================================== */
-@media(max-width:1024px){
-    .toc-pill{font-size:12px;padding:7px 14px}
-}
 @media(max-width:768px){
-    .nav-inner{height:72px}
-    .nav-back-btn span{display:none}
-    .nav-back-btn{padding:14px}
-    .toc-bar{top:75px}
+    .nav-inner{height:64px;padding:0 16px}
+    .nav-logo img{height:20px}
+    .nav-logo-blog{font-size:12px}
+    .nav-right{gap:8px}
+    .nav-back-btn{font-size:14px;font-weight:700;padding:12px 16px;letter-spacing:-.02em}
+    .lang-trigger{width:36px;height:36px;padding:0;justify-content:center;min-height:unset}
+    .lang-globe{width:16px;height:16px}
+    .lang-code-label{display:none}
+    .lang-chevron{display:none}
+    .lang-panel{position:fixed;top:64px;left:16px;right:16px;min-width:unset;transform-origin:top center}
     .hero{min-height:60vh}
     .hero h1{font-size:clamp(26px,5vw,42px)}
     .hero-meta{flex-direction:column;align-items:flex-start;gap:10px}
@@ -306,6 +300,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     .tl-card{flex:0 0 180px;min-width:180px}
 }
 @media(max-width:480px){
+    .nav-inner{height:56px;padding:0 16px}
+    .nav-back-btn{font-size:14px;padding:12px 16px;border-radius:4px}
+    .lang-panel{top:56px}
     .hero-meta{gap:8px}
     .hero-tags{gap:6px}
     .gallery-2{grid-template-columns:1fr}
@@ -414,19 +411,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         </div>
     </div>
 </section>
-
-<!-- == Horizontal TOC Bar ============================================= -->
-<div class="toc-bar" id="tocBar">
-    <div class="toc-bar-inner" id="tocBarInner">
-        <button class="toc-pill active" data-section="what">What</button>
-        <button class="toc-pill" data-section="when">When</button>
-        <button class="toc-pill" data-section="months">Months</button>
-        <button class="toc-pill" data-section="best-time">Best Time</button>
-        <button class="toc-pill" data-section="stay">Where to Stay</button>
-        <button class="toc-pill" data-section="tips">Tips</button>
-        <button class="toc-pill" data-section="faqs">FAQs</button>
-    </div>
-</div>
 
 <!-- == Article Body ================================================== -->
 <article class="article-col">
@@ -901,53 +885,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     });
     document.addEventListener('keydown', function(e){
         if(e.key === 'Escape'){langWrap.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}
-    });
-
-    /* -- Horizontal TOC: Scroll Spy -- */
-    var pills = document.querySelectorAll('.toc-pill');
-    var sectionIds = [];
-    pills.forEach(function(p){ sectionIds.push(p.dataset.section); });
-
-    var tocBarInner = document.getElementById('tocBarInner');
-    var currentActive = null;
-
-    function setActivePill(id){
-        if(currentActive === id) return;
-        currentActive = id;
-        pills.forEach(function(p){
-            var isActive = p.dataset.section === id;
-            p.classList.toggle('active', isActive);
-            /* auto-scroll pill into view */
-            if(isActive){
-                var barRect = tocBarInner.getBoundingClientRect();
-                var pillRect = p.getBoundingClientRect();
-                if(pillRect.left < barRect.left + 24){
-                    tocBarInner.scrollBy({left: pillRect.left - barRect.left - 24, behavior:'smooth'});
-                } else if(pillRect.right > barRect.right - 24){
-                    tocBarInner.scrollBy({left: pillRect.right - barRect.right + 24, behavior:'smooth'});
-                }
-            }
-        });
-    }
-
-    var sectionEls = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
-    var spyObs = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-            if(entry.isIntersecting){
-                setActivePill(entry.target.getAttribute('id'));
-            }
-        });
-    }, {threshold:0, rootMargin:'-160px 0px -60% 0px'});
-    sectionEls.forEach(function(el){ spyObs.observe(el); });
-
-    /* TOC pill click: smooth scroll */
-    pills.forEach(function(p){
-        p.addEventListener('click', function(){
-            var target = document.getElementById(p.dataset.section);
-            if(target){
-                target.scrollIntoView({behavior:'smooth', block:'start'});
-            }
-        });
     });
 
     /* -- Timeline Horizontal Scroll Indicators -- */

@@ -105,8 +105,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero-img img{width:100%;height:100%;object-fit:cover}
 
 /* ── Article Layout ────────────────────────────────────── */
-.article-wrap{max-width:1200px;margin:0 auto;padding:56px 24px 0;display:flex;gap:48px;align-items:flex-start}
-.article-body{flex:1;max-width:65ch;min-width:0}
+.article-wrap{max-width:1200px;margin:0 auto;padding:56px 24px 0;display:grid;grid-template-columns:1fr min(65ch,100%) 1fr;align-items:start}
+.article-body{grid-column:2;min-width:0}
 .article-body p{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px}
 .article-body h2{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black);line-height:1.2;margin:56px 0 18px;scroll-margin-top:110px}
 .article-body h3{font-family:var(--fs);font-size:22px;font-weight:700;color:var(--black);line-height:1.25;margin:40px 0 14px}
@@ -119,7 +119,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .lead::first-letter{font-family:var(--fp);font-size:4.5em;float:left;line-height:.78;margin-right:10px;padding-top:8px;color:var(--sangria)}
 
 /* ── TOC Sidebar ───────────────────────────────────────── */
-.toc-sidebar{position:sticky;top:110px;width:200px;flex-shrink:0;max-height:calc(100vh - 130px);overflow-y:auto;padding-left:32px;border-left:1px solid var(--g3)}
+.toc-sidebar{grid-column:3;justify-self:start;position:sticky;top:110px;width:180px;max-height:calc(100vh - 130px);overflow-y:auto;padding-left:24px;border-left:1px solid var(--g3)}
 .toc-sidebar-header{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gm);margin-bottom:18px}
 .toc-link{display:block;font-size:13px;color:var(--gm);padding:7px 0 7px 14px;border-left:3px solid transparent;margin-left:-33px;padding-left:29px;line-height:1.4;transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
 .toc-link:hover{color:var(--sangria)}
@@ -273,13 +273,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 @media(max-width:1024px){
     .toc-sidebar{display:none}
     .toc-mobile{display:block}
-    .article-wrap{gap:0}
 }
 @media(max-width:768px){
-    .nav-inner{height:72px}
-    .nav-back-btn span{display:none}
-    .nav-back-btn{padding:14px}
-    .hero{padding-top:calc(72px + 36px)}
+    .nav-inner{height:64px;padding:0 16px}
+    .nav-logo img{height:20px}
+    .nav-logo-blog{font-size:12px}
+    .nav-right{gap:8px}
+    .nav-back-btn{font-size:14px;font-weight:700;padding:12px 16px;letter-spacing:-.02em}
+    .lang-trigger{width:36px;height:36px;padding:0;justify-content:center;min-height:unset}
+    .lang-globe{width:16px;height:16px}
+    .lang-code-label{display:none}
+    .lang-chevron{display:none}
+    .lang-panel{position:fixed;top:64px;left:16px;right:16px;min-width:unset;transform-origin:top center}
+    .hero{padding-top:calc(64px + 36px)}
     .hero h1{font-size:clamp(24px,5vw,40px)}
     .article-wrap{padding-top:40px}
     .article-body h2{font-size:24px;margin-top:44px}
@@ -289,6 +295,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     .nl-form{flex-direction:column}
 }
 @media(max-width:480px){
+    .nav-inner{height:56px;padding:0 16px}
+    .nav-back-btn{font-size:14px;padding:12px 16px;border-radius:4px}
+    .lang-panel{top:56px}
     .hero-meta{gap:10px}
     .gallery-2{grid-template-columns:1fr}
     .article-body p{font-size:17px}
@@ -307,7 +316,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 <!-- ── Navigation ──────────────────────────────────────── -->
     <!-- ── NAV ──────────────────────────────────────────────────── -->
-    <nav class="nav" id="nav">
+    <nav class="nav scrolled" id="nav">
         <div class="nav-inner">
             <a href="/" class="nav-logo">
                 <img src="../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
@@ -809,65 +818,108 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <script>
 (function(){
     /* ── Reading Progress ── */
-    const bar = document.getElementById('progress');
+    var bar = document.getElementById('progress');
     function updateProgress(){
-        const s = window.scrollY;
-        const h = document.documentElement.scrollHeight - window.innerHeight;
+        var s = window.scrollY;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.width = h > 0 ? (s / h * 100) + '%' : '0%';
     }
     window.addEventListener('scroll', updateProgress, {passive:true});
 
-    /* ── Nav Scroll ── */
-        // ── Scroll-triggered nav background ──────────────────────────────
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 80);
-        }, { passive: true });
+    /* ── Nav — white hero, always scrolled ── */
+    var nav = document.getElementById('nav');
+    nav.classList.add('scrolled');
 
-        // ── Language dropdown ──────────────────────────────────────────
-        const langWrap = document.getElementById('lang');
-        const langTrigger = document.getElementById('langTrigger');
-        const langCurrent = document.getElementById('langCurrent');
-
-        langTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = langWrap.classList.toggle('open');
-            langTrigger.setAttribute('aria-expanded', isOpen);
-        });
-
-        document.querySelectorAll('.lang-option').forEach(opt => {
-            opt.addEventListener('click', () => {
-                document.querySelectorAll('.lang-option').forEach(o => {
-                    o.classList.remove('active');
-                    o.setAttribute('aria-selected', 'false');
-                    const chk = o.querySelector('.lang-check');
-                    if (chk) chk.remove();
-                });
-                opt.classList.add('active');
-                opt.setAttribute('aria-selected', 'true');
-                opt.insertAdjacentHTML('beforeend',
-                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
-                langCurrent.textContent = opt.dataset.lang;
-                langWrap.classList.remove('open');
-                langTrigger.setAttribute('aria-expanded', 'false');
+    /* ── Language Dropdown ── */
+    var langWrap = document.getElementById('lang');
+    var langTrigger = document.getElementById('langTrigger');
+    var langCurrent = document.getElementById('langCurrent');
+    langTrigger.addEventListener('click', function(e){
+        e.stopPropagation();
+        var isOpen = langWrap.classList.toggle('open');
+        langTrigger.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('.lang-option').forEach(function(opt){
+        opt.addEventListener('click', function(){
+            document.querySelectorAll('.lang-option').forEach(function(o){
+                o.classList.remove('active');
+                o.setAttribute('aria-selected','false');
+                var c = o.querySelector('.lang-check'); if(c) c.remove();
             });
+            opt.classList.add('active');
+            opt.setAttribute('aria-selected','true');
+            opt.insertAdjacentHTML('beforeend','<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+            langCurrent.textContent = opt.dataset.lang;
+            langWrap.classList.remove('open');
+            langTrigger.setAttribute('aria-expanded','false');
         });
+    });
+    document.addEventListener('click', function(e){
+        if(!langWrap.contains(e.target)){langWrap.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}
+    });
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){langWrap.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}
+    });
 
-        document.addEventListener('click', e => {
-            if (!langWrap.contains(e.target)) {
-                langWrap.classList.remove('open');
-                langTrigger.setAttribute('aria-expanded', 'false');
+    /* ── TOC Sidebar Scroll Spy ── */
+    var tocLinks = document.querySelectorAll('.toc-link');
+    var tocMobileLinks = document.querySelectorAll('.toc-mobile-link');
+    var sectionIds = [];
+    tocLinks.forEach(function(l){ sectionIds.push(l.getAttribute('data-section')); });
+    var sectionEls = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+
+    function setActiveToc(id){
+        tocLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('data-section') === id); });
+        tocMobileLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href') === '#' + id); });
+    }
+
+    var spyObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                setActiveToc(entry.target.getAttribute('id'));
             }
         });
+    }, {threshold:0, rootMargin:'-120px 0px -60% 0px'});
+    sectionEls.forEach(function(el){ spyObs.observe(el); });
 
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                langWrap.classList.remove('open');
-                langTrigger.setAttribute('aria-expanded', 'false');
+    /* ── TOC Mobile Toggle ── */
+    var tocMobile = document.getElementById('tocMobile');
+    var tocMobileTrigger = document.getElementById('tocMobileTrigger');
+    if(tocMobileTrigger){
+        tocMobileTrigger.addEventListener('click', function(){
+            tocMobile.classList.toggle('open');
+        });
+    }
+
+    /* ── FAQ Accordion ── */
+    document.querySelectorAll('.faq-q').forEach(function(q){
+        q.addEventListener('click', function(){
+            var item = q.closest('.faq-item');
+            var answer = item.querySelector('.faq-a');
+            var inner = answer.querySelector('.faq-a-inner');
+            var isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function(o){
+                o.classList.remove('open');
+                o.querySelector('.faq-a').style.maxHeight = '0';
+            });
+            if(!isOpen){
+                item.classList.add('open');
+                answer.style.maxHeight = inner.scrollHeight + 'px';
             }
         });
+    });
 
-
+    /* ── Reveal on Scroll ── */
+    var revealObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e,i){
+            if(e.isIntersecting){
+                setTimeout(function(){e.target.classList.add('vis');}, i * 60);
+                revealObs.unobserve(e.target);
+            }
+        });
+    }, {threshold:0.05, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el);});
+})();
 </script>
 </body>
 </html>

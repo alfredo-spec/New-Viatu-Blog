@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feature Comparison Matrix — Viatu Blog Design Element</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --sangria:    #541736;
+  --sangria-h:  #47142e;
+  --sangria-05: rgba(84,23,54,.05);
+  --sangria-08: rgba(84,23,54,.08);
+  --sangria-12: rgba(84,23,54,.12);
+  --sangria-20: rgba(84,23,54,.20);
+  --pthalo:     #1C4447;
+  --pthalo-h:   #163538;
+  --pthalo-08:  rgba(28,68,71,.08);
+  --cream:      #F3FFB9;
+  --gl:         #F8F9FA;
+  --gm:         #6C757D;
+  --gd:         #343A40;
+  --g3:         #DEE2E6;
+  --earth-warm: #E1E3DE;
+  --earth-sand: #E8E0D6;
+  --earth-stone:#B5A898;
+  --earth-clay: #8B7355;
+  --fp: 'Krona One', sans-serif;
+  --fs: 'Hanken Grotesk', sans-serif;
+  --fc: 'Caveat', cursive;
+  --r2xl:  1rem;
+  --rfull: 9999px;
+  --rxl:   .75rem;
+  --rlg:   .5rem;
+  --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+  --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  --dur:  200ms;
+  --dur3: 300ms;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --low-bg: rgba(26,110,49,.18);
+  --low-fg: #1a6e31;
+  --mid-bg: rgba(138,95,0,.15);
+  --mid-fg: #8a5f00;
+  --lux-bg: rgba(28,68,71,.14);
+  --lux-fg: #1C4447;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--fs);
+  background: #FFFFFF;
+  color: var(--gd);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   PAGE SCAFFOLD
+   ============================================================ */
+.page-header {
+  background: var(--gl);
+  border-bottom: 1px solid var(--g3);
+  padding: 48px 32px 40px;
+  text-align: center;
+}
+.page-header__eyebrow {
+  font-family: var(--fc);
+  font-size: 18px;
+  color: var(--gm);
+  margin-bottom: 8px;
+}
+.page-header__title {
+  font-family: var(--fp);
+  font-size: 26px;
+  color: var(--gd);
+  margin-bottom: 10px;
+  letter-spacing: -.02em;
+}
+.page-header__subtitle {
+  font-family: var(--fs);
+  font-size: 14px;
+  color: var(--gm);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.variant-section {
+  padding: 64px 32px;
+  border-bottom: 1px solid var(--g3);
+}
+.variant-section:last-child { border-bottom: none; }
+
+.variant-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--gl);
+  border: 1px solid var(--g3);
+  border-radius: var(--rfull);
+  padding: 5px 14px 5px 10px;
+  font-family: var(--fs);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gm);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.variant-label__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.blog-content {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.table-intro {
+  margin-bottom: 32px;
+}
+.table-intro__tag {
+  font-family: var(--fc);
+  font-size: 16px;
+  color: var(--gm);
+  margin-bottom: 6px;
+}
+.table-intro__heading {
+  font-family: var(--fp);
+  font-size: 22px;
+  color: var(--gd);
+  letter-spacing: -.02em;
+  margin-bottom: 8px;
+}
+.table-intro__subtitle {
+  font-size: 14px;
+  color: var(--gm);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   VARIANT E — FEATURE COMPARISON MATRIX
+   ============================================================ */
+
+/* Wrapper */
+.fm-wrapper {
+  overflow-x: auto;
+  border-radius: var(--r2xl);
+  box-shadow: var(--sh-lg);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scroll hint — right-edge gradient on mobile */
+.fm-scroll-hint {
+  position: relative;
+}
+.fm-scroll-hint::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.85));
+  pointer-events: none;
+  z-index: 5;
+  opacity: 1;
+  transition: opacity var(--dur3) var(--ease);
+}
+.fm-scroll-hint.scrolled-right::after {
+  opacity: 0;
+}
+
+/* Header panel */
+.fm-header {
+  background: var(--gd);
+  position: relative;
+  overflow: hidden;
+  padding: 28px 28px 24px;
+  border-radius: var(--r2xl) var(--r2xl) 0 0;
+}
+.fm-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(84,23,54,.25) 0%, transparent 65%);
+  pointer-events: none;
+}
+.fm-header__quote {
+  font-family: var(--fc);
+  font-size: 22px;
+  color: rgba(243,255,185,.55);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.fm-header__title {
+  font-family: var(--fp);
+  font-size: 17px;
+  color: #fff;
+  letter-spacing: -.01em;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+.fm-header__subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* Table */
+.fm-table {
+  width: 100%;
+  min-width: 740px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ---- THEAD ---- */
+.fm-table thead tr {
+  background: #2A3035;
+}
+.fm-table thead th {
+  padding: 18px 14px 16px;
+  text-align: center;
+  vertical-align: bottom;
+  border-bottom: 2px solid var(--g3);
+}
+.fm-table thead th:first-child {
+  text-align: left;
+  padding-left: 20px;
+  width: 170px;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: #2A3035;
+}
+
+/* Lodge column header */
+.fm-th-lodge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.fm-th-lodge__img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+.fm-th-lodge__name {
+  font-family: var(--fp);
+  font-size: 11px;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.fm-th-lodge__loc {
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+  white-space: nowrap;
+}
+.fm-th-lodge__badge {
+  display: inline-block;
+  background: var(--cream);
+  color: var(--sangria);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--rfull);
+  margin-top: 2px;
+}
+
+/* Column header label for first column */
+.fm-th-label {
+  font-family: var(--fs);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+
+/* Featured column */
+.fm-table thead th.th--pick {
+  border-bottom: 3px solid var(--sangria);
+  background: rgba(84,23,54,.15);
+}
+
+/* ---- TBODY ---- */
+.fm-table tbody tr {
+  background: #fff;
+  border-bottom: 1px solid var(--g3);
+  transition: background var(--dur) var(--ease);
+}
+.fm-table tbody tr:last-child { border-bottom: none; }
+.fm-table tbody tr:hover td { background: var(--gl); }
+.fm-table tbody tr:hover td.fm-cell--pick { background: rgba(84,23,54,.05); }
+.fm-table tbody tr:hover td:first-child { background: var(--gl); }
+
+/* Sticky first column */
+.fm-table tbody td:first-child,
+.fm-table tfoot td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: #fff;
+}
+.fm-table tbody tr:hover td:first-child {
+  background: var(--gl);
+}
+
+/* Data cells */
+.fm-table tbody td {
+  padding: 11px 14px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+/* Featured column cells */
+.fm-cell--pick {
+  background: rgba(84,23,54,.025);
+}
+
+/* ---- GROUP HEADER ROWS ---- */
+.fm-group td {
+  background: var(--gl) !important;
+  padding: 10px 20px !important;
+  border-top: 2px solid var(--g3);
+  border-bottom: 1px solid var(--g3);
+}
+.fm-group td:first-child {
+  background: var(--gl) !important;
+}
+.fm-group__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fc);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sangria);
+  letter-spacing: .02em;
+}
+.fm-group__icon {
+  width: 18px;
+  height: 18px;
+  color: var(--sangria);
+  opacity: .6;
+  flex-shrink: 0;
+}
+
+/* ---- ROW LABEL (first column) ---- */
+.fm-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  text-align: left;
+}
+.fm-label__icon {
+  width: 16px;
+  height: 16px;
+  color: var(--gm);
+  flex-shrink: 0;
+}
+.fm-label__text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gd);
+  white-space: nowrap;
+}
+
+/* ---- CELL VALUE TYPES ---- */
+
+/* Text value */
+.fm-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gd);
+}
+
+/* Checkmark yes */
+.fm-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.fm-check--yes { color: var(--low-fg); }
+.fm-check--no  { color: var(--gm); }
+
+/* Pick column checks */
+.fm-cell--pick .fm-check--yes { color: var(--sangria); }
+
+/* Stars */
+.fm-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+.fm-star { font-size: 12px; color: #F59E0B; }
+.fm-star--empty { color: var(--g3); }
+.fm-tier {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gm);
+  margin-left: 4px;
+}
+
+/* Price pill */
+.fm-price-pill {
+  font-family: var(--fs);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gd);
+}
+
+/* Season text */
+.fm-season {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gd);
+  white-space: nowrap;
+}
+
+/* Destination link */
+.fm-dest-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sangria);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease);
+}
+.fm-dest-link:hover {
+  border-bottom-color: var(--sangria);
+}
+
+/* Country with flag */
+.fm-country {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gd);
+}
+.fm-country__flag {
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+  flex-shrink: 0;
+}
+
+/* Exclusivity pill */
+.fm-excl-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  padding: 3px 9px;
+  border-radius: var(--rfull);
+  text-transform: uppercase;
+}
+.fm-excl-pill--high {
+  background: var(--low-bg);
+  color: var(--low-fg);
+}
+.fm-excl-pill--mid {
+  background: var(--mid-bg);
+  color: var(--mid-fg);
+}
+.fm-excl-pill--very-high {
+  background: var(--lux-bg);
+  color: var(--lux-fg);
+}
+
+/* Check + text combo */
+.fm-check-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---- TFOOT — CTA ROW ---- */
+.fm-table tfoot td {
+  padding: 16px 14px;
+  text-align: center;
+  background: #fff;
+  border-top: 2px solid var(--g3);
+}
+.fm-table tfoot td:first-child {
+  background: #fff;
+}
+.fm-cta-btn {
+  display: inline-block;
+  font-family: var(--fs);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: var(--rxl);
+  border: 1.5px solid var(--g3);
+  background: #fff;
+  color: var(--gd);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  white-space: nowrap;
+}
+.fm-cta-btn:hover {
+  background: var(--gl);
+  border-color: var(--earth-stone);
+}
+.fm-cta-btn--pick {
+  background: var(--sangria);
+  color: #fff;
+  border-color: var(--sangria);
+}
+.fm-cta-btn--pick:hover {
+  background: var(--sangria-h);
+  border-color: var(--sangria-h);
+}
+
+/* ---- ALTERNATING ROW TINT ---- */
+.fm-table tbody tr.fm-row--alt td {
+  background: var(--gl);
+}
+.fm-table tbody tr.fm-row--alt td:first-child {
+  background: var(--gl);
+}
+.fm-table tbody tr.fm-row--alt td.fm-cell--pick {
+  background: rgba(84,23,54,.04);
+}
+.fm-table tbody tr.fm-row--alt:hover td {
+  background: var(--earth-warm);
+}
+.fm-table tbody tr.fm-row--alt:hover td.fm-cell--pick {
+  background: rgba(84,23,54,.06);
+}
+.fm-table tbody tr.fm-row--alt:hover td:first-child {
+  background: var(--earth-warm);
+}
+
+/* ---- MOBILE: stacked card fallback ---- */
+.fm-stacked { display: none; }
+
+@media (max-width: 640px) {
+  .fm-scroll-hint::after { display: none; }
+
+  .fm-stacked {
+    display: block;
+  }
+  .fm-wrapper { display: none; }
+
+  .fm-stacked-card {
+    background: #fff;
+    border: 1px solid var(--g3);
+    border-radius: var(--r2xl);
+    overflow: hidden;
+    box-shadow: var(--sh-md);
+    margin-bottom: 20px;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .fm-stacked-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sh-lg);
+  }
+  .fm-stacked-card--pick {
+    border: 1.5px solid var(--sangria);
+    box-shadow: 0 12px 24px -6px rgba(84,23,54,.2);
+  }
+
+  .fm-stacked-card__header {
+    padding: 18px 16px 14px;
+    border-bottom: 1px solid var(--g3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .fm-stacked-card--pick .fm-stacked-card__header {
+    background: rgba(84,23,54,.03);
+  }
+  .fm-stacked-card__img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--g3);
+    flex-shrink: 0;
+  }
+  .fm-stacked-card--pick .fm-stacked-card__img {
+    border-color: var(--sangria);
+  }
+  .fm-stacked-card__name {
+    font-family: var(--fp);
+    font-size: 13px;
+    color: var(--gd);
+    line-height: 1.25;
+    margin-bottom: 2px;
+  }
+  .fm-stacked-card__loc {
+    font-size: 11px;
+    color: var(--gm);
+  }
+  .fm-stacked-card__badge {
+    display: inline-block;
+    background: var(--cream);
+    color: var(--sangria);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--rfull);
+    margin-top: 4px;
+  }
+
+  .fm-stacked-card__rows {
+    display: grid;
+    gap: 1px;
+    background: var(--g3);
+  }
+  .fm-stacked-row {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 16px;
+    gap: 8px;
+  }
+  .fm-stacked-card--pick .fm-stacked-row {
+    background: rgba(84,23,54,.02);
+  }
+  .fm-stacked-row__label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    min-width: 110px;
+  }
+  .fm-stacked-row__value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gd);
+    text-align: right;
+  }
+
+  .fm-stacked-group {
+    background: var(--gl) !important;
+    padding: 8px 16px !important;
+    border-top: 2px solid var(--g3);
+  }
+  .fm-stacked-group__label {
+    font-family: var(--fc);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sangria);
+  }
+
+  .fm-stacked-card__cta {
+    padding: 14px 16px;
+    border-top: 1px solid var(--g3);
+  }
+  .fm-stacked-card__btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: var(--fs);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 11px 16px;
+    border-radius: var(--rxl);
+    border: 1.5px solid var(--g3);
+    background: #fff;
+    color: var(--gd);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .fm-stacked-card__btn:hover {
+    background: var(--gl);
+    border-color: var(--earth-stone);
+  }
+  .fm-stacked-card--pick .fm-stacked-card__btn {
+    background: var(--sangria);
+    color: #fff;
+    border-color: var(--sangria);
+  }
+  .fm-stacked-card--pick .fm-stacked-card__btn:hover {
+    background: var(--sangria-h);
+    border-color: var(--sangria-h);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .blog-content { max-width: 100%; }
+  .fm-table thead th:first-child { width: 140px; }
+  .fm-label__text { font-size: 11px; }
+  .fm-val { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header__eyebrow">Design Element · Blog Details</div>
+  <h1 class="page-header__title">Feature Comparison Matrix</h1>
+  <p class="page-header__subtitle">A side-by-side feature table comparing safari lodges across every dimension — checkmarks, text, stars, destinations, seasons, and pricing.</p>
+</header>
+
+<!-- ============================================================
+     VARIANT E — FEATURE COMPARISON MATRIX (DESKTOP TABLE)
+     ============================================================ -->
+<section class="variant-section">
+  <div class="blog-content">
+    <div class="variant-label">
+      <span class="variant-label__dot" style="background:var(--sangria)"></span>
+      Variant E
+    </div>
+
+    <div class="table-intro">
+      <div class="table-intro__tag">Lodge Comparison</div>
+      <h2 class="table-intro__heading">Top Serengeti Lodges Compared</h2>
+      <p class="table-intro__subtitle">Four of the Serengeti's finest properties, analysed feature by feature so you can find your perfect match.</p>
+    </div>
+
+    <!-- Desktop / Tablet: scrollable table -->
+    <div class="fm-scroll-hint">
+      <div class="fm-wrapper">
+
+        <!-- Header panel -->
+        <div class="fm-header">
+          <div class="fm-header__quote">"The full picture, at a glance"</div>
+          <div class="fm-header__title">Feature Comparison Matrix</div>
+          <div class="fm-header__subtitle">Four lodges compared across every dimension that matters</div>
+        </div>
+
+        <table class="fm-table">
+          <thead>
+            <tr>
+              <!-- Label column -->
+              <th>
+                <span class="fm-th-label">Feature</span>
+              </th>
+              <!-- Lodge 1: Singita Sasakwa -->
+              <th>
+                <div class="fm-th-lodge">
+                  <img class="fm-th-lodge__img" src="../../../reference-images/great-migration/safari-vehicle-masai-mara.jpg" alt="Singita Sasakwa">
+                  <span class="fm-th-lodge__name">Singita Sasakwa</span>
+                  <span class="fm-th-lodge__loc">Grumeti Reserve</span>
+                </div>
+              </th>
+              <!-- Lodge 2: andBeyond — EDITOR'S PICK -->
+              <th class="th--pick">
+                <div class="fm-th-lodge">
+                  <img class="fm-th-lodge__img" src="../../../reference-images/great-migration/balloon-safari-masai-mara.jpg" alt="andBeyond Under Canvas">
+                  <span class="fm-th-lodge__name">andBeyond Under Canvas</span>
+                  <span class="fm-th-lodge__loc">North Serengeti</span>
+                  <span class="fm-th-lodge__badge">Editor's Pick</span>
+                </div>
+              </th>
+              <!-- Lodge 3: Four Seasons -->
+              <th>
+                <div class="fm-th-lodge">
+                  <img class="fm-th-lodge__img" src="../../../reference-images/great-migration/lion-pride-serengeti.jpg" alt="Four Seasons Safari Lodge">
+                  <span class="fm-th-lodge__name">Four Seasons Safari</span>
+                  <span class="fm-th-lodge__loc">Central Serengeti</span>
+                </div>
+              </th>
+              <!-- Lodge 4: Lemala Kuria Hills -->
+              <th>
+                <div class="fm-th-lodge">
+                  <img class="fm-th-lodge__img" src="../../../reference-images/great-migration/cheetah-and-cub-serengeti.jpg" alt="Lemala Kuria Hills">
+                  <span class="fm-th-lodge__name">Lemala Kuria Hills</span>
+                  <span class="fm-th-lodge__loc">North Serengeti</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- ═══════ GROUP: PROPERTY BASICS ═══════ -->
+            <tr class="fm-group">
+              <td colspan="5">
+                <div class="fm-group__label">
+                  <svg class="fm-group__icon" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Property Basics
+                </div>
+              </td>
+            </tr>
+
+            <!-- Property Type -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Property type</span>
+                </div>
+              </td>
+              <td><span class="fm-val">Hillside Lodge</span></td>
+              <td class="fm-cell--pick"><span class="fm-val">Luxury Camp</span></td>
+              <td><span class="fm-val">Safari Lodge</span></td>
+              <td><span class="fm-val">Tented Lodge</span></td>
+            </tr>
+
+            <!-- Accommodation -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Accommodation</span>
+                </div>
+              </td>
+              <td><span class="fm-val">9 Villas</span></td>
+              <td class="fm-cell--pick"><span class="fm-val">20 Tented Suites</span></td>
+              <td><span class="fm-val">77 Rooms</span></td>
+              <td><span class="fm-val">15 Tented Suites</span></td>
+            </tr>
+
+            <!-- Board Basis -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Board basis</span>
+                </div>
+              </td>
+              <td><span class="fm-val">All-inclusive</span></td>
+              <td class="fm-cell--pick"><span class="fm-val">All-inclusive</span></td>
+              <td><span class="fm-val">Full Board</span></td>
+              <td><span class="fm-val">All-inclusive</span></td>
+            </tr>
+
+            <!-- Star Rating -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Rating</span>
+                </div>
+              </td>
+              <td>
+                <div class="fm-stars">
+                  <span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span>
+                  <span class="fm-tier">Ultra</span>
+                </div>
+              </td>
+              <td class="fm-cell--pick">
+                <div class="fm-stars">
+                  <span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span>
+                  <span class="fm-tier">Ultra</span>
+                </div>
+              </td>
+              <td>
+                <div class="fm-stars">
+                  <span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star fm-star--empty">★</span>
+                  <span class="fm-tier">Luxury</span>
+                </div>
+              </td>
+              <td>
+                <div class="fm-stars">
+                  <span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star">★</span><span class="fm-star fm-star--empty">★</span>
+                  <span class="fm-tier">Luxury</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- ═══════ GROUP: ACTIVITIES & EXPERIENCES ═══════ -->
+            <tr class="fm-group">
+              <td colspan="5">
+                <div class="fm-group__label">
+                  <svg class="fm-group__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  Activities &amp; Experiences
+                </div>
+              </td>
+            </tr>
+
+            <!-- Game Drives -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Game drives</span>
+                </div>
+              </td>
+              <td>
+                <div class="fm-check-text">
+                  <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-val">Unlimited</span>
+                </div>
+              </td>
+              <td class="fm-cell--pick">
+                <div class="fm-check-text">
+                  <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-val">Unlimited</span>
+                </div>
+              </td>
+              <td>
+                <div class="fm-check-text">
+                  <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-val">Daily</span>
+                </div>
+              </td>
+              <td>
+                <div class="fm-check-text">
+                  <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-val">Unlimited</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Private Vehicle -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 00-8 0v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Private vehicle</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- Walking Safaris -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M17 20H7M12 4v10M8 8l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Walking safaris</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- Balloon Safaris -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 4.17 4.42 9.92 6.24 12.11a.993.993 0 001.52 0C14.58 18.92 19 13.17 19 9c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.5"/><path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Balloon safaris</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- Night Drives -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Night drives</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- Bush Meals -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 1v3M10 1v3M14 1v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Bush meals</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- ═══════ GROUP: FACILITIES ═══════ -->
+            <tr class="fm-group">
+              <td colspan="5">
+                <div class="fm-group__label">
+                  <svg class="fm-group__icon" viewBox="0 0 24 24" fill="none"><path d="M4 8c0-2.2 3.6-4 8-4s8 1.8 8 4-3.6 4-8 4-8-1.8-8-4z" stroke="currentColor" stroke-width="1.5"/><path d="M4 8v4c0 2.2 3.6 4 8 4s8-1.8 8-4V8" stroke="currentColor" stroke-width="1.5"/></svg>
+                  Facilities
+                </div>
+              </td>
+            </tr>
+
+            <!-- Pool -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M4 8c0-2.2 3.6-4 8-4s8 1.8 8 4-3.6 4-8 4-8-1.8-8-4z" stroke="currentColor" stroke-width="1.5"/><path d="M4 8v4c0 2.2 3.6 4 8 4s8-1.8 8-4V8" stroke="currentColor" stroke-width="1.5"/></svg>
+                  <span class="fm-label__text">Pool</span>
+                </div>
+              </td>
+              <td><span class="fm-val">Infinity pool</span></td>
+              <td class="fm-cell--pick"><span class="fm-val">Natural pool</span></td>
+              <td><span class="fm-val">2 pools</span></td>
+              <td><span class="fm-val">Plunge pool</span></td>
+            </tr>
+
+            <!-- Spa -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M12 3c-4.5 0-7 2.5-7 5 0 3 2.5 5 7 5s7-2 7-5c0-2.5-2.5-5-7-5z" stroke="currentColor" stroke-width="1.5"/><path d="M5 13c0 3 3 5 7 5s7-2 7-5" stroke="currentColor" stroke-width="1.5"/></svg>
+                  <span class="fm-label__text">Spa</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- Gym -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M6.5 6.5h11M6.5 17.5h11M4 10h2.5v4H4a1 1 0 01-1-1v-2a1 1 0 011-1zM17.5 10H20a1 1 0 011 1v2a1 1 0 01-1 1h-2.5v-4zM6.5 8h11v8h-11z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Gym</span>
+                </div>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td class="fm-cell--pick">
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--yes" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".1"/><polyline points="7.5 12 10.5 15 16.5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </td>
+              <td>
+                <svg class="fm-check fm-check--no" viewBox="0 0 24 24" fill="none" style="width:18px;height:18px"><circle cx="12" cy="12" r="10" fill="rgba(108,117,125,.08)"/><line x1="9" y1="12" x2="15" y2="12" stroke="#ADB5BD" stroke-width="2" stroke-linecap="round"/></svg>
+              </td>
+            </tr>
+
+            <!-- WiFi -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">WiFi</span>
+                </div>
+              </td>
+              <td><span class="fm-val">In-room</span></td>
+              <td class="fm-cell--pick"><span class="fm-val">Common areas</span></td>
+              <td><span class="fm-val">In-room</span></td>
+              <td><span class="fm-val">Common areas</span></td>
+            </tr>
+
+            <!-- ═══════ GROUP: DESTINATION & TIMING ═══════ -->
+            <tr class="fm-group">
+              <td colspan="5">
+                <div class="fm-group__label">
+                  <svg class="fm-group__icon" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                  Destination &amp; Timing
+                </div>
+              </td>
+            </tr>
+
+            <!-- Destination -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+                  <span class="fm-label__text">Destination</span>
+                </div>
+              </td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-dest-link">Grumeti Reserve</a></td>
+              <td class="fm-cell--pick"><a href="https://www.viatu.com/en/d/serengeti" class="fm-dest-link">North Serengeti</a></td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-dest-link">Central Serengeti</a></td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-dest-link">North Serengeti</a></td>
+            </tr>
+
+            <!-- Country -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" stroke-width="1.5"/></svg>
+                  <span class="fm-label__text">Country</span>
+                </div>
+              </td>
+              <td>
+                <span class="fm-country">
+                  <img class="fm-country__flag" src="../../../reference-images/viatu-flag-tanzania.svg" alt="Tanzania flag">
+                  Tanzania
+                </span>
+              </td>
+              <td class="fm-cell--pick">
+                <span class="fm-country">
+                  <img class="fm-country__flag" src="../../../reference-images/viatu-flag-tanzania.svg" alt="Tanzania flag">
+                  Tanzania
+                </span>
+              </td>
+              <td>
+                <span class="fm-country">
+                  <img class="fm-country__flag" src="../../../reference-images/viatu-flag-tanzania.svg" alt="Tanzania flag">
+                  Tanzania
+                </span>
+              </td>
+              <td>
+                <span class="fm-country">
+                  <img class="fm-country__flag" src="../../../reference-images/viatu-flag-tanzania.svg" alt="Tanzania flag">
+                  Tanzania
+                </span>
+              </td>
+            </tr>
+
+            <!-- Best Months -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Best months</span>
+                </div>
+              </td>
+              <td><span class="fm-season">Jul – Oct</span></td>
+              <td class="fm-cell--pick"><span class="fm-season">Jun – Oct</span></td>
+              <td><span class="fm-season">Jun – Oct</span></td>
+              <td><span class="fm-season">Jul – Oct</span></td>
+            </tr>
+
+            <!-- Min. Stay -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">Min. stay</span>
+                </div>
+              </td>
+              <td><span class="fm-val">3 nights</span></td>
+              <td class="fm-cell--pick"><span class="fm-val">3 nights</span></td>
+              <td><span class="fm-val">1 night</span></td>
+              <td><span class="fm-val">2 nights</span></td>
+            </tr>
+
+            <!-- Exclusivity -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Exclusivity</span>
+                </div>
+              </td>
+              <td><span class="fm-excl-pill fm-excl-pill--very-high">Very High</span></td>
+              <td class="fm-cell--pick"><span class="fm-excl-pill fm-excl-pill--high">High</span></td>
+              <td><span class="fm-excl-pill fm-excl-pill--mid">Mid</span></td>
+              <td><span class="fm-excl-pill fm-excl-pill--high">High</span></td>
+            </tr>
+
+            <!-- ═══════ GROUP: PRICING ═══════ -->
+            <tr class="fm-group">
+              <td colspan="5">
+                <div class="fm-group__label">
+                  <svg class="fm-group__icon" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Pricing
+                </div>
+              </td>
+            </tr>
+
+            <!-- Price Range -->
+            <tr>
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="fm-label__text">Price range</span>
+                </div>
+              </td>
+              <td><span class="fm-price-pill">$$$$–$$$$$</span></td>
+              <td class="fm-cell--pick"><span class="fm-price-pill">$$$–$$$$</span></td>
+              <td><span class="fm-price-pill">$$–$$$</span></td>
+              <td><span class="fm-price-pill">$$$–$$$$</span></td>
+            </tr>
+
+            <!-- Per Night Rate -->
+            <tr class="fm-row--alt">
+              <td>
+                <div class="fm-label">
+                  <svg class="fm-label__icon" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M6 12h.01M18 12h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <span class="fm-label__text">From / night</span>
+                </div>
+              </td>
+              <td><span class="fm-val" style="font-weight:800;font-size:14px">$2,395</span></td>
+              <td class="fm-cell--pick"><span class="fm-val" style="font-weight:800;font-size:14px;color:var(--sangria)">$1,490</span></td>
+              <td><span class="fm-val" style="font-weight:800;font-size:14px">$960</span></td>
+              <td><span class="fm-val" style="font-weight:800;font-size:14px">$1,250</span></td>
+            </tr>
+          </tbody>
+
+          <!-- CTA Footer -->
+          <tfoot>
+            <tr>
+              <td></td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-cta-btn">View Lodge</a></td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-cta-btn fm-cta-btn--pick">View Lodge</a></td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-cta-btn">View Lodge</a></td>
+              <td><a href="https://www.viatu.com/en/d/serengeti" class="fm-cta-btn">View Lodge</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div><!-- /.fm-wrapper -->
+    </div><!-- /.fm-scroll-hint -->
+
+    <!-- ═══════ MOBILE STACKED CARDS ═══════ -->
+    <div class="fm-stacked">
+
+      <!-- Card 1: Singita Sasakwa -->
+      <div class="fm-stacked-card">
+        <div class="fm-stacked-card__header">
+          <img class="fm-stacked-card__img" src="../../../reference-images/great-migration/safari-vehicle-masai-mara.jpg" alt="Singita Sasakwa">
+          <div>
+            <div class="fm-stacked-card__name">Singita Sasakwa</div>
+            <div class="fm-stacked-card__loc">Grumeti Reserve · Tanzania</div>
+          </div>
+        </div>
+        <div class="fm-stacked-card__rows">
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Property Basics</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Property type</span><span class="fm-stacked-row__value">Hillside Lodge</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Accommodation</span><span class="fm-stacked-row__value">9 Villas</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Board basis</span><span class="fm-stacked-row__value">All-inclusive</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Rating</span><span class="fm-stacked-row__value">★★★★★ Ultra</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Activities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Game drives</span><span class="fm-stacked-row__value">✓ Unlimited</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Private vehicle</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Walking safaris</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Balloon safaris</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Night drives</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Facilities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Pool</span><span class="fm-stacked-row__value">Infinity pool</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Spa</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">WiFi</span><span class="fm-stacked-row__value">In-room</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Destination &amp; Timing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Best months</span><span class="fm-stacked-row__value">Jul – Oct</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Min. stay</span><span class="fm-stacked-row__value">3 nights</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Exclusivity</span><span class="fm-stacked-row__value"><span class="fm-excl-pill fm-excl-pill--very-high">Very High</span></span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Pricing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Price range</span><span class="fm-stacked-row__value">$$$$–$$$$$</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">From / night</span><span class="fm-stacked-row__value" style="font-weight:800">$2,395</span></div>
+        </div>
+        <div class="fm-stacked-card__cta">
+          <a href="https://www.viatu.com/en/d/serengeti" class="fm-stacked-card__btn">View Lodge</a>
+        </div>
+      </div>
+
+      <!-- Card 2: andBeyond — EDITOR'S PICK -->
+      <div class="fm-stacked-card fm-stacked-card--pick">
+        <div class="fm-stacked-card__header">
+          <img class="fm-stacked-card__img" src="../../../reference-images/great-migration/balloon-safari-masai-mara.jpg" alt="andBeyond Under Canvas">
+          <div>
+            <div class="fm-stacked-card__name">andBeyond Under Canvas</div>
+            <div class="fm-stacked-card__loc">North Serengeti · Tanzania</div>
+            <span class="fm-stacked-card__badge">Editor's Pick</span>
+          </div>
+        </div>
+        <div class="fm-stacked-card__rows">
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Property Basics</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Property type</span><span class="fm-stacked-row__value">Luxury Camp</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Accommodation</span><span class="fm-stacked-row__value">20 Tented Suites</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Board basis</span><span class="fm-stacked-row__value">All-inclusive</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Rating</span><span class="fm-stacked-row__value">★★★★★ Ultra</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Activities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Game drives</span><span class="fm-stacked-row__value">✓ Unlimited</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Private vehicle</span><span class="fm-stacked-row__value" style="color:var(--sangria)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Walking safaris</span><span class="fm-stacked-row__value" style="color:var(--sangria)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Balloon safaris</span><span class="fm-stacked-row__value" style="color:var(--sangria)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Night drives</span><span class="fm-stacked-row__value" style="color:var(--gm)">—</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Facilities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Pool</span><span class="fm-stacked-row__value">Natural pool</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Spa</span><span class="fm-stacked-row__value" style="color:var(--sangria)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">WiFi</span><span class="fm-stacked-row__value">Common areas</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Destination &amp; Timing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Best months</span><span class="fm-stacked-row__value">Jun – Oct</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Min. stay</span><span class="fm-stacked-row__value">3 nights</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Exclusivity</span><span class="fm-stacked-row__value"><span class="fm-excl-pill fm-excl-pill--high">High</span></span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Pricing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Price range</span><span class="fm-stacked-row__value">$$$–$$$$</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">From / night</span><span class="fm-stacked-row__value" style="font-weight:800;color:var(--sangria)">$1,490</span></div>
+        </div>
+        <div class="fm-stacked-card__cta">
+          <a href="https://www.viatu.com/en/d/serengeti" class="fm-stacked-card__btn">View Lodge</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Four Seasons -->
+      <div class="fm-stacked-card">
+        <div class="fm-stacked-card__header">
+          <img class="fm-stacked-card__img" src="../../../reference-images/great-migration/lion-pride-serengeti.jpg" alt="Four Seasons Safari Lodge">
+          <div>
+            <div class="fm-stacked-card__name">Four Seasons Safari</div>
+            <div class="fm-stacked-card__loc">Central Serengeti · Tanzania</div>
+          </div>
+        </div>
+        <div class="fm-stacked-card__rows">
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Property Basics</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Property type</span><span class="fm-stacked-row__value">Safari Lodge</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Accommodation</span><span class="fm-stacked-row__value">77 Rooms</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Board basis</span><span class="fm-stacked-row__value">Full Board</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Rating</span><span class="fm-stacked-row__value">★★★★☆ Luxury</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Activities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Game drives</span><span class="fm-stacked-row__value">✓ Daily</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Private vehicle</span><span class="fm-stacked-row__value" style="color:var(--gm)">—</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Walking safaris</span><span class="fm-stacked-row__value" style="color:var(--gm)">—</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Balloon safaris</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Night drives</span><span class="fm-stacked-row__value" style="color:var(--gm)">—</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Facilities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Pool</span><span class="fm-stacked-row__value">2 pools</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Spa</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">WiFi</span><span class="fm-stacked-row__value">In-room</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Destination &amp; Timing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Best months</span><span class="fm-stacked-row__value">Jun – Oct</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Min. stay</span><span class="fm-stacked-row__value">1 night</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Exclusivity</span><span class="fm-stacked-row__value"><span class="fm-excl-pill fm-excl-pill--mid">Mid</span></span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Pricing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Price range</span><span class="fm-stacked-row__value">$$–$$$</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">From / night</span><span class="fm-stacked-row__value" style="font-weight:800">$960</span></div>
+        </div>
+        <div class="fm-stacked-card__cta">
+          <a href="https://www.viatu.com/en/d/serengeti" class="fm-stacked-card__btn">View Lodge</a>
+        </div>
+      </div>
+
+      <!-- Card 4: Lemala Kuria Hills -->
+      <div class="fm-stacked-card">
+        <div class="fm-stacked-card__header">
+          <img class="fm-stacked-card__img" src="../../../reference-images/great-migration/cheetah-and-cub-serengeti.jpg" alt="Lemala Kuria Hills">
+          <div>
+            <div class="fm-stacked-card__name">Lemala Kuria Hills</div>
+            <div class="fm-stacked-card__loc">North Serengeti · Tanzania</div>
+          </div>
+        </div>
+        <div class="fm-stacked-card__rows">
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Property Basics</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Property type</span><span class="fm-stacked-row__value">Tented Lodge</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Accommodation</span><span class="fm-stacked-row__value">15 Tented Suites</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Board basis</span><span class="fm-stacked-row__value">All-inclusive</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Rating</span><span class="fm-stacked-row__value">★★★★☆ Luxury</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Activities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Game drives</span><span class="fm-stacked-row__value">✓ Unlimited</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Private vehicle</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Walking safaris</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Balloon safaris</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Night drives</span><span class="fm-stacked-row__value" style="color:var(--low-fg)">✓</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Facilities</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Pool</span><span class="fm-stacked-row__value">Plunge pool</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Spa</span><span class="fm-stacked-row__value" style="color:var(--gm)">—</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">WiFi</span><span class="fm-stacked-row__value">Common areas</span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Destination &amp; Timing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Best months</span><span class="fm-stacked-row__value">Jul – Oct</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Min. stay</span><span class="fm-stacked-row__value">2 nights</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Exclusivity</span><span class="fm-stacked-row__value"><span class="fm-excl-pill fm-excl-pill--high">High</span></span></div>
+          <div class="fm-stacked-group"><span class="fm-stacked-group__label">Pricing</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">Price range</span><span class="fm-stacked-row__value">$$$–$$$$</span></div>
+          <div class="fm-stacked-row"><span class="fm-stacked-row__label">From / night</span><span class="fm-stacked-row__value" style="font-weight:800">$1,250</span></div>
+        </div>
+        <div class="fm-stacked-card__cta">
+          <a href="https://www.viatu.com/en/d/serengeti" class="fm-stacked-card__btn">View Lodge</a>
+        </div>
+      </div>
+
+    </div><!-- /.fm-stacked -->
+
+  </div><!-- /.blog-content -->
+</section>
+
+<script>
+// Scroll hint: hide right-edge gradient when scrolled to end
+document.querySelectorAll('.fm-wrapper').forEach(wrapper => {
+  wrapper.addEventListener('scroll', () => {
+    const hint = wrapper.closest('.fm-scroll-hint');
+    if (!hint) return;
+    const atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 8;
+    hint.classList.toggle('scrolled-right', atEnd);
+  });
+});
+</script>
+
+</body>
+</html>

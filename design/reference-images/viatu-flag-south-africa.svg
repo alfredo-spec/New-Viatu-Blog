@@ -1,14 +1,18 @@
 <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0_523_16503" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="20">
-<rect x="0.5" y="0.5" width="29" height="19" fill="white"/>
-</mask>
-<g mask="url(#mask0_523_16503)">
-<mask id="path-2-outside-1_523_16503" maskUnits="userSpaceOnUse" x="-0.5" y="-5.71338" width="31" height="31" fill="black">
-<rect fill="white" x="-0.5" y="-5.71338" width="31" height="31"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M14.4821 8.18365L0.5 -2.71338V22.7131L14.4822 11.816H29.4999V8.18365H14.4821Z"/>
-</mask>
-<path d="M0.5 -2.71338L1.11472 -3.50213L-0.5 -4.76057V-2.71338H0.5ZM14.4821 8.18365L13.8674 8.97239L14.1384 9.18365H14.4821V8.18365ZM0.5 22.7131H-0.5V24.7603L1.11472 23.5018L0.5 22.7131ZM14.4822 11.816V10.816H14.1385L13.8675 11.0272L14.4822 11.816ZM29.4999 11.816V12.816H30.4999V11.816H29.4999ZM29.4999 8.18365H30.4999V7.18365H29.4999V8.18365ZM-0.114716 -1.92463L13.8674 8.97239L15.0968 7.3949L1.11472 -3.50213L-0.114716 -1.92463ZM1.5 22.7131V-2.71338H-0.5V22.7131H1.5ZM13.8675 11.0272L-0.114716 21.9243L1.11472 23.5018L15.0969 12.6047L13.8675 11.0272ZM29.4999 10.816H14.4822V12.816H29.4999V10.816ZM28.4999 8.18365V11.816H30.4999V8.18365H28.4999ZM14.4821 9.18365H29.4999V7.18365H14.4821V9.18365Z" fill="#F7FCFF" mask="url(#path-2-outside-1_523_16503)"/>
-<path d="M0.800389 4.15205L0 3.55054V4.55176V15.4488V16.45L0.800389 15.8485L8.05039 10.4L8.58225 10.0003L8.05039 9.60058L0.800389 4.15205Z" stroke="white"/>
-</g>
-<rect x="1" y="1" width="28" height="18" stroke="white"/>
+<rect width="30" height="20" fill="#FFFFFF"/>
+<rect y="0" width="30" height="8" fill="#DE3831"/>
+<rect y="12" width="30" height="8" fill="#002395"/>
+<polygon points="0,0 13,0 13,0 0,0" fill="#DE3831"/>
+<polygon points="0,0 0,20 10,10" fill="#000000"/>
+<polygon points="0,1 0,19 9,10" fill="#000000"/>
+<path d="M0 0 L14 0 L14 7.5 L10.5 10 L14 12.5 L14 20 L0 20 L0 0Z" fill="none"/>
+<rect y="7.5" width="30" height="1" fill="#FFFFFF"/>
+<rect y="11.5" width="30" height="1" fill="#FFFFFF"/>
+<path d="M10.5 10 L30 3.5 L30 0 L13 0 L13 8 Z" fill="#DE3831"/>
+<path d="M10.5 10 L30 16.5 L30 20 L13 20 L13 12 Z" fill="#002395"/>
+<path d="M0 0 L13.5 0 L13.5 7.8 L10 10 L13.5 12.2 L13.5 20 L0 20 Z" fill="#007749"/>
+<polygon points="0,1.5 0,18.5 8.5,10" fill="#000000"/>
+<path d="M0 0 L0 2 L9 10 L0 18 L0 20 L10.5 10 Z" fill="#000000"/>
+<path d="M0 1 L0 1.5 L8.5 10 L0 18.5 L0 19 L9.5 10 Z" fill="#FFB81C"/>
+<rect x="0" y="0" width="30" height="20" stroke="#D0D0D0" stroke-width="0.5" fill="none"/>
 </svg>
