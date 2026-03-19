@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seasonality Calendar — Viatu Blog Design Element</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --sangria:    #541736;
+  --sangria-h:  #47142e;
+  --sangria-05: rgba(84,23,54,.05);
+  --sangria-08: rgba(84,23,54,.08);
+  --sangria-12: rgba(84,23,54,.12);
+  --sangria-20: rgba(84,23,54,.20);
+  --pthalo:     #1C4447;
+  --pthalo-h:   #163538;
+  --pthalo-08:  rgba(28,68,71,.08);
+  --cream:      #F3FFB9;
+  --gl:         #F8F9FA;
+  --gm:         #6C757D;
+  --gd:         #343A40;
+  --g3:         #DEE2E6;
+  --earth-warm: #E1E3DE;
+  --earth-sand: #E8E0D6;
+  --earth-stone:#B5A898;
+  --earth-clay: #8B7355;
+  --fp: 'Krona One', sans-serif;
+  --fs: 'Hanken Grotesk', sans-serif;
+  --fc: 'Caveat', cursive;
+  --r2xl:  1rem;
+  --rfull: 9999px;
+  --rxl:   .75rem;
+  --rlg:   .5rem;
+  --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+  --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  --dur:  200ms;
+  --dur3: 300ms;
+  --ease: cubic-bezier(.4,0,.2,1);
+  /* Season-specific tokens */
+  --season-peak:    rgba(26,110,49,.20);
+  --season-good:    rgba(243,197,0,.18);
+  --season-low:     rgba(239,68,68,.12);
+  --season-peak-fg: #1a6e31;
+  --season-good-fg: #8a5f00;
+  --season-low-fg:  #b91c1c;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--fs);
+  background: #FFFFFF;
+  color: var(--gd);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   PAGE SCAFFOLD
+   ============================================================ */
+.page-header {
+  background: var(--gl);
+  border-bottom: 1px solid var(--g3);
+  padding: 48px 32px 40px;
+  text-align: center;
+}
+.page-header__eyebrow {
+  font-family: var(--fc);
+  font-size: 18px;
+  color: var(--gm);
+  margin-bottom: 8px;
+}
+.page-header__title {
+  font-family: var(--fp);
+  font-size: 26px;
+  color: var(--gd);
+  margin-bottom: 10px;
+  letter-spacing: -.02em;
+}
+.page-header__subtitle {
+  font-family: var(--fs);
+  font-size: 14px;
+  color: var(--gm);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.variant-section {
+  padding: 64px 32px;
+  border-bottom: 1px solid var(--g3);
+}
+.variant-section:last-child { border-bottom: none; }
+
+.variant-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--gl);
+  border: 1px solid var(--g3);
+  border-radius: var(--rfull);
+  padding: 5px 14px 5px 10px;
+  font-family: var(--fs);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gm);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.variant-label__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.blog-content {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.table-intro {
+  margin-bottom: 32px;
+}
+.table-intro__tag {
+  font-family: var(--fc);
+  font-size: 16px;
+  color: var(--gm);
+  margin-bottom: 6px;
+}
+.table-intro__heading {
+  font-family: var(--fp);
+  font-size: 22px;
+  color: var(--gd);
+  letter-spacing: -.02em;
+  margin-bottom: 8px;
+}
+.table-intro__subtitle {
+  font-size: 14px;
+  color: var(--gm);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   VARIANT F1 — SEASONALITY TABLE GRID
+   ============================================================ */
+
+/* Wrapper */
+.season-wrapper {
+  overflow-x: auto;
+  border-radius: var(--r2xl);
+  box-shadow: var(--sh-lg);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scroll hint */
+.season-scroll-hint {
+  position: relative;
+}
+.season-scroll-hint::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.85));
+  pointer-events: none;
+  z-index: 5;
+  opacity: 1;
+  transition: opacity var(--dur3) var(--ease);
+}
+.season-scroll-hint.scrolled-right::after {
+  opacity: 0;
+}
+
+/* Header panel */
+.season-header {
+  background: var(--pthalo);
+  position: relative;
+  overflow: hidden;
+  padding: 28px 28px 24px;
+  border-radius: var(--r2xl) var(--r2xl) 0 0;
+}
+.season-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(84,23,54,.25) 0%, transparent 65%);
+  pointer-events: none;
+}
+.season-header__quote {
+  font-family: var(--fc);
+  font-size: 22px;
+  color: rgba(243,255,185,.55);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.season-header__title {
+  font-family: var(--fp);
+  font-size: 17px;
+  color: #fff;
+  letter-spacing: -.01em;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+.season-header__subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* Table */
+.season-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ---- THEAD ---- */
+.season-table thead tr {
+  background: #1a3336;
+}
+.season-table thead th {
+  padding: 14px 6px 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: var(--fs);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  border-bottom: 2px solid var(--g3);
+}
+.season-table thead th:first-child {
+  text-align: left;
+  padding-left: 20px;
+  width: 180px;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background: #1a3336;
+  color: rgba(255,255,255,.5);
+}
+
+/* ---- TBODY ---- */
+.season-table tbody tr {
+  background: #fff;
+  border-bottom: 1px solid var(--g3);
+  transition: background var(--dur) var(--ease);
+}
+.season-table tbody tr:last-child { border-bottom: none; }
+.season-table tbody tr:hover td { background: var(--gl); }
+.season-table tbody tr:hover td:first-child { background: var(--gl); }
+
+/* Sticky first column */
+.season-table tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: #fff;
+  box-shadow: 2px 0 4px rgba(0,0,0,.04);
+}
+.season-table tbody tr:hover td:first-child {
+  background: var(--gl);
+}
+
+/* Lodge cell */
+.season-lodge {
+  padding: 14px 16px 14px 20px;
+}
+.season-lodge__name {
+  font-family: var(--fs);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gd);
+  line-height: 1.3;
+}
+.season-lodge__location {
+  font-size: 10px;
+  color: var(--gm);
+  margin-top: 2px;
+}
+
+/* Data cells */
+.season-table tbody td {
+  padding: 10px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Dot indicators */
+.season-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: relative;
+  cursor: default;
+  transition: transform var(--dur) var(--ease);
+}
+.season-dot:hover {
+  transform: scale(1.15);
+}
+.season-dot::after {
+  content: '';
+  display: block;
+  border-radius: 50%;
+}
+
+/* Peak */
+.season-dot--peak {
+  background: var(--season-peak);
+}
+.season-dot--peak::after {
+  width: 10px;
+  height: 10px;
+  background: var(--season-peak-fg);
+}
+
+/* Good / Shoulder */
+.season-dot--good {
+  background: var(--season-good);
+}
+.season-dot--good::after {
+  width: 10px;
+  height: 10px;
+  background: var(--season-good-fg);
+}
+
+/* Low */
+.season-dot--low {
+  background: var(--season-low);
+}
+.season-dot--low::after {
+  width: 8px;
+  height: 8px;
+  background: var(--season-low-fg);
+  opacity: .5;
+}
+
+/* Closed */
+.season-closed {
+  font-size: 14px;
+  color: var(--g3);
+  font-weight: 400;
+}
+
+/* Tooltip */
+.season-dot[data-tip] {
+  position: relative;
+}
+.season-dot[data-tip]::before {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gd);
+  color: #fff;
+  font-family: var(--fs);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease);
+  z-index: 10;
+}
+.season-dot[data-tip]:hover::before {
+  opacity: 1;
+}
+
+/* Legend strip */
+.season-legend {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 20px;
+  background: var(--gl);
+  border-top: 1px solid var(--g3);
+  border-radius: 0 0 var(--r2xl) var(--r2xl);
+}
+.season-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gm);
+}
+.season-legend__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.season-legend__dot--peak { background: var(--season-peak-fg); }
+.season-legend__dot--good { background: var(--season-good-fg); }
+.season-legend__dot--low  { background: var(--season-low-fg); opacity: .5; }
+.season-legend__dot--closed {
+  background: transparent;
+  border: 1.5px solid var(--g3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.season-legend__dot--closed::after {
+  content: '\2014';
+  font-size: 8px;
+  color: var(--g3);
+  line-height: 1;
+}
+
+/* ============================================================
+   VARIANT F2 — HEAT STRIP CARDS
+   ============================================================ */
+
+.season-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 640px) {
+  .season-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.season-card {
+  background: #fff;
+  border-radius: var(--r2xl);
+  border: 1px solid var(--g3);
+  box-shadow: var(--sh-sm);
+  padding: 20px;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  cursor: default;
+}
+.season-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-md);
+}
+
+/* Card header */
+.season-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.season-card__info {}
+.season-card__name {
+  font-family: var(--fp);
+  font-size: 14px;
+  color: var(--gd);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+.season-card__location {
+  font-size: 11px;
+  color: var(--gm);
+  margin-top: 2px;
+}
+.season-card__price-pill {
+  display: inline-flex;
+  align-items: center;
+  background: var(--pthalo-08);
+  color: var(--pthalo);
+  font-family: var(--fs);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--rfull);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+/* Heat strip */
+.season-strip {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  height: 36px;
+  border-radius: var(--rxl);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.season-strip__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fs);
+  font-size: 9px;
+  font-weight: 600;
+  transition: opacity var(--dur) var(--ease);
+}
+.season-strip__cell--peak {
+  background: var(--season-peak);
+  color: var(--season-peak-fg);
+}
+.season-strip__cell--good {
+  background: var(--season-good);
+  color: var(--season-good-fg);
+}
+.season-strip__cell--low {
+  background: var(--season-low);
+  color: var(--season-low-fg);
+}
+
+/* Month labels below strip */
+.season-months {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  margin-bottom: 16px;
+}
+.season-months__label {
+  text-align: center;
+  font-family: var(--fs);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--gm);
+}
+
+/* Stats row */
+.season-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--g3);
+}
+.season-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.season-stat__label {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gm);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.season-stat__value {
+  font-family: var(--fs);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gd);
+  line-height: 1.3;
+}
+.season-stat__stars {
+  display: flex;
+  gap: 1px;
+  color: #F59E0B;
+  font-size: 13px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header__eyebrow">Design Element &middot; Blog Details</div>
+  <h1 class="page-header__title">Seasonality Calendar</h1>
+  <p class="page-header__subtitle">Two architectural variants for showing when to visit &mdash; a table grid and heat strip cards.</p>
+</header>
+
+<!-- ============================================================
+     VARIANT F1 — SEASONALITY TABLE GRID
+     ============================================================ -->
+<section class="variant-section">
+  <div class="blog-content">
+    <div class="variant-label">
+      <span class="variant-label__dot" style="background:var(--pthalo)"></span>
+      Variant F1
+    </div>
+
+    <div class="table-intro">
+      <div class="table-intro__tag">Safari Planning</div>
+      <h2 class="table-intro__heading">When to Visit: Season at a Glance</h2>
+      <p class="table-intro__subtitle">Peak, shoulder, and low seasons for top safari lodges across East Africa.</p>
+    </div>
+
+    <div class="season-scroll-hint">
+      <div class="season-wrapper">
+
+        <!-- Header panel -->
+        <div class="season-header">
+          <div class="season-header__quote">"Timing is everything"</div>
+          <div class="season-header__title">When to Visit: Season at a Glance</div>
+          <div class="season-header__subtitle">Peak, shoulder, and low seasons for top safari lodges</div>
+        </div>
+
+        <table class="season-table">
+          <thead>
+            <tr>
+              <th>Lodge</th>
+              <th>Jan</th>
+              <th>Feb</th>
+              <th>Mar</th>
+              <th>Apr</th>
+              <th>May</th>
+              <th>Jun</th>
+              <th>Jul</th>
+              <th>Aug</th>
+              <th>Sep</th>
+              <th>Oct</th>
+              <th>Nov</th>
+              <th>Dec</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Lodge 1: Singita Sasakwa -->
+            <tr>
+              <td>
+                <div class="season-lodge">
+                  <div class="season-lodge__name">Singita Sasakwa</div>
+                  <div class="season-lodge__location">Grumeti Reserve</div>
+                </div>
+              </td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+            </tr>
+
+            <!-- Lodge 2: andBeyond Under Canvas -->
+            <tr>
+              <td>
+                <div class="season-lodge">
+                  <div class="season-lodge__name">andBeyond Under Canvas</div>
+                  <div class="season-lodge__location">North Serengeti</div>
+                </div>
+              </td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+            </tr>
+
+            <!-- Lodge 3: Four Seasons Safari -->
+            <tr>
+              <td>
+                <div class="season-lodge">
+                  <div class="season-lodge__name">Four Seasons Safari</div>
+                  <div class="season-lodge__location">Central Serengeti</div>
+                </div>
+              </td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+            </tr>
+
+            <!-- Lodge 4: Governors' Camp -->
+            <tr>
+              <td>
+                <div class="season-lodge">
+                  <div class="season-lodge__name">Governors' Camp</div>
+                  <div class="season-lodge__location">Masai Mara, Kenya</div>
+                </div>
+              </td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+            </tr>
+
+            <!-- Lodge 5: Volcanoes Safaris -->
+            <tr>
+              <td>
+                <div class="season-lodge">
+                  <div class="season-lodge__name">Volcanoes Safaris</div>
+                  <div class="season-lodge__location">Volcanoes NP, Rwanda</div>
+                </div>
+              </td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--peak" data-tip="Peak season"></span></td>
+              <td><span class="season-dot season-dot--good" data-tip="Shoulder season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+              <td><span class="season-dot season-dot--low" data-tip="Low season"></span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Legend -->
+        <div class="season-legend">
+          <div class="season-legend__item">
+            <span class="season-legend__dot season-legend__dot--peak"></span>
+            Peak season
+          </div>
+          <div class="season-legend__item">
+            <span class="season-legend__dot season-legend__dot--good"></span>
+            Shoulder season
+          </div>
+          <div class="season-legend__item">
+            <span class="season-legend__dot season-legend__dot--low"></span>
+            Low season
+          </div>
+          <div class="season-legend__item">
+            <span class="season-legend__dot season-legend__dot--closed"></span>
+            Closed
+          </div>
+        </div>
+
+      </div><!-- /.season-wrapper -->
+    </div><!-- /.season-scroll-hint -->
+
+  </div><!-- /.blog-content -->
+</section>
+
+<!-- ============================================================
+     VARIANT F2 — HEAT STRIP CARDS
+     ============================================================ -->
+<section class="variant-section">
+  <div class="blog-content">
+    <div class="variant-label">
+      <span class="variant-label__dot" style="background:var(--sangria)"></span>
+      Variant F2
+    </div>
+
+    <div class="table-intro">
+      <div class="table-intro__tag">Safari Planning</div>
+      <h2 class="table-intro__heading">When to Visit: Heat Strip View</h2>
+      <p class="table-intro__subtitle">A compact card-based view of seasonal availability for each lodge, at a glance.</p>
+    </div>
+
+    <div class="season-cards">
+
+      <!-- Card 1: Singita Sasakwa -->
+      <div class="season-card">
+        <div class="season-card__header">
+          <div class="season-card__info">
+            <div class="season-card__name">Singita Sasakwa</div>
+            <div class="season-card__location">Grumeti Reserve</div>
+          </div>
+          <span class="season-card__price-pill">$$$$$</span>
+        </div>
+        <div class="season-strip">
+          <span class="season-strip__cell season-strip__cell--low">J</span>
+          <span class="season-strip__cell season-strip__cell--low">F</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--low">A</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--good">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">A</span>
+          <span class="season-strip__cell season-strip__cell--peak">S</span>
+          <span class="season-strip__cell season-strip__cell--peak">O</span>
+          <span class="season-strip__cell season-strip__cell--good">N</span>
+          <span class="season-strip__cell season-strip__cell--low">D</span>
+        </div>
+        <div class="season-months">
+          <span class="season-months__label">Jan</span>
+          <span class="season-months__label">Feb</span>
+          <span class="season-months__label">Mar</span>
+          <span class="season-months__label">Apr</span>
+          <span class="season-months__label">May</span>
+          <span class="season-months__label">Jun</span>
+          <span class="season-months__label">Jul</span>
+          <span class="season-months__label">Aug</span>
+          <span class="season-months__label">Sep</span>
+          <span class="season-months__label">Oct</span>
+          <span class="season-months__label">Nov</span>
+          <span class="season-months__label">Dec</span>
+        </div>
+        <div class="season-card__stats">
+          <div class="season-stat">
+            <span class="season-stat__label">Rating</span>
+            <span class="season-stat__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Best months</span>
+            <span class="season-stat__value">Jul &ndash; Oct</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Price range</span>
+            <span class="season-stat__value">$2,500 &ndash; $4,800/night</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: andBeyond Under Canvas -->
+      <div class="season-card">
+        <div class="season-card__header">
+          <div class="season-card__info">
+            <div class="season-card__name">andBeyond Under Canvas</div>
+            <div class="season-card__location">North Serengeti</div>
+          </div>
+          <span class="season-card__price-pill">$$$$</span>
+        </div>
+        <div class="season-strip">
+          <span class="season-strip__cell season-strip__cell--good">J</span>
+          <span class="season-strip__cell season-strip__cell--good">F</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--low">A</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">A</span>
+          <span class="season-strip__cell season-strip__cell--peak">S</span>
+          <span class="season-strip__cell season-strip__cell--peak">O</span>
+          <span class="season-strip__cell season-strip__cell--good">N</span>
+          <span class="season-strip__cell season-strip__cell--good">D</span>
+        </div>
+        <div class="season-months">
+          <span class="season-months__label">Jan</span>
+          <span class="season-months__label">Feb</span>
+          <span class="season-months__label">Mar</span>
+          <span class="season-months__label">Apr</span>
+          <span class="season-months__label">May</span>
+          <span class="season-months__label">Jun</span>
+          <span class="season-months__label">Jul</span>
+          <span class="season-months__label">Aug</span>
+          <span class="season-months__label">Sep</span>
+          <span class="season-months__label">Oct</span>
+          <span class="season-months__label">Nov</span>
+          <span class="season-months__label">Dec</span>
+        </div>
+        <div class="season-card__stats">
+          <div class="season-stat">
+            <span class="season-stat__label">Rating</span>
+            <span class="season-stat__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Best months</span>
+            <span class="season-stat__value">Jun &ndash; Oct</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Price range</span>
+            <span class="season-stat__value">$1,800 &ndash; $3,500/night</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Four Seasons Safari -->
+      <div class="season-card">
+        <div class="season-card__header">
+          <div class="season-card__info">
+            <div class="season-card__name">Four Seasons Safari</div>
+            <div class="season-card__location">Central Serengeti</div>
+          </div>
+          <span class="season-card__price-pill">$$$$</span>
+        </div>
+        <div class="season-strip">
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">F</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--low">A</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">A</span>
+          <span class="season-strip__cell season-strip__cell--peak">S</span>
+          <span class="season-strip__cell season-strip__cell--peak">O</span>
+          <span class="season-strip__cell season-strip__cell--good">N</span>
+          <span class="season-strip__cell season-strip__cell--good">D</span>
+        </div>
+        <div class="season-months">
+          <span class="season-months__label">Jan</span>
+          <span class="season-months__label">Feb</span>
+          <span class="season-months__label">Mar</span>
+          <span class="season-months__label">Apr</span>
+          <span class="season-months__label">May</span>
+          <span class="season-months__label">Jun</span>
+          <span class="season-months__label">Jul</span>
+          <span class="season-months__label">Aug</span>
+          <span class="season-months__label">Sep</span>
+          <span class="season-months__label">Oct</span>
+          <span class="season-months__label">Nov</span>
+          <span class="season-months__label">Dec</span>
+        </div>
+        <div class="season-card__stats">
+          <div class="season-stat">
+            <span class="season-stat__label">Rating</span>
+            <span class="season-stat__stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Best months</span>
+            <span class="season-stat__value">Jan &ndash; Feb, Jun &ndash; Oct</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Price range</span>
+            <span class="season-stat__value">$1,500 &ndash; $3,200/night</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Governors' Camp -->
+      <div class="season-card">
+        <div class="season-card__header">
+          <div class="season-card__info">
+            <div class="season-card__name">Governors' Camp</div>
+            <div class="season-card__location">Masai Mara, Kenya</div>
+          </div>
+          <span class="season-card__price-pill">$$$</span>
+        </div>
+        <div class="season-strip">
+          <span class="season-strip__cell season-strip__cell--low">J</span>
+          <span class="season-strip__cell season-strip__cell--low">F</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--low">A</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--good">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">A</span>
+          <span class="season-strip__cell season-strip__cell--peak">S</span>
+          <span class="season-strip__cell season-strip__cell--peak">O</span>
+          <span class="season-strip__cell season-strip__cell--good">N</span>
+          <span class="season-strip__cell season-strip__cell--good">D</span>
+        </div>
+        <div class="season-months">
+          <span class="season-months__label">Jan</span>
+          <span class="season-months__label">Feb</span>
+          <span class="season-months__label">Mar</span>
+          <span class="season-months__label">Apr</span>
+          <span class="season-months__label">May</span>
+          <span class="season-months__label">Jun</span>
+          <span class="season-months__label">Jul</span>
+          <span class="season-months__label">Aug</span>
+          <span class="season-months__label">Sep</span>
+          <span class="season-months__label">Oct</span>
+          <span class="season-months__label">Nov</span>
+          <span class="season-months__label">Dec</span>
+        </div>
+        <div class="season-card__stats">
+          <div class="season-stat">
+            <span class="season-stat__label">Rating</span>
+            <span class="season-stat__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Best months</span>
+            <span class="season-stat__value">Jul &ndash; Oct</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Price range</span>
+            <span class="season-stat__value">$950 &ndash; $2,100/night</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Volcanoes Safaris -->
+      <div class="season-card">
+        <div class="season-card__header">
+          <div class="season-card__info">
+            <div class="season-card__name">Volcanoes Safaris</div>
+            <div class="season-card__location">Volcanoes NP, Rwanda</div>
+          </div>
+          <span class="season-card__price-pill">$$$</span>
+        </div>
+        <div class="season-strip">
+          <span class="season-strip__cell season-strip__cell--good">J</span>
+          <span class="season-strip__cell season-strip__cell--good">F</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--low">A</span>
+          <span class="season-strip__cell season-strip__cell--low">M</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">J</span>
+          <span class="season-strip__cell season-strip__cell--peak">A</span>
+          <span class="season-strip__cell season-strip__cell--peak">S</span>
+          <span class="season-strip__cell season-strip__cell--good">O</span>
+          <span class="season-strip__cell season-strip__cell--low">N</span>
+          <span class="season-strip__cell season-strip__cell--low">D</span>
+        </div>
+        <div class="season-months">
+          <span class="season-months__label">Jan</span>
+          <span class="season-months__label">Feb</span>
+          <span class="season-months__label">Mar</span>
+          <span class="season-months__label">Apr</span>
+          <span class="season-months__label">May</span>
+          <span class="season-months__label">Jun</span>
+          <span class="season-months__label">Jul</span>
+          <span class="season-months__label">Aug</span>
+          <span class="season-months__label">Sep</span>
+          <span class="season-months__label">Oct</span>
+          <span class="season-months__label">Nov</span>
+          <span class="season-months__label">Dec</span>
+        </div>
+        <div class="season-card__stats">
+          <div class="season-stat">
+            <span class="season-stat__label">Rating</span>
+            <span class="season-stat__stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Best months</span>
+            <span class="season-stat__value">Jun &ndash; Sep</span>
+          </div>
+          <div class="season-stat">
+            <span class="season-stat__label">Price range</span>
+            <span class="season-stat__value">$800 &ndash; $1,600/night</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.season-cards -->
+
+  </div><!-- /.blog-content -->
+</section>
+
+<script>
+// Scroll hint: hide right-edge gradient when scrolled to end
+document.querySelectorAll('.season-wrapper').forEach(wrapper => {
+  wrapper.addEventListener('scroll', () => {
+    const hint = wrapper.closest('.season-scroll-hint');
+    if (!hint) return;
+    const atEnd = wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 8;
+    hint.classList.toggle('scrolled-right', atEnd);
+  });
+});
+</script>
+
+</body>
+</html>

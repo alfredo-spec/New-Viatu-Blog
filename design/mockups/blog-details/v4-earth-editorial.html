@@ -26,7 +26,6 @@
     --sh-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
     --sh-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
     --dur:200ms;--dur3:300ms;--ease:cubic-bezier(.4,0,.2,1);
-    --s-calving:#2d7a3a;--s-breed:#c4850a;--s-cross:#541736;--s-return:#1C4447;
 }
 
 /* ── Reset ─────────────────────────────────────────────── */
@@ -115,9 +114,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .band{width:100%;padding:80px 0}
 .band-inner{max-width:760px;margin:0 auto;padding:0 24px}
 .band--white{background:var(--white)}
-.band--sand{background:var(--earth-sand)}
 .band--warm{background:var(--earth-warm)}
-.band--pthalo{background:var(--pthalo)}
 .band--sangria{background:var(--sangria)}
 .band--dark{background:#1b1b1b}
 
@@ -152,13 +149,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 }
 
 /* Dark band overrides */
-.band--pthalo h2,.band--sangria h2{color:var(--white)}
-.band--pthalo .h2-tagline{color:var(--earth-sand)}
-.band--sangria .h2-tagline{color:var(--earth-sand)}
-.band--pthalo h3{color:var(--white);border-left-color:var(--earth-stone)}
-.band--pthalo p{color:rgba(255,255,255,.85)}
-.band--pthalo li{color:rgba(255,255,255,.85)}
-.band--pthalo strong{color:var(--white)}
+.band--sangria h2{color:var(--white)}
+.band--sangria .h2-tagline{color:var(--earth-warm)}
 .band--sangria p{color:rgba(255,255,255,.8)}
 
 /* ── Body Text ─────────────────────────────────────────── */
@@ -166,50 +158,68 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .band ul,.band ol{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px;padding-left:24px}
 .band li{margin-bottom:10px}
 .band li strong{color:var(--black)}
-.band--pthalo li strong{color:var(--white)}
 
 /* ── Lead Paragraph ────────────────────────────────────── */
 .lead{font-size:24px!important;line-height:1.6!important;color:var(--gd)!important}
 .lead::first-letter{font-family:var(--fp);font-size:3.8em;float:left;line-height:.78;margin-right:10px;padding-top:8px;color:var(--sangria)}
 
-/* ── Intro Layout (2-col with TOC) ─────────────────────── */
-.intro-layout{
-    display:grid;
-    grid-template-columns:1fr 320px;
-    gap:48px;
-    max-width:1100px;
-    margin:0 auto;
-    padding:0 24px;
-    align-items:start;
+/* ── Inline Table of Contents ─────────────────────────── */
+.toc-inline{
+    border-top:1px solid var(--g3);
+    border-bottom:1px solid var(--g3);
+    padding:28px 0;
+    margin:40px 0;
 }
-.intro-content p{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px}
-
-/* ── TOC Card ──────────────────────────────────────────── */
-.toc-card{
-    position:sticky;top:112px;
-    background:var(--earth-sand);
-    border-left:4px solid var(--sangria);
-    padding:28px 24px;
+.toc-inline-label{
+    font-family:var(--fc);
+    font-size:20px;
+    font-weight:700;
+    color:var(--sangria);
+    line-height:1.2;
+    margin-bottom:16px;
 }
-.toc-title{font-family:var(--fc);font-size:22px;font-weight:700;color:var(--sangria);margin-bottom:16px}
-.toc-list{list-style:none;counter-reset:toc}
-.toc-item{counter-increment:toc}
-.toc-item a{
-    display:flex;align-items:baseline;gap:0;
-    padding:10px 0;
-    border-bottom:1px solid rgba(139,115,85,.15);
-    font-size:15px;font-weight:500;color:var(--gd);
-    transition:color var(--dur) var(--ease);
+.toc-inline-list{
+    list-style:none;
+    counter-reset:toc;
+    padding:0;
+    margin:0;
 }
-.toc-item:last-child a{border-bottom:none}
-.toc-item a::before{
+.toc-inline-list li{
+    counter-increment:toc;
+}
+.toc-inline-list a{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    font-family:var(--fs);
+    font-size:15px;
+    font-weight:400;
+    color:var(--gm);
+    padding:8px 0 8px 16px;
+    border-left:3px solid transparent;
+    transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease),font-weight var(--dur) var(--ease);
+}
+.toc-inline-list a::before{
     content:counter(toc, decimal-leading-zero);
-    font-family:var(--fs);font-weight:300;font-size:13px;
-    color:var(--earth-clay);margin-right:12px;letter-spacing:.02em;
-    min-width:22px;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.04em;
+    color:var(--earth-stone);
+    flex-shrink:0;
+    min-width:20px;
 }
-.toc-item a:hover{color:var(--sangria)}
-.toc-item a.active{color:var(--sangria);font-weight:600}
+.toc-inline-list a:hover{
+    color:var(--sangria);
+    border-left-color:rgba(84,23,54,.3);
+}
+.toc-inline-list a.active{
+    color:var(--sangria);
+    font-weight:600;
+    border-left-color:var(--sangria);
+}
+.toc-inline-list a.active::before{
+    color:var(--sangria);
+}
 
 /* ── Image Treatments ──────────────────────────────────── */
 
@@ -239,7 +249,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     margin-left:60px;
     padding-left:14px;
 }
-.band--pthalo .img-breakout figcaption{color:rgba(255,255,255,.55);border-left-color:rgba(255,255,255,.2)}
 
 /* C. Paired portrait grid */
 .img-pair{
@@ -253,36 +262,32 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .img-pair figure{overflow:hidden}
 .img-pair img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
 
-/* D. Framed image (sand passepartout) */
+/* D. Framed image (warm passepartout) */
 .img-framed{
     padding:12px;
-    background:var(--earth-sand);
+    background:var(--earth-warm);
     margin:40px 0;
 }
-.band--sand .img-framed{background:var(--white)}
+.band--warm .img-framed{background:var(--white)}
 .img-framed img{width:100%;display:block;object-fit:cover}
 .img-framed figcaption{
     padding:14px 0 2px;
     font-family:var(--fc);font-size:18px;font-weight:700;
     color:var(--earth-clay);text-align:center;
 }
-.band--sand .img-framed figcaption{color:var(--earth-clay)}
+.band--warm .img-framed figcaption{color:var(--earth-clay)}
 
 /* ── Pull Quote ────────────────────────────────────────── */
 .pullquote{margin:48px 0;padding:28px 0 28px 28px;border-left:4px solid var(--sangria)}
 .pullquote p{font-family:var(--fc)!important;font-size:28px!important;font-weight:700!important;color:var(--sangria)!important;line-height:1.35!important;margin-bottom:6px!important}
 .pullquote cite{font-family:var(--fs);font-size:13px;font-weight:500;color:var(--gm);font-style:normal;letter-spacing:.02em}
-.band--pthalo .pullquote{border-left-color:var(--earth-sand)}
-.band--pthalo .pullquote p{color:var(--earth-sand)!important}
-.band--pthalo .pullquote cite{color:rgba(255,255,255,.5)}
-
 /* ── Callout Box ───────────────────────────────────────── */
-.callout{margin:32px 0;padding:20px 24px;background:var(--gl);border-left:4px solid var(--pthalo);border-radius:0;display:flex;gap:14px;align-items:flex-start}
+.callout{margin:32px 0;padding:20px 24px;background:var(--gl);border-left:4px solid var(--sangria);border-radius:0;display:flex;gap:14px;align-items:flex-start}
 .callout-icon{flex-shrink:0;width:20px;height:20px;margin-top:2px}
-.callout-icon svg{width:20px;height:20px;stroke:var(--pthalo);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.callout-icon svg{width:20px;height:20px;stroke:var(--sangria);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .callout-label{font-family:var(--fc);font-size:16px;font-weight:700;color:var(--sangria);margin-bottom:4px}
 .callout-text{font-size:15px;color:var(--gd);line-height:1.6}
-.band--sand .callout{background:var(--white)}
+.band--warm .callout{background:var(--white)}
 
 /* ── Month Timeline Rows ──────────────────────────────── */
 .month-table{margin:40px 0}
@@ -298,11 +303,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     display:inline-block;font-size:11px;font-weight:600;
     text-transform:uppercase;letter-spacing:.04em;
     padding:4px 12px;border-radius:var(--rfull);margin-top:4px;
+    background:var(--gl);color:var(--gd);border:1px solid var(--g3);
 }
-.month-badge--calving{background:rgba(45,122,58,.08);color:var(--s-calving)}
-.month-badge--breed{background:rgba(196,133,10,.08);color:var(--s-breed)}
-.month-badge--cross{background:rgba(84,23,54,.08);color:var(--s-cross)}
-.month-badge--return{background:rgba(28,68,71,.08);color:var(--s-return)}
 
 /* ── Tips Cards ────────────────────────────────────────── */
 .tip-card{
@@ -409,12 +411,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 
 /* ── Responsive ────────────────────────────────────────── */
 @media(max-width:1023px){
-    .intro-layout{grid-template-columns:1fr;gap:0}
-    .toc-card{position:static;margin-bottom:40px}
     .img-breakout,.img-pair{width:100%;margin-left:0}
     .img-breakout figcaption{margin-left:0;padding-left:14px}
 }
 @media(max-width:768px){
+    .nav-inner{height:64px;padding:0 16px}
+    .nav-logo img{height:20px}
+    .nav-logo-blog{font-size:12px}
+    .nav-right{gap:8px}
+    .nav-back-btn{font-size:14px;font-weight:700;padding:12px 16px;letter-spacing:-.02em}
+    .lang-trigger{width:36px;height:36px;padding:0;justify-content:center;min-height:unset}
+    .lang-globe{width:16px;height:16px}
+    .lang-code-label{display:none}
+    .lang-chevron{display:none}
+    .lang-panel{position:fixed;top:64px;left:16px;right:16px;min-width:unset;transform-origin:top center}
     .hero{min-height:65vh;padding-bottom:48px}
     .hero-subtitle{font-size:17px}
     .band{padding:56px 0}
@@ -425,14 +435,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     .related-grid{grid-template-columns:1fr}
     .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
     .nl-form{flex-direction:column}
-    .nav-back-btn span{display:none}
-    .nav-back-btn{padding:12px}
-    .nav-back-btn svg{width:18px;height:18px}
 }
 @media(max-width:480px){
+    .nav-inner{height:56px;padding:0 16px}
+    .nav-back-btn{font-size:14px;padding:12px 16px;border-radius:4px}
+    .lang-panel{top:56px}
     .band{padding:40px 0}
     .band-inner{padding:0 20px}
-    .intro-layout{padding:0 20px}
     .hero{padding:0 20px 40px}
     .hero-meta{gap:8px}
     .month-row{grid-template-columns:1fr}
@@ -539,30 +548,29 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
      INTRO + TOC — White Band
      ═══════════════════════════════════════════════════════ -->
 <section class="band band--white">
-    <div class="intro-layout">
-        <div class="intro-content">
-            <p class="lead reveal">Ready to witness one of the wildest shows on Earth? The Great Migration is your ticket to nature's most epic road trip. Over a million wildebeest, along with zebras and gazelles, journey across Tanzania and Kenya, making it one of the last massive wildlife migrations on the planet.</p>
-            <p class="reveal">This guide covers everything you need to plan your trip: the best times to go, where to stay, what to expect month by month, and practical tips from our safari specialists who have spent decades following the herds.</p>
-        </div>
-        <aside class="toc-card" id="tocCard">
-            <p class="toc-title">In this guide</p>
-            <ol class="toc-list" id="tocList">
-                <li class="toc-item"><a href="#sec-what" data-section="sec-what" class="active">What is the Great Migration?</a></li>
-                <li class="toc-item"><a href="#sec-when" data-section="sec-when">When Does the Migration Take Place?</a></li>
-                <li class="toc-item"><a href="#sec-month" data-section="sec-month">Month-by-Month Breakdown</a></li>
-                <li class="toc-item"><a href="#sec-best" data-section="sec-best">When is the Best Time to Go?</a></li>
-                <li class="toc-item"><a href="#sec-stay" data-section="sec-stay">Where to Stay</a></li>
-                <li class="toc-item"><a href="#sec-tips" data-section="sec-tips">Tips for Planning Your Safari</a></li>
-                <li class="toc-item"><a href="#sec-faq" data-section="sec-faq">Frequently Asked Questions</a></li>
+    <div class="band-inner">
+        <p class="lead reveal">Ready to witness one of the wildest shows on Earth? The Great Migration is your ticket to nature's most epic road trip. Over a million wildebeest, along with zebras and gazelles, journey across Tanzania and Kenya, making it one of the last massive wildlife migrations on the planet.</p>
+        <p class="reveal">This guide covers everything you need to plan your trip: the best times to go, where to stay, what to expect month by month, and practical tips from our safari specialists who have spent decades following the herds.</p>
+
+        <nav class="toc-inline reveal" id="tocInline">
+            <p class="toc-inline-label">In this guide</p>
+            <ol class="toc-inline-list">
+                <li><a href="#sec-what" data-section="sec-what">What is the Great Migration?</a></li>
+                <li><a href="#sec-when" data-section="sec-when">When Does it Take Place?</a></li>
+                <li><a href="#sec-month" data-section="sec-month">Month-by-Month Breakdown</a></li>
+                <li><a href="#sec-best" data-section="sec-best">Best Time to Go</a></li>
+                <li><a href="#sec-stay" data-section="sec-stay">Where to Stay</a></li>
+                <li><a href="#sec-tips" data-section="sec-tips">Tips for Planning</a></li>
+                <li><a href="#sec-faq" data-section="sec-faq">FAQs</a></li>
             </ol>
-        </aside>
+        </nav>
     </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 1: What is the Great Migration? — Earth Sand
+     SECTION 1: What is the Great Migration? — Earth Warm
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--sand">
+<section class="band band--warm">
     <div class="band-inner">
         <h2 id="sec-what" class="reveal">What is the Great Migration?</h2>
         <p class="h2-tagline reveal">Two million animals on a circular journey</p>
@@ -624,42 +632,42 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
                 <div class="month-label">Jan–Feb</div>
                 <div class="month-content">
                     <p>Southern Serengeti &amp; Ndutu. Calving season is in full swing &mdash; around 8,000 wildebeest are born each day. The nutrient-rich volcanic plains support lactating females, and the density of predator action is extraordinary.</p>
-                    <span class="month-badge month-badge--calving">Calving Season</span>
+                    <span class="month-badge">Calving Season</span>
                 </div>
             </div>
             <div class="month-row">
                 <div class="month-label">Mar–Apr</div>
                 <div class="month-content">
                     <p>The long rains begin, pushing the herds westward and northward. The landscape transforms from golden brown to vivid green. Columns of animals begin to form as the migration gathers momentum.</p>
-                    <span class="month-badge month-badge--breed">Green Season</span>
+                    <span class="month-badge">Green Season</span>
                 </div>
             </div>
             <div class="month-row">
                 <div class="month-label">May–Jun</div>
                 <div class="month-content">
                     <p>Western Corridor of the Serengeti. The first major river crossings of the Grumeti River occur &mdash; smaller in scale than the Mara crossings but equally intense. Far fewer vehicles than peak season.</p>
-                    <span class="month-badge month-badge--cross">River Crossings</span>
+                    <span class="month-badge">River Crossings</span>
                 </div>
             </div>
             <div class="month-row">
                 <div class="month-label">Jul–Aug</div>
                 <div class="month-content">
                     <p>Northern Serengeti &amp; Masai Mara. The iconic Mara River crossings &mdash; with their chaos, bravery, and heartbreak &mdash; take place during this window. Peak season with the highest concentration of visitors.</p>
-                    <span class="month-badge month-badge--cross">Peak Crossings</span>
+                    <span class="month-badge">Peak Crossings</span>
                 </div>
             </div>
             <div class="month-row">
                 <div class="month-label">Sep–Oct</div>
                 <div class="month-content">
                     <p>Late crossings continue in the Masai Mara. The herds begin their gradual return south as the short rains approach. Excellent game viewing with slightly fewer visitors than July&ndash;August.</p>
-                    <span class="month-badge month-badge--return">Return South</span>
+                    <span class="month-badge">Return South</span>
                 </div>
             </div>
             <div class="month-row">
                 <div class="month-label">Nov–Dec</div>
                 <div class="month-content">
                     <p>Eastern Serengeti. The short rains arrive, drawing the herds back towards the southern plains. The cycle begins anew as the animals filter south to complete the loop.</p>
-                    <span class="month-badge month-badge--breed">Short Rains</span>
+                    <span class="month-badge">Short Rains</span>
                 </div>
             </div>
         </div>
@@ -701,9 +709,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 5: Where to Stay — Pthalo Dark Band
+     SECTION 5: Where to Stay — Earth Warm
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--pthalo">
+<section class="band band--warm">
     <div class="band-inner">
         <h2 id="sec-stay" class="reveal">Where to Stay</h2>
         <p class="h2-tagline reveal">From permanent lodges to mobile camps</p>
@@ -743,9 +751,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 6: Tips for Planning — Earth Sand
+     SECTION 6: Tips for Planning — White
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--sand">
+<section class="band band--white">
     <div class="band-inner">
         <h2 id="sec-tips" class="reveal">Tips for Planning Your Safari</h2>
         <p class="h2-tagline reveal">Six things we wish every traveller knew</p>
@@ -811,9 +819,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 7: FAQ — White
+     SECTION 7: FAQ — Earth Warm
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--white">
+<section class="band band--warm">
     <div class="band-inner">
         <h2 id="sec-faq" class="reveal">Frequently Asked Questions</h2>
         <p class="h2-tagline reveal">What travellers ask us most</p>
@@ -857,9 +865,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
-     AUTHOR BIO — Earth Sand
+     AUTHOR BIO — White
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--sand">
+<section class="band band--white">
     <div class="band-inner">
         <div class="author-bio reveal">
             <div class="author-bio-portrait"><img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Barbara Buchel"></div>
@@ -881,7 +889,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <section class="band band--sangria" style="text-align:center">
     <div class="band-inner">
         <div class="cta-band reveal">
-            <p class="h2-tagline" style="color:var(--earth-sand)">Ready to witness it yourself?</p>
+            <p class="h2-tagline" style="color:var(--earth-warm)">Ready to witness it yourself?</p>
             <h2 style="margin-bottom:16px">Let's Plan Your Migration Safari</h2>
             <p style="color:rgba(255,255,255,.8);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto">Our safari specialists have followed the herds for decades. Let us design an itinerary that puts you in the right place at the right time.</p>
             <a href="#" class="cta-btn">
@@ -893,9 +901,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     NEWSLETTER — Earth Warm
+     NEWSLETTER — White
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--warm">
+<section class="band band--white">
     <div class="nl-inner reveal">
         <p class="nl-tag">Stay inspired</p>
         <h2 class="nl-title">Safari stories in your inbox</h2>
@@ -909,9 +917,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     RELATED POSTS — White
+     RELATED POSTS — Earth Warm
      ═══════════════════════════════════════════════════════ -->
-<section class="band band--white">
+<section class="band band--warm">
     <div class="related-inner">
         <div class="related-header reveal">
             <p class="related-tag">Keep reading</p>
@@ -1054,23 +1062,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     });
 
     /* ── TOC Scroll Spy ── */
-    var tocLinks = document.querySelectorAll('#tocList a');
-    var sectionHeadings = document.querySelectorAll('h2[id]');
-    var currentActive = null;
+    var tocLinks = document.querySelectorAll('.toc-inline-list a');
+    var sectionIds = [];
+    tocLinks.forEach(function(l){ sectionIds.push(l.getAttribute('data-section')); });
+    var sectionEls = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+
+    function setActiveToc(id){
+        tocLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('data-section') === id); });
+    }
+
     var spyObs = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
             if(entry.isIntersecting){
-                var id = entry.target.getAttribute('id');
-                if(currentActive !== id){
-                    currentActive = id;
-                    tocLinks.forEach(function(l){
-                        l.classList.toggle('active', l.getAttribute('data-section') === id);
-                    });
-                }
+                setActiveToc(entry.target.getAttribute('id'));
             }
         });
-    }, {threshold:0, rootMargin:'-112px 0px -60% 0px'});
-    sectionHeadings.forEach(function(h){spyObs.observe(h);});
+    }, {threshold:0, rootMargin:'-120px 0px -60% 0px'});
+    sectionEls.forEach(function(el){ spyObs.observe(el); });
 
     /* Smooth scroll TOC links */
     tocLinks.forEach(function(link){

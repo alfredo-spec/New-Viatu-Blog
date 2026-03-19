@@ -988,50 +988,6 @@
         });
 
 
-
-        // ── Language dropdown ─────────────────────────────────────
-        const langWrap = document.getElementById('lang');
-        const langTrigger = document.getElementById('langTrigger');
-        const langCurrent = document.getElementById('langCurrent');
-
-        langTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = langWrap.classList.toggle('open');
-            langTrigger.setAttribute('aria-expanded', isOpen);
-        });
-
-        document.querySelectorAll('.lang-option').forEach(opt => {
-            opt.addEventListener('click', () => {
-                document.querySelectorAll('.lang-option').forEach(o => {
-                    o.classList.remove('active');
-                    o.setAttribute('aria-selected', 'false');
-                    const chk = o.querySelector('.lang-check');
-                    if (chk) chk.remove();
-                });
-                opt.classList.add('active');
-                opt.setAttribute('aria-selected', 'true');
-                opt.insertAdjacentHTML('beforeend',
-                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
-                langCurrent.textContent = opt.dataset.lang;
-                langWrap.classList.remove('open');
-                langTrigger.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        document.addEventListener('click', e => {
-            if (!langWrap.contains(e.target)) {
-                langWrap.classList.remove('open');
-                langTrigger.setAttribute('aria-expanded', 'false');
-            }
-        });
-
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                langWrap.classList.remove('open');
-                langTrigger.setAttribute('aria-expanded', 'false');
-            }
-        });
-
         // ── Reveal on scroll ──────────────────────────────────────
         const obs = new IntersectionObserver((entries) => {
             entries.forEach((e, i) => {

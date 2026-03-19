@@ -321,9 +321,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     .gallery-dark-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
-    .nav-inner{height:72px}
-    .nav-back-btn span{display:none}
-    .nav-back-btn{padding:14px}
+    .nav-inner{height:64px;padding:0 16px}
+    .nav-logo img{height:20px}
+    .nav-logo-blog{font-size:12px}
+    .nav-right{gap:8px}
+    .nav-back-btn{font-size:14px;font-weight:700;padding:12px 16px;letter-spacing:-.02em}
+    .lang-trigger{width:36px;height:36px;padding:0;justify-content:center;min-height:unset}
+    .lang-globe{width:16px;height:16px}
+    .lang-code-label{display:none}
+    .lang-chevron{display:none}
+    .lang-panel{position:fixed;top:64px;left:16px;right:16px;min-width:unset;transform-origin:top center}
     .hero{min-height:75vh;min-height:75svh}
     .hero h1{font-size:clamp(28px,5vw,44px)}
     .hero-lead{font-size:17px}
@@ -338,6 +345,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     .toc-panel{width:100%}
 }
 @media(max-width:480px){
+    .nav-inner{height:56px;padding:0 16px}
+    .nav-back-btn{font-size:14px;padding:12px 16px;border-radius:4px}
+    .lang-panel{top:56px}
     .hero{min-height:65vh;min-height:65svh}
     .hero-meta-line{display:flex;flex-direction:column;gap:4px}
     .article-body p{font-size:17px}
