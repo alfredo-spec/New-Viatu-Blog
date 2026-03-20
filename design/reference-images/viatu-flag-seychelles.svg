@@ -1,14 +1,9 @@
-<svg width="53" height="34" viewBox="0 0 53 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_51_104)">
-<path d="M35.6363 0H17.6667L0 34L35.6363 0Z" stroke="white" stroke-width="2"/>
-<path d="M53 11.7692V0H35.6151L0 34L53 11.7692Z" stroke="white" stroke-width="2"/>
-<path d="M53 22.2308L52.9654 11.7692L0 34L53 22.2308Z" stroke="white" stroke-width="2"/>
-<path d="M53 34V22.2308L0 34H53Z" stroke="white" stroke-width="2"/>
-<path d="M0 0H53V34H0V0Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_51_104">
-<rect width="53" height="34" fill="white"/>
-</clipPath>
-</defs>
+<svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
+<!-- Radiating bands from bottom-left -->
+<rect width="30" height="20" fill="#007A3D"/>
+<polygon points="0,20 30,0 30,20" fill="#FFFFFF"/>
+<polygon points="0,20 30,5 30,20" fill="#D62828"/>
+<polygon points="0,20 30,10 30,20" fill="#FCD856"/>
+<polygon points="0,20 15,0 30,0 30,20" fill="#003F87"/>
+<rect x="0" y="0" width="30" height="20" stroke="#D0D0D0" stroke-width="0.5" fill="none"/>
 </svg>
