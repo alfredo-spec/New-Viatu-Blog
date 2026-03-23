@@ -1,9 +1,9 @@
-<svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0_523_16564" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="20">
-<rect x="0.5" y="0.5" width="29" height="19" fill="white"/>
-</mask>
-<g mask="url(#mask0_523_16564)">
-<path d="M-0.624832 21.5717L-0.347117 21.9886L0.0692699 21.7101L32.9307 -0.268793L33.3456 -0.546247L33.0689 -0.961597L31.0564 -3.98276L30.7787 -4.39967L30.3623 -4.12118L-2.49917 17.8577L-2.914 18.1352L-2.63732 18.5505L-0.624832 21.5717Z" stroke="white"/>
-<rect x="1" y="1" width="28" height="18" stroke="white"/>
-</g>
+<svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
+<rect width="30" height="20" fill="#1EB53A"/>
+<polygon points="0,0 30,0 30,20" fill="#00A3DD"/>
+<polygon points="0,4.5 0,0 24,20 28,20" fill="#FCD116"/>
+<polygon points="0,3 0,0 25.5,20 29.5,20" fill="#FCD116"/>
+<polygon points="0,2 26,20 24,20 0,4" fill="#000000"/>
+<polygon points="0,0 0,3 25.5,20 28,20" fill="#000000"/>
+<rect x="0" y="0" width="30" height="20" stroke="#D0D0D0" stroke-width="0.5" fill="none"/>
 </svg>

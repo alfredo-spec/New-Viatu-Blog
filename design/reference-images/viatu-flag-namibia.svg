@@ -1,13 +1,15 @@
-<svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="30" height="20" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
+<!-- Blue top-right -->
 <rect width="30" height="20" fill="#003580"/>
-<path d="M0 0L30 20" stroke="transparent" fill="none"/>
-<polygon points="0,0 30,20 0,20" fill="#009543"/>
-<path d="M-2,-1 L32,21" stroke="#C8102E" stroke-width="5"/>
-<path d="M-2,-1 L32,21" stroke="#FFFFFF" stroke-width="7" style="mix-blend-mode:destination-out" opacity="0"/>
-<path d="M-3,-1.5 L33,21.5" stroke="#FFFFFF" stroke-width="8"/>
-<path d="M-2.5,-1 L32.5,21" stroke="#C8102E" stroke-width="5"/>
-<circle cx="8" cy="7" r="4" fill="#FFD100"/>
-<circle cx="9" cy="6.2" r="3.5" fill="#003580"/>
-<path d="M5.5,7 L6.2,5 L7,7 L5,6 L7.5,6 Z" fill="#FFD100" transform="translate(2.5, -1.5) scale(0.7)"/>
-<rect x="0" y="0" width="30" height="20" rx="0" stroke="#D0D0D0" stroke-width="0.5" fill="none"/>
+<!-- Green bottom-left triangle -->
+<polygon points="0,0 0,20 30,20" fill="#009543"/>
+<!-- White diagonal stripe border -->
+<polygon points="0,0 0,5 25,20 30,20 30,15 5,0" fill="#FFFFFF"/>
+<!-- Red diagonal stripe -->
+<polygon points="0,1.5 0,3.5 27,20 29,20 30,18 30,16 3,0 1,0" fill="#C8102E"/>
+<!-- Sun (yellow circle with rays) in top-left blue area -->
+<circle cx="7.5" cy="6.5" r="3" fill="#FFD100"/>
+<!-- Blue inner circle to create crescent-like sun -->
+<circle cx="8.3" cy="5.8" r="2.5" fill="#003580"/>
+<rect x="0" y="0" width="30" height="20" stroke="#D0D0D0" stroke-width="0.5" fill="none"/>
 </svg>
