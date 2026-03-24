@@ -103,6 +103,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero-tag{font-size:12px;font-weight:500;color:rgba(255,255,255,.85);padding:5px 14px;border-radius:var(--rfull);border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:all var(--dur) var(--ease)}
 .hero-tag:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
 
+/* -- Breadcrumbs ---------------------------------------------------- */
+.breadcrumbs{max-width:720px;margin:0 auto;padding:24px 24px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--gm)}
+.breadcrumbs a{transition:color var(--dur) var(--ease)}
+.breadcrumbs a:hover{color:var(--sangria)}
+.breadcrumbs .sep{color:var(--platinum)}
+.breadcrumbs .current{color:var(--gd);font-weight:500}
+
 /* -- Article Layout ------------------------------------------------- */
 .article-col{max-width:720px;margin:0 auto;padding:56px 24px 0}
 .article-col p{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px}
@@ -411,6 +418,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         </div>
     </div>
 </section>
+
+<!-- == Breadcrumbs ==================================================== -->
+<nav class="breadcrumbs reveal" aria-label="Breadcrumb">
+    <a href="#">Blog</a><span class="sep">/</span>
+    <a href="#">Tanzania</a><span class="sep">/</span>
+    <span class="current">Great Migration</span>
+</nav>
 
 <!-- == Article Body ================================================== -->
 <article class="article-col">
