@@ -110,6 +110,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero-tag{font-size:11px;font-weight:500;color:rgba(255,255,255,.75);padding:5px 14px;border-radius:var(--rfull);border:1px solid rgba(255,255,255,.2);transition:all var(--dur) var(--ease)}
 .hero-tag:hover{color:var(--white);border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.08)}
 
+/* ── Breadcrumbs ──────────────────────────────────────── */
+.breadcrumbs{max-width:760px;margin:0 auto;padding:20px 24px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--gm)}
+.breadcrumbs a{transition:color var(--dur) var(--ease)}
+.breadcrumbs a:hover{color:var(--sangria)}
+.breadcrumbs .sep{color:var(--platinum);font-size:12px}
+.breadcrumbs .current{color:var(--gd);font-weight:500}
+
 /* ── Section Bands ─────────────────────────────────────── */
 .band{width:100%;padding:80px 0}
 .band-inner{max-width:760px;margin:0 auto;padding:0 24px}
@@ -543,6 +550,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         </div>
     </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════
+     BREADCRUMBS
+     ═══════════════════════════════════════════════════════ -->
+<nav class="breadcrumbs reveal" aria-label="Breadcrumb">
+    <a href="#">Blog</a><span class="sep">/</span>
+    <a href="#">Tanzania</a><span class="sep">/</span>
+    <span class="current">The Ultimate Guide to the Great Migration</span>
+</nav>
 
 <!-- ═══════════════════════════════════════════════════════
      INTRO + TOC — White Band
