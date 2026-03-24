@@ -5,7 +5,12 @@
       "WebFetch(domain:github.com)",
       "mcp__claude_ai_Figma__get_design_context",
       "mcp__claude_ai_Figma__get_screenshot",
-      "mcp__plugin_figma_figma__get_screenshot"
+      "mcp__plugin_figma_figma__get_screenshot",
+      "Bash(while read:*)",
+      "Bash(do grep:*)",
+      "Bash(echo \"MISSING: $f\")",
+      "Bash(done)",
+      "Bash(echo \"  $f\")"
     ]
   }
 }
