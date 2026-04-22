@@ -10,7 +10,9 @@
       "Bash(do grep:*)",
       "Bash(echo \"MISSING: $f\")",
       "Bash(done)",
-      "Bash(echo \"  $f\")"
+      "Bash(echo \"  $f\")",
+      "Bash(curl -sL https://www.viatu.com/en/p/21-nettleton-boutique-hotel-private-residence)",
+      "Bash(curl -sL https://www.viatu.com/en)"
     ]
   }
 }

@@ -310,17 +310,6 @@
             font-size: 13px
         }
 
-        .lang-check {
-            width: 13px;
-            height: 13px;
-            fill: none;
-            stroke: var(--sangria);
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            margin-left: auto;
-            flex-shrink: 0
-        }
 
         /* ─── LISTING HERO ─────────────────────────────────────── */
         .listing-hero {
@@ -445,14 +434,6 @@
             color:var(--sangria); letter-spacing:-.03em
         }
 
-        .author-card-verified {
-            position:absolute; bottom:16px; right:calc(50% - 60px + 4px);
-            width:26px; height:26px; border-radius:var(--rfull);
-            background:var(--sangria); display:flex; align-items:center; justify-content:center;
-            box-shadow:0 2px 8px rgba(84,23,54,.3);
-            z-index:2
-        }
-        .author-card-verified svg { width:12px; height:12px; stroke:var(--white); fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round }
 
         .author-card-name {
             font-family:var(--fs); font-size:20px; font-weight:700;
@@ -674,9 +655,6 @@
                         <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
                             <span class="lang-flag">🇬🇧</span>
                             <span class="lang-name">English</span>
-                            <svg class="lang-check" viewBox="0 0 24 24">
-                                <polyline points="20 6 9 17 4 12" />
-                            </svg>
                         </button>
                         <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
                             <span class="lang-flag">🇩🇪</span>
@@ -745,9 +723,6 @@
                     <div class="author-card-portrait">
                         <img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Lena Schmidt">
                     </div>
-                    <div class="author-card-verified">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
                     <h3 class="author-card-name">Lena Schmidt</h3>
                     <span class="author-card-role">Senior Safari Specialist</span>
                     <p class="author-card-tagline">With over a decade in the bush, Lena brings deep knowledge of Southern and East Africa's most extraordinary wildlife encounters.</p>
@@ -809,9 +784,6 @@
                     <div class="author-card-portrait">
                         <img src="../../../public/images/photos/Barbara B&W.png" alt="Bárbara Reis">
                     </div>
-                    <div class="author-card-verified">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
                     <h3 class="author-card-name">B&aacute;rbara Reis</h3>
                     <span class="author-card-role">Southern Africa Specialist</span>
                     <p class="author-card-tagline">B&aacute;rbara's deep roots in Southern Africa bring authentic, nuanced guides to Namibia, Botswana, and South Africa's hidden corners.</p>
@@ -841,9 +813,6 @@
                 <a href="/author/alfredo-seidemann" class="author-card reveal">
                     <div class="author-card-portrait">
                         <img src="../../../public/images/photos/Alfredo Profile Picture copy.jpeg" alt="Alfredo Seidemann">
-                    </div>
-                    <div class="author-card-verified">
-                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                     <h3 class="author-card-name">Alfredo Seidemann</h3>
                     <span class="author-card-role">Founder &amp; Editor</span>
@@ -1076,13 +1045,9 @@
                 document.querySelectorAll('.lang-option').forEach(o => {
                     o.classList.remove('active');
                     o.setAttribute('aria-selected', 'false');
-                    const chk = o.querySelector('.lang-check');
-                    if (chk) chk.remove();
                 });
                 opt.classList.add('active');
                 opt.setAttribute('aria-selected', 'true');
-                opt.insertAdjacentHTML('beforeend',
-                    '<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
                 langCurrent.textContent = opt.dataset.lang;
                 langWrap.classList.remove('open');
                 langTrigger.setAttribute('aria-expanded', 'false');

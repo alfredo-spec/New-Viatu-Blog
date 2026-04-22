@@ -424,6 +424,631 @@
                 font-size: 24px;
             }
         }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT C: MINIMAL TEXT LINKS — LIGHT
+           ════════════════════════════════════════════════════════ */
+        .related-c {
+            background: var(--earth-warm);
+            padding: 48px 24px;
+        }
+
+        .related-c__inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .related-c__header {
+            margin-bottom: 24px;
+        }
+
+        .related-c__tagline {
+            font-family: var(--fc);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .related-c__title {
+            font-family: var(--fs);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.2;
+        }
+
+        .related-c__list {
+            list-style: none;
+        }
+
+        .related-c__item {
+            border-bottom: 1px solid var(--g3);
+        }
+
+        .related-c__item:first-child {
+            border-top: 1px solid var(--g3);
+        }
+
+        .related-c__link {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            padding: 14px 0;
+            padding-left: 0;
+            border-left: 2px solid transparent;
+            transition: padding-left var(--dur) var(--ease), border-color var(--dur) var(--ease);
+        }
+
+        .related-c__link:hover {
+            padding-left: 12px;
+            border-left-color: var(--sangria);
+        }
+
+        .related-c__item-category {
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--sangria);
+            min-width: 80px;
+            flex-shrink: 0;
+        }
+
+        .related-c__item-title {
+            font-family: var(--fs);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gd);
+            line-height: 1.35;
+            transition: color var(--dur) var(--ease);
+        }
+
+        .related-c__link:hover .related-c__item-title {
+            color: var(--sangria);
+        }
+
+        @media (max-width: 768px) {
+            .related-c {
+                padding: 40px 20px;
+            }
+
+            .related-c__title {
+                font-size: 20px;
+            }
+
+            .related-c__link {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .related-c__item-category {
+                min-width: unset;
+            }
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT C: MINIMAL TEXT LINKS — DARK
+           ════════════════════════════════════════════════════════ */
+        .related-c--dark {
+            background: #1b1b1b;
+            padding: 48px 24px;
+        }
+
+        .related-c--dark .related-c__inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .related-c--dark .related-c__title {
+            color: var(--white);
+        }
+
+        .related-c--dark .related-c__item {
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .related-c--dark .related-c__item:first-child {
+            border-top-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .related-c--dark .related-c__link {
+            border-left-color: transparent;
+        }
+
+        .related-c--dark .related-c__link:hover {
+            border-left-color: var(--sangria);
+        }
+
+        .related-c--dark .related-c__item-title {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .related-c--dark .related-c__link:hover .related-c__item-title {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .related-c--dark {
+                padding: 40px 20px;
+            }
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT D: COMPACT THUMBNAIL CARDS — LIGHT
+           ════════════════════════════════════════════════════════ */
+        .related-d {
+            background: var(--earth-warm);
+            padding: 64px 24px;
+        }
+
+        .related-d__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-d__header {
+            margin-bottom: 32px;
+        }
+
+        .related-d__tagline {
+            font-family: var(--fc);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .related-d__title {
+            font-family: var(--fs);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.2;
+        }
+
+        .related-d__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .related-d__card {
+            display: flex;
+            flex-direction: row;
+            background: var(--white);
+            border-radius: var(--rmd);
+            overflow: hidden;
+            box-shadow: var(--sh-sm);
+            transition: box-shadow var(--dur3) var(--ease), transform var(--dur3) var(--ease);
+        }
+
+        .related-d__card:hover {
+            box-shadow: var(--sh-md);
+            transform: translateY(-1px);
+        }
+
+        .related-d__card-thumb-wrap {
+            width: 88px;
+            min-height: 88px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .related-d__card-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .related-d__card:hover .related-d__card-thumb {
+            transform: scale(1.05);
+        }
+
+        .related-d__card-body {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .related-d__card-category {
+            font-family: var(--fs);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--sangria);
+            margin-bottom: 4px;
+        }
+
+        .related-d__card-title {
+            font-family: var(--fs);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .related-d__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .related-d {
+                padding: 48px 20px;
+            }
+
+            .related-d__grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .related-d__title {
+                font-size: 22px;
+            }
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT D: COMPACT THUMBNAIL CARDS — DARK
+           ════════════════════════════════════════════════════════ */
+        .related-d--dark {
+            background: #1b1b1b;
+            padding: 64px 24px;
+        }
+
+        .related-d--dark .related-d__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-d--dark .related-d__title {
+            color: var(--white);
+        }
+
+        .related-d--dark .related-d__card {
+            background: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: none;
+        }
+
+        .related-d--dark .related-d__card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .related-d--dark .related-d__card-title {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .related-d--dark {
+                padding: 48px 20px;
+            }
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT E: RICH FULL BLOCKS — LIGHT
+           ════════════════════════════════════════════════════════ */
+        .related-e {
+            background: var(--earth-warm);
+            padding: 96px 24px;
+        }
+
+        .related-e__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-e__header {
+            margin-bottom: 48px;
+        }
+
+        .related-e__tagline {
+            font-family: var(--fc);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--sangria);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .related-e__title {
+            font-family: var(--fs);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.2;
+        }
+
+        .related-e__grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* Featured card (left) */
+        .related-e__card {
+            background: var(--white);
+            border-radius: var(--rxl);
+            overflow: hidden;
+            box-shadow: var(--sh-md);
+            transition: box-shadow var(--dur3) var(--ease), transform var(--dur3) var(--ease);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .related-e__card:hover {
+            box-shadow: var(--sh-lg);
+            transform: translateY(-3px);
+        }
+
+        .related-e__card-image-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .related-e__card--featured .related-e__card-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .related-e__card:hover .related-e__card-img {
+            transform: scale(1.03);
+        }
+
+        .related-e__card--featured .related-e__card-body {
+            padding: 28px 28px 32px;
+        }
+
+        .related-e__card-category {
+            font-family: var(--fs);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--sangria);
+            margin-bottom: 10px;
+        }
+
+        .related-e__card--featured .related-e__card-title {
+            font-family: var(--fs);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+
+        .related-e__card--featured .related-e__card-excerpt {
+            font-family: var(--fs);
+            font-size: 15px;
+            color: var(--gm);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .related-e__card-footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .related-e__card-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fs);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gm);
+            flex-shrink: 0;
+        }
+
+        .related-e__card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .related-e__card-author {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gd);
+            font-weight: 500;
+        }
+
+        .related-e__card-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--platinum);
+            flex-shrink: 0;
+        }
+
+        .related-e__card-date {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gm);
+        }
+
+        .related-e__card-read-time {
+            font-family: var(--fs);
+            font-size: 13px;
+            color: var(--gm);
+        }
+
+        /* Supporting cards (right column) */
+        .related-e__supporting {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .related-e__card--supporting .related-e__card-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            transition: transform var(--dur3) var(--ease);
+        }
+
+        .related-e__card--supporting .related-e__card-body {
+            padding: 20px 24px 24px;
+        }
+
+        .related-e__card--supporting .related-e__card-title {
+            font-family: var(--fs);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1.3;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .related-e__card--supporting .related-e__card-excerpt {
+            font-family: var(--fs);
+            font-size: 14px;
+            color: var(--gm);
+            line-height: 1.5;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .related-e__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .related-e__supporting {
+                flex-direction: row;
+                gap: 24px;
+            }
+
+            .related-e__supporting .related-e__card {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .related-e {
+                padding: 64px 20px;
+            }
+
+            .related-e__supporting {
+                flex-direction: column;
+            }
+
+            .related-e__card--featured .related-e__card-img {
+                aspect-ratio: 16/9;
+            }
+
+            .related-e__card--featured .related-e__card-title {
+                font-size: 20px;
+            }
+
+            .related-e__title {
+                font-size: 24px;
+            }
+        }
+
+
+        /* ════════════════════════════════════════════════════════
+           VARIANT E: RICH FULL BLOCKS — DARK
+           ════════════════════════════════════════════════════════ */
+        .related-e--dark {
+            background: #1b1b1b;
+            padding: 96px 24px;
+        }
+
+        .related-e--dark .related-e__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-e--dark .related-e__title {
+            color: var(--white);
+        }
+
+        .related-e--dark .related-e__card {
+            background: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: none;
+        }
+
+        .related-e--dark .related-e__card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        .related-e--dark .related-e__card--featured .related-e__card-title,
+        .related-e--dark .related-e__card--supporting .related-e__card-title {
+            color: var(--white);
+        }
+
+        .related-e--dark .related-e__card--featured .related-e__card-excerpt,
+        .related-e--dark .related-e__card--supporting .related-e__card-excerpt {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .related-e--dark .related-e__card-avatar {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .related-e--dark .related-e__card-author {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .related-e--dark .related-e__card-dot {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .related-e--dark .related-e__card-date,
+        .related-e--dark .related-e__card-read-time {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .related-e--dark {
+                padding: 64px 20px;
+            }
+        }
     </style>
 </head>
 
@@ -582,6 +1207,360 @@
                     </div>
                 </a>
 
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT C: MINIMAL TEXT LINKS — LIGHT
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant C — Light Background (Minimal Text Links)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-c">
+        <div class="related-c__inner">
+            <header class="related-c__header">
+                <p class="related-c__tagline">Keep reading</p>
+                <h2 class="related-c__title">Related Articles</h2>
+            </header>
+
+            <ul class="related-c__list">
+                <li class="related-c__item">
+                    <a href="#" class="related-c__link">
+                        <span class="related-c__item-category">Tanzania</span>
+                        <span class="related-c__item-title">Why is a Safari in East Africa So Expensive?</span>
+                    </a>
+                </li>
+                <li class="related-c__item">
+                    <a href="#" class="related-c__link">
+                        <span class="related-c__item-category">Kenya</span>
+                        <span class="related-c__item-title">Is It Safe to Travel to Kenya and Tanzania?</span>
+                    </a>
+                </li>
+                <li class="related-c__item">
+                    <a href="#" class="related-c__link">
+                        <span class="related-c__item-category">South Africa</span>
+                        <span class="related-c__item-title">National Parks vs Private Game Reserves</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT C: MINIMAL TEXT LINKS — DARK
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant C — Dark Background (Minimal Text Links)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-c related-c--dark">
+        <div class="related-c__inner">
+            <header class="related-c__header">
+                <p class="related-c__tagline">Keep reading</p>
+                <h2 class="related-c__title">Related Articles</h2>
+            </header>
+
+            <ul class="related-c__list">
+                <li class="related-c__item">
+                    <a href="#" class="related-c__link">
+                        <span class="related-c__item-category">Tanzania</span>
+                        <span class="related-c__item-title">Why is a Safari in East Africa So Expensive?</span>
+                    </a>
+                </li>
+                <li class="related-c__item">
+                    <a href="#" class="related-c__link">
+                        <span class="related-c__item-category">Kenya</span>
+                        <span class="related-c__item-title">Is It Safe to Travel to Kenya and Tanzania?</span>
+                    </a>
+                </li>
+                <li class="related-c__item">
+                    <a href="#" class="related-c__link">
+                        <span class="related-c__item-category">South Africa</span>
+                        <span class="related-c__item-title">National Parks vs Private Game Reserves</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT D: COMPACT THUMBNAIL CARDS — LIGHT
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant D — Light Background (Compact Thumbnail Cards)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-d">
+        <div class="related-d__inner">
+            <header class="related-d__header">
+                <p class="related-d__tagline">Keep reading</p>
+                <h2 class="related-d__title">Related Articles</h2>
+            </header>
+
+            <div class="related-d__grid">
+
+                <a href="#" class="related-d__card">
+                    <div class="related-d__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/cheetah-cubs-serengeti.jpg"
+                            alt="Cheetah cubs in the Serengeti"
+                            class="related-d__card-thumb">
+                    </div>
+                    <div class="related-d__card-body">
+                        <span class="related-d__card-category">Tanzania</span>
+                        <h3 class="related-d__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                    </div>
+                </a>
+
+                <a href="#" class="related-d__card">
+                    <div class="related-d__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/zebra-serengeti.jpg"
+                            alt="Zebra herd in the Serengeti"
+                            class="related-d__card-thumb">
+                    </div>
+                    <div class="related-d__card-body">
+                        <span class="related-d__card-category">Kenya</span>
+                        <h3 class="related-d__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                    </div>
+                </a>
+
+                <a href="#" class="related-d__card">
+                    <div class="related-d__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg"
+                            alt="Hot air balloon safari over the Masai Mara"
+                            class="related-d__card-thumb">
+                    </div>
+                    <div class="related-d__card-body">
+                        <span class="related-d__card-category">South Africa</span>
+                        <h3 class="related-d__card-title">National Parks vs Private Game Reserves</h3>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT D: COMPACT THUMBNAIL CARDS — DARK
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant D — Dark Background (Compact Thumbnail Cards)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-d related-d--dark">
+        <div class="related-d__inner">
+            <header class="related-d__header">
+                <p class="related-d__tagline">Keep reading</p>
+                <h2 class="related-d__title">Related Articles</h2>
+            </header>
+
+            <div class="related-d__grid">
+
+                <a href="#" class="related-d__card">
+                    <div class="related-d__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/cheetah-cubs-serengeti.jpg"
+                            alt="Cheetah cubs in the Serengeti"
+                            class="related-d__card-thumb">
+                    </div>
+                    <div class="related-d__card-body">
+                        <span class="related-d__card-category">Tanzania</span>
+                        <h3 class="related-d__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                    </div>
+                </a>
+
+                <a href="#" class="related-d__card">
+                    <div class="related-d__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/zebra-serengeti.jpg"
+                            alt="Zebra herd in the Serengeti"
+                            class="related-d__card-thumb">
+                    </div>
+                    <div class="related-d__card-body">
+                        <span class="related-d__card-category">Kenya</span>
+                        <h3 class="related-d__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                    </div>
+                </a>
+
+                <a href="#" class="related-d__card">
+                    <div class="related-d__card-thumb-wrap">
+                        <img src="../../../../design/reference-images/great-migration/balloon-safari-masai-mara.jpg"
+                            alt="Hot air balloon safari over the Masai Mara"
+                            class="related-d__card-thumb">
+                    </div>
+                    <div class="related-d__card-body">
+                        <span class="related-d__card-category">South Africa</span>
+                        <h3 class="related-d__card-title">National Parks vs Private Game Reserves</h3>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT E: RICH FULL BLOCKS — LIGHT
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant E — Light Background (Rich Full Blocks)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-e">
+        <div class="related-e__inner">
+            <header class="related-e__header">
+                <p class="related-e__tagline">Keep reading</p>
+                <h2 class="related-e__title">Related Articles</h2>
+            </header>
+
+            <div class="related-e__grid">
+
+                <!-- Featured card (left) -->
+                <a href="#" class="related-e__card related-e__card--featured">
+                    <div class="related-e__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/game-drive-serengeti.jpg"
+                            alt="Game drive through the Serengeti plains"
+                            class="related-e__card-img">
+                    </div>
+                    <div class="related-e__card-body">
+                        <span class="related-e__card-category">Tanzania</span>
+                        <h3 class="related-e__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                        <p class="related-e__card-excerpt">Breaking down the real costs behind an East African safari — from park fees and premium camps to the logistics of reaching remote wilderness areas that make this experience truly once-in-a-lifetime.</p>
+                        <div class="related-e__card-footer">
+                            <div class="related-e__card-avatar">BB</div>
+                            <div class="related-e__card-meta">
+                                <span class="related-e__card-author">Barbara Buchel</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-date">Sep 2024</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-read-time">8 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Supporting cards (right) -->
+                <div class="related-e__supporting">
+
+                    <a href="#" class="related-e__card related-e__card--supporting">
+                        <div class="related-e__card-image-wrap">
+                            <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                                alt="Lion pride resting in the Serengeti grasslands"
+                                class="related-e__card-img">
+                        </div>
+                        <div class="related-e__card-body">
+                            <span class="related-e__card-category">Kenya</span>
+                            <h3 class="related-e__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                            <p class="related-e__card-excerpt">Everything you need to know about safety on your East African safari adventure.</p>
+                            <div class="related-e__card-footer">
+                                <span class="related-e__card-author">Barbara Buchel</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-date">Aug 2024</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="related-e__card related-e__card--supporting">
+                        <div class="related-e__card-image-wrap">
+                            <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                                alt="Leopard resting in a tree in the Masai Mara"
+                                class="related-e__card-img">
+                        </div>
+                        <div class="related-e__card-body">
+                            <span class="related-e__card-category">South Africa</span>
+                            <h3 class="related-e__card-title">National Parks vs Private Game Reserves</h3>
+                            <p class="related-e__card-excerpt">Understanding the key differences to choose the right safari experience for you.</p>
+                            <div class="related-e__card-footer">
+                                <span class="related-e__card-author">Zeldi Smulders</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-date">Jul 2024</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════
+         VARIANT E: RICH FULL BLOCKS — DARK
+         ════════════════════════════════════════════════════════ -->
+    <div class="variant-label">Variant E — Dark Background (Rich Full Blocks)</div>
+    <div class="variant-separator"></div>
+
+    <section class="related-e related-e--dark">
+        <div class="related-e__inner">
+            <header class="related-e__header">
+                <p class="related-e__tagline">Keep reading</p>
+                <h2 class="related-e__title">Related Articles</h2>
+            </header>
+
+            <div class="related-e__grid">
+
+                <!-- Featured card (left) -->
+                <a href="#" class="related-e__card related-e__card--featured">
+                    <div class="related-e__card-image-wrap">
+                        <img src="../../../../design/reference-images/great-migration/game-drive-serengeti.jpg"
+                            alt="Game drive through the Serengeti plains"
+                            class="related-e__card-img">
+                    </div>
+                    <div class="related-e__card-body">
+                        <span class="related-e__card-category">Tanzania</span>
+                        <h3 class="related-e__card-title">Why is a Safari in East Africa So Expensive?</h3>
+                        <p class="related-e__card-excerpt">Breaking down the real costs behind an East African safari — from park fees and premium camps to the logistics of reaching remote wilderness areas that make this experience truly once-in-a-lifetime.</p>
+                        <div class="related-e__card-footer">
+                            <div class="related-e__card-avatar">BB</div>
+                            <div class="related-e__card-meta">
+                                <span class="related-e__card-author">Barbara Buchel</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-date">Sep 2024</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-read-time">8 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Supporting cards (right) -->
+                <div class="related-e__supporting">
+
+                    <a href="#" class="related-e__card related-e__card--supporting">
+                        <div class="related-e__card-image-wrap">
+                            <img src="../../../../design/reference-images/great-migration/lion-pride-serengeti.jpg"
+                                alt="Lion pride resting in the Serengeti grasslands"
+                                class="related-e__card-img">
+                        </div>
+                        <div class="related-e__card-body">
+                            <span class="related-e__card-category">Kenya</span>
+                            <h3 class="related-e__card-title">Is It Safe to Travel to Kenya and Tanzania?</h3>
+                            <p class="related-e__card-excerpt">Everything you need to know about safety on your East African safari adventure.</p>
+                            <div class="related-e__card-footer">
+                                <span class="related-e__card-author">Barbara Buchel</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-date">Aug 2024</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#" class="related-e__card related-e__card--supporting">
+                        <div class="related-e__card-image-wrap">
+                            <img src="../../../../design/reference-images/great-migration/leopard-tree-masai-mara.jpg"
+                                alt="Leopard resting in a tree in the Masai Mara"
+                                class="related-e__card-img">
+                        </div>
+                        <div class="related-e__card-body">
+                            <span class="related-e__card-category">South Africa</span>
+                            <h3 class="related-e__card-title">National Parks vs Private Game Reserves</h3>
+                            <p class="related-e__card-excerpt">Understanding the key differences to choose the right safari experience for you.</p>
+                            <div class="related-e__card-footer">
+                                <span class="related-e__card-author">Zeldi Smulders</span>
+                                <span class="related-e__card-dot"></span>
+                                <span class="related-e__card-date">Jul 2024</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
             </div>
         </div>
     </section>
