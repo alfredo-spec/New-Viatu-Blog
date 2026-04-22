@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 Nettleton Boutique Hotel — Viatu Stay Details (V3 Side Split)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fs);color:var(--gd);background:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+
+/* ── Design Tokens ─────────────────────────────────────── */
+:root{
+  --sangria:#541736;
+  --pthalo:#1C4447;
+  --platinum:#C4C4C4;
+  --black:#000;
+  --white:#FFF;
+  --cream:#F3FFB9;
+  --gl:#F8F9FA;
+  --gm:#6C757D;
+  --gd:#343A40;
+  --g3:#DEE2E6;
+  --earth-warm:#E1E3DE;
+
+  --fp:'Krona One',sans-serif;
+  --fs:'Hanken Grotesk',sans-serif;
+  --fc:'Caveat',cursive;
+
+  --rmd:6px;
+  --rlg:8px;
+  --rxl:12px;
+  --rfull:9999px;
+
+  --sh-sm:0 1px 2px rgba(0,0,0,.05);
+  --sh-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+  --sh-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+
+  --dur:200ms;
+  --dur3:300ms;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Utility ───────────────────────────────────────────── */
+.container{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.nums{font-variant-numeric:tabular-nums}
+
+/* ── Focus Visible ─────────────────────────────────────── */
+:focus-visible{outline:2px solid var(--sangria);outline-offset:2px;border-radius:var(--rmd)}
+
+/* ── Reduced Motion ────────────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ── Nav ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background var(--dur3) var(--ease),box-shadow var(--dur3) var(--ease)}
+.nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:88px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:8px;line-height:1}
+.nav-logo img{height:24px;width:auto;display:block}
+.nav:not(.scrolled) .logo-dark{display:none}
+.nav.scrolled .logo-white{display:none}
+.nav-center{display:flex;align-items:center;gap:28px}
+.nav-link{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:400;transition:opacity var(--dur) var(--ease);white-space:nowrap;opacity:.85}
+.nav-link:hover{opacity:1}
+.nav-link svg{width:20px;height:20px;flex-shrink:0}
+.nav:not(.scrolled) .nav-link{color:rgba(255,255,255,.85)}
+.nav.scrolled .nav-link{color:var(--gd)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-cta{font-size:16px;font-weight:700;line-height:1.2;padding:18px 20px;border-radius:4px;display:inline-flex;align-items:center;gap:5px;transition:all var(--dur) var(--ease);letter-spacing:-.03em;cursor:pointer;white-space:nowrap;color:var(--white);background:var(--sangria);border:none}
+.nav-cta:hover{background:#6b1d45;transform:translateY(-1px)}
+/* Lang dropdown */
+.lang{position:relative}
+.lang-trigger{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;cursor:pointer;padding:7px 10px;border-radius:var(--rmd);min-height:36px;border:1px solid transparent;background:none;letter-spacing:.04em;line-height:1;transition:all var(--dur) var(--ease)}
+.nav:not(.scrolled) .lang-trigger{color:rgba(255,255,255,.7)}
+.nav:not(.scrolled) .lang-trigger:hover{color:var(--white);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.nav.scrolled .lang-trigger{color:var(--gm)}
+.nav.scrolled .lang-trigger:hover{color:var(--sangria);background:rgba(84,23,54,.04);border-color:rgba(84,23,54,.15)}
+.lang-globe{width:15px;height:15px;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.lang-code-label{font-size:13px;font-weight:600;letter-spacing:.06em}
+.lang-chevron{display:block;width:11px;height:11px;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--dur) var(--ease)}
+.lang.open .lang-chevron{transform:rotate(180deg)}
+.lang-panel{position:absolute;top:calc(100% + 8px);right:0;min-width:210px;background:var(--white);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.04);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-5px) scale(.98);transform-origin:top right;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur);z-index:20}
+.lang.open .lang-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.lang-panel-header{display:flex;align-items:center;padding:11px 16px 9px;border-bottom:1px solid rgba(0,0,0,.06)}
+.lang-panel-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gm)}
+.lang-option{display:flex;align-items:center;gap:11px;width:100%;padding:11px 16px;border:none;border-left:3px solid transparent;background:none;font-size:13px;font-weight:400;color:var(--gd);cursor:pointer;text-align:left;transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-left-color var(--dur) var(--ease)}
+.lang-option:not(:last-child){border-bottom:1px solid rgba(0,0,0,.045)}
+.lang-option:hover{background:var(--gl);color:var(--sangria);border-left-color:rgba(84,23,54,.3)}
+.lang-option.active{color:var(--sangria);border-left-color:var(--sangria);background:rgba(84,23,54,.03)}
+.lang-option.active .lang-name{font-weight:600}
+.lang-flag{font-size:18px;line-height:1;flex-shrink:0}
+.lang-name{flex:1;font-size:13px}
+.lang-check{width:13px;height:13px;fill:none;stroke:var(--sangria);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;margin-left:auto;flex-shrink:0}
+@media(max-width:767px){
+  .nav-center{display:none}
+  .nav-inner{padding:0 20px;height:72px}
+}
+
+/* ── Gallery — Side-by-Side Split ──────────────────────── */
+.gallery{width:100%;height:min(600px,70vh);display:grid;grid-template-columns:60% 40%;gap:4px;overflow:hidden}
+.gallery__hero{position:relative;overflow:hidden}
+.gallery__hero-img{width:100%;height:100%}
+.gallery__hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.2) 40%,transparent 70%);pointer-events:none}
+.gallery__hero-overlay{position:absolute;bottom:0;left:0;z-index:2;padding:48px;display:flex;flex-direction:column;gap:12px}
+.gallery__location{display:flex;align-items:center;gap:6px;font-family:var(--fs);font-size:14px;color:rgba(255,255,255,.8)}
+.gallery__location svg{width:14px;height:14px;flex-shrink:0}
+.gallery__title{font-family:var(--fp);font-size:38px;color:var(--white);letter-spacing:-.03em;line-height:1.15;max-width:520px}
+.gallery__pill{display:inline-flex;align-items:center;gap:6px;background:var(--pthalo);color:var(--cream);font-family:var(--fs);font-size:13px;font-weight:600;padding:6px 14px;border-radius:var(--rfull);width:fit-content}
+.gallery__pill svg{width:14px;height:14px}
+
+.gallery__stack{display:grid;grid-template-rows:1fr 1fr 1fr;gap:4px}
+.gallery__stack-img{width:100%;height:100%;overflow:hidden;position:relative}
+.gallery__stack-img--more{cursor:pointer}
+.gallery__more-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;color:var(--white);font-family:var(--fs);font-size:16px;font-weight:600;z-index:2;transition:background var(--dur) var(--ease)}
+.gallery__stack-img--more:hover .gallery__more-overlay{background:rgba(0,0,0,.6)}
+
+/* Mobile gallery */
+.gallery__mobile-strip{display:none}
+
+@media(max-width:767px){
+  .gallery{display:block;height:50vh}
+  .gallery__hero{height:100%}
+  .gallery__title{font-size:24px}
+  .gallery__hero-overlay{padding:24px}
+  .gallery__stack{display:none}
+  .gallery__mobile-strip{display:flex;gap:8px;padding:12px 24px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gallery__mobile-strip::-webkit-scrollbar{display:none}
+  .gallery__thumb{width:80px;height:60px;border-radius:var(--rmd);flex-shrink:0;overflow:hidden;cursor:pointer;transition:opacity var(--dur) var(--ease)}
+  .gallery__thumb:hover{opacity:.8}
+}
+
+/* ── Property Info Bar ─────────────────────────────────── */
+.info-bar{padding:40px 24px;max-width:1200px;margin:0 auto}
+.info-bar__inner{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.info-bar__left{display:flex;flex-direction:column;gap:8px}
+.info-bar__breadcrumb{font-family:var(--fs);font-size:14px;color:var(--gm)}
+.info-bar__breadcrumb a{transition:color var(--dur) var(--ease)}
+.info-bar__breadcrumb a:hover{color:var(--sangria)}
+.info-bar__price{font-family:var(--fs);font-size:24px;color:var(--gd)}
+.info-bar__price strong{font-weight:700}
+.info-bar__price span{font-weight:400}
+.info-bar__actions{display:flex;gap:12px}
+.info-bar__action-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--g3);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color var(--dur) var(--ease),background var(--dur) var(--ease)}
+.info-bar__action-btn:hover{border-color:var(--gm);background:var(--gl)}
+.info-bar__action-btn svg{width:20px;height:20px;color:var(--gd)}
+
+/* ── Two-Column Layout ─────────────────────────────────── */
+.content{max-width:1200px;margin:0 auto;padding:0 24px 80px}
+.content__grid{display:grid;grid-template-columns:62% 33%;gap:5%;align-items:start}
+@media(max-width:1023px){
+  .content__grid{grid-template-columns:1fr;gap:40px}
+}
+
+/* ── Main Column ───────────────────────────────────────── */
+.main__tagline{font-family:var(--fc);font-size:22px;color:var(--sangria);margin-bottom:8px}
+.main__heading{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--gd);margin-bottom:16px;line-height:1.3}
+.main__desc{font-family:var(--fs);font-size:18px;line-height:1.6;color:var(--gd);margin-bottom:8px}
+.main__show-more{display:inline-block;font-family:var(--fs);font-size:16px;font-weight:600;color:var(--sangria);background:none;border:none;cursor:pointer;padding:4px 0;margin-bottom:48px;transition:opacity var(--dur) var(--ease);text-decoration:none}
+.main__show-more:hover{text-decoration:underline}
+
+/* Highlights */
+.highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+@media(max-width:767px){.highlights{grid-template-columns:1fr}}
+.highlight-card{padding:24px;border:1px solid var(--g3);border-radius:var(--rxl);transition:box-shadow var(--dur3) var(--ease)}
+.highlight-card:hover{box-shadow:var(--sh-md)}
+.highlight-card__icon{width:32px;height:32px;color:var(--pthalo);margin-bottom:12px}
+.highlight-card__title{font-family:var(--fs);font-size:16px;font-weight:700;color:var(--gd);margin-bottom:4px}
+.highlight-card__desc{font-family:var(--fs);font-size:14px;color:var(--gm);line-height:1.5}
+
+/* Room Spec Grid */
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px;padding:24px;background:var(--gl);border-radius:var(--rxl)}
+@media(max-width:767px){.specs{grid-template-columns:repeat(2,1fr)}}
+.spec{text-align:center}
+.spec__value{font-family:var(--fs);font-size:22px;font-weight:700;color:var(--gd)}
+.spec__label{font-family:var(--fs);font-size:13px;color:var(--gm);margin-top:2px}
+
+/* ── Facilities ── */
+.facilities{padding:48px 0;border-top:1px solid var(--g3)}
+.facilities h3{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black);margin-bottom:8px}
+.facilities-sub{font-size:16px;color:var(--gm);margin-bottom:32px}
+.facilities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.facility-item{display:flex;align-items:center;gap:12px;padding:16px;border-radius:var(--rlg);background:var(--gl);transition:background var(--dur) var(--ease)}
+.facility-item:hover{background:var(--g3)}
+.facility-item svg{width:24px;height:24px;stroke:var(--pthalo);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.facility-item span{font-size:16px;font-weight:500;color:var(--gd)}
+.facilities-more{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:14px;font-weight:600;color:var(--sangria);cursor:pointer;transition:opacity var(--dur) var(--ease)}
+.facilities-more:hover{opacity:.7}
+@media(max-width:767px){.facilities-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+
+/* Rooms */
+.rooms__heading{font-family:var(--fs);font-size:24px;font-weight:700;color:var(--gd);margin-bottom:20px}
+.room-card{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:20px;border:1px solid var(--g3);border-radius:var(--rxl);margin-bottom:16px;transition:box-shadow var(--dur3) var(--ease)}
+.room-card:hover{box-shadow:var(--sh-md)}
+@media(max-width:600px){.room-card{grid-template-columns:1fr}}
+.room-card__img{width:100%;height:140px;border-radius:var(--rlg);overflow:hidden}
+.room-card__body{display:flex;flex-direction:column;justify-content:center;gap:4px}
+.room-card__name{font-family:var(--fs);font-size:18px;font-weight:700;color:var(--gd)}
+.room-card__meta{font-family:var(--fs);font-size:13px;color:var(--gm);display:flex;gap:12px;flex-wrap:wrap}
+.room-card__desc{font-family:var(--fs);font-size:14px;color:var(--gm);line-height:1.5;margin-top:4px}
+
+/* Map */
+.map__heading{font-family:var(--fs);font-size:24px;font-weight:700;color:var(--gd);margin-bottom:16px;margin-top:48px}
+.map__placeholder{width:100%;height:300px;background:var(--gl);border-radius:var(--rxl);display:flex;align-items:center;justify-content:center;font-family:var(--fs);font-size:14px;color:var(--gm)}
+
+/* ── Sticky Sidebar ────────────────────────────────────── */
+.sidebar{position:sticky;top:88px}
+.booking-card{background:var(--white);border:1px solid var(--g3);border-radius:var(--rxl);padding:28px;box-shadow:var(--sh-lg)}
+.booking-card__price{font-family:var(--fs);font-size:24px;color:var(--gd);margin-bottom:20px}
+.booking-card__price strong{font-weight:700}
+.booking-card__price span{font-weight:400;font-size:16px;color:var(--gm)}
+.booking-card__field{margin-bottom:12px}
+.booking-card__label{display:block;font-family:var(--fs);font-size:12px;font-weight:600;color:var(--gd);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.booking-card__input{width:100%;padding:10px 14px;border:1.5px solid var(--g3);border-radius:var(--rlg);font-family:var(--fs);font-size:14px;color:var(--gd);background:var(--white);transition:border-color var(--dur) var(--ease);min-height:44px}
+.booking-card__input:focus{border-color:var(--sangria);outline:none}
+.booking-card__row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.booking-card__cta{width:100%;background:var(--sangria);color:var(--white);border:none;border-radius:4px;font-family:var(--fs);font-size:16px;font-weight:700;letter-spacing:-0.03em;cursor:pointer;margin-top:16px;min-height:44px;padding:18px 20px;transition:background var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.booking-card__cta:hover{background:#6b1f47;transform:translateY(-1px)}
+.booking-card__cta:active{transform:scale(.98)}
+.booking-card__note{text-align:center;font-family:var(--fs);font-size:13px;color:var(--gm);margin-top:12px}
+
+/* ── Sustainability ── */
+.sustainability-section{padding:64px 0;background:var(--gl);text-align:center}
+.sustainability-section .wrap{max-width:800px}
+.sustainability-logo{height:20px;width:auto;display:block;margin:0 auto 24px;opacity:.4}
+.sustainability-section h3{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black);margin-bottom:40px}
+.sustainability-ratings{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:40px}
+.sustainability-rating{text-align:center}
+.sustainability-rating svg{width:36px;height:36px;stroke:var(--pthalo);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block}
+.sustainability-score{font-family:var(--fs);font-size:36px;font-weight:700;color:var(--pthalo);line-height:1;margin-bottom:8px}
+.sustainability-label{font-size:14px;font-weight:500;color:var(--gm)}
+.sustainability-desc{font-size:16px;color:var(--gd);line-height:1.6;max-width:60ch;margin:0 auto}
+@media(max-width:767px){.sustainability-ratings{gap:16px}.sustainability-score{font-size:28px}}
+
+/* ── Featured Trips ────────────────────────────────────── */
+.featured{background:var(--earth-warm);padding:80px 24px}
+.featured__inner{max-width:1200px;margin:0 auto}
+.featured__heading{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--gd);margin-bottom:32px}
+.featured__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:767px){.featured__grid{grid-template-columns:1fr;max-width:400px}}
+.trip-card{background:var(--white);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--sh-sm);transition:box-shadow var(--dur3) var(--ease),transform var(--dur3) var(--ease)}
+.trip-card:hover{box-shadow:var(--sh-lg);transform:translateY(-2px)}
+.trip-card__img{width:100%;height:200px;overflow:hidden}
+.trip-card__body{padding:20px}
+.trip-card__tag{font-family:var(--fs);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--pthalo);margin-bottom:8px}
+.trip-card__title{font-family:var(--fs);font-size:18px;font-weight:700;color:var(--gd);margin-bottom:6px}
+.trip-card__meta{font-family:var(--fs);font-size:14px;color:var(--gm);margin-bottom:12px}
+.trip-card__price{font-family:var(--fs);font-size:16px;color:var(--gd)}
+.trip-card__price strong{font-weight:700}
+
+/* ── Footer ── */
+.footer{background:#1b1b1b}
+.footer-upper{padding:64px 0 56px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+.footer-col h4{font-size:20px;font-weight:700;color:var(--white);margin-bottom:20px;line-height:1.2}
+.footer-col a{display:block;font-size:16px;font-weight:400;color:rgba(255,255,255,.55);padding:4px 0;line-height:1.5;transition:color var(--dur) var(--ease)}
+.footer-col a:hover{color:var(--white)}
+.footer-social{display:flex;align-items:center;gap:10px;font-size:16px;color:rgba(255,255,255,.55);padding:4px 0;transition:color var(--dur) var(--ease)}
+.footer-social:hover{color:var(--white)}
+.footer-social svg{width:18px;height:18px;flex-shrink:0;opacity:.65;transition:opacity var(--dur) var(--ease)}
+.footer-social:hover svg{opacity:1}
+.footer-cert{margin-top:24px;padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:var(--rlg)}
+.footer-cert-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px}
+.footer-cert-row{display:flex;align-items:center;gap:12px}
+.footer-cert-icon{width:40px;height:40px;border-radius:var(--rfull);border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.5);line-height:1.1;text-align:center;flex-shrink:0}
+.footer-cert-text{font-size:11px;color:rgba(255,255,255,.3);line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:24px 0}
+.footer-bottom-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-bottom-logo img{height:20px;width:auto;display:block;opacity:.5}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+@media(max-width:767px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">
+            <img src="../../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+            <img src="../../../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+        </a>
+        <div class="nav-center">
+            <a href="/en/t" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6.5L5.73 8.13A3 3 0 004 10.93c0 2.33 2.45 3.84 4.53 2.8l6.94-3.47c2.08-1.04 4.53.47 4.53 2.8a3 3 0 01-1.73 2.8L15 17.5M15 5a3 3 0 11-6 0 3 3 0 016 0zM15 19a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Trips</span>
+            </a>
+            <a href="/en/p" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 16l2.58-6.58A5 5 0 005 7.23V6a2 2 0 012-2h10a2 2 0 012 2v1.23c0 .75.14 1.5.42 2.19L22 16M5 8h3m8 0h3M4 19h16a2 2 0 002-2 2 2 0 00-2-2H4a2 2 0 00-2 2 2 2 0 002 2zm6-8h4a2 2 0 002-2 2 2 0 00-2-2h-4a2 2 0 00-2 2 2 2 0 002 2z"/></svg>
+                <span>Stays</span>
+            </a>
+            <a href="/en/d" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m20.3 7.4-4-3.3a2 2 0 00-2.6 0l-3.4 2.8a2 2 0 01-2.6 0l-3-2.5A1 1 0 003 5v10c0 .6.3 1.1.7 1.5l4 3.3c.4.3.8.5 1.3.5M9 8v12m12-6c0 2.2-3 6-4 6s-4-3.8-4-6a4 4 0 118 0z"/></svg>
+                <span>Destinations</span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <div class="lang" id="lang">
+                <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+                    <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10" stroke-width="1.75"/><line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/></svg>
+                    <span class="lang-code-label" id="langCurrent">EN</span>
+                    <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="lang-panel" id="langPanel" role="listbox">
+                    <div class="lang-panel-header"><span class="lang-panel-label">Language</span></div>
+                    <button class="lang-option active" data-lang="EN" role="option" aria-selected="true"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></button>
+                    <button class="lang-option" data-lang="DE" role="option" aria-selected="false"><span class="lang-flag">🇩🇪</span><span class="lang-name">Deutsch</span></button>
+                    <button class="lang-option" data-lang="FR" role="option" aria-selected="false"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span></button>
+                    <button class="lang-option" data-lang="ES" role="option" aria-selected="false"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span></button>
+                </div>
+            </div>
+            <a href="/en/plan-my-trip" class="nav-cta">Plan your trip</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     GALLERY — Side-by-Side Split
+     ════════════════════════════════════════════════════════ -->
+<section class="gallery" aria-label="Property photo gallery">
+  <!-- Left: Hero image with overlay -->
+  <div class="gallery__hero">
+    <img class="gallery__hero-img" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/d8/45/d845b16b-27d0-476b-9f6c-3ecd81a07a9b/146641.jpg?width=1200&quality=80&format=auto" alt="21 Nettleton exterior with Clifton view" style="width:100%;height:100%;object-fit:cover">
+    <div class="gallery__hero-overlay">
+      <p class="gallery__location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Atlantic Seaboard, Cape Town
+      </p>
+      <h1 class="gallery__title">21 Nettleton Boutique Hotel</h1>
+      <div class="gallery__pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
+        4.5 Rating
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: 3 stacked images -->
+  <div class="gallery__stack">
+    <div class="gallery__stack-img" aria-label="Main lounge">
+      <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/41/ec/41ec247a-a262-4c75-bbbf-4c87110d5429/21_nettleton_main_lounge.jpg?width=800&quality=80&format=auto" alt="21 Nettleton main lounge" style="width:100%;height:100%;object-fit:cover">
+    </div>
+    <div class="gallery__stack-img" aria-label="Bedroom suite">
+      <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/64/cc/64ccb880-5dfc-4923-b105-6c2dbd35b583/146636.jpg?width=800&quality=80&format=auto" alt="21 Nettleton bedroom suite" style="width:100%;height:100%;object-fit:cover">
+    </div>
+    <div class="gallery__stack-img gallery__stack-img--more" role="button" tabindex="0" aria-label="View all 14 photos">
+      <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/e4/12/e412654b-a039-48bd-8c27-4741e2b76ffd/146645.jpg?width=800&quality=80&format=auto" alt="21 Nettleton pool and terrace" style="width:100%;height:100%;object-fit:cover">
+      <div class="gallery__more-overlay">+11 more</div>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile thumbnail strip -->
+<div class="gallery__mobile-strip" aria-label="Gallery thumbnails">
+  <div class="gallery__thumb" role="button" tabindex="0" aria-label="View photo 2">
+    <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/41/ec/41ec247a-a262-4c75-bbbf-4c87110d5429/21_nettleton_main_lounge.jpg?width=400&quality=80&format=auto" alt="Main lounge thumbnail" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <div class="gallery__thumb" role="button" tabindex="0" aria-label="View photo 3">
+    <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/64/cc/64ccb880-5dfc-4923-b105-6c2dbd35b583/146636.jpg?width=400&quality=80&format=auto" alt="Bedroom suite thumbnail" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <div class="gallery__thumb" role="button" tabindex="0" aria-label="View photo 4">
+    <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/e4/12/e412654b-a039-48bd-8c27-4741e2b76ffd/146645.jpg?width=400&quality=80&format=auto" alt="Pool and terrace thumbnail" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <div class="gallery__thumb" role="button" tabindex="0" aria-label="View all photos">
+    <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/84/3e/843e4f98-578a-4c73-b203-88330c88436c/21_nettleton_bar.jpg?width=400&quality=80&format=auto" alt="Bar area thumbnail" style="width:100%;height:100%;object-fit:cover">
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     PROPERTY INFO BAR
+     ════════════════════════════════════════════════════════ -->
+<div class="info-bar">
+  <div class="info-bar__inner">
+    <div class="info-bar__left">
+      <nav class="info-bar__breadcrumb" aria-label="Breadcrumb">
+        <a href="#">Home</a> / <a href="#">Stays</a> / <a href="#">Cape Town</a>
+      </nav>
+      <p class="info-bar__price">From <strong>&pound;347.63</strong> <span>/person</span></p>
+    </div>
+    <div class="info-bar__actions">
+      <button class="info-bar__action-btn" aria-label="Save to wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="info-bar__action-btn" aria-label="Share property">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     TWO-COLUMN CONTENT
+     ════════════════════════════════════════════════════════ -->
+<div class="content">
+  <div class="content__grid">
+
+    <!-- ── Main Column ──────────────────────────────────── -->
+    <main>
+      <p class="main__tagline">Luxury Boutique Stay</p>
+      <h2 class="main__heading">About this stay</h2>
+      <p class="main__desc">
+        A picture of privacy and exclusivity, 21 Nettleton Boutique Hotel &amp; Private Residence offers only 5 rooms and a penthouse, all well-appointed and stylishly enhanced with beautiful art, antique furniture and plush decorations.
+      </p>
+      <button class="main__show-more" type="button">Show more</button>
+
+      <!-- Highlights -->
+      <div class="highlights">
+        <article class="highlight-card">
+          <svg class="highlight-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-8 4 16 4-12 2 4h4"/></svg>
+          <h3 class="highlight-card__title">Private Pool</h3>
+          <p class="highlight-card__desc">Infinity pool overlooking Clifton beaches</p>
+        </article>
+        <article class="highlight-card">
+          <svg class="highlight-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          <h3 class="highlight-card__title">Farm-to-Table Dining</h3>
+          <p class="highlight-card__desc">Curated meals from local producers</p>
+        </article>
+        <article class="highlight-card">
+          <svg class="highlight-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3 class="highlight-card__title">Spa &amp; Wellness</h3>
+          <p class="highlight-card__desc">In-house treatments and personal training</p>
+        </article>
+      </div>
+
+      <!-- Room Spec Grid -->
+      <div class="specs" role="list" aria-label="Property specifications">
+        <div class="spec" role="listitem">
+          <div class="spec__value">2-10</div>
+          <div class="spec__label">Guests</div>
+        </div>
+        <div class="spec" role="listitem">
+          <div class="spec__value">5+1</div>
+          <div class="spec__label">Bedrooms</div>
+        </div>
+        <div class="spec" role="listitem">
+          <div class="spec__value">6</div>
+          <div class="spec__label">Bathrooms</div>
+        </div>
+        <div class="spec" role="listitem">
+          <div class="spec__value">850 m&sup2;</div>
+          <div class="spec__label">Size</div>
+        </div>
+      </div>
+
+      <!-- Facilities -->
+      <section class="facilities" id="facilities">
+          <h3>Facilities</h3>
+          <p class="facilities-sub">Available at this stay</p>
+          <div class="facilities-grid">
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M8 22V19.5C8 18.1193 9.11929 17 10.5 17H13.5C14.8807 17 16 18.1193 16 19.5V22M17 2L17 5M7 2V5M3 10H21M12 14H12.01M8 14H8.01M16 14H16.01"/><rect x="3" y="6" width="18" height="15" rx="2"/></svg>
+                  <span>Bar / Lounge</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span>Secured Parking</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M19 17h2l-2-6h-1M3 17h16V6H3v11zm5-7h4"/><circle cx="6.5" cy="17" r="2.5"/><circle cx="16.5" cy="17" r="2.5"/></svg>
+                  <span>Free Parking</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M2 12h20M2 6c2-2 4-3 6-3s4 1 6 3 4 3 6 3M2 18c2-2 4-3 6-3s4 1 6 3 4 3 6 3"/></svg>
+                  <span>Outdoor Pool</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M3 11l7-8 4 4 7-6M21 11v10H3V11M7 17h0M12 17h0M17 17h0"/></svg>
+                  <span>Restaurant</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  <span>Room Service</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-2c0-3.31 4.03-6 9-6s9 2.69 9 6v2c0 3.31-4.03 6-9 6z"/><path d="M12 14c2.76 0 5-1.34 5-3s-2.24-3-5-3-5 1.34-5 3 2.24 3 5 3z"/></svg>
+                  <span>Spa</span>
+              </div>
+              <div class="facility-item">
+                  <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+                  <span>WiFi</span>
+              </div>
+          </div>
+          <button class="facilities-more">Show all facilities <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+      </section>
+
+      <!-- Rooms & Suites -->
+      <section aria-labelledby="rooms-heading">
+        <h2 class="rooms__heading" id="rooms-heading">Rooms &amp; Suites</h2>
+
+        <article class="room-card">
+          <div class="room-card__img">
+            <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/14/a1/14a10db4-c5d8-4844-902b-c1a83aa1e832/emperor_suite_21-nettleton-21.jpg?width=800&quality=80&format=auto" alt="Clifton Suite at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="room-card__body">
+            <h3 class="room-card__name">Clifton Suite</h3>
+            <div class="room-card__meta">
+              <span>2 Guests</span>
+              <span>King Bed</span>
+              <span>65 m&sup2;</span>
+            </div>
+            <p class="room-card__desc">Ocean-facing suite with private balcony, freestanding bath and panoramic views of Clifton Beach.</p>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <div class="room-card__img">
+            <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/1c/e8/1ce86c29-8d1b-43f2-a1b3-9a0b950494f1/king_room_21_rework2.jpg?width=800&quality=80&format=auto" alt="Lion's Head Room at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="room-card__body">
+            <h3 class="room-card__name">Lion&rsquo;s Head Room</h3>
+            <div class="room-card__meta">
+              <span>2 Guests</span>
+              <span>Queen Bed</span>
+              <span>48 m&sup2;</span>
+            </div>
+            <p class="room-card__desc">Mountain-view room with designer furnishings, walk-in rain shower and curated minibar.</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- Map -->
+      <section aria-labelledby="map-heading">
+        <h2 class="map__heading" id="map-heading">Location</h2>
+        <div class="map__placeholder" aria-label="Map placeholder">
+          <span>Map &mdash; Atlantic Seaboard, Cape Town</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- ── Sticky Sidebar ───────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="booking-card">
+        <p class="booking-card__price">From <strong>&pound;347.63</strong> <span>/person</span></p>
+
+        <div class="booking-card__row">
+          <div class="booking-card__field">
+            <label class="booking-card__label" for="checkin">Check-in</label>
+            <input class="booking-card__input" type="date" id="checkin" aria-label="Check-in date">
+          </div>
+          <div class="booking-card__field">
+            <label class="booking-card__label" for="checkout">Check-out</label>
+            <input class="booking-card__input" type="date" id="checkout" aria-label="Check-out date">
+          </div>
+        </div>
+
+        <div class="booking-card__field">
+          <label class="booking-card__label" for="guests">Guests</label>
+          <select class="booking-card__input" id="guests">
+            <option>1 Guest</option>
+            <option selected>2 Guests</option>
+            <option>3 Guests</option>
+            <option>4 Guests</option>
+            <option>5 Guests</option>
+            <option>6 Guests</option>
+            <option>7 Guests</option>
+            <option>8 Guests</option>
+            <option>9 Guests</option>
+            <option>10 Guests</option>
+          </select>
+        </div>
+
+        <button class="booking-card__cta" type="button">Plan your trip</button>
+        <p class="booking-card__note">You won&rsquo;t be charged yet</p>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SUSTAINABILITY
+     ════════════════════════════════════════════════════════ -->
+<section class="sustainability-section" id="sustainability">
+    <div class="wrap">
+        <img src="../../../brand/logos/viatu-logo-dark.svg" alt="Viatu" class="sustainability-logo" width="110" height="24">
+        <h3>Sustainability Rating</h3>
+        <div class="sustainability-ratings">
+            <div class="sustainability-rating">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M17 9.24C16.08 9.68 15.09 10 14 10c-1.09 0-2.08-.32-3-1-.92.68-1.91 1-3 1-1.09 0-2.08-.32-3-.76"/></svg>
+                <div class="sustainability-score nums">4.5</div>
+                <div class="sustainability-label">Environmental Impact</div>
+            </div>
+            <div class="sustainability-rating">
+                <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                <div class="sustainability-score nums">3.9</div>
+                <div class="sustainability-label">Economic Impact</div>
+            </div>
+            <div class="sustainability-rating">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <div class="sustainability-score nums">4.5</div>
+                <div class="sustainability-label">Socio-cultural Impact</div>
+            </div>
+        </div>
+        <p class="sustainability-desc">21 Nettleton is committed to responsible tourism, supporting local communities, minimising environmental impact, and preserving the natural beauty of the Cape Town coastline for future generations.</p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FEATURED TRIPS
+     ════════════════════════════════════════════════════════ -->
+<section class="featured" aria-labelledby="featured-heading">
+  <div class="featured__inner">
+    <h2 class="featured__heading" id="featured-heading">Featured Trips</h2>
+    <div class="featured__grid">
+
+      <article class="trip-card">
+        <div class="trip-card__img">
+          <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/49/13/4913b88e-2ca6-442f-8977-c0e0157d8e4f/149309.jpg?width=800&quality=80&format=auto" alt="Kruger Big Five Explorer trip" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="trip-card__body">
+          <p class="trip-card__tag">Safari</p>
+          <h3 class="trip-card__title">Kruger Big Five Explorer</h3>
+          <p class="trip-card__meta">5 nights &middot; Mpumalanga, South Africa</p>
+          <p class="trip-card__price">From <strong>&pound;1,245</strong> /person</p>
+        </div>
+      </article>
+
+      <article class="trip-card">
+        <div class="trip-card__img">
+          <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/49/13/4913b88e-2ca6-442f-8977-c0e0157d8e4f/149309.jpg?width=800&quality=80&format=auto" alt="Cape Winelands Escape trip" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="trip-card__body">
+          <p class="trip-card__tag">Winelands</p>
+          <h3 class="trip-card__title">Cape Winelands Escape</h3>
+          <p class="trip-card__meta">3 nights &middot; Stellenbosch &amp; Franschhoek</p>
+          <p class="trip-card__price">From <strong>&pound;890</strong> /person</p>
+        </div>
+      </article>
+
+      <article class="trip-card">
+        <div class="trip-card__img">
+          <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/49/13/4913b88e-2ca6-442f-8977-c0e0157d8e4f/149309.jpg?width=800&quality=80&format=auto" alt="Garden Route Discovery trip" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="trip-card__body">
+          <p class="trip-card__tag">Road Trip</p>
+          <h3 class="trip-card__title">Garden Route Discovery</h3>
+          <p class="trip-card__meta">7 nights &middot; Western &amp; Eastern Cape</p>
+          <p class="trip-card__price">From <strong>&pound;1,560</strong> /person</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="footer-upper">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="#">All Trips</a><a href="#">All Stays</a><a href="#">Destinations</a><a href="#">Plan My Trip</a>
+                    <div class="footer-cert">
+                        <div class="footer-cert-label">Certified</div>
+                        <div class="footer-cert-row">
+                            <div class="footer-cert-icon">B<br>Corp</div>
+                            <span class="footer-cert-text">Meeting high standards of social and environmental impact.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Destinations</h4>
+                    <a href="#">Namibia</a><a href="#">Botswana</a><a href="#">Kenya</a><a href="#">Tanzania</a><a href="#">South Africa</a><a href="#">All destinations</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a><a href="#">Sustainability</a><a href="#">Reviews</a><a href="#">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+                    <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="wrap">
+            <div class="footer-bottom-inner">
+                <div class="footer-bottom-logo"><img src="../../../brand/logos/viatu-logo-white.svg" alt="Viatu" width="90" height="20"></div>
+                <span class="footer-copy">&copy; <span class="nums">2026</span> Viatu. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  // ── Navbar scroll behavior ──────────────────────────────
+  var nav = document.getElementById('nav');
+  var scrollThreshold = 50;
+
+  function handleScroll(){
+    if(window.scrollY > scrollThreshold){
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, {passive:true});
+  handleScroll();
+
+  // ── Language dropdown ─────────────────────────────────
+  var langEl = document.getElementById('lang');
+  var langTrigger = document.getElementById('langTrigger');
+
+  if(langTrigger){
+    langTrigger.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = langEl.classList.toggle('open');
+      langTrigger.setAttribute('aria-expanded', isOpen);
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    if(langEl && !langEl.contains(e.target)){
+      langEl.classList.remove('open');
+      if(langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  var langOptions = document.querySelectorAll('.lang-option');
+  langOptions.forEach(function(opt){
+    opt.addEventListener('click', function(){
+      langOptions.forEach(function(o){
+        o.classList.remove('active');
+        o.setAttribute('aria-selected','false');
+        var chk = o.querySelector('.lang-check');
+        if(chk) chk.remove();
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected','true');
+      var check = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      check.setAttribute('class','lang-check');
+      check.setAttribute('viewBox','0 0 24 24');
+      check.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+      this.appendChild(check);
+      var code = this.getAttribute('data-lang');
+      document.getElementById('langCurrent').textContent = code;
+      langEl.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded','false');
+    });
+  });
+
+  // ── "+11 more" gallery button ───────────────────────────
+  var moreBtn = document.querySelector('.gallery__stack-img--more');
+  if(moreBtn){
+    moreBtn.addEventListener('click', function(){
+      alert('Full gallery lightbox would open here.');
+    });
+    moreBtn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        this.click();
+      }
+    });
+  }
+
+  // ── "Show more" description toggle ──────────────────────
+  var showMoreBtn = document.querySelector('.main__show-more');
+  var descEl = document.querySelector('.main__desc');
+  var fullText = 'A picture of privacy and exclusivity, 21 Nettleton Boutique Hotel & Private Residence offers only 5 rooms and a penthouse, all well-appointed and stylishly enhanced with beautiful art, antique furniture and plush decorations. Perched on the slopes of Lion\'s Head, the property commands sweeping views across Clifton\'s four pristine beaches and the vast Atlantic Ocean beyond. Each morning begins with a bespoke breakfast prepared by the in-house chef, and evenings unfold around a candlelit dinner table or beside the infinity pool under a canopy of stars. The hotel\'s concierge curates tailored experiences \u2014 from private wine tastings in nearby Constantia to helicopter tours over the Cape Peninsula.';
+  var shortText = descEl.textContent;
+  var expanded = false;
+
+  if(showMoreBtn){
+    showMoreBtn.addEventListener('click', function(){
+      expanded = !expanded;
+      descEl.textContent = expanded ? fullText : shortText;
+      showMoreBtn.textContent = expanded ? 'Show less' : 'Show more';
+    });
+  }
+
+  // ── Mobile thumbnail clicks ─────────────────────────────
+  var thumbs = document.querySelectorAll('.gallery__thumb');
+  thumbs.forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      alert('Gallery thumbnail tapped.');
+    });
+    thumb.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

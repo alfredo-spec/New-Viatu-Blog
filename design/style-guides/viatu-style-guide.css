@@ -1,0 +1,742 @@
+/*
+ * ============================================================
+ * VIATU DESIGN SYSTEM — CSS Reference
+ * "The Trip Builder for Conscious Travellers"
+ * Last updated: February 2026
+ * Source: viatu-design-system.md / viatu-complete-css.css
+ * ============================================================
+ */
+
+/* ============================================================
+   1. GOOGLE FONTS IMPORT
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Caveat:wght@400;700&family=Source+Code+Pro&display=swap');
+
+
+/* ============================================================
+   2. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     COLORS — Brand Palette
+  ---------------------------------------------------------- */
+  --sangria-red:   #541736;
+  --pthalo-green:  #1C4447;
+  --platinum-grey: #C4C4C4;
+  --black:         #000000;
+  --white:         #FFFFFF;
+  --cream:         #F3FFB9; /* lime-yellow accent — NOT beige */
+
+  /* Hover / active states derived from sangria */
+  --sangria-hover:  #47142e;
+  --sangria-active: #3b1026;
+
+  /* ----------------------------------------------------------
+     COLORS — Extended Neutrals
+  ---------------------------------------------------------- */
+  --grey-light:  #F8F9FA;
+  --grey-medium: #6C757D;
+  --grey-dark:   #343A40;
+  --grey-300:    #DEE2E6;
+  --section-alt: #E1E3DE;
+
+  /* ----------------------------------------------------------
+     COLORS — Semantic / Feedback
+  ---------------------------------------------------------- */
+  --color-success: #22c55e;
+  --color-danger:  #ef4444;
+  --color-warning: #f59e0b;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Font Families
+  ---------------------------------------------------------- */
+  --font-primary:   'Krona One', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-secondary: 'Hanken Grotesk', 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-supporting:'Caveat', cursive;
+  --font-mono:      'Source Code Pro', Monaco, monospace;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Font Weights
+  ---------------------------------------------------------- */
+  --font-light:    300;
+  --font-regular:  400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+  --font-black:    900;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Line Heights
+  ---------------------------------------------------------- */
+  --leading-tight:   1.2;   /* H2–H5, taglines */
+  --leading-normal:  1.34;  /* H1 specifically */
+  --leading-relaxed: 1.5;   /* All body text */
+  --leading-loose:   1.625; /* Relaxed reading */
+
+  /* ----------------------------------------------------------
+     SPACING — 8px Grid
+  ---------------------------------------------------------- */
+  --space-1:   0.25rem;  /*   4px */
+  --space-2:   0.5rem;   /*   8px */
+  --space-3:   0.75rem;  /*  12px */
+  --space-4:   1rem;     /*  16px */
+  --space-5:   1.25rem;  /*  20px */
+  --space-6:   1.5rem;   /*  24px */
+  --space-8:   2rem;     /*  32px */
+  --space-10:  2.5rem;   /*  40px */
+  --space-12:  3rem;     /*  48px */
+  --space-16:  4rem;     /*  64px */
+  --space-20:  5rem;     /*  80px */
+  --space-24:  6rem;     /*  96px */
+  --space-32:  8rem;     /* 128px */
+  --space-40:  10rem;    /* 160px */
+  --space-48:  12rem;    /* 192px */
+  --space-56:  14rem;    /* 224px */
+  --space-64:  16rem;    /* 256px */
+  --space-80:  20rem;    /* 320px */
+  --space-96:  24rem;    /* 384px */
+  --space-112: 28rem;    /* 448px */
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+  ---------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm:   0.125rem;  /*  2px — icon grid items */
+  --radius-md:   0.375rem;  /*  6px — buttons, inputs */
+  --radius-lg:   0.5rem;    /*  8px — cards */
+  --radius-xl:   0.75rem;   /* 12px */
+  --radius-2xl:  1rem;      /* 16px */
+  --radius-full: 9999px;    /* badges, pills, dots, avatars */
+
+  /* ----------------------------------------------------------
+     BORDER WIDTHS
+  ---------------------------------------------------------- */
+  --border-1: 1px; /* card borders, inputs, icon grid */
+  --border-2: 2px; /* outline buttons */
+  --border-4: 4px; /* card accent (left border) */
+
+  /* ----------------------------------------------------------
+     SHADOWS
+  ---------------------------------------------------------- */
+  --shadow-sm:  0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* ----------------------------------------------------------
+     ANIMATION — Durations
+  ---------------------------------------------------------- */
+  --duration-75:   75ms;
+  --duration-100:  100ms;
+  --duration-150:  150ms;
+  --duration-200:  200ms;  /* buttons, inputs, icons */
+  --duration-300:  300ms;  /* cards, overlays */
+  --duration-500:  500ms;
+  --duration-700:  700ms;
+  --duration-1000: 1000ms;
+
+  /* ----------------------------------------------------------
+     ANIMATION — Easing
+  ---------------------------------------------------------- */
+  --ease-linear:  linear;
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1); /* default */
+
+  /* ----------------------------------------------------------
+     LAYOUT — Breakpoints (reference only — use in @media)
+  ---------------------------------------------------------- */
+  --breakpoint-sm:  640px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ----------------------------------------------------------
+     LAYOUT — Container Max Widths
+  ---------------------------------------------------------- */
+  --container-sm:   640px;
+  --container-md:   768px;
+  --container-lg:   1024px;
+  --container-xl:   1280px;
+  --container-2xl:  1536px;
+  --content-narrow: 65ch;  /* blog / reading */
+  --content-wide:   80ch;
+
+}
+
+
+/* ============================================================
+   3. TYPOGRAPHY CLASSES
+   ============================================================ */
+
+/* --- Headings ------------------------------------------------ */
+
+.h1 {
+  font-family: var(--font-primary);
+  font-size: 70px;
+  font-weight: var(--font-regular); /* Krona One only has 400 */
+  line-height: var(--leading-normal);
+  letter-spacing: -0.06em;
+}
+
+.h2 {
+  font-family: var(--font-secondary);
+  font-size: 58px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.03em;
+}
+
+.h3 {
+  font-family: var(--font-secondary);
+  font-size: 48px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+}
+
+.h4 {
+  font-family: var(--font-secondary);
+  font-size: 40px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+}
+
+.h5 {
+  font-family: var(--font-secondary);
+  font-size: 32px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+}
+
+/* --- Body text ---------------------------------------------- */
+
+.body-xl {
+  font-family: var(--font-secondary);
+  font-size: 24px;
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+}
+
+.body-l {
+  font-family: var(--font-secondary);
+  font-size: 20px;
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+}
+
+.body-m {
+  font-family: var(--font-secondary);
+  font-size: 18px;
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+}
+
+.body-s {
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+}
+
+.body-xs {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  font-weight: var(--font-regular);
+  line-height: var(--leading-relaxed);
+}
+
+/* --- Taglines (Caveat / handwritten accent) ------------------ */
+
+.tagline-l {
+  font-family: var(--font-supporting);
+  font-size: 24px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--sangria-red);
+}
+
+.tagline-m {
+  font-family: var(--font-supporting);
+  font-size: 20px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--sangria-red);
+}
+
+.tagline-s {
+  font-family: var(--font-supporting);
+  font-size: 18px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--sangria-red);
+}
+
+/* --- Mobile type scale (apply via @media) ------------------- */
+
+@media (max-width: 640px) {
+  .h1 { font-size: 35px; }
+  .h2 { font-size: 40px; }
+}
+
+
+/* ============================================================
+   4. LAYOUT — CONTAINER
+   ============================================================ */
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+  max-width: var(--container-xl);
+}
+
+.container-sm  { max-width: var(--container-sm); }
+.container-md  { max-width: var(--container-md); }
+.container-lg  { max-width: var(--container-lg); }
+.container-xl  { max-width: var(--container-xl); }
+.container-2xl { max-width: var(--container-2xl); }
+
+.content-narrow { max-width: var(--content-narrow); }
+.content-wide   { max-width: var(--content-wide); }
+
+
+/* ============================================================
+   5. BUTTONS
+   ============================================================ */
+
+/* Shared base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-secondary);
+  font-weight: var(--font-medium);
+  font-size: 16px;
+  min-height: 44px;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-200) var(--ease-in-out);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary */
+.btn-primary {
+  background-color: var(--sangria-red);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--sangria-hover);
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  background-color: var(--sangria-active);
+  transform: translateY(0);
+}
+
+/* Secondary */
+.btn-secondary {
+  background-color: var(--pthalo-green);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Outline Primary */
+.btn-outline-primary {
+  background-color: transparent;
+  color: var(--sangria-red);
+  border: var(--border-2) solid var(--sangria-red);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--sangria-red);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+/* Outline Secondary */
+.btn-outline-secondary {
+  background-color: transparent;
+  color: var(--pthalo-green);
+  border: var(--border-2) solid var(--pthalo-green);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--pthalo-green);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+/* CTA (larger padding) */
+.btn-cta {
+  background-color: var(--sangria-red);
+  color: var(--white);
+  padding: var(--space-4) var(--space-8);
+}
+
+.btn-cta:hover {
+  background-color: var(--sangria-hover);
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   6. FORM INPUTS
+   ============================================================ */
+
+.input {
+  font-family: var(--font-secondary);
+  font-size: 16px;
+  padding: 12px 16px;
+  border: var(--border-1) solid var(--grey-300);
+  border-radius: var(--radius-md);
+  min-height: 44px;
+  width: 100%;
+  transition: border-color var(--duration-200) var(--ease-in-out),
+              box-shadow var(--duration-200) var(--ease-in-out);
+  outline: none;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.input:focus {
+  border-color: var(--pthalo-green);
+  box-shadow: 0 0 0 3px rgba(28, 68, 71, 0.1);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   7. CARDS
+   ============================================================ */
+
+/* --- Travel Card -------------------------------------------- */
+.card-travel {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  background-color: var(--white);
+  transition: transform var(--duration-300) var(--ease-in-out),
+              box-shadow var(--duration-300) var(--ease-in-out);
+}
+
+.card-travel:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-travel__image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-travel__content {
+  padding: var(--space-6);
+}
+
+.card-travel__title {
+  font-family: var(--font-secondary);
+  font-size: 32px;
+  font-weight: var(--font-bold);
+  color: var(--black);
+}
+
+.card-travel__meta {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  color: var(--grey-medium);
+}
+
+/* --- Destination Card --------------------------------------- */
+.card-destination {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: var(--border-1) solid rgba(196, 196, 196, 0.3);
+  overflow: hidden;
+  background-color: var(--white);
+  transition: transform var(--duration-300) var(--ease-in-out),
+              box-shadow var(--duration-300) var(--ease-in-out);
+}
+
+.card-destination:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.card-destination__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-destination__content {
+  padding: var(--space-4);
+}
+
+.card-destination__title {
+  font-family: var(--font-secondary);
+  font-size: 20px;
+  font-weight: var(--font-bold);
+  color: var(--black);
+}
+
+/* --- Card with left accent border --------------------------- */
+.card-accent {
+  border-left: var(--border-4) solid var(--sangria-red);
+}
+
+
+/* ============================================================
+   8. BADGES / PILLS
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background-color: var(--grey-light);
+  color: var(--grey-dark);
+  border: var(--border-1) solid var(--platinum-grey);
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  font-weight: var(--font-medium);
+}
+
+
+/* ============================================================
+   9. SECTION HEADER
+   ============================================================ */
+
+.section-header {
+  margin-bottom: var(--space-12);
+  text-align: left;
+}
+
+.section-header__tagline {
+  font-family: var(--font-supporting);
+  font-size: 24px;
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  color: var(--sangria-red);
+  margin-bottom: var(--space-2);
+}
+
+.section-header__title {
+  font-family: var(--font-primary);
+  font-size: 58px;
+  font-weight: var(--font-regular);
+  line-height: var(--leading-tight);
+  color: var(--black);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .section-header__title { font-size: 40px; }
+}
+
+
+/* ============================================================
+   10. CAROUSEL NAVIGATION
+   ============================================================ */
+
+.carousel-nav {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.carousel-nav__btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--white);
+  border: var(--border-1) solid var(--platinum-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-200) var(--ease-in-out);
+}
+
+.carousel-nav__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel-nav__icon {
+  width: 20px;
+  height: 20px;
+  color: var(--grey-dark);
+}
+
+/* Carousel dots */
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--platinum-grey);
+  transition: all var(--duration-200) var(--ease-in-out);
+}
+
+.carousel-dot--active {
+  width: 20px;
+  background-color: var(--sangria-red);
+}
+
+
+/* ============================================================
+   11. ICONS
+   ============================================================ */
+
+/* All SVG icons use stroke, not fill */
+.icon svg {
+  stroke-width: 1.5;
+  fill: none;
+  stroke: currentColor;
+}
+
+/* Sizes */
+.icon-xs { width: 10px;  height: 10px; }
+.icon-sm { width: 16px;  height: 16px; }
+.icon-md { width: 24px;  height: 24px; }
+.icon-lg { width: 60px;  height: 60px; }
+
+/* Color variants */
+.icon-light   { color: var(--black); }
+.icon-dark    { color: var(--white); }
+.icon-sangria { color: var(--sangria-red); }
+
+
+/* ============================================================
+   12. ICON GRID CELL
+   ============================================================ */
+
+.icon-grid-cell {
+  padding: var(--space-8);
+  border: var(--border-1) solid var(--platinum-grey);
+  border-radius: var(--radius-sm);
+}
+
+.icon-grid-cell--dark {
+  background-color: var(--sangria-red);
+  border-color: var(--sangria-red);
+}
+
+
+/* ============================================================
+   13. GRID LAYOUTS
+   ============================================================ */
+
+/* Travel cards: 1 → 2 → 4 columns */
+.grid-travel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .grid-travel { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-travel { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Destination cards: 1 → 2 → 3 columns */
+.grid-destinations {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .grid-destinations { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-destinations { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Icon grid: 3 → 6 → 9 columns */
+.grid-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .grid-icons { grid-template-columns: repeat(6, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-icons { grid-template-columns: repeat(9, 1fr); }
+}
+
+
+/* ============================================================
+   14. SECTION BACKGROUNDS
+   ============================================================ */
+
+.section-default  { background-color: var(--white); }
+.section-alt      { background-color: var(--section-alt); }
+.section-dark     { background-color: var(--pthalo-green); color: var(--white); }
+.section-sangria  { background-color: var(--sangria-red);  color: var(--white); }
+.section-cream    { background-color: var(--cream); }
+
+
+/* ============================================================
+   15. ACCESSIBILITY UTILITIES
+   ============================================================ */
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus ring — applied automatically by .btn and .input above */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(28, 68, 71, 0.3);
+}

@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>21 Nettleton Boutique Hotel — Viatu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --sangria: #541736;
+      --pthalo: #1C4447;
+      --platinum: #C4C4C4;
+      --black: #000;
+      --white: #FFF;
+      --cream: #F3FFB9;
+      --gl: #F8F9FA;
+      --gm: #6C757D;
+      --gd: #343A40;
+      --g3: #DEE2E6;
+      --earth-warm: #E1E3DE;
+
+      --fp: 'Krona One', sans-serif;
+      --fs: 'Hanken Grotesk', sans-serif;
+      --fc: 'Caveat', cursive;
+
+      --rmd: 6px;
+      --rlg: 8px;
+      --rxl: 12px;
+      --rfull: 9999px;
+
+      --sh-sm: 0 1px 2px rgba(0,0,0,.05);
+      --sh-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+      --sh-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+
+      --dur: 200ms;
+      --dur3: 300ms;
+      --ease: cubic-bezier(.4, 0, .2, 1);
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    body {
+      font-family: var(--fs);
+      font-weight: 400;
+      color: var(--gd);
+      line-height: 1.6;
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ── Focus Visible ── */
+    :focus-visible {
+      outline: 2px solid var(--sangria);
+      outline-offset: 2px;
+    }
+
+    /* ── Utility ── */
+    .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+    .nums{font-variant-numeric:tabular-nums}
+
+    /* ── Nav ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background var(--dur3) var(--ease),box-shadow var(--dur3) var(--ease)}
+    .nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:88px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:8px;line-height:1}
+    .nav-logo img{height:24px;width:auto;display:block}
+    .nav:not(.scrolled) .logo-dark{display:none}
+    .nav.scrolled .logo-white{display:none}
+    .nav-center{display:flex;align-items:center;gap:28px}
+    .nav-link{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:400;transition:opacity var(--dur) var(--ease);white-space:nowrap;opacity:.85}
+    .nav-link:hover{opacity:1}
+    .nav-link svg{width:20px;height:20px;flex-shrink:0}
+    .nav:not(.scrolled) .nav-link{color:rgba(255,255,255,.85)}
+    .nav.scrolled .nav-link{color:var(--gd)}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .nav-cta{font-size:16px;font-weight:700;line-height:1.2;padding:18px 20px;border-radius:4px;display:inline-flex;align-items:center;gap:5px;transition:all var(--dur) var(--ease);letter-spacing:-.03em;cursor:pointer;white-space:nowrap;color:var(--white);background:var(--sangria);border:none}
+    .nav-cta:hover{background:#6b1d45;transform:translateY(-1px)}
+    /* Lang dropdown */
+    .lang{position:relative}
+    .lang-trigger{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;cursor:pointer;padding:7px 10px;border-radius:var(--rmd);min-height:36px;border:1px solid transparent;background:none;letter-spacing:.04em;line-height:1;transition:all var(--dur) var(--ease)}
+    .nav:not(.scrolled) .lang-trigger{color:rgba(255,255,255,.7)}
+    .nav:not(.scrolled) .lang-trigger:hover{color:var(--white);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+    .nav.scrolled .lang-trigger{color:var(--gm)}
+    .nav.scrolled .lang-trigger:hover{color:var(--sangria);background:rgba(84,23,54,.04);border-color:rgba(84,23,54,.15)}
+    .lang-globe{width:15px;height:15px;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .lang-code-label{font-size:13px;font-weight:600;letter-spacing:.06em}
+    .lang-chevron{display:block;width:11px;height:11px;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--dur) var(--ease)}
+    .lang.open .lang-chevron{transform:rotate(180deg)}
+    .lang-panel{position:absolute;top:calc(100% + 8px);right:0;min-width:210px;background:var(--white);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.04);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-5px) scale(.98);transform-origin:top right;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur);z-index:20}
+    .lang.open .lang-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+    .lang-panel-header{display:flex;align-items:center;padding:11px 16px 9px;border-bottom:1px solid rgba(0,0,0,.06)}
+    .lang-panel-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gm)}
+    .lang-option{display:flex;align-items:center;gap:11px;width:100%;padding:11px 16px;border:none;border-left:3px solid transparent;background:none;font-size:13px;font-weight:400;color:var(--gd);cursor:pointer;text-align:left;transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-left-color var(--dur) var(--ease)}
+    .lang-option:not(:last-child){border-bottom:1px solid rgba(0,0,0,.045)}
+    .lang-option:hover{background:var(--gl);color:var(--sangria);border-left-color:rgba(84,23,54,.3)}
+    .lang-option.active{color:var(--sangria);border-left-color:var(--sangria);background:rgba(84,23,54,.03)}
+    .lang-option.active .lang-name{font-weight:600}
+    .lang-flag{font-size:18px;line-height:1;flex-shrink:0}
+    .lang-name{flex:1;font-size:13px}
+    .lang-check{width:13px;height:13px;fill:none;stroke:var(--sangria);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;margin-left:auto;flex-shrink:0}
+    @media(max-width:767px){
+      .nav-center{display:none}
+      .nav-inner{padding:0 20px;height:72px}
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      min-height: 400px;
+      overflow: hidden;
+    }
+
+    .hero__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity var(--dur3) var(--ease);
+    }
+
+    .hero__slide.active {
+      opacity: 1;
+    }
+
+    .hero__gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 24px;
+      z-index: 2;
+    }
+
+    .hero__content-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero__location {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid var(--white);
+      border-radius: var(--rfull);
+      padding: 6px 16px;
+      font-family: var(--fs);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .hero__title {
+      font-family: var(--fp);
+      font-size: 28px;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .hero__price {
+      font-family: var(--fs);
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ── Thumbnail Strip ── */
+    .thumb-strip {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      overflow-x: auto;
+      display: flex;
+      gap: 10px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .thumb-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .thumb-strip__item {
+      flex-shrink: 0;
+      width: 100px;
+      height: 70px;
+      border-radius: var(--rlg);
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color var(--dur) var(--ease), opacity var(--dur) var(--ease);
+      opacity: 0.7;
+      min-height: 44px;
+    }
+
+    .thumb-strip__item:hover {
+      opacity: 1;
+    }
+
+    .thumb-strip__item.active {
+      border-color: var(--sangria);
+      opacity: 1;
+    }
+
+    /* ── Sustainability Badge ── */
+    .sustainability {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8px 24px 16px;
+    }
+
+    .sustainability__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pthalo);
+      color: var(--cream);
+      font-family: var(--fs);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--rfull);
+    }
+
+    .sustainability__badge svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Property Info Bar ── */
+    .info-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info-bar__left {
+      flex: 1;
+    }
+
+    .info-bar__tagline {
+      font-family: var(--fc);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sangria);
+      margin-bottom: 4px;
+    }
+
+    .info-bar__heading {
+      font-family: var(--fs);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gd);
+      line-height: 1.2;
+    }
+
+    .info-bar__right {
+      flex-shrink: 0;
+    }
+
+    .price-card {
+      background: var(--gl);
+      border-radius: var(--rxl);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .price-card__amount {
+      font-family: var(--fs);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gd);
+    }
+
+    .price-card__unit {
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--gm);
+    }
+
+    .price-card__cta {
+      font-family: var(--fs);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--sangria);
+      border-radius: 4px;
+      padding: 18px 20px;
+      transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+      min-height: 44px;
+      width: 100%;
+      text-align: center;
+      letter-spacing: -0.03em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .price-card__cta:hover {
+      background: #6b1f47;
+      transform: translateY(-1px);
+    }
+
+    .price-card__cta:active {
+      transform: scale(.98);
+    }
+
+    /* ── Description Section ── */
+    .description {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+    }
+
+    .description__text {
+      max-width: 65ch;
+      font-family: var(--fs);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--gd);
+    }
+
+    .description__more {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: var(--fs);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--sangria);
+      transition: opacity var(--dur) var(--ease);
+      min-height: 44px;
+      line-height: 44px;
+    }
+
+    .description__more:hover {
+      opacity: 0.7;
+    }
+
+    /* ── Room Spec Grid ── */
+    .specs {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+    }
+
+    .specs__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .spec-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 20px;
+      background: var(--gl);
+      border-radius: var(--rxl);
+    }
+
+    .spec-cell__icon {
+      color: var(--pthalo);
+      width: 32px;
+      height: 32px;
+    }
+
+    .spec-cell__label {
+      font-family: var(--fs);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gm);
+    }
+
+    .spec-cell__value {
+      font-family: var(--fs);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gd);
+    }
+
+    /* ── Facilities ── */
+    .facilities{padding:48px 0;border-top:1px solid var(--g3)}
+    .facilities h3{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black);margin-bottom:8px}
+    .facilities-sub{font-size:16px;color:var(--gm);margin-bottom:32px}
+    .facilities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+    .facility-item{display:flex;align-items:center;gap:12px;padding:16px;border-radius:var(--rlg);background:var(--gl);transition:background var(--dur) var(--ease)}
+    .facility-item:hover{background:var(--g3)}
+    .facility-item svg{width:24px;height:24px;stroke:var(--pthalo);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .facility-item span{font-size:16px;font-weight:500;color:var(--gd)}
+    .facilities-more{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:14px;font-weight:600;color:var(--sangria);cursor:pointer;transition:opacity var(--dur) var(--ease)}
+    .facilities-more:hover{opacity:.7}
+    @media(max-width:767px){.facilities-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+
+    /* ── Sustainability ── */
+    .sustainability-section{padding:64px 0;background:var(--gl);text-align:center}
+    .sustainability-section .wrap{max-width:800px}
+    .sustainability-logo{height:20px;width:auto;display:block;margin:0 auto 24px;opacity:.4}
+    .sustainability-section h3{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black);margin-bottom:40px}
+    .sustainability-ratings{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:40px}
+    .sustainability-rating{text-align:center}
+    .sustainability-rating svg{width:36px;height:36px;stroke:var(--pthalo);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block}
+    .sustainability-score{font-family:var(--fs);font-size:36px;font-weight:700;color:var(--pthalo);line-height:1;margin-bottom:8px}
+    .sustainability-label{font-size:14px;font-weight:500;color:var(--gm)}
+    .sustainability-desc{font-size:16px;color:var(--gd);line-height:1.6;max-width:60ch;margin:0 auto}
+    @media(max-width:767px){.sustainability-ratings{gap:16px}.sustainability-score{font-size:28px}}
+
+    /* ── Section Header Utility ── */
+    .section-header__tagline {
+      font-family: var(--fc);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--sangria);
+      margin-bottom: 4px;
+    }
+
+    .section-header__title {
+      font-family: var(--fs);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gd);
+      line-height: 1.2;
+    }
+
+    /* ── Rooms Section ── */
+    .rooms {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+
+    .rooms__header {
+      margin-bottom: 32px;
+    }
+
+    .rooms__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .room-card {
+      background: var(--white);
+      border: 1px solid var(--g3);
+      border-radius: var(--rxl);
+      overflow: hidden;
+      transition: box-shadow var(--dur) var(--ease);
+    }
+
+    .room-card:hover {
+      box-shadow: var(--sh-md);
+    }
+
+    .room-card__image {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .room-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .room-card__body {
+      padding: 20px;
+    }
+
+    .room-card__name {
+      font-family: var(--fs);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gd);
+      margin-bottom: 8px;
+    }
+
+    .room-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .room-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--fs);
+      font-size: 14px;
+      color: var(--gm);
+    }
+
+    .room-card__meta-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--pthalo);
+    }
+
+    .room-card__desc {
+      font-family: var(--fs);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--gm);
+      margin-bottom: 12px;
+    }
+
+    .room-card__more {
+      font-family: var(--fs);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--sangria);
+      transition: opacity var(--dur) var(--ease);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .room-card__more:hover {
+      opacity: 0.7;
+    }
+
+    /* ── Map Section ── */
+    .map-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+
+    .map-section__title {
+      font-family: var(--fs);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gd);
+      margin-bottom: 24px;
+    }
+
+    .map-section__container {
+      width: 100%;
+      height: 350px;
+      background: var(--gl);
+      border-radius: var(--rxl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--g3);
+    }
+
+    .map-section__placeholder {
+      font-family: var(--fs);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--gm);
+    }
+
+    /* ── Featured Trips Carousel ── */
+    .trips {
+      background: var(--earth-warm);
+      padding: 56px 0;
+    }
+
+    .trips__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .trips__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .trips__nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .trips__nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--g3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+      color: var(--gd);
+    }
+
+    .trips__nav-btn:hover {
+      background: var(--gd);
+      border-color: var(--gd);
+      color: var(--white);
+    }
+
+    .trips__scroll {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 4px;
+    }
+
+    .trips__scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .trip-card {
+      flex-shrink: 0;
+      width: 260px;
+      scroll-snap-align: start;
+      transition: transform var(--dur) var(--ease);
+    }
+
+    .trip-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .trip-card__image {
+      width: 260px;
+      height: 260px;
+      border-radius: var(--rlg);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .trip-card__title {
+      font-family: var(--fs);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gd);
+      margin-bottom: 4px;
+    }
+
+    .trip-card__duration {
+      font-family: var(--fs);
+      font-size: 14px;
+      color: var(--gm);
+      margin-bottom: 4px;
+    }
+
+    .trip-card__price {
+      font-family: var(--fs);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gd);
+    }
+
+    /* ── Footer ── */
+    .footer{background:#1b1b1b}
+    .footer-upper{padding:64px 0 56px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+    .footer-col h4{font-size:20px;font-weight:700;color:var(--white);margin-bottom:20px;line-height:1.2}
+    .footer-col a{display:block;font-size:16px;font-weight:400;color:rgba(255,255,255,.55);padding:4px 0;line-height:1.5;transition:color var(--dur) var(--ease)}
+    .footer-col a:hover{color:var(--white)}
+    .footer-social{display:flex;align-items:center;gap:10px;font-size:16px;color:rgba(255,255,255,.55);padding:4px 0;transition:color var(--dur) var(--ease)}
+    .footer-social:hover{color:var(--white)}
+    .footer-social svg{width:18px;height:18px;flex-shrink:0;opacity:.65;transition:opacity var(--dur) var(--ease)}
+    .footer-social:hover svg{opacity:1}
+    .footer-cert{margin-top:24px;padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:var(--rlg)}
+    .footer-cert-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px}
+    .footer-cert-row{display:flex;align-items:center;gap:12px}
+    .footer-cert-icon{width:40px;height:40px;border-radius:var(--rfull);border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.5);line-height:1.1;text-align:center;flex-shrink:0}
+    .footer-cert-text{font-size:11px;color:rgba(255,255,255,.3);line-height:1.5}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:24px 0}
+    .footer-bottom-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer-bottom-logo img{height:20px;width:auto;display:block;opacity:.5}
+    .footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+    @media(max-width:767px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+
+    /* ── Responsive: Tablet (768px+) ── */
+    @media (min-width: 768px) {
+      .hero__content {
+        padding: 48px 40px;
+      }
+
+      .hero__title {
+        font-size: 36px;
+      }
+
+      .thumb-strip {
+        padding: 16px 40px;
+      }
+
+      .sustainability {
+        padding: 8px 40px 16px;
+      }
+
+      .info-bar {
+        padding: 40px 40px;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+      }
+
+      .info-bar__heading {
+        font-size: 40px;
+      }
+
+      .description {
+        padding: 0 40px 48px;
+      }
+
+      .specs {
+        padding: 0 40px 56px;
+      }
+
+      .specs__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .rooms {
+        padding: 0 40px 64px;
+      }
+
+      .rooms__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .map-section {
+        padding: 0 40px 64px;
+      }
+
+      .trips__inner {
+        padding: 0 40px;
+      }
+    }
+
+    /* ── Responsive: Desktop (1024px+) ── */
+    @media (min-width: 1024px) {
+      .hero__content {
+        padding: 56px 64px;
+      }
+
+      .hero__title {
+        font-size: 42px;
+      }
+
+      .info-bar {
+        padding: 48px 64px;
+      }
+
+      .description {
+        padding: 0 64px 48px;
+      }
+
+      .specs {
+        padding: 0 64px 56px;
+      }
+
+      .rooms {
+        padding: 0 64px 64px;
+      }
+
+      .map-section {
+        padding: 0 64px 64px;
+      }
+
+      .trips__inner {
+        padding: 0 64px;
+      }
+
+      .price-card {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .price-card__cta {
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAVIGATION ════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">
+            <img src="../../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+            <img src="../../../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+        </a>
+        <div class="nav-center">
+            <a href="/en/t" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6.5L5.73 8.13A3 3 0 004 10.93c0 2.33 2.45 3.84 4.53 2.8l6.94-3.47c2.08-1.04 4.53.47 4.53 2.8a3 3 0 01-1.73 2.8L15 17.5M15 5a3 3 0 11-6 0 3 3 0 016 0zM15 19a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Trips</span>
+            </a>
+            <a href="/en/p" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 16l2.58-6.58A5 5 0 005 7.23V6a2 2 0 012-2h10a2 2 0 012 2v1.23c0 .75.14 1.5.42 2.19L22 16M5 8h3m8 0h3M4 19h16a2 2 0 002-2 2 2 0 00-2-2H4a2 2 0 00-2 2 2 2 0 002 2zm6-8h4a2 2 0 002-2 2 2 0 00-2-2h-4a2 2 0 00-2 2 2 2 0 002 2z"/></svg>
+                <span>Stays</span>
+            </a>
+            <a href="/en/d" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m20.3 7.4-4-3.3a2 2 0 00-2.6 0l-3.4 2.8a2 2 0 01-2.6 0l-3-2.5A1 1 0 003 5v10c0 .6.3 1.1.7 1.5l4 3.3c.4.3.8.5 1.3.5M9 8v12m12-6c0 2.2-3 6-4 6s-4-3.8-4-6a4 4 0 118 0z"/></svg>
+                <span>Destinations</span>
+            </a>
+        </div>
+        <div class="nav-right">
+            <div class="lang" id="lang">
+                <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+                    <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10" stroke-width="1.75"/><line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/></svg>
+                    <span class="lang-code-label" id="langCurrent">EN</span>
+                    <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="lang-panel" id="langPanel" role="listbox">
+                    <div class="lang-panel-header"><span class="lang-panel-label">Language</span></div>
+                    <button class="lang-option active" data-lang="EN" role="option" aria-selected="true"><span class="lang-flag">🇬🇧</span><span class="lang-name">English</span><svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></button>
+                    <button class="lang-option" data-lang="DE" role="option" aria-selected="false"><span class="lang-flag">🇩🇪</span><span class="lang-name">Deutsch</span></button>
+                    <button class="lang-option" data-lang="FR" role="option" aria-selected="false"><span class="lang-flag">🇫🇷</span><span class="lang-name">Français</span></button>
+                    <button class="lang-option" data-lang="ES" role="option" aria-selected="false"><span class="lang-flag">🇪🇸</span><span class="lang-name">Español</span></button>
+                </div>
+            </div>
+            <a href="/en/plan-my-trip" class="nav-cta">Plan your trip</a>
+        </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ════════ CINEMATIC HERO ════════ -->
+    <section class="hero" aria-label="Property gallery">
+      <!-- Hero Slides -->
+      <div class="hero__slide active" data-slide="0">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/d8/45/d845b16b-27d0-476b-9f6c-3ecd81a07a9b/146641.jpg?width=1200&quality=80&format=auto" alt="21 Nettleton exterior with Clifton beach view" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="1">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/41/ec/41ec247a-a262-4c75-bbbf-4c87110d5429/21_nettleton_main_lounge.jpg?width=1200&quality=80&format=auto" alt="Main lounge at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="2">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/64/cc/64ccb880-5dfc-4923-b105-6c2dbd35b583/146636.jpg?width=1200&quality=80&format=auto" alt="Luxury bedroom suite at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="3">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/e4/12/e412654b-a039-48bd-8c27-4741e2b76ffd/146645.jpg?width=1200&quality=80&format=auto" alt="Pool and terrace at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="4">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/84/3e/843e4f98-578a-4c73-b203-88330c88436c/21_nettleton_bar.jpg?width=1200&quality=80&format=auto" alt="Bar area at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="5">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/b1/69/b1698370-6de9-45a1-9917-755260255705/21_nettleton_piano.jpg?width=1200&quality=80&format=auto" alt="Piano lounge at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="6">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/6c/f8/6cf8af5e-c16c-499b-acff-0ef8b0d1578d/146622.jpg?width=1200&quality=80&format=auto" alt="View from 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="hero__slide" data-slide="7">
+        <img class="hero__image" src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/bf/2b/bf2b890f-e21c-4c71-a5ac-c34a503521b0/146621.jpg?width=1200&quality=80&format=auto" alt="Another view of 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+      </div>
+
+      <!-- Gradient Overlay -->
+      <div class="hero__gradient"></div>
+
+      <!-- Overlaid Content -->
+      <div class="hero__content">
+        <div class="hero__content-inner">
+          <span class="hero__location">Atlantic Seaboard, Cape Town</span>
+          <h1 class="hero__title">21 Nettleton Boutique Hotel</h1>
+          <p class="hero__price">From <span style="font-weight:600;">&#163;347.63</span> /person</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ THUMBNAIL STRIP ════════ -->
+    <div class="thumb-strip" role="tablist" aria-label="Gallery thumbnails">
+      <button class="thumb-strip__item active" role="tab" aria-selected="true" aria-label="Clifton Beach exterior" data-thumb="0">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/d8/45/d845b16b-27d0-476b-9f6c-3ecd81a07a9b/146641.jpg?width=400&quality=80&format=auto" alt="Exterior view" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Main lounge" data-thumb="1">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/41/ec/41ec247a-a262-4c75-bbbf-4c87110d5429/21_nettleton_main_lounge.jpg?width=400&quality=80&format=auto" alt="Main lounge" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Bedroom suite" data-thumb="2">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/64/cc/64ccb880-5dfc-4923-b105-6c2dbd35b583/146636.jpg?width=400&quality=80&format=auto" alt="Bedroom suite" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Pool terrace" data-thumb="3">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/e4/12/e412654b-a039-48bd-8c27-4741e2b76ffd/146645.jpg?width=400&quality=80&format=auto" alt="Pool and terrace" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Bar" data-thumb="4">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/84/3e/843e4f98-578a-4c73-b203-88330c88436c/21_nettleton_bar.jpg?width=400&quality=80&format=auto" alt="Bar area" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Piano lounge" data-thumb="5">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/b1/69/b1698370-6de9-45a1-9917-755260255705/21_nettleton_piano.jpg?width=400&quality=80&format=auto" alt="Piano lounge" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Property view" data-thumb="6">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/6c/f8/6cf8af5e-c16c-499b-acff-0ef8b0d1578d/146622.jpg?width=400&quality=80&format=auto" alt="Property view" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <button class="thumb-strip__item" role="tab" aria-selected="false" aria-label="Another view" data-thumb="7">
+        <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/bf/2b/bf2b890f-e21c-4c71-a5ac-c34a503521b0/146621.jpg?width=400&quality=80&format=auto" alt="Another view" style="width:100%;height:100%;object-fit:cover">
+      </button>
+    </div>
+
+    <!-- ════════ SUSTAINABILITY BADGE ════════ -->
+    <div class="sustainability">
+      <span class="sustainability__badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13.5 2.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/>
+        </svg>
+        <span style="font-family:var(--fs);">4.5</span> Sustainability Rating
+      </span>
+    </div>
+
+    <!-- ════════ PROPERTY INFO BAR ════════ -->
+    <section class="info-bar" aria-label="Property overview">
+      <div class="info-bar__left">
+        <p class="info-bar__tagline">Luxury Boutique Stay</p>
+        <h2 class="info-bar__heading">21 Nettleton Boutique Hotel &amp; Private Residence</h2>
+      </div>
+      <div class="info-bar__right">
+        <div class="price-card">
+          <div>
+            <span class="price-card__amount">&#163;347.63</span>
+            <span class="price-card__unit"> /person</span>
+          </div>
+          <a href="#" class="price-card__cta">Plan your trip</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ DESCRIPTION ════════ -->
+    <section class="description" aria-label="Property description">
+      <p class="description__text">
+        A picture of privacy and exclusivity, 21 Nettleton Boutique Hotel &amp; Private Residence offers only 5 rooms and a penthouse, all well-appointed and stylishly enhanced with beautiful art, antique furniture and plush decorations. Guests can relax in style at the pool, on the garden terrace or in one of the lounges.
+      </p>
+      <a href="#" class="description__more">Show more</a>
+    </section>
+
+    <!-- ════════ ROOM SPEC GRID ════════ -->
+    <section class="specs" aria-label="Property specifications">
+      <div class="specs__grid">
+        <!-- Guests -->
+        <div class="spec-cell">
+          <svg class="spec-cell__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <span class="spec-cell__label">Guests</span>
+          <span class="spec-cell__value">2-10</span>
+        </div>
+        <!-- Bedrooms -->
+        <div class="spec-cell">
+          <svg class="spec-cell__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 4v16"/>
+            <path d="M2 8h18a2 2 0 0 1 2 2v10"/>
+            <path d="M2 17h20"/>
+            <path d="M6 8v9"/>
+          </svg>
+          <span class="spec-cell__label">Bedrooms</span>
+          <span class="spec-cell__value">5 + Penthouse</span>
+        </div>
+        <!-- Bathrooms -->
+        <div class="spec-cell">
+          <svg class="spec-cell__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z"/>
+            <path d="M6 12V5a2 2 0 0 1 2-2h3v2.25"/>
+            <path d="M14 20v2"/>
+            <path d="M10 20v2"/>
+          </svg>
+          <span class="spec-cell__label">Bathrooms</span>
+          <span class="spec-cell__value">6</span>
+        </div>
+        <!-- Size -->
+        <div class="spec-cell">
+          <svg class="spec-cell__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M9 21V9"/>
+          </svg>
+          <span class="spec-cell__label">Size</span>
+          <span class="spec-cell__value">850 m&#178;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ FACILITIES ════════ -->
+    <section class="facilities" id="facilities">
+        <h3>Facilities</h3>
+        <p class="facilities-sub">Available at this stay</p>
+        <div class="facilities-grid">
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M8 22V19.5C8 18.1193 9.11929 17 10.5 17H13.5C14.8807 17 16 18.1193 16 19.5V22M17 2L17 5M7 2V5M3 10H21M12 14H12.01M8 14H8.01M16 14H16.01"/><rect x="3" y="6" width="18" height="15" rx="2"/></svg>
+                <span>Bar / Lounge</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Secured Parking</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M19 17h2l-2-6h-1M3 17h16V6H3v11zm5-7h4"/><circle cx="6.5" cy="17" r="2.5"/><circle cx="16.5" cy="17" r="2.5"/></svg>
+                <span>Free Parking</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M2 12h20M2 6c2-2 4-3 6-3s4 1 6 3 4 3 6 3M2 18c2-2 4-3 6-3s4 1 6 3 4 3 6 3"/></svg>
+                <span>Outdoor Pool</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M3 11l7-8 4 4 7-6M21 11v10H3V11M7 17h0M12 17h0M17 17h0"/></svg>
+                <span>Restaurant</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span>Room Service</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-2c0-3.31 4.03-6 9-6s9 2.69 9 6v2c0 3.31-4.03 6-9 6z"/><path d="M12 14c2.76 0 5-1.34 5-3s-2.24-3-5-3-5 1.34-5 3 2.24 3 5 3z"/></svg>
+                <span>Spa</span>
+            </div>
+            <div class="facility-item">
+                <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+                <span>WiFi</span>
+            </div>
+        </div>
+        <button class="facilities-more">Show all facilities <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </section>
+
+    <!-- ════════ SUSTAINABILITY SECTION ════════ -->
+    <section class="sustainability-section" id="sustainability">
+        <div class="wrap">
+            <img src="../../../brand/logos/viatu-logo-dark.svg" alt="Viatu" class="sustainability-logo" width="110" height="24">
+            <h3>Sustainability Rating</h3>
+            <div class="sustainability-ratings">
+                <div class="sustainability-rating">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M17 9.24C16.08 9.68 15.09 10 14 10c-1.09 0-2.08-.32-3-1-.92.68-1.91 1-3 1-1.09 0-2.08-.32-3-.76"/></svg>
+                    <div class="sustainability-score nums">4.5</div>
+                    <div class="sustainability-label">Environmental Impact</div>
+                </div>
+                <div class="sustainability-rating">
+                    <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                    <div class="sustainability-score nums">3.9</div>
+                    <div class="sustainability-label">Economic Impact</div>
+                </div>
+                <div class="sustainability-rating">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <div class="sustainability-score nums">4.5</div>
+                    <div class="sustainability-label">Socio-cultural Impact</div>
+                </div>
+            </div>
+            <p class="sustainability-desc">21 Nettleton is committed to responsible tourism, supporting local communities, minimising environmental impact, and preserving the natural beauty of the Cape Town coastline for future generations.</p>
+        </div>
+    </section>
+
+    <!-- ════════ ROOMS SECTION ════════ -->
+    <section class="rooms" aria-label="Rooms and suites">
+      <div class="rooms__header">
+        <p class="section-header__tagline">Accommodation</p>
+        <h3 class="section-header__title">Rooms &amp; Suites</h3>
+      </div>
+      <div class="rooms__grid">
+        <!-- Room 1 -->
+        <article class="room-card">
+          <div class="room-card__image">
+            <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/14/a1/14a10db4-c5d8-4844-902b-c1a83aa1e832/emperor_suite_21-nettleton-21.jpg?width=800&quality=80&format=auto" alt="Luxury Suite at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="room-card__body">
+            <h4 class="room-card__name">Luxury Suite</h4>
+            <div class="room-card__meta">
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 4v16"/>
+                  <path d="M2 8h18a2 2 0 0 1 2 2v10"/>
+                  <path d="M2 17h20"/>
+                  <path d="M6 8v9"/>
+                </svg>
+                1 King bed
+              </span>
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                </svg>
+                2 Guests
+              </span>
+            </div>
+            <p class="room-card__desc">Spacious suite with panoramic ocean views, a private balcony, king-size bed, and en-suite bathroom with rain shower.</p>
+            <a href="#" class="room-card__more">Show more</a>
+          </div>
+        </article>
+        <!-- Room 2 -->
+        <article class="room-card">
+          <div class="room-card__image">
+            <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/1c/e8/1ce86c29-8d1b-43f2-a1b3-9a0b950494f1/king_room_21_rework2.jpg?width=800&quality=80&format=auto" alt="Garden Room at 21 Nettleton" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="room-card__body">
+            <h4 class="room-card__name">Garden Room</h4>
+            <div class="room-card__meta">
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 4v16"/>
+                  <path d="M2 8h18a2 2 0 0 1 2 2v10"/>
+                  <path d="M2 17h20"/>
+                  <path d="M6 8v9"/>
+                </svg>
+                1 Queen bed
+              </span>
+              <span class="room-card__meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                </svg>
+                2 Guests
+              </span>
+            </div>
+            <p class="room-card__desc">Elegant ground-floor room opening onto a lush private garden, featuring artisan furnishings and a deep soaking tub.</p>
+            <a href="#" class="room-card__more">Show more</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ════════ MAP SECTION ════════ -->
+    <section class="map-section" aria-label="Location map">
+      <h3 class="map-section__title">Find it on the Map</h3>
+      <div class="map-section__container">
+        <span class="map-section__placeholder">Map placeholder</span>
+      </div>
+    </section>
+
+    <!-- ════════ FEATURED TRIPS CAROUSEL ════════ -->
+    <section class="trips" aria-label="Featured trips">
+      <div class="trips__inner">
+        <div class="trips__header">
+          <div>
+            <p class="section-header__tagline">Our Top Picks</p>
+            <h3 class="section-header__title">Trips we think you'll love</h3>
+          </div>
+          <div class="trips__nav">
+            <button class="trips__nav-btn" aria-label="Previous trips" id="tripsPrev">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <button class="trips__nav-btn" aria-label="Next trips" id="tripsNext">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="trips__scroll" id="tripsScroll">
+          <!-- Trip 1 -->
+          <article class="trip-card">
+            <div class="trip-card__image">
+              <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/49/13/4913b88e-2ca6-442f-8977-c0e0157d8e4f/149309.jpg?width=800&quality=80&format=auto" alt="Cape Winelands & Safari trip" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+            </div>
+            <h4 class="trip-card__title">Cape Winelands &amp; Safari</h4>
+            <p class="trip-card__duration">10 days</p>
+            <p class="trip-card__price">From &#163;4,250 /person</p>
+          </article>
+          <!-- Trip 2 -->
+          <article class="trip-card">
+            <div class="trip-card__image">
+              <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/49/13/4913b88e-2ca6-442f-8977-c0e0157d8e4f/149309.jpg?width=800&quality=80&format=auto" alt="Serengeti Migration Trail trip" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+            </div>
+            <h4 class="trip-card__title">Serengeti Migration Trail</h4>
+            <p class="trip-card__duration">8 days</p>
+            <p class="trip-card__price">From &#163;5,800 /person</p>
+          </article>
+          <!-- Trip 3 -->
+          <article class="trip-card">
+            <div class="trip-card__image">
+              <img src="https://dpu9z4r46dtyt.cloudfront.net/media/filer_public/49/13/4913b88e-2ca6-442f-8977-c0e0157d8e4f/149309.jpg?width=800&quality=80&format=auto" alt="Okavango Delta Explorer trip" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+            </div>
+            <h4 class="trip-card__title">Okavango Delta Explorer</h4>
+            <p class="trip-card__duration">12 days</p>
+            <p class="trip-card__price">From &#163;6,920 /person</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="footer-upper">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="#">All Trips</a><a href="#">All Stays</a><a href="#">Destinations</a><a href="#">Plan My Trip</a>
+                    <div class="footer-cert">
+                        <div class="footer-cert-label">Certified</div>
+                        <div class="footer-cert-row">
+                            <div class="footer-cert-icon">B<br>Corp</div>
+                            <span class="footer-cert-text">Meeting high standards of social and environmental impact.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Destinations</h4>
+                    <a href="#">Namibia</a><a href="#">Botswana</a><a href="#">Kenya</a><a href="#">Tanzania</a><a href="#">South Africa</a><a href="#">All destinations</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a><a href="#">Sustainability</a><a href="#">Reviews</a><a href="#">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+                    <a href="#" class="footer-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="wrap">
+            <div class="footer-bottom-inner">
+                <div class="footer-bottom-logo"><img src="../../../brand/logos/viatu-logo-white.svg" alt="Viatu" width="90" height="20"></div>
+                <span class="footer-copy">&copy; <span class="nums">2026</span> Viatu. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+  </footer>
+
+  <!-- ════════ JAVASCRIPT ════════ -->
+  <script>
+    // ── Nav scroll behavior (V1: transparent → scrolled at 50px) ──
+    (function() {
+      var nav = document.getElementById('nav');
+      var scrollThreshold = 50;
+
+      function updateNav() {
+        if (window.scrollY > scrollThreshold) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+    })();
+
+    // ── Language dropdown ──
+    (function() {
+      var lang = document.getElementById('lang');
+      var trigger = document.getElementById('langTrigger');
+      var panel = document.getElementById('langPanel');
+      var currentLabel = document.getElementById('langCurrent');
+
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isOpen = lang.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', isOpen);
+      });
+
+      panel.addEventListener('click', function(e) {
+        var opt = e.target.closest('.lang-option');
+        if (!opt) return;
+        panel.querySelectorAll('.lang-option').forEach(function(o) {
+          o.classList.remove('active');
+          o.setAttribute('aria-selected', 'false');
+          var chk = o.querySelector('.lang-check');
+          if (chk) chk.remove();
+        });
+        opt.classList.add('active');
+        opt.setAttribute('aria-selected', 'true');
+        var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('class','lang-check');
+        svg.setAttribute('viewBox','0 0 24 24');
+        var poly = document.createElementNS('http://www.w3.org/2000/svg','polyline');
+        poly.setAttribute('points','20 6 9 17 4 12');
+        svg.appendChild(poly);
+        opt.appendChild(svg);
+        currentLabel.textContent = opt.getAttribute('data-lang');
+        lang.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!lang.contains(e.target)) {
+          lang.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // ── Gallery: thumbnail → hero ──
+    (function() {
+      var slides = document.querySelectorAll('.hero__slide');
+      var thumbs = document.querySelectorAll('.thumb-strip__item');
+
+      function activateSlide(index) {
+        slides.forEach(function(s) { s.classList.remove('active'); });
+        thumbs.forEach(function(t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+
+        if (slides[index]) slides[index].classList.add('active');
+        if (thumbs[index]) {
+          thumbs[index].classList.add('active');
+          thumbs[index].setAttribute('aria-selected', 'true');
+        }
+      }
+
+      thumbs.forEach(function(thumb) {
+        thumb.addEventListener('click', function() {
+          var idx = parseInt(this.getAttribute('data-thumb'), 10);
+          activateSlide(idx);
+        });
+      });
+    })();
+
+    // ── Trips carousel scroll ──
+    (function() {
+      var scroll = document.getElementById('tripsScroll');
+      var prevBtn = document.getElementById('tripsPrev');
+      var nextBtn = document.getElementById('tripsNext');
+      var scrollAmount = 284; // card width + gap
+
+      prevBtn.addEventListener('click', function() {
+        scroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', function() {
+        scroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

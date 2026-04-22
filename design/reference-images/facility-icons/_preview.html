@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viatu Facility Icons — Preview</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Hanken Grotesk',system-ui,sans-serif;background:#f8f9fa;padding:40px 24px;color:#343A40}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+p.sub{font-size:14px;color:#6C757D;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:24px}
+.card{background:#fff;border-radius:12px;padding:24px 16px 16px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.card svg{width:40px;height:40px;margin:0 auto 12px;color:#1C4447}
+.card .name{font-size:12px;font-weight:500;color:#6C757D;word-break:break-word}
+.sizes{margin-top:60px}
+.sizes h2{font-size:20px;font-weight:700;margin-bottom:16px}
+.sizes .row{display:flex;align-items:center;gap:24px;margin-bottom:16px}
+.sizes .row span{font-size:12px;color:#6C757D;min-width:40px}
+.sizes svg{color:#1C4447}
+</style>
+</head>
+<body>
+<h1>Viatu Facility Icons</h1>
+<p class="sub">39 icons at 40px — stroke-width 1.5, Heroicons-outline style. Color: Pthalo (#1C4447).</p>
+
+<div class="grid" id="grid"></div>
+
+<div class="sizes">
+<h2>Size test — wifi icon at multiple sizes</h2>
+<div class="row"><span>16px</span><img src="wifi.svg" width="16" height="16" style="color:#1C4447"></div>
+<div class="row"><span>20px</span><img src="wifi.svg" width="20" height="20"></div>
+<div class="row"><span>24px</span><img src="wifi.svg" width="24" height="24"></div>
+<div class="row"><span>36px</span><img src="wifi.svg" width="36" height="36"></div>
+<div class="row"><span>40px</span><img src="wifi.svg" width="40" height="40"></div>
+</div>
+
+<script>
+const icons = [
+  "24-hour-front-desk","24-hour-security","air-conditioning","bar-lounge",
+  "battery-charging","bbq-picnic-area","bucket-shower","business-centre",
+  "childrens-play-area","communal-dining","conference-facilities","courtesy-car",
+  "currency-exchange","eco-friendly","eco-toilet","elevators","flush-toilet",
+  "free-airport-shuttle","free-parking","gym","hairdresser-barber","heated-pool",
+  "hot-water-shower","indoor-pool","kiddies-club","laundry-service","library",
+  "mosquito-nets","outdoor-pool","private-airstrip","private-vehicle","restaurant",
+  "room-service","secured-parking","spa","tennis-court","tour-sightseeing-desk",
+  "wheelchair-access","wifi"
+];
+const grid = document.getElementById('grid');
+icons.forEach(name => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `<object data="${name}.svg" type="image/svg+xml" width="40" height="40" style="display:block;margin:0 auto 12px"></object><div class="name">${name}</div>`;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
