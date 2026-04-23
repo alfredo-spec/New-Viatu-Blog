@@ -665,15 +665,17 @@
         }
 
         /* ─── RATING BREAKDOWN ─────────────────────────────────── */
+        /* ─── RATING: Editorial Tombstone + Category Plates ───── */
         .rating-section {
             margin-top:56px; padding-top:48px;
             border-top:1px solid var(--g3)
         }
         .rating-header {
-            display:flex; align-items:flex-end; justify-content:space-between;
-            margin-bottom:32px; gap:24px
+            display:flex; align-items:flex-start; justify-content:space-between;
+            gap:48px; padding-bottom:40px; margin-bottom:40px;
+            border-bottom:1px solid rgba(196,196,196,.3)
         }
-        .rating-header-left {}
+        .rating-header-left { flex:1; padding-top:8px }
         .rating-header-tag {
             font-family:var(--fc); font-size:20px; font-weight:700;
             color:var(--sangria); line-height:1; margin-bottom:6px
@@ -682,47 +684,59 @@
             font-family:var(--fs); font-size:24px; font-weight:700;
             color:var(--black); line-height:1.25
         }
-        .rating-overall {
-            display:flex; align-items:center; gap:12px;
-            padding:16px 24px; background:var(--gl);
-            border-radius:var(--rlg); border:1px solid var(--g3);
-            flex-shrink:0
+        .rating-tombstone {
+            display:grid; grid-template-columns:auto 220px;
+            gap:28px; align-items:center; flex-shrink:0
         }
-        .rating-overall-score {
-            font-family:var(--fs); font-size:36px; font-weight:700;
-            color:var(--sangria); line-height:1
+        .rating-tombstone-num {
+            font-family:var(--fs); font-size:96px; font-weight:900;
+            color:var(--sangria); line-height:.85;
+            letter-spacing:-.04em; font-variant-numeric:tabular-nums
         }
-        .rating-overall-meta { display:flex; flex-direction:column; gap:2px }
-        .rating-overall-max { font-size:13px; color:var(--platinum); font-weight:500 }
-        .rating-overall-stars { display:flex; gap:2px }
-        .rating-overall-stars svg { width:14px; height:14px; fill:var(--sangria) }
+        .rating-tombstone-meta { display:flex; flex-direction:column; gap:10px }
+        .rating-tombstone-eyebrow {
+            font-family:var(--fs); font-size:10px; font-weight:700;
+            letter-spacing:.22em; text-transform:uppercase;
+            color:var(--platinum)
+        }
+        .rating-tombstone-rule {
+            width:40px; height:2px; background:var(--sangria)
+        }
+        .rating-tombstone-blurb {
+            font-family:var(--fs); font-size:14px; font-weight:400;
+            font-style:italic; color:var(--gd); line-height:1.5
+        }
 
-        .rating-table { width:100% }
-        .rating-row {
-            display:grid; grid-template-columns:180px 1fr 60px;
-            align-items:center; gap:16px;
-            padding:14px 0; border-bottom:1px solid rgba(222,226,230,.4)
+        .rating-plates {
+            display:grid; grid-template-columns:repeat(3, 1fr); gap:16px
         }
-        .rating-row:last-child { border-bottom:none }
-        .rating-cat {
-            font-size:14px; font-weight:600; color:var(--gd)
+        .rating-plate {
+            display:flex; flex-direction:column;
+            padding:20px; gap:14px; min-height:140px;
+            border:1px solid rgba(196,196,196,.35);
+            border-radius:6px; background:transparent
         }
-        .rating-bar-track {
-            height:6px; background:var(--g3); border-radius:3px;
-            overflow:hidden
+        .rating-plate-label {
+            font-family:var(--fs); font-size:10px; font-weight:700;
+            letter-spacing:.16em; text-transform:uppercase;
+            color:var(--platinum); line-height:1.3
         }
-        .rating-bar-fill {
-            height:100%; border-radius:3px;
-            background:var(--sangria);
-            transition:width .8s var(--ease)
+        .rating-plate-score {
+            font-family:var(--fs); font-size:36px; font-weight:600;
+            color:var(--sangria); line-height:1;
+            font-variant-numeric:tabular-nums; letter-spacing:-.02em
         }
-        .rating-bar-fill.high { background:var(--pthalo) }
-        .rating-score {
-            font-family:var(--fs); font-size:15px; font-weight:700;
-            color:var(--gd); text-align:right
+        .rating-plate-bar {
+            height:2px; background:rgba(196,196,196,.45);
+            border-radius:1px; margin-top:auto;
+            position:relative; overflow:hidden
         }
-        .rating-note {
-            font-size:13px; color:var(--gm); margin-top:4px; line-height:1.4
+        .rating-plate-bar::before {
+            content:""; position:absolute; inset:0 auto 0 0;
+            width:var(--v); background:var(--sangria)
+        }
+        .rating-plate.low .rating-plate-bar::before {
+            background:rgba(84,23,54,.45)
         }
 
         /* ─── PRICING TABLE ────────────────────────────────────── */
@@ -891,8 +905,10 @@
             .glance-5__grid { grid-template-columns:1fr 1fr }
             .glance-5__bottom { flex-direction:column }
             .glance-5__pairs { width:100% }
-            .rating-header { flex-direction:column; align-items:flex-start }
-            .rating-row { grid-template-columns:140px 1fr 50px; gap:12px }
+            .rating-header { flex-direction:column; align-items:flex-start; gap:32px }
+            .rating-tombstone { grid-template-columns:auto 1fr; gap:20px; width:100% }
+            .rating-tombstone-num { font-size:80px }
+            .rating-plates { grid-template-columns:repeat(2, 1fr) }
             .author-bio { flex-direction:column; align-items:center; text-align:center }
             .nl-form { flex-direction:column }
             .footer-grid { grid-template-columns:1fr 1fr; gap:40px 32px }
@@ -909,6 +925,9 @@
             .glance-5__grid { grid-template-columns:1fr }
             .glance-5__top { flex-direction:column }
             .glance-5__score-block { flex-direction:row; gap:12px; width:100%; justify-content:center }
+            .rating-tombstone { grid-template-columns:1fr; gap:16px }
+            .rating-tombstone-num { font-size:64px }
+            .rating-plates { grid-template-columns:1fr }
             .pricing-table thead th { padding:10px 14px; font-size:10px }
             .pricing-table tbody td { padding:12px 14px; font-size:14px }
         }
@@ -1163,65 +1182,60 @@
                     <div class="rating-header-tag">Rating breakdown</div>
                     <div class="rating-header-title">Tawana Camp &mdash; Category Scores</div>
                 </div>
-                <div class="rating-overall">
-                    <span class="rating-overall-score nums">4.5</span>
-                    <div class="rating-overall-meta">
-                        <span class="rating-overall-max">/ 5.0</span>
-                        <div class="rating-overall-stars">
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24" fill="url(#halfStar)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        </div>
+                <div class="rating-tombstone">
+                    <div class="rating-tombstone-num nums">4.5</div>
+                    <div class="rating-tombstone-meta">
+                        <div class="rating-tombstone-eyebrow">Viatu Verdict</div>
+                        <div class="rating-tombstone-rule"></div>
+                        <div class="rating-tombstone-blurb">Six categories land at 4.5 or above. Food and guiding held it back from a clean sweep.</div>
                     </div>
                 </div>
             </div>
-            <div class="rating-table">
-                <div class="rating-row">
-                    <span class="rating-cat">Design &amp; Architecture</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
-                    <span class="rating-score nums">5.0</span>
+            <div class="rating-plates">
+                <div class="rating-plate">
+                    <div class="rating-plate-label">Design &amp; Architecture</div>
+                    <div class="rating-plate-score nums">5.0</div>
+                    <div class="rating-plate-bar" style="--v:100%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Rooms</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
-                    <span class="rating-score nums">5.0</span>
+                <div class="rating-plate">
+                    <div class="rating-plate-label">Rooms</div>
+                    <div class="rating-plate-score nums">5.0</div>
+                    <div class="rating-plate-bar" style="--v:100%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Wildlife &amp; Location</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
-                    <span class="rating-score nums">5.0</span>
+                <div class="rating-plate">
+                    <div class="rating-plate-label">Wildlife &amp; Location</div>
+                    <div class="rating-plate-score nums">5.0</div>
+                    <div class="rating-plate-bar" style="--v:100%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Food &amp; Dining</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
-                    <span class="rating-score nums">3.5</span>
+                <div class="rating-plate low">
+                    <div class="rating-plate-label">Food &amp; Dining</div>
+                    <div class="rating-plate-score nums">3.5</div>
+                    <div class="rating-plate-bar" style="--v:70%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Wine &amp; Drinks</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:90%"></div></div>
-                    <span class="rating-score nums">4.5</span>
+                <div class="rating-plate">
+                    <div class="rating-plate-label">Wine &amp; Drinks</div>
+                    <div class="rating-plate-score nums">4.5</div>
+                    <div class="rating-plate-bar" style="--v:90%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Activities</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%"></div></div>
-                    <span class="rating-score nums">4.0</span>
+                <div class="rating-plate">
+                    <div class="rating-plate-label">Activities</div>
+                    <div class="rating-plate-score nums">4.0</div>
+                    <div class="rating-plate-bar" style="--v:80%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Guiding</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
-                    <span class="rating-score nums">3.5</span>
+                <div class="rating-plate low">
+                    <div class="rating-plate-label">Guiding</div>
+                    <div class="rating-plate-score nums">3.5</div>
+                    <div class="rating-plate-bar" style="--v:70%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Character &amp; Personality</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
-                    <span class="rating-score nums">3.5</span>
+                <div class="rating-plate low">
+                    <div class="rating-plate-label">Character &amp; Personality</div>
+                    <div class="rating-plate-score nums">3.5</div>
+                    <div class="rating-plate-bar" style="--v:70%"></div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Value for Money</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%"></div></div>
-                    <span class="rating-score nums">4.0</span>
+                <div class="rating-plate">
+                    <div class="rating-plate-label">Value for Money</div>
+                    <div class="rating-plate-score nums">4.0</div>
+                    <div class="rating-plate-bar" style="--v:80%"></div>
                 </div>
             </div>
         </div>
