@@ -528,15 +528,17 @@
         .glance-1__tip-text { font-size:14px; color:var(--gd); line-height:1.5 }
 
         /* ─── RATING BREAKDOWN ─────────────────────────────────── */
+        /* ─── RATING: Numeric Pedestal + Index Ledger ─────────── */
         .rating-section {
             margin-top:56px; padding-top:48px;
             border-top:1px solid var(--g3)
         }
         .rating-header {
             display:flex; align-items:flex-end; justify-content:space-between;
-            margin-bottom:32px; gap:24px
+            gap:48px; padding-bottom:32px; margin-bottom:40px;
+            border-bottom:1px solid rgba(196,196,196,.3)
         }
-        .rating-header-left {}
+        .rating-header-left { flex:1 }
         .rating-header-tag {
             font-family:var(--fc); font-size:20px; font-weight:700;
             color:var(--sangria); line-height:1; margin-bottom:6px
@@ -545,47 +547,60 @@
             font-family:var(--fs); font-size:24px; font-weight:700;
             color:var(--black); line-height:1.25
         }
-        .rating-overall {
-            display:flex; align-items:center; gap:12px;
-            padding:16px 24px; background:var(--gl);
-            border-radius:var(--rlg); border:1px solid var(--g3);
-            flex-shrink:0
+        .rating-pedestal {
+            display:flex; flex-direction:column; align-items:flex-end;
+            gap:8px; flex-shrink:0
         }
-        .rating-overall-score {
-            font-family:var(--fs); font-size:36px; font-weight:700;
-            color:var(--sangria); line-height:1
+        .rating-pedestal-num {
+            font-family:var(--fs); font-size:72px; font-weight:300;
+            color:var(--sangria); line-height:.9;
+            letter-spacing:-.02em; font-variant-numeric:tabular-nums
         }
-        .rating-overall-meta { display:flex; flex-direction:column; gap:2px }
-        .rating-overall-max { font-size:13px; color:var(--platinum); font-weight:500 }
-        .rating-overall-stars { display:flex; gap:2px }
-        .rating-overall-stars svg { width:14px; height:14px; fill:var(--sangria) }
+        .rating-pedestal-label {
+            font-size:10px; font-weight:600;
+            letter-spacing:.2em; text-transform:uppercase;
+            color:var(--platinum)
+        }
 
-        .rating-table { width:100% }
-        .rating-row {
-            display:grid; grid-template-columns:180px 1fr 60px;
-            align-items:center; gap:16px;
-            padding:14px 0; border-bottom:1px solid rgba(222,226,230,.4)
+        .rating-ledger {
+            display:flex; flex-direction:column; gap:32px
         }
-        .rating-row:last-child { border-bottom:none }
-        .rating-cat {
-            font-size:14px; font-weight:600; color:var(--gd)
+        .rating-ledger-group { display:flex; flex-direction:column }
+        .rating-ledger-heading {
+            font-family:var(--fs); font-size:10px; font-weight:700;
+            letter-spacing:.22em; text-transform:uppercase;
+            color:var(--platinum); padding-bottom:10px;
+            border-bottom:1px solid rgba(196,196,196,.3); margin-bottom:2px
         }
-        .rating-bar-track {
-            height:6px; background:var(--g3); border-radius:3px;
-            overflow:hidden
+        .rating-ledger-row {
+            display:grid; grid-template-columns:1fr 48px 96px;
+            align-items:center; gap:20px;
+            padding:14px 0;
+            border-bottom:1px solid rgba(222,226,230,.5)
         }
-        .rating-bar-fill {
-            height:100%; border-radius:3px;
-            background:var(--sangria);
-            transition:width .8s var(--ease)
+        .rating-ledger-row:last-child { border-bottom:none }
+        .rating-ledger-cat {
+            font-size:15px; font-weight:500; color:var(--gd)
         }
-        .rating-bar-fill.high { background:var(--pthalo) }
-        .rating-score {
-            font-family:var(--fs); font-size:15px; font-weight:700;
-            color:var(--gd); text-align:right
+        .rating-ledger-score {
+            font-family:var(--fs); font-size:15px; font-weight:600;
+            color:var(--sangria); text-align:right;
+            font-variant-numeric:tabular-nums
         }
-        .rating-note {
-            font-size:13px; color:var(--gm); margin-top:4px; line-height:1.4
+        .rating-ledger-dots {
+            display:flex; gap:5px; justify-content:flex-end
+        }
+        .rating-ledger-dots i {
+            width:8px; height:8px; border-radius:50%;
+            border:1px solid rgba(196,196,196,.65);
+            background:transparent; display:block
+        }
+        .rating-ledger-dots i.filled {
+            background:var(--sangria); border-color:var(--sangria)
+        }
+        .rating-ledger-dots i.half {
+            background:linear-gradient(90deg, var(--sangria) 50%, transparent 50%);
+            border-color:var(--sangria)
         }
 
         /* ─── PRICING TABLE ────────────────────────────────────── */
@@ -757,8 +772,9 @@
             .glance-1__row:nth-last-child(-n+2) { border-bottom:1px solid rgba(222,226,230,.5) }
             .glance-1__row:last-child { border-bottom:none }
             .glance-1__header { flex-direction:column; gap:12px; align-items:flex-start }
-            .rating-header { flex-direction:column; align-items:flex-start }
-            .rating-row { grid-template-columns:140px 1fr 50px; gap:12px }
+            .rating-header { flex-direction:column; align-items:flex-start; gap:24px }
+            .rating-pedestal { flex-direction:row; align-items:baseline; gap:14px }
+            .rating-pedestal-num { font-size:56px }
             .author-bio { flex-direction:column; align-items:center; text-align:center }
             .nl-form { flex-direction:column }
             .footer-grid { grid-template-columns:1fr 1fr; gap:40px 32px }
@@ -774,8 +790,9 @@
             .article-body p { font-size:17px }
             .glance-1__header { padding:16px 20px }
             .glance-1__body { padding:20px }
-            .rating-row { grid-template-columns:1fr 1fr; gap:8px }
-            .rating-cat { grid-column:1 / -1 }
+            .rating-ledger-row { grid-template-columns:1fr auto; gap:6px 16px }
+            .rating-ledger-cat { grid-column:1 / -1 }
+            .rating-ledger-dots { justify-content:flex-start; padding-top:2px }
             .pricing-table thead th { padding:10px 14px; font-size:10px }
             .pricing-table tbody td { padding:12px 14px; font-size:14px }
         }
@@ -1040,65 +1057,67 @@
                     <div class="rating-header-tag">Rating breakdown</div>
                     <div class="rating-header-title">Tawana Camp &mdash; Category Scores</div>
                 </div>
-                <div class="rating-overall">
-                    <span class="rating-overall-score nums">4.5</span>
-                    <div class="rating-overall-meta">
-                        <span class="rating-overall-max">/ 5.0</span>
-                        <div class="rating-overall-stars">
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg viewBox="0 0 24 24" fill="url(#halfStar)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        </div>
-                    </div>
+                <div class="rating-pedestal">
+                    <span class="rating-pedestal-num nums">4.5</span>
+                    <span class="rating-pedestal-label">Out of Five</span>
                 </div>
             </div>
-            <div class="rating-table">
-                <div class="rating-row">
-                    <span class="rating-cat">Design &amp; Architecture</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
-                    <span class="rating-score nums">5.0</span>
+            <div class="rating-ledger">
+                <div class="rating-ledger-group">
+                    <div class="rating-ledger-heading">Stay</div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Design &amp; Architecture</span>
+                        <span class="rating-ledger-score nums">5.0</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i></div>
+                    </div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Rooms</span>
+                        <span class="rating-ledger-score nums">5.0</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i></div>
+                    </div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Food &amp; Dining</span>
+                        <span class="rating-ledger-score nums">3.5</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="half"></i><i></i></div>
+                    </div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Wine &amp; Drinks</span>
+                        <span class="rating-ledger-score nums">4.5</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="half"></i></div>
+                    </div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Rooms</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
-                    <span class="rating-score nums">5.0</span>
+
+                <div class="rating-ledger-group">
+                    <div class="rating-ledger-heading">Experience</div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Wildlife &amp; Location</span>
+                        <span class="rating-ledger-score nums">5.0</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i></div>
+                    </div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Activities</span>
+                        <span class="rating-ledger-score nums">4.0</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i><i></i></div>
+                    </div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Guiding</span>
+                        <span class="rating-ledger-score nums">3.5</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="half"></i><i></i></div>
+                    </div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Character &amp; Personality</span>
+                        <span class="rating-ledger-score nums">3.5</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="half"></i><i></i></div>
+                    </div>
                 </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Wildlife &amp; Location</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:100%"></div></div>
-                    <span class="rating-score nums">5.0</span>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Food &amp; Dining</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
-                    <span class="rating-score nums">3.5</span>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Wine &amp; Drinks</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill high" style="width:90%"></div></div>
-                    <span class="rating-score nums">4.5</span>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Activities</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%"></div></div>
-                    <span class="rating-score nums">4.0</span>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Guiding</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
-                    <span class="rating-score nums">3.5</span>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Character &amp; Personality</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:70%"></div></div>
-                    <span class="rating-score nums">3.5</span>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-cat">Value for Money</span>
-                    <div class="rating-bar-track"><div class="rating-bar-fill" style="width:80%"></div></div>
-                    <span class="rating-score nums">4.0</span>
+
+                <div class="rating-ledger-group">
+                    <div class="rating-ledger-heading">Value</div>
+                    <div class="rating-ledger-row">
+                        <span class="rating-ledger-cat">Value for Money</span>
+                        <span class="rating-ledger-score nums">4.0</span>
+                        <div class="rating-ledger-dots"><i class="filled"></i><i class="filled"></i><i class="filled"></i><i class="filled"></i><i></i></div>
+                    </div>
                 </div>
             </div>
         </div>

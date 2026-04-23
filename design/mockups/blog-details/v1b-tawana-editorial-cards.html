@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1b — Editorial Cards · Tawana Camp Review | Blog Details | Viatu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Hanken+Grotesk:wght@300;400;500;600;700;900&family=Krona+One&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   v1b — Editorial Callout Cards (Tawana)
+   Warmer than v1a. Tables become framed callouts with Caveat labels.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Tokens ────────────────────────────────────────────── */
+:root{
+    --sangria:#541736;--pthalo:#1C4447;--platinum:#C4C4C4;
+    --black:#000;--white:#FFF;--cream:#F3FFB9;
+    --gl:#F8F9FA;--gm:#6C757D;--gd:#343A40;--g3:#DEE2E6;
+    --earth-warm:#E1E3DE;--earth-sand:#E8E0D6;--earth-stone:#B5A898;--earth-clay:#8B7355;
+    --fp:'Krona One',sans-serif;--fs:'Hanken Grotesk',sans-serif;--fc:'Caveat',cursive;
+    --rmd:.375rem;--rlg:.5rem;--rxl:.75rem;--rfull:9999px;
+    --sh-sm:0 1px 2px rgba(0,0,0,.05);
+    --sh-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+    --sh-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+    --dur:200ms;--dur3:300ms;--ease:cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Reset ─────────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--fs);color:var(--gd);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.5}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.nums{font-variant-numeric:tabular-nums;font-family:var(--fs)}
+
+/* ── Reading Progress ──────────────────────────────────── */
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--sangria);z-index:200;width:0;transition:width 80ms linear;pointer-events:none}
+
+/* ── Nav ───────────────────────────────────────────────── */
+.nav{position:fixed;top:3px;left:0;right:0;z-index:100;transition:background var(--dur3) var(--ease),box-shadow var(--dur3) var(--ease)}
+.nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-inner{max-width:700px;margin:0 auto;padding:0 24px;height:88px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;flex-direction:column;align-items:flex-start;line-height:1}
+.nav-logo img{height:24px;width:auto;display:block}
+.nav:not(.scrolled) .logo-dark{display:none}
+.nav.scrolled .logo-white{display:none}
+.nav-logo-blog{font-family:var(--fc);font-size:14px;font-weight:700;letter-spacing:.01em;line-height:1;margin-top:2px;align-self:flex-end}
+.nav:not(.scrolled) .nav-logo-blog{color:rgba(255,255,255,.88)}
+.nav.scrolled .nav-logo-blog{color:#1B1B1B}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-back-btn{font-size:16px;font-weight:700;line-height:1.2;padding:18px 20px;border-radius:4px;display:inline-flex;align-items:center;gap:5px;transition:all var(--dur) var(--ease);letter-spacing:0;cursor:pointer;white-space:nowrap;color:var(--white);background:var(--sangria);border:none}
+.nav-back-btn:hover{background:#6b1d45;transform:translateY(-1px)}
+.lang{position:relative}
+.lang-trigger{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;cursor:pointer;padding:7px 10px;border-radius:var(--rmd);min-height:36px;border:1px solid transparent;background:none;letter-spacing:.04em;line-height:1;transition:all var(--dur) var(--ease)}
+.nav:not(.scrolled) .lang-trigger{color:rgba(255,255,255,.7)}
+.nav:not(.scrolled) .lang-trigger:hover{color:var(--white);background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.nav.scrolled .lang-trigger{color:var(--gm)}
+.nav.scrolled .lang-trigger:hover{color:var(--sangria);background:rgba(84,23,54,.04);border-color:rgba(84,23,54,.15)}
+.lang-globe{width:15px;height:15px;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.lang-code-label{font-size:13px;font-weight:600;letter-spacing:.06em}
+.lang-chevron{display:block;width:11px;height:11px;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--dur) var(--ease)}
+.lang.open .lang-chevron{transform:rotate(180deg)}
+.lang-panel{position:absolute;top:calc(100% + 8px);right:0;min-width:210px;background:var(--white);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.04);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-5px) scale(.98);transform-origin:top right;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur);z-index:20}
+.lang.open .lang-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.lang-panel-header{display:flex;align-items:center;padding:11px 16px 9px;border-bottom:1px solid rgba(0,0,0,.06)}
+.lang-panel-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gm)}
+.lang-option{display:flex;align-items:center;gap:11px;width:100%;padding:11px 16px;border:none;border-left:3px solid transparent;background:none;font-size:13px;font-weight:400;color:var(--gd);cursor:pointer;text-align:left;transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-left-color var(--dur) var(--ease)}
+.lang-option:not(:last-child){border-bottom:1px solid rgba(0,0,0,.045)}
+.lang-option:hover{background:var(--gl);color:var(--sangria);border-left-color:rgba(84,23,54,.3)}
+.lang-option.active{color:var(--sangria);border-left-color:var(--sangria);background:rgba(84,23,54,.03)}
+.lang-option.active .lang-name{font-weight:600}
+.lang-flag{font-size:18px;line-height:1;flex-shrink:0}
+.lang-name{flex:1;font-size:13px}
+.lang-check{width:13px;height:13px;fill:none;stroke:var(--sangria);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;margin-left:auto;flex-shrink:0}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero{padding:calc(88px + 48px) 24px 0;text-align:center;background:var(--white)}
+.hero-inner{max-width:700px;margin:0 auto}
+.hero-crumbs{font-size:14px;color:var(--gm);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.hero-crumbs a{transition:color var(--dur) var(--ease)}
+.hero-crumbs a:hover{color:var(--sangria)}
+.hero-crumbs .sep{color:var(--platinum)}
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:28px}
+.hero-tag{font-size:12px;font-weight:500;color:var(--gm);padding:5px 14px;border-radius:var(--rfull);border:1px solid var(--g3);background:var(--white);transition:all var(--dur) var(--ease)}
+.hero-tag:hover{color:var(--sangria);border-color:rgba(84,23,54,.25);background:rgba(84,23,54,.03)}
+.hero h1{font-family:var(--fp);font-size:clamp(26px,4vw,44px);font-weight:400;color:var(--black);letter-spacing:-.06em;line-height:1.15;margin-bottom:24px}
+.hero-meta{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.hero-author{display:flex;align-items:center;gap:10px}
+.hero-avatar{width:36px;height:36px;border-radius:var(--rfull);overflow:hidden;border:2px solid var(--g3);flex-shrink:0}
+.hero-avatar img{width:100%;height:100%;object-fit:cover}
+.hero-byline{font-size:14px;font-weight:500;color:var(--gd)}
+.hero-byline strong{font-weight:600}
+.hero-dot{width:3px;height:3px;border-radius:var(--rfull);background:var(--platinum)}
+.hero-date{font-size:14px;color:var(--gm)}
+.hero-read{font-size:13px;color:var(--gm)}
+.hero-img{border-radius:var(--rlg);overflow:hidden;box-shadow:var(--sh-md);aspect-ratio:16/9}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+
+/* ── Article Layout ────────────────────────────────────── */
+.article-wrap{max-width:700px;margin:0 auto;padding:56px 24px 0}
+.article-body{min-width:0}
+.article-body p{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px}
+.article-body h2{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black);line-height:1.2;margin:56px 0 18px;scroll-margin-top:110px}
+.article-body h3{font-family:var(--fs);font-size:22px;font-weight:700;color:var(--black);line-height:1.25;margin:40px 0 14px}
+.article-body ul,.article-body ol{font-size:18px;line-height:1.78;color:var(--gd);margin-bottom:24px;padding-left:24px}
+.article-body li{margin-bottom:10px}
+.article-body li strong{color:var(--black)}
+
+.lead{font-size:22px!important;line-height:1.6!important;color:var(--gd)!important}
+.lead::first-letter{font-family:var(--fp);font-size:4.5em;float:left;line-height:.78;margin-right:10px;padding-top:8px;color:var(--sangria)}
+
+/* ── TOC ───────────────────────────────────────────────── */
+.toc-mobile{display:block;margin-bottom:32px}
+.toc-mobile-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;color:var(--gd);background:var(--gl);padding:14px 18px;border-radius:var(--rlg);border:1px solid var(--g3);cursor:pointer;transition:all var(--dur) var(--ease)}
+.toc-mobile-trigger:hover{border-color:var(--sangria);color:var(--sangria)}
+.toc-mobile-trigger svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;transition:transform var(--dur) var(--ease)}
+.toc-mobile.open .toc-mobile-trigger svg{transform:rotate(180deg)}
+.toc-mobile-list{max-height:0;overflow:hidden;transition:max-height var(--dur3) var(--ease)}
+.toc-mobile.open .toc-mobile-list{max-height:500px}
+.toc-mobile-link{display:block;font-size:14px;color:var(--gm);padding:10px 18px;border-left:3px solid transparent;transition:all var(--dur) var(--ease)}
+.toc-mobile-link:hover{color:var(--sangria)}
+.toc-mobile-link.active{color:var(--sangria);font-weight:600;border-left-color:var(--sangria)}
+
+/* ── Inline Images ─────────────────────────────────────── */
+.article-img{margin:40px 0;border-radius:var(--rlg);overflow:hidden;box-shadow:var(--sh-sm)}
+.article-img img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.article-img figcaption{font-size:13px;color:var(--gm);font-style:italic;padding:12px 0 0;line-height:1.5}
+
+/* ── Pull Quote ────────────────────────────────────────── */
+.pullquote{margin:48px 0;padding:24px 0 24px 28px;border-left:4px solid var(--sangria)}
+.pullquote p{font-family:var(--fc)!important;font-size:26px!important;font-weight:700!important;color:var(--sangria)!important;line-height:1.35!important;margin-bottom:6px!important}
+.pullquote cite{font-family:var(--fs);font-size:13px;font-weight:500;color:var(--gm);font-style:normal;letter-spacing:.02em}
+
+/* ── Callout ───────────────────────────────────────────── */
+.callout{margin:32px 0;padding:20px 24px;background:var(--gl);border-left:4px solid var(--pthalo);border-radius:var(--rlg);display:flex;gap:14px;align-items:flex-start}
+.callout-icon{flex-shrink:0;width:20px;height:20px;margin-top:2px}
+.callout-icon svg{width:20px;height:20px;stroke:var(--pthalo);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.callout-label{font-family:var(--fc);font-size:16px;font-weight:700;color:var(--sangria);margin-bottom:4px}
+.callout-text{font-size:15px;color:var(--gd);line-height:1.6}
+
+/* ── Key Takeaways ─────────────────────────────────────── */
+.takeaways{margin:24px 0 40px;padding:28px 32px;background:var(--gl);border-radius:var(--rlg);border:1px solid var(--g3)}
+.takeaways-label{font-family:var(--fc);font-size:20px;font-weight:700;color:var(--sangria);margin-bottom:12px}
+.takeaways ul{margin:0;padding-left:20px;font-size:15px;line-height:1.7}
+.takeaways li{margin-bottom:10px;color:var(--gd)}
+.takeaways li:last-child{margin-bottom:0}
+.takeaways li strong{color:var(--black)}
+
+/* ═══════════════════════════════════════════════════════
+   v1b-SPECIFIC: EDITORIAL CALLOUT CARDS
+   ═══════════════════════════════════════════════════════ */
+
+/* ── At-a-Glance: Framed Card with Cream Top Bar ──────── */
+.glance{margin:16px 0 40px;border:1px solid var(--g3);border-radius:var(--rlg);overflow:hidden;background:var(--white)}
+.glance-top{height:6px;background:var(--cream)}
+.glance-header{padding:22px 28px 8px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.glance-tag{font-family:var(--fc);font-size:22px;font-weight:700;color:var(--sangria);line-height:1}
+.glance-rating{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gd)}
+.glance-rating svg{width:14px;height:14px;fill:var(--sangria)}
+.glance-rating .glance-rating-num{color:var(--black);font-weight:700;margin-left:2px}
+.glance-body{padding:8px 28px 24px;background:var(--gl);display:grid;grid-template-columns:1fr 1fr;gap:4px 28px}
+.glance-row{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--g3)}
+.glance-row:nth-last-child(-n+2){border-bottom:none}
+.glance-icon{flex-shrink:0;width:28px;height:28px;border-radius:var(--rfull);background:var(--white);border:1px solid var(--g3);display:flex;align-items:center;justify-content:center;margin-top:2px}
+.glance-icon svg{width:15px;height:15px;stroke:var(--pthalo);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.glance-content{flex:1;min-width:0}
+.glance-key{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gm);line-height:1.3;margin-bottom:3px}
+.glance-val{font-size:14px;font-weight:500;color:var(--gd);line-height:1.45}
+.glance-val strong{font-weight:700;color:var(--black)}
+
+/* ── Rating: Meter Bar Cards ──────────────────────────── */
+.rating-card{margin:32px 0;background:var(--gl);border:1px solid var(--g3);border-radius:var(--rlg);overflow:hidden}
+.rating-hero{display:flex;align-items:center;gap:24px;padding:28px 32px;background:var(--white);border-bottom:1px solid var(--g3)}
+.rating-hero-score{display:flex;align-items:baseline;gap:4px}
+.rating-hero-num{font-family:var(--fp);font-size:64px;font-weight:400;color:var(--black);letter-spacing:-.05em;line-height:1}
+.rating-hero-denom{font-family:var(--fs);font-size:20px;font-weight:400;color:var(--gm)}
+.rating-hero-right{flex:1;min-width:0}
+.rating-hero-label{font-family:var(--fc);font-size:20px;font-weight:700;color:var(--sangria);line-height:1;margin-bottom:6px}
+.rating-hero-stars{display:inline-flex;gap:3px;margin-bottom:6px}
+.rating-hero-stars svg{width:18px;height:18px}
+.rating-hero-stars .s-full{fill:var(--sangria)}
+.rating-hero-stars .s-half{fill:url(#halfFillB)}
+.rating-hero-stars .s-empty{fill:var(--g3)}
+.rating-hero-caption{font-size:13px;color:var(--gm);line-height:1.5}
+
+.rating-rows{padding:8px 32px 24px}
+.rating-row{padding:18px 0;border-bottom:1px solid var(--g3)}
+.rating-row:last-child{border-bottom:none}
+.rating-row-top{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;margin-bottom:10px}
+.rating-row-cat{font-size:15px;font-weight:600;color:var(--gd)}
+.rating-row-num{font-size:13px;font-weight:700;color:var(--black);white-space:nowrap}
+.rating-bar{position:relative;height:6px;background:var(--g3);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.rating-bar-fill{position:absolute;inset:0 auto 0 0;background:var(--sangria);border-radius:3px;transition:width .6s var(--ease)}
+.rating-row-note{font-size:13px;color:var(--gm);line-height:1.5}
+
+/* ── Pricing: Season Cards ────────────────────────────── */
+.price-cards{margin:16px 0 24px;display:flex;flex-direction:column;gap:12px}
+.price-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:18px 22px;background:var(--white);border:1px solid var(--g3);border-left:4px solid var(--sangria);border-radius:var(--rlg);transition:background var(--dur) var(--ease)}
+.price-card.t-mid-high{background:var(--gl)}
+.price-card.t-high{background:var(--earth-warm)}
+.price-card.t-peak{background:var(--earth-warm);border-left-width:6px}
+.price-card-season{display:flex;flex-direction:column;gap:2px;min-width:92px}
+.price-card-tier{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gm);line-height:1}
+.price-card.t-peak .price-card-tier{color:var(--sangria)}
+.price-card-label{font-size:17px;font-weight:700;color:var(--black);letter-spacing:-.01em;line-height:1.2}
+.price-card-dates{font-size:13px;color:var(--gm);line-height:1.45;font-variant-numeric:tabular-nums}
+.price-card-price{text-align:right;min-width:130px}
+.price-card-num{font-family:var(--fp);font-size:22px;font-weight:400;color:var(--black);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price-card.t-peak .price-card-num{color:var(--sangria)}
+.price-card-unit{font-size:11px;color:var(--gm);margin-top:4px;letter-spacing:.02em}
+.price-fine{font-size:13px;color:var(--gm);line-height:1.6;margin:16px 0 40px}
+.price-fine strong{color:var(--gd);font-weight:600}
+
+/* ── Mid CTA ───────────────────────────────────────────── */
+.mid-cta{text-align:center;margin:56px 0}
+.mid-cta a{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--white);background:var(--sangria);padding:16px 32px;border-radius:var(--rmd);transition:all var(--dur) var(--ease)}
+.mid-cta a:hover{background:#6b1d45;transform:translateY(-1px);box-shadow:var(--sh-md)}
+.mid-cta a svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ── Tags ──────────────────────────────────────────────── */
+.article-tags{display:flex;flex-wrap:wrap;gap:8px;margin:56px 0 0;padding-top:32px;border-top:1px solid var(--g3)}
+.article-tags .hero-tag{font-size:13px}
+
+/* ── Author Bio ────────────────────────────────────────── */
+.author-bio{margin-top:48px;padding:32px;border:1px solid var(--g3);border-radius:var(--rlg);display:flex;gap:24px;align-items:flex-start;background:var(--white)}
+.author-bio-portrait{width:80px;height:80px;border-radius:var(--rfull);overflow:hidden;flex-shrink:0;border:3px solid var(--white);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.author-bio-portrait img{width:100%;height:100%;object-fit:cover}
+.author-bio-content{flex:1}
+.author-bio-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gm);margin-bottom:4px}
+.author-bio-name{font-size:20px;font-weight:700;color:var(--black);line-height:1.25;margin-bottom:4px}
+.author-bio-role{font-size:13px;font-weight:500;color:var(--sangria);margin-bottom:12px}
+.author-bio-text{font-size:15px;color:var(--gm);line-height:1.6;margin-bottom:16px}
+.author-bio-link{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:500;color:var(--sangria);transition:gap var(--dur3) var(--ease)}
+.author-bio-link:hover{gap:8px}
+.author-bio-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── Newsletter ────────────────────────────────────────── */
+.nl{background:var(--earth-warm);padding:80px 0}
+.nl-inner{max-width:520px;margin:0 auto;padding:0 24px;text-align:center}
+.nl-tag{font-family:var(--fc);font-size:22px;font-weight:700;color:var(--sangria);margin-bottom:4px}
+.nl-title{font-family:var(--fp);font-size:clamp(20px,2.5vw,28px);font-weight:400;letter-spacing:-.04em;line-height:1.2;margin-bottom:8px;color:var(--black)}
+.nl-text{font-size:15px;color:var(--gm);margin-bottom:28px;line-height:1.6}
+.nl-form{display:flex;gap:10px}
+.nl-input{flex:1;font-size:15px;color:var(--black);padding:12px 16px;border:1px solid var(--earth-sand);border-radius:var(--rmd);min-height:48px;outline:none;background:var(--white);font-family:var(--fs);transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+.nl-input::placeholder{color:var(--platinum);font-weight:300}
+.nl-input:focus{border-color:var(--pthalo);box-shadow:0 0 0 3px rgba(28,68,71,.08)}
+.nl-btn{font-size:14px;font-weight:500;color:var(--white);background:var(--sangria);padding:12px 28px;border-radius:var(--rmd);min-height:48px;transition:all var(--dur) var(--ease);white-space:nowrap;border:none;font-family:var(--fs);cursor:pointer}
+.nl-btn:hover{opacity:.9}
+.nl-fine{font-size:12px;color:var(--earth-stone);margin-top:14px}
+
+/* ── Related Posts ─────────────────────────────────────── */
+.related{background:var(--earth-warm);padding:0 0 80px}
+.related-inner{max-width:700px;margin:0 auto;padding:0 24px}
+.related-header{margin-bottom:40px}
+.related-tag{font-family:var(--fc);font-size:20px;font-weight:700;color:var(--sangria);margin-bottom:4px}
+.related-title{font-family:var(--fs);font-size:28px;font-weight:700;color:var(--black)}
+.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.related-card{background:var(--white);border-radius:var(--rlg);overflow:hidden;box-shadow:var(--sh-sm);transition:transform var(--dur3) var(--ease),box-shadow var(--dur3) var(--ease)}
+.related-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.related-card-img{aspect-ratio:16/9;overflow:hidden}
+.related-card-img img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur3) var(--ease)}
+.related-card:hover .related-card-img img{transform:scale(1.03)}
+.related-card-body{padding:20px}
+.related-card-cat{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sangria);margin-bottom:8px}
+.related-card-title{font-size:16px;font-weight:700;color:var(--black);line-height:1.3;margin-bottom:8px}
+.related-card-excerpt{font-size:13px;color:var(--gm);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.related-card-meta{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;color:var(--gm)}
+.related-card-meta .dot{width:3px;height:3px;border-radius:var(--rfull);background:var(--platinum)}
+
+/* ── Footer ────────────────────────────────────────────── */
+.footer{background:#1b1b1b}
+.footer-upper{padding:64px 0 56px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;max-width:700px;margin:0 auto;padding:0 24px}
+.footer-col h4{font-size:18px;font-weight:700;color:var(--white);margin-bottom:18px;line-height:1.2}
+.footer-col a{display:block;font-size:14px;font-weight:400;color:rgba(255,255,255,.55);padding:3px 0;line-height:1.5;transition:color var(--dur) var(--ease)}
+.footer-col a:hover{color:var(--white)}
+.footer-social{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.55);padding:3px 0;transition:color var(--dur) var(--ease)}
+.footer-social:hover{color:var(--white)}
+.footer-social svg{width:16px;height:16px;flex-shrink:0;opacity:.65;transition:opacity var(--dur) var(--ease)}
+.footer-social:hover svg{opacity:1}
+.footer-cert{margin-top:20px;padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:var(--rlg)}
+.footer-cert-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px}
+.footer-cert-row{display:flex;align-items:center;gap:10px}
+.footer-cert-icon{width:36px;height:36px;border-radius:var(--rfull);border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:rgba(255,255,255,.5);line-height:1.1;text-align:center;flex-shrink:0}
+.footer-cert-text{font-size:10px;color:rgba(255,255,255,.3);line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:24px 0}
+.footer-bottom-inner{max-width:700px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-bottom-logo img{height:20px;width:auto;display:block;opacity:.5}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media(max-width:768px){
+    .nav-inner{height:64px;padding:0 16px}
+    .nav-logo img{height:20px}
+    .nav-logo-blog{font-size:12px}
+    .nav-right{gap:8px}
+    .nav-back-btn{font-size:14px;font-weight:700;padding:12px 16px;letter-spacing:-.02em}
+    .lang-trigger{width:36px;height:36px;padding:0;justify-content:center;min-height:unset}
+    .lang-globe{width:16px;height:16px}
+    .lang-code-label{display:none}
+    .lang-chevron{display:none}
+    .lang-panel{position:fixed;top:64px;left:16px;right:16px;min-width:unset;transform-origin:top center}
+    .hero{padding-top:calc(64px + 36px)}
+    .hero h1{font-size:clamp(24px,5vw,36px)}
+    .article-wrap{padding-top:40px}
+    .article-body h2{font-size:24px;margin-top:44px}
+    .article-body h3{font-size:20px}
+    .related-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
+    .nl-form{flex-direction:column}
+    .glance-body{grid-template-columns:1fr;padding:8px 20px 20px}
+    .glance-header{padding:20px 20px 8px}
+    .glance-row:nth-last-child(-n+2){border-bottom:1px solid var(--g3)}
+    .glance-row:last-child{border-bottom:none}
+    .rating-hero{flex-direction:column;align-items:flex-start;gap:12px;padding:24px}
+    .rating-hero-num{font-size:56px}
+    .rating-rows{padding:8px 24px 20px}
+    .price-card{grid-template-columns:1fr;gap:10px;padding:16px 18px}
+    .price-card-price{text-align:left;min-width:unset}
+}
+@media(max-width:480px){
+    .nav-inner{height:56px;padding:0 16px}
+    .nav-back-btn{font-size:14px;padding:12px 16px;border-radius:4px}
+    .lang-panel{top:56px}
+    .hero-meta{gap:10px}
+    .article-body p{font-size:17px}
+    .lead{font-size:20px!important}
+    .lead::first-letter{font-size:3.5em}
+    .author-bio{flex-direction:column;align-items:center;text-align:center}
+    .footer-grid{grid-template-columns:1fr}
+    .takeaways{padding:22px 20px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <linearGradient id="halfFillB" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="50%" stop-color="#541736"/>
+            <stop offset="50%" stop-color="#DEE2E6"/>
+        </linearGradient>
+    </defs>
+</svg>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">
+            <img src="../../brand/logos/viatu-logo-white.svg" class="logo-white" alt="Viatu" width="110" height="24">
+            <img src="../../brand/logos/viatu-logo-dark.svg" class="logo-dark" alt="Viatu" width="110" height="24">
+            <span class="nav-logo-blog">blog</span>
+        </a>
+        <div class="nav-right">
+            <div class="lang" id="lang">
+                <button class="lang-trigger" id="langTrigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select language">
+                    <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                        <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.5"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.5"/>
+                    </svg>
+                    <span class="lang-code-label" id="langCurrent">EN</span>
+                    <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="lang-panel" id="langPanel" role="listbox">
+                    <div class="lang-panel-header">
+                        <span class="lang-panel-label">Language</span>
+                    </div>
+                    <button class="lang-option active" data-lang="EN" role="option" aria-selected="true">
+                        <span class="lang-flag">&#127468;&#127463;</span>
+                        <span class="lang-name">English</span>
+                        <svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                    </button>
+                    <button class="lang-option" data-lang="DE" role="option" aria-selected="false">
+                        <span class="lang-flag">&#127465;&#127466;</span>
+                        <span class="lang-name">Deutsch</span>
+                    </button>
+                    <button class="lang-option" data-lang="FR" role="option" aria-selected="false">
+                        <span class="lang-flag">&#127467;&#127479;</span>
+                        <span class="lang-name">Français</span>
+                    </button>
+                    <button class="lang-option" data-lang="ES" role="option" aria-selected="false">
+                        <span class="lang-flag">&#127466;&#127480;</span>
+                        <span class="lang-name">Español</span>
+                    </button>
+                </div>
+            </div>
+            <a href="/" class="nav-back-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                <span>Back to homepage</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-inner reveal">
+        <div class="hero-crumbs">
+            <a href="#">Blog</a><span class="sep">/</span>
+            <a href="#">Lodge Reviews</a><span class="sep">/</span>
+            <a href="#">Botswana</a>
+        </div>
+        <div class="hero-tags">
+            <span class="hero-tag">Botswana</span>
+            <span class="hero-tag">Okavango Delta</span>
+            <span class="hero-tag">Lodge Review</span>
+            <span class="hero-tag">Natural Selection</span>
+        </div>
+        <h1>Tawana Camp Review: Natural Selection's Flagship Delivers (Almost)</h1>
+        <div class="hero-meta">
+            <div class="hero-author">
+                <div class="hero-avatar"><img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Barbara Buchel"></div>
+                <span class="hero-byline">By <strong>Barbara Buchel</strong></span>
+            </div>
+            <span class="hero-dot"></span>
+            <span class="hero-date nums">January 2026</span>
+            <span class="hero-dot"></span>
+            <span class="hero-read nums">15 min read</span>
+        </div>
+    </div>
+    <div class="hero-inner" style="margin-top:8px">
+        <figure class="hero-img reveal">
+            <img src="../../../public/images/photos/accommodation-camp-suite.jpg" alt="Tawana Camp suite overlooking the Okavango Delta">
+        </figure>
+    </div>
+</section>
+
+<div class="article-wrap">
+    <article class="article-body">
+
+        <!-- ─── At a Glance: Editorial Callout Card ─── -->
+        <section class="glance reveal" aria-labelledby="at-a-glance">
+            <div class="glance-top"></div>
+            <div class="glance-header">
+                <span class="glance-tag" id="at-a-glance">At a glance</span>
+                <span class="glance-rating" aria-label="Rated 4.5 out of 5">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:url(#halfFillB)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span class="glance-rating-num nums">4.5 / 5</span>
+                </span>
+            </div>
+            <div class="glance-body">
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Lodge</div>
+                        <div class="glance-val"><strong>Tawana Camp</strong></div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Location</div>
+                        <div class="glance-val">Moremi Game Reserve, Gomoti River</div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Operator</div>
+                        <div class="glance-val">Natural Selection</div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Opened</div>
+                        <div class="glance-val nums">May 2024</div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><path d="M2 12h20M2 12l3-3m-3 3l3 3M22 12l-3-3m3 3l-3 3"/><rect x="7" y="7" width="10" height="10"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Rooms</div>
+                        <div class="glance-val"><span class="nums">8</span> suites · <span class="nums">3</span> family units</div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Price Range</div>
+                        <div class="glance-val nums">$1,895 – $3,895 pp / night</div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Best For</div>
+                        <div class="glance-val">Predator sightings over activity menus</div>
+                    </div>
+                </div>
+                <div class="glance-row">
+                    <div class="glance-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="glance-content">
+                        <div class="glance-key">Children</div>
+                        <div class="glance-val"><span class="nums">6+</span> welcome · private vehicle under <span class="nums">9</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Takeaways -->
+        <div class="takeaways reveal">
+            <div class="takeaways-label">Key takeaways</div>
+            <ul>
+                <li><strong>The most visually striking Okavango Delta lodge I've stayed at.</strong> A decade of Natural Selection learnings poured into one property.</li>
+                <li><strong>Wildlife delivers even in green season.</strong> Leopards mating in a tree. A pride of twenty lions on the road. Two hundred marabou storks in one clearing.</li>
+                <li><strong>Rooms are villa-scale</strong> — 100 sqm, Jura coffee machine with origin-labeled beans, private plunge pool.</li>
+                <li><strong>Food is the weak spot.</strong> Buffets and overcooked fillets at a $2k–$4k/night price point. The wine program saves it.</li>
+                <li><strong>Botswana pricing justified</strong> — a rare sentence. But Tawana earns it.</li>
+            </ul>
+        </div>
+
+        <!-- TOC -->
+        <div class="toc-mobile" id="tocMobile">
+            <button class="toc-mobile-trigger" id="tocMobileTrigger">
+                Table of contents
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="toc-mobile-list" id="tocMobileList">
+                <a href="#arrival" class="toc-mobile-link">The Arrival</a>
+                <a href="#vibe" class="toc-mobile-link">The Vibe</a>
+                <a href="#rooms" class="toc-mobile-link">The Rooms</a>
+                <a href="#food" class="toc-mobile-link">The Food (and the Wine)</a>
+                <a href="#wildlife" class="toc-mobile-link">Wildlife &amp; Activities</a>
+                <a href="#verdict" class="toc-mobile-link">The Verdict</a>
+                <a href="#ratings" class="toc-mobile-link">Rating Breakdown</a>
+                <a href="#pricing" class="toc-mobile-link">Pricing</a>
+            </div>
+        </div>
+
+        <p class="lead reveal">Natural Selection opened Tawana Camp in May <span class="nums">2024</span>, their first lodge they fully own and operate. Eight suites on the Gomoti River, in the southeastern corner of Moremi Game Reserve. Their thesis statement as a safari company. So does it hold up? Mostly. Beautifully. With one caveat.</p>
+
+        <h2 id="arrival" class="reveal">The Arrival</h2>
+        <p class="reveal">Name was waiting at the airstrip. No cold towels, no welcome drink, no ceremony. Just your guide, a Land Cruiser, and a handshake. The fanfare comes later.</p>
+        <p class="reveal">The drive in took over an hour, though "drive" undersells it. We hadn't been on the dirt track for ten minutes before we stopped for our first sighting. Then another. Mopane scrub thinning out, the Gomoti River pulling the landscape open, and already the game was announcing itself. By the time we reached the lodge, we'd been on safari for an hour without technically starting one.</p>
+        <p class="reveal">Then a woven boca tunnel. Cool shade, lowered voices, the feeling of crossing a threshold. And the Delta is in front of you. One of its arms, green and wide, with a horizon line that doesn't quite exist. Staff waiting with cold towels and refreshments. The welcome choreography that the airstrip skipped, delivered here against a backdrop that earns it.</p>
+
+        <figure class="article-img reveal">
+            <img src="../../reference-images/great-migration/game-drive-serengeti.jpg" alt="Safari game drive through Moremi Game Reserve">
+            <figcaption>The drive in from the airstrip is already a game drive — Moremi Game Reserve, Botswana.</figcaption>
+        </figure>
+
+        <h2 id="vibe" class="reveal">The Vibe</h2>
+        <p class="reveal">The architecture hits you before the details do. Modern, but not trying to prove anything. Clean geometric lines softened by organic materials, pale wood and earthy tones pulled from the local Batawana tribal palette. Dorsia Travel's Tom Cahalan called it "Bisate meets Miavana." He's not wrong.</p>
+        <p class="reveal">The camp is unfenced. Completely. Elephants browse behind the suites. Baboons cross the walkways at 6 AM like commuters who haven't had their coffee. An impala stood fifteen meters from the pool one afternoon, utterly indifferent to the fact that I was in it.</p>
+
+        <div class="pullquote reveal">
+            <p>"Beauty without eccentricity is just a very expensive hotel."</p>
+            <cite>On what Tawana is missing</cite>
+        </div>
+
+        <p class="reveal">Here's what keeps it from the top shelf. Walk through Duke's Camp — part of Natural Selection's collaboration with Uncharted Africa, older, rougher around the edges — and you feel personality radiating from every crooked bookshelf, every faded map on the wall. Tawana doesn't have that yet. It's gorgeous, immaculately designed, impressive in every measurable dimension. But "impressive" and "unforgettable" aren't the same word.</p>
+        <p class="reveal">And here's the frustrating thing: the story is right there. Tawana Camp is named after Chief Tawana Moremi, the current paramount chief of the Batawana people and an active partner in the lodge. His grandmother, Elizabeth Pulane Moremi, regent queen from <span class="nums">1946</span> to <span class="nums">1964</span>, convinced her people to set aside their ancestral hunting grounds and proclaim Moremi Game Reserve in <span class="nums">1963</span>. Three generations of one family. That's not a marketing angle. That's a legacy. And it's barely visible at the property.</p>
+
+        <h2 id="rooms" class="reveal">The Rooms</h2>
+        <p class="reveal">Call them suites and you'd be underselling it. These are villas. A hundred square meters each, <span class="nums">130</span> for the family configurations. And every one of them looks out over the wetlands.</p>
+        <p class="reveal">What's clever is how the space is divided. A hundred square meters could feel cavernous, but Tawana breaks each villa into distinct worlds. The living room is its own zone: a Jura coffee machine with origin-labeled beans, coffee table books I actually opened, a minibar stocked with South African gins — Inverroche, The Botanist, Bombay, Bloedlemoen. No entry-level filler. The bedroom is a separate room entirely. The bathroom is its own space too, with indoor and outdoor showers and a freestanding bathtub deep enough to disappear into.</p>
+
+        <figure class="article-img reveal">
+            <img src="../../../public/images/photos/accommodation-camp-suite.jpg" alt="Suite interior at Tawana Camp">
+            <figcaption>Villa-scale suites at Tawana — <span class="nums">100 sqm</span> of carefully partitioned space.</figcaption>
+        </figure>
+
+        <p class="reveal">Cork flooring underfoot. Silent. Cool. The glass balcony doors actually close properly. They seal. At North Island, the doors fought you and leaked warm air back in like a personal grudge. At Tawana, you slide them shut and the air conditioning does its job.</p>
+
+        <div class="callout reveal">
+            <div class="callout-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div>
+                <div class="callout-label">Pro tip</div>
+                <div class="callout-text">Request rooms <span class="nums">5</span> through <span class="nums">7</span>. They're closest to the main area. Room <span class="nums">8</span> is beautiful but the walk to dinner takes long enough that you'll start questioning your choice somewhere around the third bend in the boardwalk.</div>
+            </div>
+        </div>
+
+        <h2 id="food" class="reveal">The Food (and the Wine That Saves It)</h2>
+        <p class="reveal">I'll be direct. The food at Tawana is fine. Not bad. Not exciting. Fine. This is a lodge that charges between $<span class="nums">1,895</span> and $<span class="nums">3,895</span> per person per night. At that price point, "fine" lands like a missed note.</p>
+        <p class="reveal">The problem is the buffets. The kitchen defaults to that generic safari-lodge format too often: warm chafing dishes, stainless steel lids, the faint metallic smell of a hotel breakfast bar. The beef fillets came out overcooked more than once. When your room has origin-labeled coffee beans and a gin selection that rivals a Cape Town cocktail bar, a buffet lunch feels like it belongs to a different property.</p>
+        <p class="reveal">Now. The wine program. This is where Tawana overcorrects for the kitchen, and overcorrects beautifully. A walk-in wine cellar. Cool stone air when you step inside, the temperature drop sharp enough to make you pause. The sommelier, ET, is the real find. Trained in Stellenbosch, flown there specifically to learn the craft, and you can feel the difference between someone performing wine knowledge and someone who actually cares about what's in the glass.</p>
+
+        <h2 id="wildlife" class="reveal">Wildlife &amp; Activities</h2>
+        <p class="reveal">Let me deal with the restrictions first. Moremi Game Reserve is a national park. That means: sunset curfew at <span class="nums">6:30</span> PM. No walking safaris. No boating. No night drives. On paper, the activity menu looks thin. In practice, the game concentration on the Gomoti River corridor makes the restrictions feel like a footnote.</p>
+
+        <figure class="article-img reveal">
+            <img src="../../reference-images/great-migration/leopard-tree-masai-mara.jpg" alt="Leopard resting in a tree">
+            <figcaption>Leopards mating in a tree, close enough to hear — one of several standout sightings over two days.</figcaption>
+        </figure>
+
+        <p class="reveal">What actually happened: leopards mating in a tree, close enough to the vehicle that I could hear the sound. A pride of twenty lions sleeping on the road, sprawled across the track like they owned it. Towers of giraffe with their young, backlit by the kind of light that only exists between a thunderstorm and sunset. Buffalo herds in the hundreds. Elephant families — groups of twenty, mothers and calves interacting. And birds: two hundred marabou storks standing in a single clearing, prehistoric and motionless.</p>
+
+        <div class="callout reveal">
+            <div class="callout-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2v1M12 6a4 4 0 0 0-4 4c0 2 1 3.5 2 4.5.67.67 1 1.17 1 1.5v1h2v-1c0-.33.33-.83 1-1.5 1-1 2-2.5 2-4.5a4 4 0 0 0-4-4z"/></svg></div>
+            <div>
+                <div class="callout-label">Pair it right</div>
+                <div class="callout-text">Pair Tawana with Duke's Camp or North Island on the same circuit. Duke's sits on a private concession — walking safaris, night drives, mokoro excursions, all the things Moremi's rules don't allow. Tawana gives you predators and design. The sister properties fill the gaps.</div>
+            </div>
+        </div>
+
+        <h2 id="verdict" class="reveal">The Verdict</h2>
+        <p class="reveal">Natural Selection built something extraordinary here. The most visually impressive lodge in the Okavango Delta. The design is sharp without being cold. The rooms improve on everything they learned at North Island, and the improvements are the kind you feel — sealed doors, cork floors, spatial separation — rather than the kind you photograph. The wildlife on the Gomoti River justifies the trip on its own terms.</p>
+        <p class="reveal">The food is the weakest category. Overcooked beef fillets and buffet trays at a price point that should mean plated service and a chef who knows your name. ET and the wine cellar don't fully erase that, though they come close enough that the sting fades by the second glass of Stellenbosch Chenin Blanc.</p>
+        <p class="reveal">What's missing? Personality. The <span class="nums">0.5</span> it didn't earn. It's <span class="nums">18</span> months old. These things can develop. If Natural Selection lets you feel the Moremi heritage, not just in the name above the door but in the experience, this becomes a <span class="nums">5/5</span> property.</p>
+        <p class="reveal">Is it worth $<span class="nums">1,895</span> to $<span class="nums">3,895</span> a night? For the leopards and the wine cellar and the rooms and that toilet with the elephant view? Yes. Worth every cent.</p>
+
+        <div class="mid-cta reveal">
+            <a href="#">
+                Plan a Botswana safari
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- ─── Rating Breakdown: Meter Bar Cards ─── -->
+        <h2 id="ratings" class="reveal">Rating Breakdown</h2>
+
+        <div class="rating-card reveal">
+            <div class="rating-hero">
+                <div class="rating-hero-score">
+                    <span class="rating-hero-num nums">4.5</span>
+                    <span class="rating-hero-denom">/ 5</span>
+                </div>
+                <div class="rating-hero-right">
+                    <div class="rating-hero-label">Overall</div>
+                    <div class="rating-hero-stars" aria-label="Rated 4.5 out of 5">
+                        <svg viewBox="0 0 24 24" class="s-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" class="s-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" class="s-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" class="s-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" class="s-half"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="rating-hero-caption">A near-flagship. Missing only the last half-star of soul.</div>
+                </div>
+            </div>
+
+            <div class="rating-rows">
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Design &amp; Architecture</span><span class="rating-row-num nums">5 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:100%"></span></div>
+                    <div class="rating-row-note">The most striking lodge in the Delta. Nothing close.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Rooms</span><span class="rating-row-num nums">5 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:100%"></span></div>
+                    <div class="rating-row-note">Villa-scale. Smart North Island improvements. The Jura alone earns a star.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Wildlife &amp; Location</span><span class="rating-row-num nums">5 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:100%"></span></div>
+                    <div class="rating-row-note">Gomoti River corridor. Leopards, lions, buffalo, elephants. Even in green season.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Food &amp; Dining</span><span class="rating-row-num nums">3 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:60%"></span></div>
+                    <div class="rating-row-note">Overcooked fillets, repetitive buffets. Boma setting is beautiful. Breakfast is the bright spot.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Wine &amp; Drinks</span><span class="rating-row-num nums">4.5 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:90%"></span></div>
+                    <div class="rating-row-note">ET, the Stellenbosch-trained sommelier. Walk-in cellar. Inverroche on the bar.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Activities</span><span class="rating-row-num nums">4 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:80%"></span></div>
+                    <div class="rating-row-note">Park rules restrict the menu, but game density compensates. Helicopter available.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Guiding</span><span class="rating-row-num nums">3.5 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:70%"></span></div>
+                    <div class="rating-row-note">Experienced and calm, not captivating. The wildlife deserves narration to match.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Character &amp; Personality</span><span class="rating-row-num nums">3.5 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:70%"></span></div>
+                    <div class="rating-row-note">Gorgeous but searching for its soul. Needs eccentricity.</div>
+                </div>
+                <div class="rating-row">
+                    <div class="rating-row-top"><span class="rating-row-cat">Value for Money</span><span class="rating-row-num nums">4 / 5</span></div>
+                    <div class="rating-bar"><span class="rating-bar-fill" style="width:80%"></span></div>
+                    <div class="rating-row-note">Botswana pricing justified. A rare sentence in any Okavango Delta review.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── Pricing: Season Cards ─── -->
+        <h2 id="pricing" class="reveal">Pricing (<span class="nums">2026</span> Rates)</h2>
+
+        <div class="price-cards reveal">
+            <div class="price-card t-low">
+                <div class="price-card-season">
+                    <span class="price-card-tier">Low</span>
+                    <span class="price-card-label">Green Season</span>
+                </div>
+                <div class="price-card-dates nums">Jan 10 – Mar 31</div>
+                <div class="price-card-price">
+                    <div class="price-card-num">from $1,895</div>
+                    <div class="price-card-unit">pp / night</div>
+                </div>
+            </div>
+            <div class="price-card t-mid">
+                <div class="price-card-season">
+                    <span class="price-card-tier">Mid</span>
+                    <span class="price-card-label">Shoulder</span>
+                </div>
+                <div class="price-card-dates nums">Apr · Nov 1 – Dec 19</div>
+                <div class="price-card-price">
+                    <div class="price-card-num">$2,795</div>
+                    <div class="price-card-unit">pp / night</div>
+                </div>
+            </div>
+            <div class="price-card t-mid-high">
+                <div class="price-card-season">
+                    <span class="price-card-tier">Mid / High</span>
+                    <span class="price-card-label">Transition</span>
+                </div>
+                <div class="price-card-dates nums">May · Oct</div>
+                <div class="price-card-price">
+                    <div class="price-card-num">$2,935</div>
+                    <div class="price-card-unit">pp / night</div>
+                </div>
+            </div>
+            <div class="price-card t-high">
+                <div class="price-card-season">
+                    <span class="price-card-tier">High</span>
+                    <span class="price-card-label">Dry Season</span>
+                </div>
+                <div class="price-card-dates nums">Jun · Sep · Dec 20 – Jan 9</div>
+                <div class="price-card-price">
+                    <div class="price-card-num">$3,295 – $3,495</div>
+                    <div class="price-card-unit">pp / night</div>
+                </div>
+            </div>
+            <div class="price-card t-peak">
+                <div class="price-card-season">
+                    <span class="price-card-tier">Peak</span>
+                    <span class="price-card-label">River Crossings</span>
+                </div>
+                <div class="price-card-dates nums">Jul – Aug</div>
+                <div class="price-card-price">
+                    <div class="price-card-num">$3,895</div>
+                    <div class="price-card-unit">pp / night</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="price-fine reveal"><strong>Included:</strong> All meals, local-brand drinks, two daily game drives, park fees, airstrip transfers, limited laundry. <strong>Not included:</strong> Premium wines and spirits, gratuities, helicopter flights, international flights. Children <span class="nums">6</span> and older are welcome. Families with children under <span class="nums">9</span> must pre-book a private safari vehicle.</p>
+
+        <div class="article-tags reveal">
+            <span class="hero-tag">Botswana</span>
+            <span class="hero-tag">Okavango Delta</span>
+            <span class="hero-tag">Moremi Game Reserve</span>
+            <span class="hero-tag">Luxury Safari</span>
+            <span class="hero-tag">Lodge Review</span>
+            <span class="hero-tag">Natural Selection</span>
+            <span class="hero-tag">Green Season</span>
+        </div>
+
+        <div class="author-bio reveal">
+            <div class="author-bio-portrait"><img src="../../../public/images/photos/portrait-safari-specialist.png" alt="Barbara Buchel"></div>
+            <div class="author-bio-content">
+                <div class="author-bio-label">Written by</div>
+                <div class="author-bio-name">Barbara Buchel</div>
+                <div class="author-bio-role">Safari Specialist &amp; Editor</div>
+                <p class="author-bio-text">Barbara has been exploring Southern and East Africa's wilderness for over a decade. She writes about lodge reviews, conservation partnerships, and the future of sustainable safari tourism.</p>
+                <a href="#" class="author-bio-link">
+                    View all articles
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+            </div>
+        </div>
+
+    </article>
+</div>
+
+<section class="nl">
+    <div class="nl-inner reveal">
+        <p class="nl-tag">Stay inspired</p>
+        <h2 class="nl-title">Okavango Delta lodge updates, monthly</h2>
+        <p class="nl-text">New openings, seasonal rates, and honest reviews like this one. Delivered every two weeks.</p>
+        <div class="nl-form">
+            <input type="email" class="nl-input" placeholder="Your email address" aria-label="Email">
+            <button class="nl-btn">Subscribe</button>
+        </div>
+        <p class="nl-fine">No spam. Unsubscribe anytime.</p>
+    </div>
+</section>
+
+<section class="related">
+    <div class="related-inner">
+        <div class="related-header reveal">
+            <p class="related-tag">Keep reading</p>
+            <h2 class="related-title">Related articles</h2>
+        </div>
+        <div class="related-grid">
+            <a href="#" class="related-card reveal">
+                <div class="related-card-img"><img src="../../../public/images/photos/wildlife-elephants-namibia.jpg" alt="Elephants at a waterhole"></div>
+                <div class="related-card-body">
+                    <div class="related-card-cat">Botswana</div>
+                    <div class="related-card-title">North Island Review: Natural Selection's Water-First Flagship</div>
+                    <div class="related-card-excerpt">The sister property in the northern Delta. Mokoro excursions, boating, and how it compares to Tawana.</div>
+                    <div class="related-card-meta"><span>Barbara Buchel</span><span class="dot"></span><span class="nums">Dec 2025</span></div>
+                </div>
+            </a>
+            <a href="#" class="related-card reveal">
+                <div class="related-card-img"><img src="../../reference-images/great-migration/safari-vehicle-masai-mara.jpg" alt="Safari vehicle on a dusty road"></div>
+                <div class="related-card-body">
+                    <div class="related-card-cat">Okavango Delta</div>
+                    <div class="related-card-title">Okavango Delta Lodges: The Complete Guide</div>
+                    <div class="related-card-excerpt">Our ranked list of the Delta's top lodges, grouped by concession type and season.</div>
+                    <div class="related-card-meta"><span>Barbara Buchel</span><span class="dot"></span><span class="nums">Nov 2025</span></div>
+                </div>
+            </a>
+            <a href="#" class="related-card reveal">
+                <div class="related-card-img"><img src="../../reference-images/great-migration/leopard-tree-masai-mara.jpg" alt="Leopard in a tree"></div>
+                <div class="related-card-body">
+                    <div class="related-card-cat">Botswana</div>
+                    <div class="related-card-title">Moremi Game Reserve Guide</div>
+                    <div class="related-card-excerpt">History, wildlife, and practical planning for Africa's first indigenous-proclaimed reserve.</div>
+                    <div class="related-card-meta"><span>Zeldi Smulders</span><span class="dot"></span><span class="nums">Oct 2025</span></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-upper">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="#">All Trips</a>
+                <a href="#">All Stays</a>
+                <a href="#">Destinations</a>
+                <a href="#">Plan My Trip</a>
+                <div class="footer-cert">
+                    <div class="footer-cert-label">Certified</div>
+                    <div class="footer-cert-row">
+                        <div class="footer-cert-icon">B<br>Corp</div>
+                        <span class="footer-cert-text">Meeting high standards of social and environmental impact.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Destinations</h4>
+                <a href="#">Botswana</a><a href="#">Namibia</a><a href="#">Kenya</a><a href="#">Tanzania</a><a href="#">South Africa</a><a href="#">All destinations</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="#">About Us</a><a href="#">Sustainability</a><a href="#">Reviews</a><a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow us</h4>
+                <a href="#" class="footer-social">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    Instagram
+                </a>
+                <a href="#" class="footer-social">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+            <div class="footer-bottom-logo"><img src="../../brand/logos/viatu-logo-white.svg" alt="Viatu" width="90" height="20"></div>
+            <span class="footer-copy">&copy; <span class="nums">2026</span> Viatu. All rights reserved.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    var bar = document.getElementById('progress');
+    function updateProgress(){
+        var s = window.scrollY;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = h > 0 ? (s / h * 100) + '%' : '0%';
+    }
+    window.addEventListener('scroll', updateProgress, {passive:true});
+
+    var nav = document.getElementById('nav');
+    nav.classList.add('scrolled');
+
+    var langWrap = document.getElementById('lang');
+    var langTrigger = document.getElementById('langTrigger');
+    var langCurrent = document.getElementById('langCurrent');
+    langTrigger.addEventListener('click', function(e){
+        e.stopPropagation();
+        var isOpen = langWrap.classList.toggle('open');
+        langTrigger.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('.lang-option').forEach(function(opt){
+        opt.addEventListener('click', function(){
+            document.querySelectorAll('.lang-option').forEach(function(o){
+                o.classList.remove('active');
+                o.setAttribute('aria-selected','false');
+                var c = o.querySelector('.lang-check'); if(c) c.remove();
+            });
+            opt.classList.add('active');
+            opt.setAttribute('aria-selected','true');
+            opt.insertAdjacentHTML('beforeend','<svg class="lang-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>');
+            langCurrent.textContent = opt.dataset.lang;
+            langWrap.classList.remove('open');
+            langTrigger.setAttribute('aria-expanded','false');
+        });
+    });
+    document.addEventListener('click', function(e){
+        if(!langWrap.contains(e.target)){langWrap.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}
+    });
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){langWrap.classList.remove('open');langTrigger.setAttribute('aria-expanded','false');}
+    });
+
+    var tocMobile = document.getElementById('tocMobile');
+    var tocMobileTrigger = document.getElementById('tocMobileTrigger');
+    if(tocMobileTrigger){
+        tocMobileTrigger.addEventListener('click', function(){
+            tocMobile.classList.toggle('open');
+        });
+    }
+
+    var tocMobileLinks = document.querySelectorAll('.toc-mobile-link');
+    var sectionIds = [];
+    tocMobileLinks.forEach(function(l){ sectionIds.push(l.getAttribute('href').replace('#','')); });
+    var sectionEls = sectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+
+    function setActiveToc(id){
+        tocMobileLinks.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href') === '#' + id); });
+    }
+
+    var spyObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                setActiveToc(entry.target.getAttribute('id'));
+            }
+        });
+    }, {threshold:0, rootMargin:'-120px 0px -60% 0px'});
+    sectionEls.forEach(function(el){ spyObs.observe(el); });
+
+    var revealObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e,i){
+            if(e.isIntersecting){
+                setTimeout(function(){e.target.classList.add('vis');}, i * 60);
+                revealObs.unobserve(e.target);
+            }
+        });
+    }, {threshold:0.05, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){revealObs.observe(el);});
+})();
+</script>
+</body>
+</html>
